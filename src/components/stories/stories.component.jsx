@@ -86,12 +86,14 @@ const Stories = ({ fetchStoryPostsAdd }) => {
                   required
                 />
                 <label htmlFor="username" className="form__input--label">
-                  URL
+                  UserName
                 </label>
               </div>
             </div>
             <div className="form__group">
-              <button className="btn btn--green">Next step &rarr;</button>
+              <button type="submit" className="btn btn--green">
+                Next step &rarr;
+              </button>
             </div>
           </form>
         </div>

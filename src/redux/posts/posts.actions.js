@@ -18,6 +18,10 @@ export const fetchSingleCollectionPostsSuccess = data => ({
   type: PostsActionTypes.FETCH_SINGLE_POSTS_COLLECTION_SUCCESS,
   payload: data,
 });
+export const fetchSingleHighlightCollectionPostsSuccess = data => ({
+  type: PostsActionTypes.FETCH_SINGLE_HIGHLIGHT_POSTS_COLLECTION_SUCCESS,
+  payload: data,
+});
 
 // USERNAME POST credentials
 
@@ -61,6 +65,28 @@ export const fetchHashTagPostsSuccess = data => ({
 export const fetchHashTagPostsDownload = shortcode => ({
   type: PostsActionTypes.FETCH_HASHTAG_POSTS_DOWNLOAD,
   payload: shortcode,
+});
+
+
+// HIGHLIGHT POST
+export const fetchHighlightPostsAdd = highlightForm => ({
+  type: PostsActionTypes.FETCH_HIGHLIGHT_POSTS_ADD,
+  payload: highlightForm,
+});
+
+export const fetchHighlightPostsStart = datas => ({
+  type: PostsActionTypes.FETCH_HIGHLIGHT_POSTS_START,
+  payload: datas,
+});
+
+export const fetchHighlightPostsSuccess = data => ({
+  type: PostsActionTypes.FETCH_HIGHLIGHT_POSTS_SUCCESS,
+  payload: data,
+});
+
+export const fetchHighlightPostsDownload = idcode => ({
+  type: PostsActionTypes.FETCH_HIGHLIGHT_POSTS_DOWNLOAD,
+  payload: idcode,
 });
 
 

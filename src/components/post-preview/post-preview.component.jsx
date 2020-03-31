@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from "react";
 import LoadingBar from "react-top-loading-bar";
-// import "../../pages/posts/posts.styles.scss";
-// import "./post-collection-preview.styles.scss";
 import Axios from "axios";
 import { withRouter } from "react-router-dom";
 
 const PostPreview = ({ __typename, owner, post, history, downloadName }) => {
   // const { url, setUrl } = useState();
-  const [media, setMedia] = useState(__typename);
-  const [download, setDownload] = useState();
   const [view, setView] = useState();
   const [loadBar, setLoadBar] = useState();
   useEffect(() => {
@@ -40,14 +36,11 @@ const PostPreview = ({ __typename, owner, post, history, downloadName }) => {
     e.preventDefault();
     // console.log(e.currentTarget.querySelector('div').className);
     const loaderbtn = e.currentTarget.querySelector("div");
-    // const downloadbtn = e.target;
+    const downloadName = makeDownloadName(10);
     const downloadbtn = e.target;
     loaderbtn.className = "loader show";
     downloadbtn.className = "hide";
-    // console.log(downloadBtn);
     console.log(loaderbtn);
-    // setDownloading('loader show');
-    // setDownloadBtn('hide');
     const method = "GET";
     const min = 1;
     const max = 100;
@@ -84,8 +77,17 @@ const PostPreview = ({ __typename, owner, post, history, downloadName }) => {
         loaderbtn.className = "loader hide";
         downloadbtn.className = "show";
       });
-    // return await values.add('<div className="show"></div>');
-    // await e.target.classList.add('show');
+  }
+
+  function makeDownloadName(length) {
+    var result = "";
+    var characters =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789wavedownloaderJOshmatJjenUche007AdaStepheNNwakwuoInstagram";
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
   }
 
   return (
@@ -158,6 +160,7 @@ const PostPreview = ({ __typename, owner, post, history, downloadName }) => {
                 ></video>
               ) : (
                 <div
+                  className="post-card__collections--card-media_box"
                   style={{
                     backgroundImage: `url(${post.display_url})`,
                     backgroundPosition: "center",

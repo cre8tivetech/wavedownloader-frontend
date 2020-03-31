@@ -95,7 +95,7 @@ const PostByUserName = ({ fetchUserNamePostsAdd }) => {
                   required
                 />
                 <label htmlFor="username" className="form__input--label">
-                  URL
+                  UserName
                 </label>
               </div>
 
@@ -140,16 +140,17 @@ const PostByUserName = ({ fetchUserNamePostsAdd }) => {
                 <input
                   type="number"
                   className="form__input--box"
-                  placeholder="Numbers of post (Min 5)"
+                  placeholder="Numbers of post (Min 5) (Max 50)"
                   id="numbers-of-post"
                   min="5"
+                  max="50"
                   onChange={handleChange}
                   name="numberOfPost"
                   value={numberOfPost}
                   required
                 />
                 <label htmlFor="numbers-of-post" className="form__input--label">
-                  Numbers of posts (Min 5)
+                  (Min 5) (Max 50)
                 </label>
               </div>
             </div>

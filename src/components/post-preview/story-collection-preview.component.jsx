@@ -5,8 +5,7 @@ import LoadingBar from "react-top-loading-bar";
 import Axios from "axios";
 import { withRouter } from "react-router-dom";
 
-const StoryCollectionPreview = ({ __typename, owner, post, history }) => {
-  // const { url, setUrl } = useState();
+const StoryCollectionPreview = ({ owner, post, history }) => {
   const {
     profile_pic_url,
     username,
@@ -16,8 +15,6 @@ const StoryCollectionPreview = ({ __typename, owner, post, history }) => {
     biography,
     is_verified
   } = owner;
-  const [media, setMedia] = useState(__typename);
-  const [download, setDownload] = useState();
   const [view, setView] = useState();
   const [loadBar, setLoadBar] = useState();
   useEffect(() => {
@@ -50,14 +47,10 @@ const StoryCollectionPreview = ({ __typename, owner, post, history }) => {
     // console.log(e.currentTarget.querySelector('div').className);
     const loaderbtn = e.currentTarget.querySelector("div");
     const downloadName = makeDownloadName(10);
-    // const downloadbtn = e.target;
     const downloadbtn = e.target;
     loaderbtn.className = "loader show";
     downloadbtn.className = "hide";
-    // console.log(downloadBtn);
     console.log(loaderbtn);
-    // setDownloading('loader show');
-    // setDownloadBtn('hide');
     const method = "GET";
     const min = 1;
     const max = 100;

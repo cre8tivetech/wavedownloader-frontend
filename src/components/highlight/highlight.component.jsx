@@ -1,21 +1,33 @@
 import React, { useState, useEffect } from "react";
 import Accordion from "../accordion/accordion.component";
 import LoadingBar from "react-top-loading-bar";
-
-// import './post-by-username.styles.scss';
+import { useHistory, withRouter } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { fetchHighlightPostsAdd } from "../../redux/posts/posts.actions";
+import { connect } from "react-redux";
 
-const Highlight = () => {
+const Highlight = ({ fetchHighlightPostsAdd }) => {
   const [loadBar, setLoadBar] = useState(0);
+  const [username, setUsername] = useState("");
   const startLoader = () => {
     setLoadBar(100);
   };
   const onLoaderFinished = () => {
     setLoadBar(0);
   };
+  const history = useHistory();
   useEffect(() => {
     startLoader();
   }, [startLoader]);
+
+  const handleSubmit = event => {
+    event.preventDefault();
+    fetchHighlightPostsAdd(username);
+    history.push("/highlight-posts");
+  };
+  const handleChange = event => {
+    setUsername(event.target.value);
+  };
   return (
     <div className="home-section">
       <LoadingBar
@@ -47,16 +59,16 @@ const Highlight = () => {
       </div>
       <div className="download card">
         <p className="download__text download__text--1">
-          Download Instagram Post By Username!
+          Download Instagram Highlights Post!
         </p>
         <div className="download__text download__text--2">
           <p>
             <span>NEW</span>{" "}
-            <small>Files encrypted are changed for safer reuploading!</small>
+            <small>Files encrypted are changed for faster reuploading!</small>
           </p>
         </div>
         <div className="download__form">
-          <form action="#" className="form">
+          <form onSubmit={handleSubmit} className="form">
             <div className="form__group">
               {/* UserName */}
               <div className="form__input">
@@ -69,54 +81,19 @@ const Highlight = () => {
                   className="form__input--box"
                   placeholder="Username"
                   id="username"
+                  value={username}
+                  onChange={handleChange}
                   required
                 />
                 <label htmlFor="username" className="form__input--label">
-                  URL
-                </label>
-              </div>
-
-              {/* Post Type */}
-              <div className="form__input">
-                <i
-                  className="fad fa-images"
-                  style={{ color: "var(--color-primary)" }}
-                ></i>
-                <select
-                  className="form__input--box"
-                  placeholder="Select post type"
-                  required
-                  // value={this.state.value} onChange={this.handleChange}
-                >
-                  <option value="" disabled selected hidden>
-                    Select Post Type
-                  </option>
-                  <option value="all">All</option>
-                  <option value="video">Video</option>
-                  <option value="image">Image</option>
-                </select>
-              </div>
-
-              {/* Number of post */}
-              <div className="form__input">
-                <i
-                  className="fad fa-sort-numeric-down"
-                  style={{ color: "var(--color-primary)" }}
-                ></i>
-                <input
-                  type="number"
-                  className="form__input--box"
-                  placeholder="Numbers of post"
-                  id="numbers-of-post"
-                  required
-                />
-                <label htmlFor="numbers-of-post" className="form__input--label">
-                  Numbers of post
+                  UserName
                 </label>
               </div>
             </div>
             <div className="form__group">
-              <button className="btn btn--green">Next step &rarr;</button>
+              <button type="submit" className="btn btn--green">
+                Next step &rarr;
+              </button>
             </div>
           </form>
         </div>
@@ -229,4 +206,7 @@ const Highlight = () => {
     </div>
   );
 };
-export default Highlight;
+const mapDispatchToProps = dispatch => ({
+  fetchHighlightPostsAdd: username => dispatch(fetchHighlightPostsAdd(username))
+});
+export default withRouter(connect(null, mapDispatchToProps)(Highlight));

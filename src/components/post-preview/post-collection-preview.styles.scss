@@ -164,7 +164,7 @@
         &_box {
           margin: 0 0 -0.5rem 0;
           max-width: 100%;
-          height: 30rem;
+          height: 25rem;
 
           .layer-icon {
             float: right;
@@ -172,17 +172,6 @@
             width: 20px;
             height: 20px;
           }
-
-          // .play {
-          //   cursor: pointer;
-          //   top: 45%;
-          //   left: 45%;
-          //   font-size: 6rem;
-
-          //   &:hover {
-          //     color: var(--color-primary-light) !important;
-          //   }
-          // }
         }
 
         video {

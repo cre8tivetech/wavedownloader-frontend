@@ -1,27 +1,20 @@
 import React, { useState, useEffect } from "react";
 import LoadingBar from "react-top-loading-bar";
-import { useHistory } from "react-router-dom";
-import "../../pages/posts/posts.styles.scss";
-import slideLayer from "../../assets/slide.svg";
-import videoLayer from "../../assets/video.svg";
-import photoLayer from "../../assets/photo.svg";
-import "./post-collection-preview.styles.scss";
+// import "../../pages/posts/posts.styles.scss";
+// import "./post-collection-preview.styles.scss";
+import Axios from "axios";
 import { withRouter } from "react-router-dom";
-import { fetchUserNamePostsDownload } from "../../redux/posts/posts.actions";
+import { fetchHighlightPostsDownload } from "../../redux/posts/posts.actions";
 import { connect } from "react-redux";
 
-const UserNameCollectionPreview = ({
-  data,
-  downloadName,
-  fetchUserNamePostsDownload
+const HighlightCollectionPreview = ({
+  owner,
+  post,
+  length,
+  history,
+  fetchHighlightPostsDownload
 }) => {
   // const { url, setUrl } = useState();
-  // const [media, setMedia] = useState(__typename);
-  const [mediaUrl, setMediaUrl] = useState();
-  const [view, setView] = useState();
-  const [event, setEvent] = useState();
-  const [collectionType, setCollectionType] = useState();
-  const history = useHistory();
   const {
     profile_pic_url,
     username,
@@ -30,18 +23,37 @@ const UserNameCollectionPreview = ({
     following,
     biography,
     is_verified
-  } = data.owner;
+  } = owner;
   const [downloading, setDownloading] = useState("loader hide");
   const [downloadBtn, setDownloadBtn] = useState("show");
+  const [view, setView] = useState();
   const [loadBar, setLoadBar] = useState();
-  // const []
   useEffect(() => {
-    console.log(history);
-    console.log(data);
+    console.log(history.location);
     setLoadBar(100);
+    console.log(owner);
+    // setUrl(history.location.data.url);
+    if (post.is_video) {
+      setView("post-card__detail--more-views show");
+      // setCollectionType(
+      //   <i
+      //     className="fad fa-play play"
+      //     style={{ color: 'var(--color-light)' }}
+      //   ></i>
+      // );
+    } else {
+      setView("post-card__detail--more-views hide");
+      // setCollectionType('');
+    }
+    if (!post.text) {
+      post.text = "No caption text for this post";
+    }
+    // return () => {
+    //   console.log("will unmount");
+    // };
   }, [setLoadBar]);
 
-  function downloadFile(shortcode, e) {
+  function downloadFile(idcode, e) {
     e.preventDefault();
     // console.log(e.currentTarget.querySelector('div').className);
     const loaderbtn = e.currentTarget.querySelector("div");
@@ -52,10 +64,10 @@ const UserNameCollectionPreview = ({
     console.log(downloadBtn);
     setTimeout(() => {
       console.log("Downloading post");
-      fetchUserNamePostsDownload(shortcode);
+      fetchHighlightPostsDownload(idcode);
     }, 2000);
     console.log(loaderbtn);
-    // setDownloading("loader show");
+    setDownloading("loader show");
     setDownloadBtn("hide");
     console.log("downloaded");
     setTimeout(() => {
@@ -82,7 +94,7 @@ const UserNameCollectionPreview = ({
             <div className="post-card__detail--image-name">
               <p>
                 <strong>
-                  @{full_name}{" "}
+                  @{full_name}
                   {is_verified ? (
                     <i
                       className="fa fa-badge-check"
@@ -94,13 +106,6 @@ const UserNameCollectionPreview = ({
               <p>
                 <small>{username}</small>
               </p>
-              {/* <p>
-                <i
-                  className="fad fa-calendar-alt"
-                  style={{ color: 'var(--color-grey-dark-1)' }}
-                ></i>
-                 <small>{posted_on.date}</small> 
-              </p> */}
             </div>
           </div>
           <div className="post-card__detail--info">
@@ -129,40 +134,57 @@ const UserNameCollectionPreview = ({
             </div>
           </div>
         </div>
+
         <div className="post-card__collections multiple">
-          {data.post
+          {post
             // .filter((item, idx) => idx < 10)
             .map((item, i) => (
               <div key={i} className="post-card__collections--card">
                 <div className="post-card__collections--card-media">
-                  <div
-                    className="post-card__collections--card-media_box"
-                    style={{
-                      backgroundImage: `url(${item.display_url})`,
-                      backgroundPosition: "center",
-                      backgroundSize: "cover",
-                      backgroundRepeat: "no-repeat"
-                    }}
-                  >
-                    {item.__typename === "GraphSidecar" ? (
-                      <img className="layer-icon" src={slideLayer} alt="" />
-                    ) : item.__typename === "GraphVideo" ? (
-                      <img className="layer-icon" src={videoLayer} alt="" />
-                    ) : item.__typename === "GraphImage" ? (
-                      <img className="layer-icon" src={photoLayer} alt="" />
-                    ) : null}
-                  </div>
-                  <a
-                    onClick={e => downloadFile(item.shortcode, e)}
-                    target="__blank"
-                    className="post-card__collections--card-media_download-btn"
-                    data-method="get"
-                  >
-                    <div className="loader hide"></div>
-                    <p>
-                      Save <i className="fad fa-save"></i>
-                    </p>
-                  </a>
+                  {item.is_video ? (
+                    <div className="post-card__collections--card-media_box">
+                      <video
+                        controls
+                        controlsList="nodownload"
+                        src={item.video_url}
+                      ></video>
+                    </div>
+                  ) : (
+                    <div
+                      className="post-card__collections--card-media_box"
+                      style={{
+                        backgroundImage: `url(${item.display_url})`,
+                        backgroundPosition: "center",
+                        backgroundSize: "cover",
+                        backgroundRepeat: "no-repeat"
+                      }}
+                    ></div>
+                  )}
+                  {item.is_video ? (
+                    <a
+                      onClick={e => downloadFile(item.video_url, e, ".mp4")}
+                      target="__blank"
+                      className="post-card__collections--card-media_download-btn"
+                      data-method="get"
+                    >
+                      <div className="loader hide"></div>
+                      <p className="show">
+                        Save <i className="fad fa-save"></i>
+                      </p>
+                    </a>
+                  ) : (
+                    <a
+                      onClick={e => downloadFile(item.id, e)}
+                      target="__blank"
+                      className="post-card__collections--card-media_download-btn"
+                      data-method="get"
+                    >
+                      <div className="loader hide"></div>
+                      <p>
+                        Save <i className="fad fa-save"></i>
+                      </p>
+                    </a>
+                  )}
                 </div>
               </div>
               // <CollectionItem key={item.id} item={item} />
@@ -172,12 +194,11 @@ const UserNameCollectionPreview = ({
     </div>
   );
 };
-
 const mapDispatchToProps = dispatch => ({
-  fetchUserNamePostsDownload: shortcode =>
-    dispatch(fetchUserNamePostsDownload(shortcode))
+  fetchHighlightPostsDownload: shortcode =>
+    dispatch(fetchHighlightPostsDownload(shortcode))
 });
 
 export default withRouter(
-  connect(null, mapDispatchToProps)(UserNameCollectionPreview)
+  connect(null, mapDispatchToProps)(HighlightCollectionPreview)
 );

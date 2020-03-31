@@ -4,27 +4,23 @@ import { compose } from "redux";
 
 import {
   selectIsCollectionFetching,
-  selectIsSlideCollectionFetching,
-  selectIsSingleHighlightCollectionFetching,
-  selectError,
-  selectCollection,
-  selectIsCollectionsLoaded
+  selectHighlightCollections,
+  selectIsCollectionsLoaded,
+  selectError
 } from "../../redux/posts/posts.selector";
-import PostsOverview from "./posts-overview.component";
 import PostsSpinner from "../posts-spinner/posts-spinner.component";
+import HighlightPostsOverview from "./highlight-posts-overview.component";
 
 const mapStateToProps = createStructuredSelector({
   isLoading: selectIsCollectionFetching,
-  isSlide: selectIsSlideCollectionFetching,
-  isSingleHighlight: selectIsSingleHighlightCollectionFetching,
   postError: selectError,
-  collection: selectCollection,
+  highlightCollections: selectHighlightCollections,
   isLoaded: selectIsCollectionsLoaded
 });
 
-const PostsOverviewContainer = compose(
+const HighlightPostsOverviewContainer = compose(
   connect(mapStateToProps),
   PostsSpinner
-)(PostsOverview);
+)(HighlightPostsOverview);
 
-export default PostsOverviewContainer;
+export default HighlightPostsOverviewContainer;

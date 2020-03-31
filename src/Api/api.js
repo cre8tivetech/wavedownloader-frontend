@@ -32,6 +32,13 @@ export const hashtagPostApi = async (hashTag) => {
   return collectionsMap;
 };
 
+export const highlightPostApi = async username => {
+  const collectionsMap = await Axios.get(
+    process.env.REACT_APP_API + process.env.REACT_APP_HIGHLIGHT_POST + username
+  );
+  return collectionsMap;
+};
+
 export const storyPostApi = async username => {
   const collectionsMap = await Axios.get(
     process.env.REACT_APP_API + process.env.REACT_APP_STORY_POST + username
@@ -39,6 +46,14 @@ export const storyPostApi = async username => {
   return collectionsMap;
 };
 
+export const idcodePostApi = async idcode => {
+  const collectionsMap = await Axios.get(
+    process.env.REACT_APP_API +
+      process.env.REACT_APP_SINGLE_HIGHLIGHT_POST +
+      idcode
+  );
+  return collectionsMap;
+};
 
 export const shortcodePostApi = async shortcode => {
   const collectionsMap = await Axios.get(

@@ -12,6 +12,11 @@ export const selectSlideCollection = createSelector(
   posts => posts.slideCollections
 );
 
+export const selectSingleHighlightCollection = createSelector(
+  [selectPosts],
+  posts => posts.singleHighlightCollections
+);
+
 export const selectUserCollections = createSelector(
   [selectPosts],
   posts => posts.userCollections
@@ -20,6 +25,11 @@ export const selectUserCollections = createSelector(
 export const selectHashTagCollections = createSelector(
   [selectPosts],
   posts => posts.hashTagCollections
+);
+
+export const selectHighlightCollections = createSelector(
+  [selectPosts],
+  posts => posts.highlightCollections
 );
 
 export const selectStoryCollections = createSelector(
@@ -71,6 +81,11 @@ export const selectIsCollectionFetching = createSelector(
 export const selectIsSlideCollectionFetching = createSelector(
   [selectPosts],
   posts => posts.isSlide
+);
+
+export const selectIsSingleHighlightCollectionFetching = createSelector(
+  [selectPosts],
+  posts => posts.isSingleHighlight
 );
 
 

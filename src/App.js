@@ -16,6 +16,7 @@ import Stories from './components/stories/stories.component';
 import Posts from './pages/posts/posts.component';
 import UserNamePosts from './pages/posts/username-posts.component';
 import HashTagPosts from './pages/posts/hashtag-posts.component';
+import HighlightPosts from './pages/posts/highlight-posts.component';
 import StoryPosts from './pages/posts/story-posts.component';
 import PostsSpinner from './components/posts-spinner/posts-spinner.component';
 
@@ -32,6 +33,7 @@ const App = () => (
       <Route exact path="/posts" component={Posts} />
       <Route exact path="/username-posts" component={UserNamePosts} />
       <Route exact path="/hashtag-posts" component={HashTagPosts} />
+      <Route exact path="/highlight-posts" component={HighlightPosts} />
       <Route exact path="/story-posts" component={StoryPosts} />
 
       <Route exact path="/spinner" component={PostsSpinner} />

@@ -6,13 +6,18 @@ import {
   usernamePostApi,
   hashtagPostApi,
   storyPostApi,
+  highlightPostApi,
   shortcodePostApi,
+  idcodePostApi,
 } from '../../Api/api';
 import {
   fetchSinglePostsSuccess,
   fetchSingleCollectionPostsSuccess,
+  fetchSingleHighlightCollectionPostsSuccess,
+
   fetchUserNamePostsSuccess,
   fetchHashTagPostsSuccess,
+  fetchHighlightPostsSuccess,
   fetchStoryPostsSuccess,
   fetchPostsFailure,
 } from './posts.actions';
@@ -20,13 +25,16 @@ import {
 const link = state => state.posts.source;
 const credentials = state => state.posts.credentials;
 const shortcode = state => state.posts.shortcode;
+const idcode = state => state.posts.idcode;
 const hashTagForm = state => state.posts.hashTagForm;
+const highlightForm = state => state.posts.highlightForm;
 const storyUserName = state => state.posts.storyForm;
 
 export function* fetchPostsAsync() {
   yield console.log('I am fired');
   const url = yield select(link);
   const shortCode = yield select(shortcode);
+  const idCode = yield select(idcode);
   try {
     if(url) {
     const result = yield singlePostApi(url).then(function(response) {
@@ -51,6 +59,15 @@ export function* fetchPostsAsync() {
       }else if (result.data.__typename === 'GraphImage' ||  result.data.__typename === 'GraphVideo') {
         console.log("Single post initiated");
         yield put(fetchSinglePostsSuccess(result.data));
+      }
+    }else if(idCode) {
+      const result = yield idcodePostApi(idCode).then(function(response) {
+        return response;
+      });
+      yield console.log(result);
+      if(result.data.__typename === "GraphHighlightReel"){
+        console.log("Single Highlight post");
+        yield put(fetchSingleHighlightCollectionPostsSuccess(result.data));    
       }
     }
   } catch (error) {
@@ -91,6 +108,24 @@ export function* fetchHashTagPostsAsync() {
     yield console.log(result.data);
     console.log('HashTag post initiated');
     yield put(fetchHashTagPostsSuccess(result));
+  } catch (error) {
+    yield put(fetchPostsFailure(error.response.data.message));
+  }
+}
+
+export function* fetchHighlightPostsAsync() {
+  yield console.log('I am fired');
+  const username = yield select(highlightForm);
+  yield console.log(username);
+  try {
+    const result = yield highlightPostApi(username).then(function(
+      response
+    ) {
+      return response;
+    });
+    yield console.log(result.data);
+    console.log('HashTag post initiated');
+    yield put(fetchHighlightPostsSuccess(result.data));
   } catch (error) {
     yield put(fetchPostsFailure(error.response.data.message));
   }
@@ -150,6 +185,7 @@ export function* fetchUserNamePostDownload() {
   );
 }
 
+
 // USERNAME POST ADD
 export function* fetchPostsCredentials({ payload: { userName, numberOfPost } }) {
          yield console.log('I am fired');
@@ -208,6 +244,45 @@ export function* fetchHashTagPostsFormData() {
   );
 }
 
+// HIGHLIGHT POST ADD SAGAS
+export function* fetchHighlightForm({
+  payload: { username },
+}) {
+  yield console.log('I am fired');
+  try {
+    const data = yield {username};
+    // yield console.log(data);
+    yield put(fetchHighlightPostsFormData(data));
+  } catch (error) {
+    yield put(fetchPostsFailure(error.message));
+  }
+}
+
+export function* fetchHighlightPostsFormData() {
+  yield takeLatest(
+    PostActionTypes.FETCH_HIGHLIGHT_POSTS_ADD,
+    fetchHighlightForm
+  );
+}
+
+// HIGHLIGHT POST DOWNLOAD
+export function* fetchHighlightPosts({ payload: { idcode } }) {
+  yield console.log('I am fired');
+  try {
+    const data = yield { idcode: idcode };
+    // yield console.log(data);
+    yield put(fetchHighlightPostDownload(data));
+  } catch (error) {
+    yield put(fetchPostsFailure(error.message));
+  }
+}
+
+export function* fetchHighlightPostDownload() {
+  yield takeLatest(
+    PostActionTypes.FETCH_HIGHLIGHT_POSTS_DOWNLOAD, 
+    fetchHighlightPosts
+  );
+}
 
 // STORY POST ADD SAGAS
 export function* fetchStoryPost({ payload: { storyForm } }) {
@@ -250,7 +325,14 @@ export function* onFetchHashTagPostsStart() {
   );
 }
 
-export function* onFetchStoryPOstsStart () {
+export function* onFetchHighlightPostsStart() {
+  yield takeLatest(
+    PostActionTypes.FETCH_HIGHLIGHT_POSTS_START,
+    fetchHighlightPostsAsync
+  );
+}
+
+export function* onFetchStoryPostsStart () {
   yield takeLatest(
     PostActionTypes.FETCH_STORY_POSTS_START,
     fetchStoryPostsAsync
@@ -263,7 +345,8 @@ export function* postsSagas() {
     call(fetchPostsStart),
     call(onFetchUserNamePostsStart),
     call(onFetchHashTagPostsStart),
-    call(onFetchStoryPOstsStart),
+    call(onFetchHighlightPostsStart),
+    call(onFetchStoryPostsStart),
   ]);
 }
 

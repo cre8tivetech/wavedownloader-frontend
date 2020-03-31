@@ -4,16 +4,18 @@ import { createStructuredSelector } from "reselect";
 import {
   selectCollection,
   selectSlideCollection,
+  selectSingleHighlightCollection,
   selectSource,
   selectError
 } from "../../redux/posts/posts.selector";
 import "./posts-overview.styles.scss";
 import PostPreview from "../post-preview/post-preview.component";
 import PostCollectionPreview from "../post-preview/post-collection-preview.component";
-
+import PostHighlightCollectionPreview from "../post-preview/post-highlight-collection-preview.component";
 const PostsOverview = ({
   collections,
   slideCollections,
+  singleHighlightCollections,
   // source,
   errorMessage
 }) => {
@@ -36,6 +38,16 @@ const PostsOverview = ({
       ))} */}
       <PostCollectionPreview {...slideCollections} {...error} />
     </div>
+  ) : singleHighlightCollections ? (
+    <div className="posts-overview">
+      {/* {slideCollections.post.map(({ ...otherCollectionProps }, i) => (
+        <PostCollectionPreview key={i} {...otherCollectionProps} />
+      ))} */}
+      <PostHighlightCollectionPreview
+        {...singleHighlightCollections}
+        {...error}
+      />
+    </div>
   ) : (
     <div></div>
   );
@@ -44,6 +56,7 @@ const PostsOverview = ({
 const mapStateToProps = createStructuredSelector({
   collections: selectCollection,
   slideCollections: selectSlideCollection,
+  singleHighlightCollections: selectSingleHighlightCollection,
   source: selectSource,
   errorMessage: selectError
 });

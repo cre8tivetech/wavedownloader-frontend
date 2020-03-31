@@ -16,11 +16,6 @@ const HashTagCollectionPreview = ({
   downloadName,
   fetchHashTagPostsDownload
 }) => {
-  // const [media, setMedia] = useState(__typename);
-  const [mediaUrl, setMediaUrl] = useState();
-  const [view, setView] = useState();
-  const [event, setEvent] = useState();
-  const [collectionType, setCollectionType] = useState();
   const history = useHistory();
   const { top_post, most_recent_post } = data;
   const {
@@ -149,6 +144,7 @@ const HashTagCollectionPreview = ({
                     <div key={i} className="post-card__collections--card">
                       <div className="post-card__collections--card-media">
                         <div
+                          className="post-card__collections--card-media_box"
                           style={{
                             backgroundImage: `url(${item.display_url})`,
                             backgroundPosition: "center",
@@ -206,6 +202,7 @@ const HashTagCollectionPreview = ({
                     <div key={i} className="post-card__collections--card">
                       <div className="post-card__collections--card-media">
                         <div
+                          className="post-card__collections--card-media_box"
                           style={{
                             backgroundImage: `url(${item.display_url})`,
                             backgroundPosition: "center",

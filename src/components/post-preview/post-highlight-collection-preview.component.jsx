@@ -6,47 +6,27 @@ import "./post-collection-preview.styles.scss";
 import Axios from "axios";
 import { withRouter } from "react-router-dom";
 
-const PostCollectionPreview = ({ data, downloadName, history }) => {
-  // const { url, setUrl } = useState();
-  // const [media, setMedia] = useState(__typename);
+const PostHighlightCollectionPreview = ({ owner, post, history }) => {
   const [mediaUrl, setMediaUrl] = useState();
   const [view, setView] = useState();
   const [event, setEvent] = useState();
   const [collectionType, setCollectionType] = useState();
-  const results = data.post.filter((datas, i) => {
-    return datas;
-  });
   const {
-    like_count,
-    comment_count,
-    text,
-    video_view_count,
-    is_video,
-    posted_on
-  } = results[0];
-  const { profile_pic_url, username, full_name } = data.owner;
+    profile_pic_url,
+    username,
+    full_name,
+    biography,
+    followers,
+    following,
+    is_verified
+  } = owner;
   const [downloading, setDownloading] = useState("loader hide");
   const [downloadBtn, setDownloadBtn] = useState("show");
   const [loadBar, setLoadBar] = useState();
   // const []
   useEffect(() => {
-    console.log(results[0]);
-    console.log(history);
-    console.log(data);
     setLoadBar(100);
-    console.log(like_count);
-    if (is_video) {
-      setView("post-card__detail--more-views show");
-      // setCollectionType(
-      //   <i
-      //     className="fad fa-play play"
-      //     style={{ color: 'var(--color-light)' }}
-      //   ></i>
-      // );
-    } else {
-      setView("post-card__detail--more-views hide");
-      // setCollectionType('');
-    }
+
     // return () => {
     //   console.log('will unmount');
     // };
@@ -100,6 +80,7 @@ const PostCollectionPreview = ({ data, downloadName, history }) => {
     // return await values.add('<div className="show"></div>');
     // await e.target.classList.add('show');
   }
+
   function makeDownloadName(length) {
     var result = "";
     var characters =
@@ -125,65 +106,68 @@ const PostCollectionPreview = ({ data, downloadName, history }) => {
             <img src={profile_pic_url} alt="" />
             <div className="post-card__detail--image-name">
               <p>
-                <strong>@{full_name}</strong>
+                <strong>
+                  @{full_name}{" "}
+                  {is_verified ? (
+                    <i
+                      className="fa fa-badge-check"
+                      style={{ color: "var(--color-verify)" }}
+                    ></i>
+                  ) : null}
+                </strong>
               </p>
               <p>
                 <small>{username}</small>
               </p>
-              <p>
+              {/* <p>
                 <i
                   className="fad fa-calendar-alt"
-                  style={{ color: "var(--color-grey-dark-1)" }}
+                  style={{ color: 'var(--color-grey-dark-1)' }}
                 ></i>
-                <small>{posted_on.date}</small>
-              </p>
+                 <small>{posted_on.date}</small> 
+              </p> */}
             </div>
           </div>
           <div className="post-card__detail--info">
             {/* <img src={} alt="" /> */}
             <i
-              className="fad fa-pen-alt"
+              className="fad fa-book-user"
               style={{ color: "var(--color-primary-light)" }}
             ></i>
-            <p>{text}</p>
+            <p>{biography}</p>
           </div>
           <div className="post-card__detail--more">
             {/* <img src={} alt="" /> */}
             <div className="post-card__detail--more-like">
               <i
-                className="fad fa-heart"
-                style={{ color: "var(--color-danger-1)" }}
+                className="fad fa-users"
+                style={{ color: "var(--color-tertiary)" }}
               ></i>
-              <p>{like_count}</p>
+              <p>{followers}</p>
             </div>
             <div className="post-card__detail--more-comment">
               <i
-                className="fad fa-comment"
+                className="fad fa-user-friends"
                 style={{ color: "var(--color-secondary)" }}
               ></i>
-              <p>{comment_count}</p>
-            </div>
-            <div className={view}>
-              <i
-                className="fad fa-eye"
-                style={{ color: "var(--color-tertiary)" }}
-              ></i>
-              <p>{video_view_count}</p>
+              <p>{following}</p>
             </div>
           </div>
         </div>
         <div className="post-card__collections multiple">
-          {data.post
+          {post
             // .filter((item, idx) => idx < 10)
             .map((item, i) => (
               <div key={i} className="post-card__collections--card">
                 <div className="post-card__collections--card-media ">
-                  {is_video ? (
-                    <video
-                      controls
-                      controlsList="nodownload"
-                      src={item.video_url}
-                    ></video>
+                  {item.is_video ? (
+                    <div className="post-card__collections--card-media_box">
+                      <video
+                        controls
+                        controlsList="nodownload"
+                        src={item.video_url}
+                      ></video>
+                    </div>
                   ) : (
                     <div
                       className="post-card__collections--card-media_box"
@@ -195,7 +179,7 @@ const PostCollectionPreview = ({ data, downloadName, history }) => {
                       }}
                     ></div>
                   )}
-                  {is_video ? (
+                  {item.is_video ? (
                     <a
                       onClick={e => downloadFile(item.video_url, e, ".mp4")}
                       target="__blank"
@@ -230,4 +214,4 @@ const PostCollectionPreview = ({ data, downloadName, history }) => {
   );
 };
 
-export default withRouter(PostCollectionPreview);
+export default withRouter(PostHighlightCollectionPreview);
