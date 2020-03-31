@@ -1,0 +1,122 @@
+.navigation {
+  display: block;
+
+  &__sidebarIconToggle {
+    transition: all 0.3s;
+    box-sizing: border-box;
+    cursor: pointer;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 22px;
+    right: 15px;
+    border-radius: 50px;
+    height: 22px;
+    width: 22px;
+  }
+
+  &__spinner {
+    transition: all 0.3s;
+    box-sizing: border-box;
+    position: absolute;
+    height: 3px;
+    width: 100%;
+    background: var(--color-primary-light);
+    border-radius: 50px;
+  }
+
+  &__horizontal {
+    transition: all 0.3s;
+    box-sizing: border-box;
+    position: relative;
+    float: right;
+    margin-top: 3px;
+  }
+
+  &__part-1 {
+    position: relative;
+    transition: all 0.3s;
+    box-sizing: border-box;
+    float: right;
+  }
+
+  &__part-2 {
+    transition: all 0.3s;
+    box-sizing: border-box;
+    position: relative;
+    float: right;
+    margin-top: 3px;
+  }
+
+  &__sidebarMenu {
+    height: 100%;
+    position: fixed;
+    right: 0;
+    width: 250px;
+    margin-top: 60px;
+    transform: translateX(250px);
+    transition: transform 250ms ease-in-out;
+    // background: linear-gradient(180deg, #038125 0%, #038125 100%);
+    background-color: var(--color-light);
+
+    &--inner {
+      margin: 0;
+      padding: 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+
+      li {
+        list-style: none;
+        color: var(--color-primary);
+        text-transform: uppercase;
+        font-weight: bold;
+        padding: 20px;
+        cursor: pointer;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+        span {
+          display: block;
+          font-size: 14px;
+          color: rgba(255, 255, 255, 0.5);
+        }
+
+        a {
+          color: var(--color-primary);
+          text-transform: uppercase;
+          font-weight: bold;
+          cursor: pointer;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+
+  input[type="checkbox"]:checked ~ &__sidebarMenu {
+    transform: translateX(0);
+  }
+
+  input[type="checkbox"] {
+    transition: all 0.3s;
+    box-sizing: border-box;
+    display: none;
+  }
+
+  input[type="checkbox"]:checked ~ &__sidebarIconToggle > &__horizontal {
+    transition: all 0.3s;
+    box-sizing: border-box;
+    opacity: 0;
+  }
+
+  input[type="checkbox"]:checked ~ &__sidebarIconToggle > &__part-1 {
+    transition: all 0.3s;
+    box-sizing: border-box;
+    transform: rotate(135deg);
+    margin-top: 8px;
+  }
+
+  input[type="checkbox"]:checked ~ &__sidebarIconToggle > &__part-2 {
+    transition: all 0.3s;
+    box-sizing: border-box;
+    transform: rotate(-135deg);
+    margin-top: -9px;
+  }
+}

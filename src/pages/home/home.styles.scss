@@ -1,0 +1,115 @@
+.home-section {
+  width: 70%;
+  margin: 0 auto;
+
+  & > * {
+    margin-top: 4rem;
+    box-shadow: 0 0.5rem 2rem rgba(black, 0.15);
+  }
+
+  // DOWNLOAD OPTIONS
+  .options {
+    display: flex;
+    flex-wrap: wrap;
+
+    & > * {
+      position: relative;
+      border-radius: 10px;
+      margin: 1rem 2rem;
+      padding: 0 4rem;
+      background-color: var(--color-light);
+      box-shadow: 0 0.5rem 2rem rgba(black, 0.1);
+      font-size: 1.5rem;
+      text-transform: uppercase;
+      font-weight: 700;
+
+      &:hover {
+        background-color: #00000044;
+        color: white;
+      }
+
+      span {
+        position: absolute;
+        top: 0.5rem;
+        right: 3rem;
+        letter-spacing: 0.1rem;
+        font-size: 0.7rem;
+      }
+    }
+
+    &--active {
+      background-color: var(--color-primary);
+      color: var(--color-light);
+    }
+  }
+
+  // DOWNLOAD LINK
+  .download {
+    text-align: center;
+    border-radius: 1rem;
+    border: 0.1rem solid var(--color-primary);
+    margin-bottom: 5rem;
+
+    &__text {
+      position: relative;
+      font-size: 2.2rem;
+      font-family: Helvetica;
+      margin: 0 auto;
+
+      p {
+        margin: 0.8rem 0 2rem 0;
+      }
+
+      &--2 {
+        display: inline-block;
+
+        p {
+          span {
+            float: left;
+            font-family: sans-serif;
+            background-color: var(--color-primary);
+            font-size: 0.5rem;
+            color: var(--color-light);
+            padding: 0.3rem;
+            border-radius: 50%;
+          }
+        }
+      }
+    }
+  }
+}
+
+// .feature-box {
+//   background-color: rgba($color-white, 0.8);
+//   font-size: 1.5rem;
+//   padding: 2.5rem;
+//   text-align: center;
+//   border-radius: 3px;
+//   box-shadow: 0 1.5rem 4rem rgba($color-black, 0.15);
+//   transition: transform 0.3s;
+
+//   @include respond(tab-port) {
+//     padding: 2rem;
+//   }
+
+//   &__icon {
+//     font-size: 6rem;
+//     margin-bottom: 0.5rem;
+//     display: inline-block;
+//     background-image: linear-gradient(
+//       to right,
+//       $color-primary-light,
+//       $color-primary-dark
+//     );
+//     -webkit-background-clip: text;
+//     color: transparent;
+
+//     @include respond(tab-port) {
+//       margin: 0;
+//     }
+//   }
+
+//   &:hover {
+//     transform: translateY(-1.5rem) scale(1.03);
+//   }
+// }
