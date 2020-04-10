@@ -12,7 +12,7 @@ const StoryPosts = ({ fetchStoryPostsStart, match }) => {
     <div className="post-section">
       <Route
         exact
-        path={`${match.path}`}
+        // path={`${match.path}`}
         component={StoryPostsOverviewContainer}
       />
     </div>

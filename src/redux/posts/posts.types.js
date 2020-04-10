@@ -1,4 +1,4 @@
-const PostsActionTyes = {
+const PostsActionTypes = {
   FETCH_POSTS_ADD: 'FETCH_POSTS_ADD',
   FETCH_POSTS_START: 'FETCH_POSTS_START',
   FETCH_POSTS_FAILURE: 'FETCH_POSTS_FAILURE',
@@ -38,4 +38,4 @@ const PostsActionTyes = {
   // FETCH_SINGLE_POSTS_SUCCESS: 'FETCH_SINGLE_POSTS_SUCCESS',
 };
 
-export default PostsActionTyes;
+export default PostsActionTypes;

@@ -2,15 +2,10 @@ import React, { useState, useEffect } from "react";
 import LoadingBar from "react-top-loading-bar";
 import "../../pages/posts/posts.styles.scss";
 import "./post-collection-preview.styles.scss";
-// import '../../components/post-preview/post-collection-preview.styles.scss';
 import Axios from "axios";
 import { withRouter } from "react-router-dom";
 
-const PostHighlightCollectionPreview = ({ owner, post, history }) => {
-  const [mediaUrl, setMediaUrl] = useState();
-  const [view, setView] = useState();
-  const [event, setEvent] = useState();
-  const [collectionType, setCollectionType] = useState();
+const PostHighlightCollectionPreview = ({ owner, post }) => {
   const {
     profile_pic_url,
     username,
@@ -20,8 +15,6 @@ const PostHighlightCollectionPreview = ({ owner, post, history }) => {
     following,
     is_verified
   } = owner;
-  const [downloading, setDownloading] = useState("loader hide");
-  const [downloadBtn, setDownloadBtn] = useState("show");
   const [loadBar, setLoadBar] = useState();
   // const []
   useEffect(() => {

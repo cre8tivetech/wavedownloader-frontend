@@ -24,8 +24,11 @@
       font-weight: 700;
 
       &:hover {
-        background-color: #00000044;
+        background-color: var(--color-btn-hover);
         color: white;
+        p {
+          color: white;
+        }
       }
 
       span {
@@ -35,11 +38,25 @@
         letter-spacing: 0.1rem;
         font-size: 0.7rem;
       }
+
+      p {
+        color: var(--color-text-1);
+      }
     }
 
     &--active {
       background-color: var(--color-primary);
       color: var(--color-light);
+
+      p {
+        color: var(--color-light);
+      }
+    }
+
+    .update__box {
+      & > * {
+        color: white;
+      }
     }
   }
 
@@ -77,6 +94,10 @@
       }
     }
   }
+}
+
+.update-faq .update__content p {
+  color: var(--color-bg);
 }
 
 // .feature-box {

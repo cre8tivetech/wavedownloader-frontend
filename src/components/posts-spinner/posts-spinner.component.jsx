@@ -18,41 +18,43 @@ const PostsSpinner = WrappedComponent => {
       if (postError) {
         setLoadBar(99.9);
         setBarColor("red");
+        console.log(postError);
         setTimeout(() => {
           setErrorDIsplay("block");
         }, 3000);
         setTimeout(() => {
           setErrorDIsplay("none");
-        }, 11000);
-      } else if (postError === null) {
-        setLoadBar(99.9);
-        setBarColor("linear-gradient(92deg, #038125 0%, #fbff00 100%)");
-        setErrorDIsplay("none");
-        setTimeout(() => {
-          setBarColor("red");
-          setErrorDIsplay("block");
-          setErrorMessage(
-            "Sorry, No internet connection. Please try again later!"
-          );
-        }, 5000);
-        setTimeout(() => {
-          setErrorDIsplay("none");
-        }, 10000);
-      } else {
-        setLoadBar(99.9);
-        setBarColor("red");
-        setTimeout(() => {
-          setErrorDIsplay("none");
-          setErrorMessage(
-            "__Sorry, No internet connection. Please try again later"
-          );
-          setErrorDIsplay("block");
-        }, 5000);
-
-        setTimeout(() => {
-          setErrorDIsplay("none");
-        }, 10000);
+        }, 20000);
       }
+      // else if (postError === null) {
+      //   setLoadBar(99.9);
+      //   setBarColor("linear-gradient(92deg, #038125 0%, #fbff00 100%)");
+      //   setErrorDIsplay("none");
+      //   setTimeout(() => {
+      //     setBarColor("red");
+      //     setErrorDIsplay("block");
+      //     setErrorMessage(
+      //       "Sorry, No internet connection. Please try again later!"
+      //     );
+      //   }, 5000);
+      //   setTimeout(() => {
+      //     setErrorDIsplay("none");
+      //   }, 10000);
+      // } else {
+      //   setLoadBar(99.9);
+      //   setBarColor("red");
+      //   setTimeout(() => {
+      //     setErrorDIsplay("none");
+      //     setErrorMessage(
+      //       "__Sorry, No internet connection. Please try again later"
+      //     );
+      //     setErrorDIsplay("block");
+      //   }, 5000);
+
+      //   setTimeout(() => {
+      //     setErrorDIsplay("none");
+      //   }, 10000);
+      // }
     }, [setLoadBar, setBarColor, setErrorDIsplay, postError]);
 
     return isLoading ? (
@@ -64,6 +66,7 @@ const PostsSpinner = WrappedComponent => {
           onLoaderFinished={() => setLoadBar(99)}
         />
         <div style={{ display: errorDisplay }} className="message">
+          <span className="message-close">&times;</span>
           <p>
             <i
               className="fad fa-bug"

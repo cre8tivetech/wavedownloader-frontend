@@ -12,7 +12,7 @@ const HighlightPosts = ({ fetchHighlightPostsStart, match }) => {
     <div className="post-section">
       <Route
         exact
-        path={`${match.path}`}
+        // path={`${match.path}`}
         component={HighlightPostsOverviewContainer}
       />
     </div>

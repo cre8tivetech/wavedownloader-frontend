@@ -185,14 +185,14 @@
           display: block;
           // background-color: var(--color-primary);
           width: 100%;
-          color: var(--color-light);
+          color: var(--color-text-3);
           text-align: center;
           font-size: 2rem;
           height: 50px;
 
           &:hover {
             background-color: var(--color-primary);
-            // color: var(--color-primary);
+            color: var(--color-bg);
           }
 
           p {

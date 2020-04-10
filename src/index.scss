@@ -24,13 +24,7 @@ body {
   font-weight: 400;
   color: var(--color-grey-dark-2);
   line-height: 1.6;
-  background-image: linear-gradient(
-    to right bottom,
-    var(--color-light),
-    var(--color-grey-light-1)
-  );
-  background-size: cover;
-  background-repeat: no-repeat;
+  background-color: var(--color-bg);
 }
 
 code {
@@ -49,6 +43,10 @@ body {
 
 body::-webkit-scrollbar-track {
   background: var(--scrollbarBG);
+}
+
+a {
+  text-decoration: none;
 }
 
 body::-webkit-scrollbar-thumb {

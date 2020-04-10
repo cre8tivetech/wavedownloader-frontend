@@ -1,6 +1,6 @@
 .post-section {
   position: relative;
-  background: var(--color-grey-light-1);
+  background: var(--color-bg);
   width: 100%;
 
   .post-card {
@@ -8,6 +8,7 @@
     flex-direction: column;
     width: 70%;
     margin: 8rem auto 5rem auto;
+    background-color: var(--color-card);
     box-shadow: 0 1.5rem 2rem rgba(black, 0.1);
     padding: 1rem;
 

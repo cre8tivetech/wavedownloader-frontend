@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
-import { Route } from 'react-router-dom';
-import { fetchUserNamePostsStart } from '../../redux/posts/posts.actions';
-import UserNamePostsOverviewContainer from '../../components/posts-overview/username-posts-overview.container';
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import { Route } from "react-router-dom";
+import { fetchUserNamePostsStart } from "../../redux/posts/posts.actions";
+import UserNamePostsOverviewContainer from "../../components/posts-overview/username-posts-overview.container";
 
 const UserNamePosts = ({ fetchUserNamePostsStart, match }) => {
+  // console.log(match.path);
   useEffect(() => {
     fetchUserNamePostsStart();
   }, [fetchUserNamePostsStart]);
@@ -13,7 +14,7 @@ const UserNamePosts = ({ fetchUserNamePostsStart, match }) => {
     <div className="post-section">
       <Route
         exact
-        path={`${match.path}`}
+        // path={`${match.path}`}
         component={UserNamePostsOverviewContainer}
       />
     </div>
@@ -21,7 +22,7 @@ const UserNamePosts = ({ fetchUserNamePostsStart, match }) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  fetchUserNamePostsStart: () => dispatch(fetchUserNamePostsStart()),
+  fetchUserNamePostsStart: () => dispatch(fetchUserNamePostsStart())
 });
 
 export default connect(null, mapDispatchToProps)(UserNamePosts);

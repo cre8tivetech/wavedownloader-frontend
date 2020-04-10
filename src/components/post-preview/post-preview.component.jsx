@@ -3,7 +3,7 @@ import LoadingBar from "react-top-loading-bar";
 import Axios from "axios";
 import { withRouter } from "react-router-dom";
 
-const PostPreview = ({ __typename, owner, post, history, downloadName }) => {
+const PostPreview = ({ __typename, owner, post, history }) => {
   // const { url, setUrl } = useState();
   const [view, setView] = useState();
   const [loadBar, setLoadBar] = useState();

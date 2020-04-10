@@ -29,15 +29,17 @@ const idcode = state => state.posts.idcode;
 const hashTagForm = state => state.posts.hashTagForm;
 const highlightForm = state => state.posts.highlightForm;
 const storyUserName = state => state.posts.storyForm;
+const userToken = (state) => state.user.token;
 
 export function* fetchPostsAsync() {
   yield console.log('I am fired');
   const url = yield select(link);
   const shortCode = yield select(shortcode);
   const idCode = yield select(idcode);
+  const token = yield select(userToken);
   try {
     if(url) {
-    const result = yield singlePostApi(url).then(function(response) {
+    const result = yield singlePostApi(url, token).then(function(response) {
       return response;
     });
     yield console.log(result);
@@ -71,17 +73,18 @@ export function* fetchPostsAsync() {
       }
     }
   } catch (error) {
-    yield put(fetchPostsFailure(error.response.data.message));
+    yield put(fetchPostsFailure(error.response ? error.response.data.message || error.response.data.error  : "No Internet!!.  Poor internet connection, Please check your connectivity, and try again later"));
   }
 }
 
 export function* fetchUserNamePostsAsync() {
   yield console.log('I am fired');
   const {userName, numberOfPost} = yield select(credentials);
+  const token = yield select(userToken);
   yield console.log(userName);
   yield console.log(numberOfPost);
   try {
-    const result = yield usernamePostApi(userName, numberOfPost).then(
+    const result = yield usernamePostApi(userName, numberOfPost, token).then(
       function(response) {
         return response;
       }
@@ -90,17 +93,19 @@ export function* fetchUserNamePostsAsync() {
       console.log('Username post initiated');
       yield put(fetchUserNamePostsSuccess(result));
   } catch (error) {
-    yield put(fetchPostsFailure(error.response.data.message));
+    yield console.log(error.response.data.error);
+    yield put(fetchPostsFailure(error.response ? error.response.data.message || error.response.data.error  : "No Internet!!.  Poor internet connection, Please check your connectivity, and try again later"));
   }
 }
 
 export function* fetchHashTagPostsAsync() {
   yield console.log('I am fired');
   const { hashTag, postType } = yield select(hashTagForm);
+   const token = yield select(userToken);
   yield console.log(hashTag);
   yield console.log(postType);
   try {
-    const result = yield hashtagPostApi(hashTag).then(function(
+    const result = yield hashtagPostApi(hashTag, token).then(function(
       response
     ) {
       return response;
@@ -109,16 +114,17 @@ export function* fetchHashTagPostsAsync() {
     console.log('HashTag post initiated');
     yield put(fetchHashTagPostsSuccess(result));
   } catch (error) {
-    yield put(fetchPostsFailure(error.response.data.message));
+    yield put(fetchPostsFailure(error.response ? error.response.data.message || error.response.data.error  : "No Internet!!.  Poor internet connection, Please check your connectivity, and try again later"));
   }
 }
 
 export function* fetchHighlightPostsAsync() {
   yield console.log('I am fired');
   const username = yield select(highlightForm);
+  const token = yield select(userToken);
   yield console.log(username);
   try {
-    const result = yield highlightPostApi(username).then(function(
+    const result = yield highlightPostApi(username, token).then(function(
       response
     ) {
       return response;
@@ -127,25 +133,25 @@ export function* fetchHighlightPostsAsync() {
     console.log('HashTag post initiated');
     yield put(fetchHighlightPostsSuccess(result.data));
   } catch (error) {
-    yield put(fetchPostsFailure(error.response.data.message));
+    yield put(fetchPostsFailure(error.response ? error.response.data.message || error.response.data.error  : "No Internet!!.  Poor internet connection, Please check your connectivity, and try again later"));
   }
 }
 
 export function* fetchStoryPostsAsync() {
   yield console.log('I am fired');
   const userName = yield select(storyUserName);
+  const token = yield select(userToken);
   try {
-      const result = yield storyPostApi(userName).then(function(response) {
+      const result = yield storyPostApi(userName, token).then(function(response) {
         return response;
       });
       yield console.log(result);
         console.log('Single post initiated');
         yield put(fetchStoryPostsSuccess(result.data));
   } catch (error) {
-    yield put(fetchPostsFailure(error.response.data.message));
+    yield put(fetchPostsFailure(error.response ? error.response.data.message || error.response.data.error  : "No Internet!!.  Poor internet connection, Please check your connectivity, and try again later"));
   }
 }
-
 
 // SINGLE POST ADD
 export function* fetchPostsUrl({ payload: { url } }) {
@@ -233,6 +239,7 @@ export function* fetchPostsHashTagForm({
     // yield console.log(data);
     yield put(fetchHashTagPostsFormData(data));
   } catch (error) {
+    
     yield put(fetchPostsFailure(error.message));
   }
 }

@@ -2,17 +2,11 @@ import React, { useState, useEffect } from "react";
 import LoadingBar from "react-top-loading-bar";
 import "../../pages/posts/posts.styles.scss";
 import "./post-collection-preview.styles.scss";
-// import '../../components/post-preview/post-collection-preview.styles.scss';
 import Axios from "axios";
 import { withRouter } from "react-router-dom";
 
 const PostCollectionPreview = ({ data, downloadName, history }) => {
-  // const { url, setUrl } = useState();
-  // const [media, setMedia] = useState(__typename);
-  const [mediaUrl, setMediaUrl] = useState();
   const [view, setView] = useState();
-  const [event, setEvent] = useState();
-  const [collectionType, setCollectionType] = useState();
   const results = data.post.filter((datas, i) => {
     return datas;
   });
@@ -25,8 +19,6 @@ const PostCollectionPreview = ({ data, downloadName, history }) => {
     posted_on
   } = results[0];
   const { profile_pic_url, username, full_name } = data.owner;
-  const [downloading, setDownloading] = useState("loader hide");
-  const [downloadBtn, setDownloadBtn] = useState("show");
   const [loadBar, setLoadBar] = useState();
   // const []
   useEffect(() => {

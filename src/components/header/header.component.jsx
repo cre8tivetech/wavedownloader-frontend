@@ -5,8 +5,9 @@ import './header.styles.scss';
 import Navigation from '../navigation/navigation.component';
 import { withRouter } from 'react-router-dom';
 import '../navigation/navigation.styles.scss';
-const Header = props => {
-  console.log(props.history);
+const Header = (props) => {
+  // console.log(Good);
+
   // <!-- HEADER -->
   return (
     <div className="header">
@@ -18,6 +19,7 @@ const Header = props => {
         ></i>
         <Link to="/">
           <img className="header__logo--img" src={YourSvg} alt="" />
+          <div className="header__logo--img"></div>
         </Link>
 
         {/* <p className="header__logo--text">Wave Downloader</p> */}
@@ -27,5 +29,4 @@ const Header = props => {
     </div>
   );
 };
-
 export default withRouter(Header);

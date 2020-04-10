@@ -1,4 +1,5 @@
 //Color
+
 :root {
   --color-primary: #05af32;
   --color-primary-light: #05da3e;
@@ -11,8 +12,12 @@
   --color-quaternary: #c11d6f;
 
   --color-light: #ffffff;
+  --color-bg: #fcfcfc;
+  --color-bg-2: #eeeeee;
+  --color-card: #f4f2f2;
+  --color-btn-hover: #a8a8a8;
 
-  --color-grey-light-1: #faf9f9;
+  --color-grey-light-1: #fafafa;
   --color-grey-light-2: #f4f2f2;
   --color-grey-light-3: #f0eeee;
   --color-grey-light-4: #cccccc;
@@ -28,6 +33,15 @@
   --color-dark-4: #1a1a1a;
 
   --color-text-1: #777777;
+  --color-text-2: #242424;
+  --color-text-3: #f1f1f1;
+
+  // --color-text-1: #a3a3a3;
+  // --color-text-2: #cccccc;
+
+  --color-plan-free: #2196f3;
+  --color-plan-basic: #5dcd72;
+  --color-plan-premium: #e63950;
 
   --color-danger-1: #ff0000;
   --color-danger-2: #ff3d3d;
@@ -39,6 +53,7 @@
   --line: 1px solid var(--color-grey-light-2);
 
   --scrollbarBG: #e4ffeb;
+  // --scrollbarBG: #020503;
   --thumbBG: #05da3e;
 }
 

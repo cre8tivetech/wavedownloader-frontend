@@ -1,0 +1,155 @@
+.signin-signup {
+  width: 70%;
+  margin: 11rem auto;
+  box-shadow: 0 0.5rem 2rem rgba(black, 0.15);
+
+  &__type {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 0 1rem;
+
+    &--btn {
+      padding: 0;
+      font-size: 20rem;
+      background-color: var(--color-primary);
+      color: var(--color-light);
+
+      p {
+        color: var(--color-light);
+      }
+    }
+
+    & > * {
+      position: relative;
+      border-radius: 10px;
+      margin: 0 2rem;
+      padding: 0;
+      background-color: var(--color-light);
+      box-shadow: 0 0.5rem 2rem rgba(black, 0.1);
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      font-weight: 700;
+
+      &:hover {
+        background-color: var(--color-btn-hover);
+        color: white;
+
+        p {
+          color: white;
+        }
+      }
+
+      span {
+        position: absolute;
+        top: 0.5rem;
+        right: 3rem;
+        letter-spacing: 0.1rem;
+        font-size: 0.7rem;
+      }
+
+      p {
+        margin: 0;
+        color: var(--color-text-1);
+      }
+    }
+  }
+
+  &__form {
+    margin-top: 4rem;
+    padding: 2rem 0;
+    background-color: var(--color-bg-2);
+  }
+
+  .active {
+    background-color: var(--color-primary);
+    color: var(--color-light);
+
+    p {
+      color: var(--color-light);
+    }
+  }
+
+  .submit_btn {
+    margin: 0 auto 1rem auto;
+    text-transform: none;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  .form__group {
+    // margin: 0 auto;
+    text-align: center;
+
+    p {
+      font-size: 1.3rem;
+      margin: 0;
+      padding: 0;
+    }
+
+    .auth-link {
+      &:link {
+        text-decoration: none;
+      }
+
+      p {
+        text-decoration: none !important;
+        font-size: 1.3rem;
+        color: var(--color-text-1);
+
+        &:hover {
+          color: var(--color-primary);
+        }
+      }
+    }
+
+    .loader {
+      border: 0.4rem solid #f3f3f3;
+      border-radius: 50%;
+      border-top: 0.4rem groove var(--color-primary);
+      border-right: 0.4rem dashed var(--color-secondary);
+      border-bottom: 0.4rem double var(--color-tertiary);
+      border-left: 0.4rem dotted var(--color-quaternary); //quaternary
+      width: 2.5rem;
+      height: 2.5rem;
+      margin: 0 auto;
+      -webkit-animation: spin 2s linear infinite;
+      animation: spin 2s linear infinite;
+      z-index: 1000;
+    }
+  }
+}
+
+.errorMessage {
+  text-align: center;
+  color: var(--color-danger-1);
+  padding-bottom: 1rem;
+  font-size: 1.3rem;
+}
+
+.successMessage {
+  text-align: center;
+  color: var(--color-primary);
+  padding-bottom: 1.5rem;
+  font-size: 1.3rem;
+}
+
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
