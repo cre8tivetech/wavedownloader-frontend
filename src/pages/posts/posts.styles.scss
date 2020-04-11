@@ -1,3 +1,5 @@
+@import '../../themes/mixins.scss';
+
 .post-section {
   position: relative;
   background: var(--color-bg);
@@ -11,6 +13,21 @@
     background-color: var(--color-card);
     box-shadow: 0 1.5rem 2rem rgba(black, 0.1);
     padding: 1rem;
+
+    @include respond(tabLand) {
+      width: 85%;
+    }
+
+    @include respond(tabPort) {
+      width: 90%;
+    }
+
+    @include respond(phone) {
+      width: 95%;
+      padding: 1rem 0.2rem;
+      margin: 7rem auto 5rem auto;
+    }
+
 
     &__media {
       margin: 1rem auto;
@@ -63,11 +80,13 @@
             i {
               padding-right: 0.5rem;
             }
+
             a {
               text-decoration: none;
               color: var(--color-primary);
             }
           }
+
           strong {
             padding-right: 1rem;
           }

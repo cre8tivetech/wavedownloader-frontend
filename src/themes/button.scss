@@ -1,3 +1,5 @@
+@import 'mixins.scss';
+
 .btn {
   color: var(--color-text-1);
 
@@ -14,11 +16,31 @@
     //Change for the <button> element
     border: none;
     cursor: pointer;
+
+    @include respond(tabPort) {
+      padding: 1rem 2rem;
+    }
+
+    @include respond(tabPort) {
+      padding: 0.8rem 1.5rem;
+    }
   }
 
   &--green {
     background-color: var(--color-primary);
     color: var(--color-light);
+    font-size: 1.5rem;
+    font-weight: 500;
+
+    @include respond(tabPort) {
+      font-size: 1.3rem;
+      padding: 1rem 2rem;
+    }
+
+    @include respond(tabPort) {
+      font-size: 1.1rem;
+      padding: 0.8rem 1.5rem;
+    }
 
     &::after {
       background-color: var(--color-primary);

@@ -215,110 +215,15 @@ const Pricing = ({ user, signOutStart }) => {
                   <p>Check download history</p>
                 </div> */}
                 <div className="plan">
-                  <div className="plan-btn btn free-bg">Buy now</div>
+                <Link to="/"> 
+                  <div className="plan-btn btn free-bg">Get now</div>
+                  </Link>
                 </div>
               </div>
             </div>
 
             <Price {...baseData} />
             <Price {...premiumData} />
-
-            {/* <div className="pricing-section_box--container_box basic">
-              <div className="pricing-section_box--container_box-top basic-img">
-                <div className="pricing-section_box--container_box-top-title">
-                  <h2>BASIC</h2>
-                </div>
-                <img src={basic} alt="" />
-              </div>
-              <div className="pricing-section_box--container_box-bottom basic">
-                <div className="sub-type">
-                  <h1>
-                    <span>$</span>
-                    {basicAmount[0]}
-                    <span>.{basicAmount[1]}</span>
-                  </h1>
-                  <h3>{type}</h3>
-                </div>
-                <div className="plan-texts">
-                  <i className="fa fa-check basic"></i>
-                  <p>Download unlimited posts</p>
-                </div>
-                <div className="plan-texts">
-                  <i className="fa fa-check basic"></i>
-                  <p>Dowload post by username</p>
-                </div>
-                <div className="plan-texts">
-                  <i className="fa fa-check basic"></i>
-                  <p>Dowload post by hashtag</p>
-                </div>
-                <div className="plan-texts">
-                  <i className="fa fa-times basic"></i>
-                  <p>Dowload stories post</p>
-                </div>
-                <div className="plan-texts">
-                  <i className="fa fa-times basic"></i>
-                  <p>Dowload highlights post</p>
-                </div>
-                <div className="plan-texts">
-                  <i className="fa fa-check basic"></i>
-                  <p>Check download history</p>
-                </div>
-                <div className="plan">
-                  <div className="plan-btn btn basic-bg">Buy now</div>
-                </div>
-              </div>
-            </div> */}
-
-            {/* <div className="pricing-section_box--container_box premium">
-              <div className="pricing-section_box--container_box-top premium-img">
-                <div className="pricing-section_box--container_box-top-title">
-                  <h2>PREMIUM</h2>
-                </div>
-                <img src={premium} alt="" />
-              </div>
-              <div className="pricing-section_box--container_box-bottom premium">
-                <div className="sub-type">
-                  <h1>
-                    <span>$</span>
-                    {premiumAmount[0]}
-                    <span>.{premiumAmount[1]}</span>
-                  </h1>
-                  <h3>{type}</h3>
-                </div>
-                <div className="plan-texts">
-                  <i className="fa fa-check premium"></i>
-                  <p>Download unlimited posts</p>
-                </div>
-                <div className="plan-texts">
-                  <i className="fa fa-check premium"></i>
-                  <p>Dowload post by username</p>
-                </div>
-                <div className="plan-texts">
-                  <i className="fa fa-check premium"></i>
-                  <p>Dowload post by hashtag</p>
-                </div>
-                <div className="plan-texts">
-                  <i className="fa fa-check premium"></i>
-                  <p>Dowload stories post</p>
-                </div>
-                <div className="plan-texts">
-                  <i className="fa fa-check premium"></i>
-                  <p>Dowload highlights post</p>
-                </div>
-                <div className="plan-texts">
-                  <i className="fa fa-check premium"></i>
-                  <p>Check download history</p>
-                </div>
-                <div className="plan">
-                  <div
-                    className="plan-btn btn premium-bg"
-                    onClick={() => addPayment(amount.premiumP)}
-                  >
-                    Buy now
-                  </div>
-                </div>
-              </div>
-            </div> */}
           </div>
         </div>
       </div>

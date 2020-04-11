@@ -1,10 +1,25 @@
+@import '../../themes/mixins.scss';
+
 .profile-section {
-  width: 70%;
+  width: 80%;
   margin: 0 auto;
 
-  & > * {
+  @include respond(tabPort) {
+    width: 85%;
+  }
+
+  @include respond(phone) {
+    width: 95%;
+  }
+
+  &>* {
     margin-top: 4rem;
     box-shadow: 0 0.5rem 2rem rgba(black, 0.15);
+
+    @include respond(tabPort) {
+      margin-top: 3.5rem;
+    }
+
   }
 
   &__box {
@@ -13,6 +28,11 @@
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
+      margin: 0 1rem;
+
+      @include respond(phone) {
+        margin: 0 0.5rem;
+      }
 
       &--left {
         display: flex;
@@ -29,6 +49,20 @@
           line-height: 5rem;
           text-align: center;
           background: var(--color-primary);
+
+          @include respond(tabPort) {
+            width: 4.5rem;
+            height: 4.5rem;
+            font-size: 2.5rem;
+            line-height: 4.5rem;
+          }
+
+          @include respond(phone) {
+            width: 4rem;
+            height: 4rem;
+            font-size: 2rem;
+            line-height: 4rem;
+          }
         }
 
         p {
@@ -38,6 +72,14 @@
           display: flex;
           text-transform: capitalize;
           flex-direction: column;
+
+          @include respond(tabPort) {
+            font-size: 1.4rem;
+          }
+
+          @include respond(phone) {
+            font-size: 1.3rem;
+          }
 
           small {
             text-transform: lowercase;
@@ -66,6 +108,14 @@
           align-content: flex-end;
           margin-left: auto;
 
+          @include respond(tabPort) {
+            font-size: 1.2rem;
+          }
+
+          @include respond(phone) {
+            font-size: 1rem;
+          }
+
           &:hover {
             color: var(--color-primary);
           }
@@ -74,6 +124,14 @@
         div {
           font-size: 1.6rem;
           cursor: pointer;
+
+          @include respond(tabPort) {
+            font-size: 1.4rem;
+          }
+
+          @include respond(phone) {
+            font-size: 1.2rem;
+          }
 
           a {
             color: var(--color-text-1);
@@ -90,6 +148,15 @@
           &:hover {
             font-size: 1.7rem;
             color: var(--color-primary);
+
+            @include respond(tabPort) {
+              font-size: 1.5rem;
+
+            }
+
+            @include respond(phone) {
+              font-size: 1.3rem;
+            }
           }
         }
       }
@@ -102,6 +169,14 @@
 
       p {
         font-size: 1.5rem;
+
+        @include respond(tabPort) {
+          font-size: 1.4rem;
+        }
+
+        @include respond(phone) {
+          font-size: 1.3rem;
+        }
       }
 
       &_container {
@@ -111,6 +186,14 @@
         margin: 0 auto;
         flex-wrap: wrap;
 
+        @include respond(tabPort) {
+          width: 88%;
+        }
+
+        @include respond(phone) {
+          width: 100%;
+        }
+
         &_box {
           width: 35%;
           margin: 1.5rem 3rem;
@@ -118,14 +201,54 @@
           padding: 1.5rem;
           text-align: center;
 
+          @include respond(tabPort) {
+            padding: 1.5rem;
+            margin: 1.5rem 3rem;
+          }
+
+          @include respond(phone) {
+            padding: 1rem;
+            margin: 1.5rem 2.5rem;
+            width: 30%;
+          }
+
+          p {
+            font-size: 1.5rem;
+
+            @include respond(tabPort) {
+              font-size: 1.35rem;
+            }
+
+            @include respond(phone) {
+              font-size: 1.1rem;
+            }
+          }
+
           strong {
             font-weight: bolder;
             font-size: 1.7rem;
+
+            @include respond(tabPort) {
+              font-size: 1.5rem;
+            }
+
+            @include respond(phone) {
+              font-weight: bold;
+              font-size: 1.2rem;
+            }
           }
 
           &-img {
             max-width: 100%;
             height: 4rem;
+
+            @include respond(tabPort) {
+              height: 3.5rem;
+            }
+
+            @include respond(phone) {
+              height: 3rem;
+            }
           }
         }
       }

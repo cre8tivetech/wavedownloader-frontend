@@ -93,12 +93,9 @@ const SinglePost = ({ fetchPostsAdd }) => {
             <div className="form__group">
               <button
                 type="submit"
-                // onClick={e => {
-                //   handleSubmit(e);
-                // }}
                 className="btn btn--green"
               >
-                Next step &rarr;
+                Download ➤
               </button>
             </div>
           </form>

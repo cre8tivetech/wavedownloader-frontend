@@ -1,6 +1,12 @@
+@import 'mixins.scss';
+
 .card {
   background: var(--color-card);
   margin: 0 auto;
   padding: 3rem;
   justify-content: center;
+
+  @include respond(tabPort) {
+    padding: 0.5rem;
+  }
 }

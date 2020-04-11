@@ -1,5 +1,4 @@
 @import '../../themes/mixins.scss';
-// @import '../../assets/Wd-logo.svg';
 
 .header {
   background-color: var(--color-bg);
@@ -13,7 +12,7 @@
     background-color: var(--color-bg);
     position: fixed;
     margin: auto;
-    height: 65px;
+    height: 55px;
     width: 100%;
     display: flex;
     color: #000000;
@@ -24,48 +23,62 @@
     align-items: center;
     flex-wrap: wrap;
 
-    @include respond(tabPort) {
-      // padding: 0 3rem;
-    }
-
     .back {
-      display: flex;
+      display: block;
       cursor: pointer;
       align-self: center;
-      // margin-top: 1rem;
-      margin-right: 40rem;
+      // margin-right: 40rem;
       // position: fixed;
       font-size: 3rem;
 
       @include respond(tabPort) {
-        margin: 0 auto 0 auto;
+        margin-right: 20rem;
+        font-size: 2.5rem;
+      }
+
+      @include respond(phone) {
+        font-size: 2rem;
+        margin-right: 10rem;
       }
     }
 
     &--img {
-      margin-right: 40rem;
-      height: 32px;
-      width: 100%;
-      text-align: center;
-      // background-image: url('../../assets/icon.png');
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
-      position: relative;
+      &-1 {
+        display: block;
+        margin-right: 50rem;
+        padding: 4px 0;
+        height: 32px;
+        width: 100%;
+        text-align: center;
+        position: relative;
 
-      @include respond(tabPort) {
-        margin: 0 auto 0 auto;
+        @include respond(tabPort) {
+          display: none;
+          margin: 0 auto 0 auto;
+        }
       }
 
-      // margin: auto;
+      &-2 {
+        display: none;
+        // margin-right: 10rem;
+        height: 32px;
+        width: 80px;
+        padding: 3px 8px;
+
+        @include respond(tabPort) {
+          display: block;
+          height: 32px;
+          width: 80px;
+          margin-right: 20rem;
+        }
+
+        @include respond(phone) {
+          display: block;
+          height: 30px;
+          width: 65px;
+          margin-right: 10rem;
+        }
+      }
     }
   }
-
-  // &--title {
-  //   margin: auto;
-  //   display: flex;
-  //   justify-content: center;
-  //   align-items: center;
-  //   flex-wrap: wrap;
-  // }
 }

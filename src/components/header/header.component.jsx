@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import YourSvg from '../../assets/Wd-logo.svg';
+import Logo1 from '../../assets/Wd-logo.svg';
+import Logo2 from '../../assets/icon.png';
 import './header.styles.scss';
 import Navigation from '../navigation/navigation.component';
 import { withRouter } from 'react-router-dom';
@@ -18,11 +19,9 @@ const Header = (props) => {
           style={{ color: 'var(--color-primary-light)' }}
         ></i>
         <Link to="/">
-          <img className="header__logo--img" src={YourSvg} alt="" />
-          <div className="header__logo--img"></div>
+          <img className="header__logo--img-1" src={Logo1} alt="" />
+          <img className="header__logo--img-2" src={Logo2} alt="" />
         </Link>
-
-        {/* <p className="header__logo--text">Wave Downloader</p> */}
       </div>
       {/* <!-- NAV MENU --> */}
       <Navigation />

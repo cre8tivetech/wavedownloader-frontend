@@ -1,3 +1,5 @@
+@import 'mixins.scss';
+
 .form {
   &__group:not(:last-child) {
     margin-bottom: 2rem;
@@ -6,12 +8,22 @@
   &__input {
     display: flex;
     flex-direction: row;
-    margin: 0 10rem;
+    margin: 0 8rem;
     justify-content: center;
     padding: 0 2rem;
     // background-color: rgba(var(--color-light), 0.5);
     border-radius: 10px;
     background-color: var(--color-light);
+
+    @include respond(tabPort) {
+      margin: 0 5rem;
+      padding: 0 .8rem;
+    }
+
+    @include respond(phone) {
+      margin: 0 2rem;
+      padding: 0 .8rem;
+    }
 
     &:not(:last-child) {
       margin-bottom: 1.5rem;
@@ -20,6 +32,11 @@
     i {
       margin: auto;
       font-size: 2rem;
+
+      @include respond(phone) {
+        margin: auto;
+        font-size: 1.3rem;
+      }
     }
 
     &--box {
@@ -29,32 +46,52 @@
       color: inherit;
       background-color: var(--color-bg);
       // background: linear-gradient(92deg, #038125 0%, #4dff07 48%, #d6da05 100%);
-      padding: 1.5rem 0;
+      padding: 1.5rem 0 1.5rem 2rem;
       border-bottom-right-radius: 0.5rem;
       border-bottom-left-radius: 0.5rem;
-      padding-left: 30px;
       border: none;
       border-bottom: 3px solid transparent;
       width: 80%;
       transition: all 0.3s;
       margin: 0 auto;
-      // @include respond(tab-port) {
-      //   width: 100%;
-      // }
 
-      // &input:-internal-autofill-selected {
-      //   background-color: var(--color-bg) !important;
-      // }
+      @include respond(tabPort) {
+        padding: 1rem 0 1rem 2rem;
+        font-size: 1.5rem;
+        border-bottom: 1px solid transparent;
+      }
+
+      @include respond(phone) {
+        padding: 1rem 0 1rem 2rem;
+        font-size: 1.3rem;
+      }
+
 
       &:focus {
         outline: none;
         background-color: var(--color-bg);
         box-shadow: 0 1rem 2rem rgba(var(--color-primary), 0.1);
-        border-bottom: 3px solid var(--color-primary);
+        border-bottom: 0.3rem solid var(--color-primary);
+
+        @include respond(tabPort) {
+          border-bottom: 0.2rem solid var(--color-primary);
+        }
+
+        @include respond(phone) {
+          border-bottom: 0.1rem solid var(--color-primary);
+        }
       }
 
       &:focus:invalid {
-        border-bottom: 3px solid var(--color-danger-1);
+        border-bottom: 0.3rem solid var(--color-danger-1);
+
+        @include respond(tabPort) {
+          border-bottom: 0.2rem solid var(--color-primary);
+        }
+
+        @include respond(phone) {
+          border-bottom: 0.1rem solid var(--color-primary);
+        }
       }
 
       &::-webkit-input-placeholder {
@@ -65,14 +102,26 @@
     &--label {
       font-size: 1.2rem;
       font-weight: 700;
-      margin-left: 2rem;
+      margin-left: 1rem;
       margin-top: 0.7rem;
       display: inline-block;
       transition: all 0.3s;
+
+      @include respond(tabPort) {
+        font-size: 1.2rem;
+        font-weight: 500;
+        margin-left: 1rem;
+      }
+
+      @include respond(phone) {
+        font-size: 0.8rem;
+        font-weight: 500;
+        margin-left: 0.5rem;
+      }
     }
 
     // siblings selector ~ or + if only one siblings
-    &--box:placeholder-shown + &--label {
+    &--box:placeholder-shown+&--label {
       opacity: 0;
       visibility: hidden;
       transform: translateX(-4rem);

@@ -1,3 +1,5 @@
+@import '../../themes/mixins.scss';
+
 .navigation {
   display: block;
   font-size: 1.1rem;
@@ -7,13 +9,18 @@
     box-sizing: border-box;
     cursor: pointer;
     position: fixed;
-    height: 100%;
-    width: 100%;
     top: 22px;
     right: 15px;
     border-radius: 50px;
-    height: 22px;
     width: 22px;
+
+    @include respond(tabPort) {
+      width: 22px;
+    }
+
+    @include respond(phone) {
+      width: 20px;
+    }
   }
 
   &__spinner {
@@ -24,6 +31,10 @@
     width: 100%;
     background: var(--color-primary-light);
     border-radius: 5rem;
+
+    @include respond(tabPort) {
+      height: 0.2rem;
+    }
   }
 
   &__horizontal {
@@ -31,7 +42,11 @@
     box-sizing: border-box;
     position: relative;
     float: right;
-    margin-top: 3px;
+    margin-top: 0.3rem;
+
+    @include respond(tabPort) {
+      margin-top: 0.45rem;
+    }
   }
 
   &__part-1 {
@@ -46,7 +61,11 @@
     box-sizing: border-box;
     position: relative;
     float: right;
-    margin-top: 3px;
+    margin-top: 0.3rem;
+
+    @include respond(tabPort) {
+      margin-top: 0.45rem;
+    }
   }
 
   &__sidebarMenu {
@@ -56,23 +75,30 @@
     flex-direction: column;
     flex-grow: 1;
     right: 0;
-    width: 250px;
-    margin-top: 60px;
+    width: 25rem;
+    margin-top: 5.55rem;
     transform: translateX(250px);
     transition: transform 250ms ease-in-out;
     background-color: var(--color-bg);
     box-shadow: 0px 0px 10px var(--color-bg);
 
-    // border-left: 1px solid var(--color-grey-dark-1);
+    @include respond(tabPort) {
+      width: 240px;
+    }
+
     &--bottom {
-      margin-top: 2rem;
+      font-weight: bold;
       padding: 0.5rem 1.5rem 0.2rem 0;
       align-self: flex-end;
       font-size: 1.2rem;
       cursor: pointer;
 
+      @include respond(tabPort) {
+        font-size: 1.2rem;
+      }
+
       p {
-        color: var(--color-text-2);
+        color: var(--color-text-1);
 
         &:hover {
           color: var(--color-primary);
@@ -82,7 +108,6 @@
 
     &--inner {
       margin-bottom: 3rem;
-      // margin: 0;
       padding: 0;
 
       // border-top: 1px solid rgba(255, 255, 255, 0.1);
@@ -93,6 +118,7 @@
         align-items: center;
         text-align: center;
         font-size: 15px;
+
         // color: rgba(255, 255, 255, 0.5);
         // color: var(--color-text-3);
 
@@ -115,8 +141,14 @@
         color: var(--color-text-2);
         text-transform: uppercase;
         font-weight: bold;
+        font-size: 1rem;
         padding: 2rem;
         cursor: pointer;
+
+
+        @include respond(tabPort) {
+          font-size: 0.9rem;
+        }
 
         &:first-child {
           padding: 0 2rem;
@@ -149,17 +181,28 @@
             line-height: 2.2rem;
             text-align: center;
             background: var(--color-primary);
+
+            @include respond(tabPort) {
+              width: 3.5rem;
+              height: 3.5rem;
+              line-height: 1.5rem;
+              font-size: 1.5rem;
+            }
           }
 
           &:active,
-          :visited ~ .navigation__sidebarMenu {
+          :visited~.navigation__sidebarMenu {
             transform: translateX(0);
           }
 
           p {
             color: var(--color-text-1);
             margin-left: 1rem;
-            font-size: 12px;
+            font-size: 1.2rem;
+
+            @include respond(tabPort) {
+              font-size: 1.2rem
+            }
 
             small {
               text-transform: lowercase;
@@ -169,37 +212,34 @@
               color: var(--color-primary);
             }
 
-            &:active ~ .navigation__sidebarMenu {
+            &:active~.navigation__sidebarMenu {
               transform: translateX(0);
             }
           }
         }
 
         .toggle-wrapp {
-          // height: 30px;
-          // max-width: 100px;
-          // width: 100%;
           margin: 0px auto;
           display: flex;
-          // justify-content: center;
           align-items: center;
-          // padding-top: 50px;
 
           p {
             padding-right: 1rem;
           }
 
           .toggle {
-            width: 40px;
-            height: 20px;
+            // width: 40px;
+            // height: 20px;
+            width: 35px;
+            height: 15px;
             position: relative;
             border: 1px solid var(--color-primary);
             background-color: var(--color-bg);
-            // margin: 0 10px;
             border-radius: 25px;
             cursor: pointer;
-            // background-color: #000000;
             transition: 300ms all;
+            margin-bottom: 3px;
+
 
             &::after {
               position: absolute;
@@ -209,7 +249,7 @@
               left: 3px;
               transition: 300ms all linear;
               font-family: fontawesome;
-              font-size: 12px;
+              font-size: 8px;
               color: var(--color-text-1);
             }
           }
@@ -244,11 +284,11 @@
     }
   }
 
-  input[type="checkbox"]:checked ~ &__sidebarMenu {
+  input[type="checkbox"]:checked~&__sidebarMenu {
     transform: translateX(0);
   }
 
-  body ~ input[type="checkbox"]:checked ~ &__sidebarMenu {
+  body~input[type="checkbox"]:checked~&__sidebarMenu {
     transform: translateX(0);
   }
 
@@ -258,20 +298,20 @@
     display: none;
   }
 
-  input[type="checkbox"]:checked ~ &__sidebarIconToggle > &__horizontal {
+  input[type="checkbox"]:checked~&__sidebarIconToggle>&__horizontal {
     transition: all 0.3s;
     box-sizing: border-box;
     opacity: 0;
   }
 
-  input[type="checkbox"]:checked ~ &__sidebarIconToggle > &__part-1 {
+  input[type="checkbox"]:checked~&__sidebarIconToggle>&__part-1 {
     transition: all 0.3s;
     box-sizing: border-box;
     transform: rotate(135deg);
     margin-top: 8px;
   }
 
-  input[type="checkbox"]:checked ~ &__sidebarIconToggle > &__part-2 {
+  input[type="checkbox"]:checked~&__sidebarIconToggle>&__part-2 {
     transition: all 0.3s;
     box-sizing: border-box;
     transform: rotate(-135deg);

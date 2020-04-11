@@ -1,10 +1,29 @@
+@import '../../themes/mixins.scss';
+
 .home-section {
   width: 70%;
   margin: 0 auto;
 
-  & > * {
+  @include respond(tabLand) {
+    width: 85%;
+  }
+
+  @include respond(tabPort) {
+    width: 90%;
+  }
+
+  @include respond(phone) {
+    width: 95%;
+  }
+
+  &>* {
     margin-top: 4rem;
     box-shadow: 0 0.5rem 2rem rgba(black, 0.15);
+
+    @include respond(phone) {
+      box-shadow: 0 0.2rem 1rem rgba(black, 0.15);
+
+    }
   }
 
   // DOWNLOAD OPTIONS
@@ -12,7 +31,7 @@
     display: flex;
     flex-wrap: wrap;
 
-    & > * {
+    &>* {
       position: relative;
       border-radius: 10px;
       margin: 1rem 2rem;
@@ -23,9 +42,28 @@
       text-transform: uppercase;
       font-weight: 700;
 
+      @include respond(tabLand) {
+        font-size: 1.3rem;
+      }
+
+      @include respond(tabPort) {
+        font-size: 1.2rem;
+        padding: 0 3rem;
+        margin: 1rem;
+        font-weight: 600;
+      }
+
+      @include respond(phone) {
+        font-size: 1rem;
+        padding: 0 1rem;
+        margin: 1rem;
+        font-weight: 600;
+      }
+
       &:hover {
         background-color: var(--color-btn-hover);
         color: white;
+
         p {
           color: white;
         }
@@ -37,6 +75,12 @@
         right: 3rem;
         letter-spacing: 0.1rem;
         font-size: 0.7rem;
+
+        @include respond(phone) {
+          font-size: 0.5rem;
+          top: 0.2rem;
+          right: 0.5rem;
+        }
       }
 
       p {
@@ -54,7 +98,7 @@
     }
 
     .update__box {
-      & > * {
+      &>* {
         color: white;
       }
     }
@@ -64,14 +108,33 @@
   .download {
     text-align: center;
     border-radius: 1rem;
-    border: 0.1rem solid var(--color-primary);
     margin-bottom: 5rem;
+
+    @include respond(tabPort) {
+      margin-bottom: 3rem;
+    }
+
+    @include respond(phone) {
+      margin-bottom: 1rem;
+    }
 
     &__text {
       position: relative;
       font-size: 2.2rem;
       font-family: Helvetica;
-      margin: 0 auto;
+      margin: 5px auto;
+
+      @include respond(tabLand) {
+        font-size: 1.9rem;
+      }
+
+      @include respond(tabPort) {
+        font-size: 1.7rem;
+      }
+
+      @include respond(phone) {
+        font-size: 1.5rem;
+      }
 
       p {
         margin: 0.8rem 0 2rem 0;

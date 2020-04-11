@@ -102,7 +102,7 @@ const SignUp = ({ signUpStart, success, error }) => {
                 onChange={handleChange}
                 required
               />
-              <label htmlFor="userName" className="form__input--label">
+              <label htmlFor="userName" max="11" className="form__input--label">
                 UserName
               </label>
             </div>
