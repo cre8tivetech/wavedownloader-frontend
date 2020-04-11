@@ -1,9 +1,16 @@
+@import "mixins.scss";
+
 .update-faq {
   display: flex;
   margin: 0 0 5rem 0;
   flex-direction: row;
   scrollbar-width: thin;
   scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+
+  @include respond(phone) {
+    flex-direction: column;
+    margin: 2rem;
+  }
 
   p {
     margin: auto;
@@ -15,6 +22,14 @@
     border-radius: 1rem 1rem 1rem 1rem;
     box-sizing: border-box;
 
+    @include respond(tabPort) {
+      // margin: 0rem 3rem;
+    }
+
+    @include respond(phone) {
+      margin: 3rem 0.5rem;
+    }
+
     &__title {
       font-size: 1.8rem;
       font-weight: 600;
@@ -23,6 +38,14 @@
       color: var(--color-light);
       padding: 0.5rem;
       border-radius: 1rem 1rem 0 0;
+
+      @include respond(tabPort) {
+        font-size: 1.4rem;
+      }
+
+      @include respond(phone) {
+        font-size: 1.3rem;
+      }
 
       p {
         i {
@@ -61,13 +84,25 @@
       p {
         font-size: 1.2rem;
 
+        @include respond(phone) {
+          font-size: 1rem;
+        }
+
         strong {
           font-size: 1.3rem;
           margin-right: 0.5rem;
 
+          @include respond(phone) {
+            font-size: 1.1rem;
+          }
+
           i {
             padding-right: 0.8rem;
             font-size: 2rem;
+
+            @include respond(phone) {
+              font-size: 1.4rem;
+            }
           }
         }
       }
@@ -86,6 +121,10 @@
     overflow: hidden;
     background-color: var(--color-light-5);
 
+    @include respond(phone) {
+      margin: 0;
+    }
+
     &__title {
       font-size: large;
       font-weight: 600;
@@ -93,6 +132,14 @@
       background-color: var(--color-tertiary);
       color: var(--color-light);
       padding: 0.5rem;
+
+      @include respond(tabPort) {
+        font-size: 1.4rem;
+      }
+
+      @include respond(phone) {
+        font-size: 1.3rem;
+      }
 
       p {
         i {

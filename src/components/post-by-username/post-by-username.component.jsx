@@ -155,7 +155,7 @@ const PostByUserName = ({ fetchUserNamePostsAdd }) => {
               </div>
             </div>
             <div className="form__group">
-              <button className="btn btn--green">Next step &rarr;</button>
+              <button className="btn btn--green">Download ➤</button>
             </div>
           </form>
         </div>

@@ -4,7 +4,6 @@ import LoadingBar from "react-top-loading-bar";
 import { useHistory } from "react-router-dom";
 import Accordion from "../../components/accordion/accordion.component";
 import { Link, withRouter } from "react-router-dom";
-import "./single-post.styles.scss";
 import { fetchPostsAdd } from "../../redux/posts/posts.actions";
 
 const SinglePost = ({ fetchPostsAdd }) => {

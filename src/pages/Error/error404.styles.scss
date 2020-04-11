@@ -6,7 +6,15 @@
   box-shadow: 0 0.5rem 2rem rgba(black, 0.15);
   text-align: center;
 
+  @include respond(tabLand) {
+    width: 50%;
+  }
+
   @include respond(tabPort) {
+    width: 60%;
+  }
+
+  @include respond(phone) {
     width: 80%;
   }
 
