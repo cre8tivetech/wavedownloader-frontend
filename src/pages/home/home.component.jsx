@@ -55,7 +55,7 @@ const Home = () => {
           </p>
         </div>
       </div>
-      <div className="update-faq card">
+      <div className="update-faq">
         <div className="update">
           <div className="update__title">
             <p>
