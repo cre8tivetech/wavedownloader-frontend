@@ -85,9 +85,8 @@ export function* signByToken({ payload: { token } }) {
 }
 
 const tokenExpiration = () =>  {
-  // 2020-04-13T01:34:46.389Z
   const loginExp = new Date();
-  const timeExp = loginExp.setMinutes(loginExp.getMinutes() + 1);
+  const timeExp = loginExp.setHours(loginExp.getHours() + 12);
   const result = new Date(timeExp);
   console.log(result);
   return result ;

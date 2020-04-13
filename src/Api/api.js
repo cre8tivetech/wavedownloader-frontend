@@ -1,18 +1,20 @@
 import Axios from "axios";
 
 export const singlePostApi = async (url, token) => {
-  const headers = {
-    'Content-Type': 'application/json',
-    Authorization: 'Bearer ' + token,
-  };
+  // const headers = {
+  //   'Content-Type': 'application/json',
+  //   Authorization: 'Bearer ' + token,
+  // };
   console.log(
     process.env.REACT_APP_API + process.env.REACT_APP_SINGLE_POST + url
   );
   const apiUrl =
     process.env.REACT_APP_API + process.env.REACT_APP_SINGLE_POST + url;
-  const collectionsMap = await Axios.get( apiUrl, {
-    headers: headers
-  });
+  const collectionsMap = await Axios.get( apiUrl
+  //   ,{
+  //   headers: headers
+  // }
+  );
   console.log(process.env.REACT_APP_API);
   console.log(process.env.REACT_APP_SHORT_CODE_POST);
   return collectionsMap;

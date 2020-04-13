@@ -23,7 +23,7 @@ const PostsSpinner = WrappedComponent => {
           setErrorDIsplay("block");
         }, 3000);
         setTimeout(() => {
-          setErrorDIsplay("none");
+          // setErrorDIsplay("none");
         }, 20000);
       }
       // else if (postError === null) {

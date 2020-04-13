@@ -29,17 +29,16 @@ const idcode = state => state.posts.idcode;
 const hashTagForm = state => state.posts.hashTagForm;
 const highlightForm = state => state.posts.highlightForm;
 const storyUserName = state => state.posts.storyForm;
-const userToken = (state) => state.user.token.key;
+const userToken = (state) => state.user.token;
 
 export function* fetchPostsAsync() {
   yield console.log('I am fired');
   const url = yield select(link);
   const shortCode = yield select(shortcode);
   const idCode = yield select(idcode);
-  const token = yield select(userToken);
   try {
     if(url) {
-    const result = yield singlePostApi(url, token).then(function(response) {
+    const result = yield singlePostApi(url).then(function(response) {
       return response;
     });
     yield console.log(result);
@@ -80,7 +79,7 @@ export function* fetchPostsAsync() {
 export function* fetchUserNamePostsAsync() {
   yield console.log('I am fired');
   const {userName, numberOfPost} = yield select(credentials);
-  const token = yield select(userToken);
+  const token = yield select(userToken.key);
   yield console.log(userName);
   yield console.log(numberOfPost);
   try {
@@ -101,7 +100,7 @@ export function* fetchUserNamePostsAsync() {
 export function* fetchHashTagPostsAsync() {
   yield console.log('I am fired');
   const { hashTag, postType } = yield select(hashTagForm);
-   const token = yield select(userToken);
+   const token = yield select(userToken.key);
   yield console.log(hashTag);
   yield console.log(postType);
   try {
@@ -121,7 +120,7 @@ export function* fetchHashTagPostsAsync() {
 export function* fetchHighlightPostsAsync() {
   yield console.log('I am fired');
   const username = yield select(highlightForm);
-  const token = yield select(userToken);
+  const token = yield select(userToken.key);
   yield console.log(username);
   try {
     const result = yield highlightPostApi(username, token).then(function(
@@ -140,7 +139,7 @@ export function* fetchHighlightPostsAsync() {
 export function* fetchStoryPostsAsync() {
   yield console.log('I am fired');
   const userName = yield select(storyUserName);
-  const token = yield select(userToken);
+  const token = yield select(userToken.key);
   try {
       const result = yield storyPostApi(userName, token).then(function(response) {
         return response;
