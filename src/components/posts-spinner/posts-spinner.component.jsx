@@ -24,7 +24,7 @@ const PostsSpinner = WrappedComponent => {
         }, 3000);
         setTimeout(() => {
           setErrorDIsplay("none");
-        }, 20000);
+        }, 2000);
       }
       // else if (postError === null) {
       //   setLoadBar(99.9);
