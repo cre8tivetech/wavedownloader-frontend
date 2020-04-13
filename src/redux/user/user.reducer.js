@@ -78,6 +78,8 @@ const userReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         currentUser: null,
+        subscription: null,
+        downloads: null,
         token: null,
         error: null,
       };

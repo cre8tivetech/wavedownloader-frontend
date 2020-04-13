@@ -5,8 +5,12 @@ import { useHistory, withRouter } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { fetchStoryPostsAdd } from "../../redux/posts/posts.actions";
 import { connect } from "react-redux";
+import { checkUserSession } from "../../redux/user/user.actions";
 
-const Stories = ({ fetchStoryPostsAdd }) => {
+const Stories = ({
+    fetchStoryPostsAdd,
+    checkUserSession
+  }) => {
   const [loadBar, setLoadBar] = useState(0);
   const [username, setUsername] = useState("");
   const startLoader = () => {
@@ -17,8 +21,9 @@ const Stories = ({ fetchStoryPostsAdd }) => {
   };
   const history = useHistory();
   useEffect(() => {
+    checkUserSession();
     startLoader();
-  }, [startLoader]);
+  }, [checkUserSession, startLoader]);
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -207,6 +212,7 @@ const Stories = ({ fetchStoryPostsAdd }) => {
   );
 };
 const mapDispatchToProps = dispatch => ({
-  fetchStoryPostsAdd: username => dispatch(fetchStoryPostsAdd(username))
+  fetchStoryPostsAdd: username => dispatch(fetchStoryPostsAdd(username)),
+  checkUserSession: () => dispatch(checkUserSession()),
 });
 export default withRouter(connect(null, mapDispatchToProps)(Stories));

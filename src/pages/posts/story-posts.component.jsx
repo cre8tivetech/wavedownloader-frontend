@@ -3,10 +3,17 @@ import { connect } from "react-redux";
 import { Route } from "react-router-dom";
 import { fetchStoryPostsStart } from "../../redux/posts/posts.actions";
 import StoryPostsOverviewContainer from "../../components/posts-overview/story-posts-overview.container";
-const StoryPosts = ({ fetchStoryPostsStart, match }) => {
+import { checkUserSession } from "../../redux/user/user.actions";
+
+const StoryPosts = ({
+    fetchStoryPostsStart,
+    checkUserSession,
+    // match
+  }) => {
   useEffect(() => {
+    checkUserSession();
     fetchStoryPostsStart();
-  }, [fetchStoryPostsStart]);
+  }, [fetchStoryPostsStart, checkUserSession]);
 
   return (
     <div className="post-section">
@@ -20,7 +27,8 @@ const StoryPosts = ({ fetchStoryPostsStart, match }) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  fetchStoryPostsStart: () => dispatch(fetchStoryPostsStart())
+  fetchStoryPostsStart: () => dispatch(fetchStoryPostsStart()),
+  checkUserSession: () => dispatch(checkUserSession()),
 });
 
 export default connect(null, mapDispatchToProps)(StoryPosts);

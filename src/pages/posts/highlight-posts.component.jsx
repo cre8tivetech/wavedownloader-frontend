@@ -3,10 +3,17 @@ import { connect } from "react-redux";
 import { Route } from "react-router-dom";
 import { fetchHighlightPostsStart } from "../../redux/posts/posts.actions";
 import HighlightPostsOverviewContainer from "../../components/posts-overview/highlight-posts-overview.container";
-const HighlightPosts = ({ fetchHighlightPostsStart, match }) => {
+import { checkUserSession } from "../../redux/user/user.actions";
+
+const HighlightPosts = ({
+    fetchHighlightPostsStart,
+    checkUserSession,
+    // match
+  }) => {
   useEffect(() => {
+    checkUserSession();
     fetchHighlightPostsStart();
-  }, [fetchHighlightPostsStart]);
+  }, [fetchHighlightPostsStart, checkUserSession]);
 
   return (
     <div className="post-section">
@@ -20,7 +27,8 @@ const HighlightPosts = ({ fetchHighlightPostsStart, match }) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  fetchHighlightPostsStart: () => dispatch(fetchHighlightPostsStart())
+  fetchHighlightPostsStart: () => dispatch(fetchHighlightPostsStart()),
+  checkUserSession: () => dispatch(checkUserSession()),
 });
 
 export default connect(null, mapDispatchToProps)(HighlightPosts);

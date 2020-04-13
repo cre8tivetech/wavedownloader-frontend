@@ -5,8 +5,12 @@ import { useHistory } from "react-router-dom";
 import { fetchHashTagPostsAdd } from "../../redux/posts/posts.actions";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import { checkUserSession } from "../../redux/user/user.actions";
 
-const PostByHashtag = ({ fetchHashTagPostsAdd }) => {
+const PostByHashtag = ({
+    fetchHashTagPostsAdd,
+    checkUserSession
+  }) => {
   const [loadBar, setLoadBar] = useState(0);
   const [hashTagForm, setHashTagForm] = useState({
     hashTag: "",
@@ -21,8 +25,9 @@ const PostByHashtag = ({ fetchHashTagPostsAdd }) => {
   };
   const history = useHistory();
   useEffect(() => {
+    checkUserSession();
     startLoader();
-  }, [startLoader]);
+  }, [startLoader, checkUserSession]);
   const handleSubmit = event => {
     event.preventDefault();
     fetchHashTagPostsAdd(hashTag, postType);
@@ -237,6 +242,7 @@ const PostByHashtag = ({ fetchHashTagPostsAdd }) => {
 };
 const mapDispatchToProps = dispatch => ({
   fetchHashTagPostsAdd: (hashTag, postType) =>
-    dispatch(fetchHashTagPostsAdd({ hashTag, postType }))
+    dispatch(fetchHashTagPostsAdd({ hashTag, postType })),
+  checkUserSession: () => dispatch(checkUserSession()),
 });
 export default connect(null, mapDispatchToProps)(PostByHashtag);

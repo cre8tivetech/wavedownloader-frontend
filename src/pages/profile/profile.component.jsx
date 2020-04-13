@@ -8,13 +8,18 @@ import {
   selectCurrentUser,
   selectSubscription
 } from "../../redux/user/user.selector";
-import { signOutStart } from "../../redux/user/user.actions";
+import { signOutStart, checkUserSession } from "../../redux/user/user.actions";
 import downloads from "../../assets/download(1).svg";
 import confirmation from "../../assets/mail(1).svg";
 import sub_time from "../../assets/sale(1).svg";
 import plan from "../../assets/subscription(1).svg";
 
-const Profile = ({ user, subscription, signOutStart }) => {
+const Profile = ({
+    user,
+    subscription,
+    signOutStart,
+    checkUserSession
+  }) => {
   const [loadBar, setLoadBar] = useState(0);
   const [subDays, setSubDays] = useState();
   const startLoader = () => {
@@ -24,36 +29,32 @@ const Profile = ({ user, subscription, signOutStart }) => {
     setLoadBar(0);
   };
   useEffect(() => {
+    checkUserSession();
     startLoader();
     console.log(subscription);
-    console.log(new Date(subscription.expired_at));
     console.log(subDaysRemaining());
-    console.log(example());
-    console.log(user);
-  });
+    
+  }, [checkUserSession]);
+  
   const subDaysRemaining = () => {
     if (user.is_subscribed) {
-      const date1 = subscription.subscribed_at.split("-");
-      const date2 = subscription.expired_at.split("-");
-      const firstDate = new Date(date1[0], date1[1], date1[2].split("T")[0]);
-      const secondDate = new Date(date2[0], date2[1], date2[2].split("T")[0]);
+      // const subDate = subscription.subscribed_at.split("-");
+      const expDate = subscription.expired_at.split("-");
+      const thisDate = new Date(Date.now());
+      const expiredDate = new Date(expDate[0], expDate[1], expDate[2].split("T")[0]);
       const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
 
-      const diffDays = Math.round(Math.abs((firstDate - secondDate) / oneDay));
+      const diffDays = Math.round(Math.abs((expiredDate - thisDate) / oneDay));
+
+      // const loginExp = new Date();
+      // const timeExp = loginExp.setHours(loginExp.getHours + 10);
+      // console.log(new Date(timeExp)); 
+
       console.log(diffDays);
       setSubDays(diffDays);
     } else {
       setSubDays(0);
     }
-  };
-  const example = () => {
-    const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
-    const firstDate = new Date(2008, 1, 12);
-    const secondDate = new Date(2008, 1, 22);
-    console.log(firstDate.getTime());
-
-    const diffDays = Math.round(Math.abs((firstDate - secondDate) / oneDay));
-    console.log(diffDays);
   };
   return (
     <div className="profile-section">
@@ -159,7 +160,8 @@ const mapStateToProps = createStructuredSelector({
   subscription: selectSubscription
 });
 const mapDispatchToProps = dispatch => ({
-  signOutStart: () => dispatch(signOutStart())
+  signOutStart: () => dispatch(signOutStart()),
+  checkUserSession: () => dispatch(checkUserSession()),
 });
 export default withRouter(
   connect(mapStateToProps, mapDispatchToProps)(Profile)

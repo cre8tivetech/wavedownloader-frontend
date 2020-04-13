@@ -5,8 +5,12 @@ import { useHistory, withRouter } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { fetchHighlightPostsAdd } from "../../redux/posts/posts.actions";
 import { connect } from "react-redux";
+import { checkUserSession } from "../../redux/user/user.actions";
 
-const Highlight = ({ fetchHighlightPostsAdd }) => {
+const Highlight = ({
+    fetchHighlightPostsAdd,
+    checkUserSession
+  }) => {
   const [loadBar, setLoadBar] = useState(0);
   const [username, setUsername] = useState("");
   const startLoader = () => {
@@ -17,8 +21,9 @@ const Highlight = ({ fetchHighlightPostsAdd }) => {
   };
   const history = useHistory();
   useEffect(() => {
+    checkUserSession();
     startLoader();
-  }, [startLoader]);
+  }, [startLoader, checkUserSession]);
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -207,6 +212,7 @@ const Highlight = ({ fetchHighlightPostsAdd }) => {
   );
 };
 const mapDispatchToProps = dispatch => ({
-  fetchHighlightPostsAdd: username => dispatch(fetchHighlightPostsAdd(username))
+  fetchHighlightPostsAdd: username => dispatch(fetchHighlightPostsAdd(username)),
+  checkUserSession: () => dispatch(checkUserSession()),
 });
 export default withRouter(connect(null, mapDispatchToProps)(Highlight));

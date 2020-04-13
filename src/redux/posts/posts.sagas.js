@@ -29,7 +29,7 @@ const idcode = state => state.posts.idcode;
 const hashTagForm = state => state.posts.hashTagForm;
 const highlightForm = state => state.posts.highlightForm;
 const storyUserName = state => state.posts.storyForm;
-const userToken = (state) => state.user.token;
+const userToken = (state) => state.user.token.key;
 
 export function* fetchPostsAsync() {
   yield console.log('I am fired');

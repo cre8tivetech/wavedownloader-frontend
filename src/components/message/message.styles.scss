@@ -1,7 +1,7 @@
 @import '../../themes/mixins.scss';
 
 .message-section {
-  position: absolute;
+  position: fixed;
   top: 8rem;
   right: 0.5rem;
   background-color: red;
@@ -34,6 +34,7 @@
     padding-bottom: 0.5rem;
     float: right;
     color: white;
+    cursor: pointer;
 
     @include respond(tabPort) {
       font-size: 1.1rem;
@@ -50,5 +51,6 @@
   padding: 3px;
   width: 160px;
   text-align: center;
+  cursor: pointer;
   // opacity: 0;
 }

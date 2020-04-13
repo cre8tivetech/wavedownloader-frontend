@@ -6,9 +6,11 @@ import { paymentVerifyApi } from '../../Api/payment';
 import {
   setToken,
   setDownloads,
+  setMessage,
   setSubscription,
   signInSuccess,
   signInFailure,
+  signOutStart,
   signOutSuccess,
   signOutFailure,
   signUpFailure,
@@ -17,7 +19,8 @@ import {
 
 
 const userActive = state => state.user.currentUser;
-const userToken = (state) => state.user.token;
+const userToken = (state) => state.user.token.key;
+const userExpire = (state) => state.user.token.expire;
 
 export function* getSnapshotFromUserAuth(userAuth) {
   try {
@@ -45,8 +48,14 @@ export function* signIn({ payload: { email, password } }) {
     const result = yield signInApi(email, password).then(function(response) {
       return response.data.data;
     });
+    console.log(tokenExpiration());
     console.log(result);
-    yield put(setToken(result.token));
+    const token = {
+      key: result.token,
+      expire: tokenExpiration()
+    }
+    console.log(token);
+    yield put(setToken(token));
     yield put(setSubscription(result.subscription));
     yield put(setDownloads(result.downloads));
     yield getSnapshotFromUserAuth(result.user);
@@ -62,9 +71,11 @@ export function* signByToken({ payload: { token } }) {
     const result = yield signInByTokenApi(token).then(function (response) {
       return response.data.data;
     });
-
-    // console.log(result.data.data.token);
-    yield put(setToken(result.token));
+    const token = {
+      key: result.token,
+      expire: tokenExpiration()
+    }
+    yield put(setToken(token));
     yield put(setSubscription(result.subscription));
     yield put(setDownloads(result.downloads));
     yield getSnapshotFromUserAuth(result.user);
@@ -73,13 +84,36 @@ export function* signByToken({ payload: { token } }) {
   }
 }
 
+const tokenExpiration = () =>  {
+  // 2020-04-13T01:34:46.389Z
+  const loginExp = new Date();
+  const timeExp = loginExp.setMinutes(loginExp.getMinutes() + 1);
+  const result = new Date(timeExp);
+  console.log(result);
+  return result ;
+}
+
 export function* isUserAuthenticated() {
+  console.log("checking session");
   try {
-    const userAuth = yield select(userActive);
-    if (!userAuth) return;
-    yield getSnapshotFromUserAuth(userAuth);
+    const expire = yield select(userExpire);
+    if (new Date(expire) <= new Date(Date.now())) {
+      const message = "Login Session as expired, 🙏 Please re-login!!";
+      
+      yield put(setMessage(message));
+      yield console.log("logging out");
+      yield put(signOutStart());
+    }
+    // const userAuth = yield select(userActive);
+    // if (!userAuth) return;
+    // yield getSnapshotFromUserAuth(userAuth);
   } catch (error) {
-    yield put(signInFailure(error));
+    console.log("Logging out");
+    yield delay(5000);
+      console.log("Logged out");
+      yield put(setMessage(null));
+    
+    // yield put(signInFailure(error));
   }
 }
 
@@ -142,9 +176,9 @@ export function* onCheckUserSession() {
   yield takeLatest(UserActionTypes.CHECK_USER_SESSION, isUserAuthenticated);
 }
 
-export function* onSignInByToken() {
-  yield takeLatest(UserActionTypes.CHECK_USER_SESSION, isUserAuthenticated);
-}
+// export function* onCheckSession() {
+//   yield takeLatest(UserActionTypes.CHECK_USER_SESSION, isUserAuthenticated);
+// }
 
 export function* onSignOutStart() {
   yield takeLatest(UserActionTypes.SIGN_OUT_START, signOut);
@@ -166,7 +200,7 @@ export function* userSagas() {
   yield all([
     call(onSignInStart),
     call(onSignInByTokenStart),
-    call(isUserAuthenticated),
+    call(onCheckUserSession),
     call(onSignOutStart),
     call(onSignUpStart),
     call(onUserPaymentStart),

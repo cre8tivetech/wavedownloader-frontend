@@ -5,13 +5,17 @@ import { createStructuredSelector } from "reselect";
 import "../pricing/pricing.styles.scss";
 import { Link, withRouter } from "react-router-dom";
 import { selectCurrentUser } from "../../redux/user/user.selector";
-import { signOutStart } from "../../redux/user/user.actions";
+import { signOutStart, checkUserSession } from "../../redux/user/user.actions";
 import free from "../../assets/message.svg";
 import basic from "../../assets/plane(1).svg";
 import premium from "../../assets/rocket.svg";
 import Price from "./price.component";
 
-const Pricing = ({ user, signOutStart }) => {
+const Pricing = ({
+    user,
+    signOutStart,
+    checkUserSession
+  }) => {
   const [loadBar, setLoadBar] = useState(0);
   // const [ref, setRef] = useState({
   //   basicREf: `basicMonthly-${Date.now()}`,
@@ -48,8 +52,9 @@ const Pricing = ({ user, signOutStart }) => {
     setLoadBar(0);
   };
   useEffect(() => {
+    checkUserSession();
     startLoader();
-  });
+  }, [checkUserSession]);
 
   const monthly = () => {
     setPlan({
@@ -234,7 +239,8 @@ const mapStateToProps = createStructuredSelector({
   user: selectCurrentUser
 });
 const mapDispatchToProps = dispatch => ({
-  signOutStart: () => dispatch(signOutStart())
+  signOutStart: () => dispatch(signOutStart()),
+  checkUserSession: () => dispatch(checkUserSession()),
 });
 export default withRouter(
   connect(mapStateToProps, mapDispatchToProps)(Pricing)

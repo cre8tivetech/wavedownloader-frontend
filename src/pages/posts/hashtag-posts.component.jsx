@@ -3,10 +3,17 @@ import { connect } from "react-redux";
 import { Route } from "react-router-dom";
 import { fetchHashTagPostsStart } from "../../redux/posts/posts.actions";
 import HashTagPostsOverviewContainer from "../../components/posts-overview/hashtag-posts-overview-container";
-const HashTagPosts = ({ fetchHashTagPostsStart, match }) => {
+import { checkUserSession } from "../../redux/user/user.actions";
+
+const HashTagPosts = ({
+    fetchHashTagPostsStart,
+    checkUserSession,
+    // match
+  }) => {
   useEffect(() => {
+    checkUserSession();
     fetchHashTagPostsStart();
-  }, [fetchHashTagPostsStart]);
+  }, [fetchHashTagPostsStart, checkUserSession]);
 
   return (
     <div className="post-section">
@@ -20,7 +27,8 @@ const HashTagPosts = ({ fetchHashTagPostsStart, match }) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  fetchHashTagPostsStart: () => dispatch(fetchHashTagPostsStart())
+  fetchHashTagPostsStart: () => dispatch(fetchHashTagPostsStart()),
+  checkUserSession: () => dispatch(checkUserSession()),
 });
 
 export default connect(null, mapDispatchToProps)(HashTagPosts);

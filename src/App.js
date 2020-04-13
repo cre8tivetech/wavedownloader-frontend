@@ -29,20 +29,35 @@ import SignUp from './pages/auth/signup.component';
 import Profile from './pages/profile/profile.component';
 
 import Pricing from './pages/pricing/pricing.component';
-import { selectCurrentUser, selectSubscription } from './redux/user/user.selector';
-import { checkUserSession } from './redux/user/user.actions';
+import {
+  selectCurrentUser,
+  selectSubscription,
+  selectToken
+} from './redux/user/user.selector';
+import {
+  checkUserSession,
+  signOutStart,
+  setMessage,
+} from './redux/user/user.actions';
 import Message from './components/message/message.component';
 import Error404 from './pages/Error/error404.component';
+import Alert from './components/message/alert.component';
 
+const App = ({
+    checkUserSession,
+    currentUser,
+    token,
+    setMessage,
+  }) => {
 
-const App = ({ checkUserSession, currentUser, subscription}) => {
   useEffect(() => {
     checkUserSession();
-    console.log(subscription);
-  }, [checkUserSession, currentUser, subscription]);
+  }, [checkUserSession, currentUser, setMessage, token]);
+
   return (
     <div className="App">
       <Header />
+      <Alert/>
       <Message />
       <Switch>
         <Route exact path="/" component={Home} />
@@ -297,10 +312,12 @@ const App = ({ checkUserSession, currentUser, subscription}) => {
 
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
-  subscription: selectSubscription
+  token: selectToken,
 });
 const mapDispatchToProps = dispatch => ({
   checkUserSession: () => dispatch(checkUserSession()),
+  signOutStart: () => dispatch(signOutStart()),
+  // setMessage: (message)=> dispatch(setMessage(message))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

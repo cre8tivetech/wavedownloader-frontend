@@ -4,10 +4,12 @@ import LoadingBar from "react-top-loading-bar";
 import "./post-by-username.styles.scss";
 import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { checkUserSession } from "../../redux/user/user.actions";
 import { fetchUserNamePostsAdd } from "../../redux/posts/posts.actions";
 import { connect } from "react-redux";
 
-const PostByUserName = ({ fetchUserNamePostsAdd }) => {
+
+const PostByUserName = ({ fetchUserNamePostsAdd, checkUserSession }) => {
   const [loadBar, setLoadBar] = useState(0);
   const [postForm, setPostForm] = useState({
     userName: "",
@@ -23,8 +25,9 @@ const PostByUserName = ({ fetchUserNamePostsAdd }) => {
   };
   const history = useHistory();
   useEffect(() => {
+    checkUserSession();
     startLoader();
-  }, [startLoader]);
+  }, [startLoader, checkUserSession]);
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -270,6 +273,7 @@ const PostByUserName = ({ fetchUserNamePostsAdd }) => {
 };
 const mapDispatchToProps = dispatch => ({
   fetchUserNamePostsAdd: (userName, numberOfPost) =>
-    dispatch(fetchUserNamePostsAdd({ userName, numberOfPost }))
+    dispatch(fetchUserNamePostsAdd({ userName, numberOfPost })),
+  checkUserSession: () => dispatch(checkUserSession()),
 });
 export default connect(null, mapDispatchToProps)(PostByUserName);

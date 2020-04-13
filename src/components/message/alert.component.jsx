@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "./message.styles.scss";
-// import Navigation from "../navigation/navigation.component";
-import { withRouter } from "react-router-dom";
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import { selectMessage } from "../../redux/user/user.selector";
 // import "../navigation/navigation.styles.scss";
-const Message = props => {
-  
-  const message = props.history.location.state;
+const Alert = ({message}) => {
   // const [hide, setHide] = useState();
-  console.log(props.history);
   // useEffect(() => {
   //   setTimeout(() => {
   //     setHide("message-section");
@@ -26,7 +24,7 @@ const Message = props => {
       <div className="message-section">
         <span onClick={e => close(e)}>x</span>
         <div>
-          <p>{message.error}</p>
+          <p>{message}</p>
         </div>
       </div>
     );
@@ -34,4 +32,7 @@ const Message = props => {
     return <div></div>;
   }
 };
-export default withRouter(Message);
+const mapStateToProps = createStructuredSelector({
+  message: selectMessage,
+});
+export default connect(mapStateToProps)(Alert);
