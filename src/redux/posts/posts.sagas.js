@@ -86,7 +86,7 @@ export function* fetchHashTagPostsAsync() {
   const { hashTag, postType } = yield select(hashTagForm);
    const token = yield select(userToken);
   try {
-    const result = yield hashtagPostApi(hashTag, token.key).then(function (
+    const result = yield hashtagPostApi(hashTag, token.key).then(function(
       response
     ) {
       return response;
@@ -102,7 +102,7 @@ export function* fetchHighlightPostsAsync() {
   const username = yield select(highlightForm);
   const token = yield select(userToken);
   try {
-    const result = yield highlightPostApi(username, token.key).then(function (
+    const result = yield highlightPostApi(username, token.key).then(function(
       response
     ) {
       return response;
@@ -117,7 +117,7 @@ export function* fetchStoryPostsAsync() {
   const userName = yield select(storyUserName);
   const token = yield select(userToken);
   try {
-      const result = yield storyPostApi(userName, token.key).then(function (response) {
+      const result = yield storyPostApi(userName, token.key).then(function(response) {
         return response;
       });
         yield put(fetchStoryPostsSuccess(result.data));
