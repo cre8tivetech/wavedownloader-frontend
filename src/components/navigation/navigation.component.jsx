@@ -121,7 +121,7 @@ const Navigation = ({ user, signOutStart }) => {
 
           <li>
             <a
-              href="https://twitter.com/plavookac"
+              href="#"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -130,7 +130,7 @@ const Navigation = ({ user, signOutStart }) => {
           </li>
           <li>
             <a
-              href="https://www.youtube.com/channel/UCDfZM0IK6RBgud8HYGFXAJg"
+              href="#"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -139,7 +139,7 @@ const Navigation = ({ user, signOutStart }) => {
           </li>
           <li>
             <a
-              href="https://www.linkedin.com/in/plavookac/"
+              href="#"
               target="_blank"
               rel="noopener noreferrer"
             >
