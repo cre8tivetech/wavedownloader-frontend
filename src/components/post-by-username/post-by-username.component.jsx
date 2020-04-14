@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Accordion from "../../components/accordion/accordion.component";
 import LoadingBar from "react-top-loading-bar";
 import "./post-by-username.styles.scss";
@@ -17,9 +17,9 @@ const PostByUserName = ({ fetchUserNamePostsAdd, checkUserSession }) => {
   });
   const { userName, numberOfPost } = postForm;
 
-  const startLoader = () => {
+  const startLoader = useCallback(() => {
     setLoadBar(100);
-  };
+  }, []);
   const onLoaderFinished = () => {
     setLoadBar(0);
   };

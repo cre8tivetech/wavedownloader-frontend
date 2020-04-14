@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import LoadingBar from "react-top-loading-bar";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
@@ -22,9 +22,9 @@ const Profile = ({
   }) => {
   const [loadBar, setLoadBar] = useState(0);
   const [subDays, setSubDays] = useState();
-  const startLoader = () => {
+  const startLoader = useCallback(() => {
     setLoadBar(100);
-  };
+  }, []);
   const onLoaderFinished = () => {
     setLoadBar(0);
   };

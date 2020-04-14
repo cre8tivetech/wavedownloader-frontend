@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Accordion from "../accordion/accordion.component";
 import LoadingBar from "react-top-loading-bar";
 import { useHistory, withRouter } from "react-router-dom";
@@ -13,9 +13,9 @@ const Stories = ({
   }) => {
   const [loadBar, setLoadBar] = useState(0);
   const [username, setUsername] = useState("");
-  const startLoader = () => {
+  const startLoader = useCallback(() => {
     setLoadBar(100);
-  };
+  }, []);
   const onLoaderFinished = () => {
     setLoadBar(0);
   };

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import LoadingBar from "react-top-loading-bar";
 import { withRouter } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -16,9 +16,9 @@ const SignIn = ({ signInStart, error }) => {
   });
 
   const { email, password } = userCredentials;
-  const startLoader = () => {
+  const startLoader = useCallback(() => {
     setLoadBar(100);
-  };
+  }, []);
   const onLoaderFinished = () => {
     setLoadBar(0);
   };

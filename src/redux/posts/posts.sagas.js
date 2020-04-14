@@ -76,6 +76,7 @@ export function* fetchUserNamePostsAsync() {
         return response;
       }
     );
+    // yield console.log(result);
       yield put(fetchUserNamePostsSuccess(result));
   } catch (error) {
     yield put(fetchPostsFailure(error.response ? error.response.data.message || error.response.data.error  : "No Internet!!.  Poor internet connection, Please check your connectivity, and try again later"));

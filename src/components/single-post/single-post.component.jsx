@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { connect } from "react-redux";
 import LoadingBar from "react-top-loading-bar";
 import { useHistory } from "react-router-dom";
@@ -9,9 +9,9 @@ import { fetchPostsAdd } from "../../redux/posts/posts.actions";
 const SinglePost = ({ fetchPostsAdd }) => {
   const [loadBar, setLoadBar] = useState(0);
   const [url, setUrl] = useState("");
-  const startLoader = () => {
+  const startLoader = useCallback(() => {
     setLoadBar(100);
-  };
+  }, [])
   const onLoaderFinished = () => {
     setLoadBar(0);
   };
@@ -19,6 +19,13 @@ const SinglePost = ({ fetchPostsAdd }) => {
   useEffect(() => {
     startLoader();
   }, [startLoader]);
+  useCallback(
+    () => {
+      startLoader();
+    },
+    [startLoader],
+  )
+  
 
   const handleSubmit = event => {
     event.preventDefault();

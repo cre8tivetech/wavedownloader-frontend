@@ -22,18 +22,18 @@ const StoryCollectionPreview = ({ owner, post, history }) => {
     setLoadBar(100);
      
     // setUrl(history.location.data.url);
-    if (post.is_video) {
-      setView("post-card__detail--more-views show");
-      // setCollectionType(
-      //   <i
-      //     className="fad fa-play play"
-      //     style={{ color: 'var(--color-light)' }}
-      //   ></i>
-      // );
-    } else {
-      setView("post-card__detail--more-views hide");
-      // setCollectionType('');
-    }
+    // if (post.is_video) {
+    //   setView("post-card__detail--more-views show");
+    //   // setCollectionType(
+    //   //   <i
+    //   //     className="fad fa-play play"
+    //   //     style={{ color: 'var(--color-light)' }}
+    //   //   ></i>
+    //   // );
+    // } else {
+    //   setView("post-card__detail--more-views hide");
+    //   // setCollectionType('');
+    // }
     if (!post.text) {
       post.text = "No caption text for this post";
     }
