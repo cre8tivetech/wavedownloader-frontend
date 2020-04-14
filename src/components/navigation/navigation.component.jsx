@@ -9,6 +9,7 @@ import "./navigation.styles.scss";
 
 const Navigation = ({ user, signOutStart }) => {
   const [mode, setMode] = useState(localStorage.getItem("mode"));
+  const [logout, setLogout] = useState("Logout");
   const [click, setClick] = useState("close");
   const history = useHistory();
   const checkMode = () => {
@@ -37,10 +38,12 @@ const Navigation = ({ user, signOutStart }) => {
   };
 
   useEffect(() => checkMode(), []);
-  const signout = () => {
+  const signOut = () => {
+    setLogout("Logging out...")
     signOutStart();
     setTimeout(() => {
       history.push("/");
+      setLogout("Logout");
     }, 3000);
   };
   const toggleMode = () => {
@@ -149,9 +152,9 @@ const Navigation = ({ user, signOutStart }) => {
         {user ? (
           <div
             className="navigation__sidebarMenu--bottom"
-            onClick={() => signout()}
+            onClick={() => signOut()}
           >
-            <p>Logout</p>
+            <p>{logout}</p>
           </div>
         ) : null}
       </div>

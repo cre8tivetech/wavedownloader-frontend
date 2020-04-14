@@ -21,6 +21,7 @@ const Profile = ({
     checkUserSession
   }) => {
   const [loadBar, setLoadBar] = useState(0);
+  const [logout, setLogout] = useState("Logout");
   const [subDays, setSubDays] = useState();
   const startLoader = useCallback(() => {
     setLoadBar(100);
@@ -33,6 +34,14 @@ const Profile = ({
     subDaysRemaining();
     startLoader();
   }, [checkUserSession]);
+
+  const signOut = () => {
+    setLogout("Logging out...")
+    signOutStart();
+    setTimeout(() => {
+      setLogout("Logout");
+    }, 3000);
+  };
   
   const subDaysRemaining = () => {
     if (user.is_subscribed) {
@@ -62,13 +71,26 @@ const Profile = ({
             <div className="profile-section__box--details--left-image">
               {user.full_name.charAt(0).toUpperCase()}
             </div>
-            <p>
-              {user.full_name} <small>{user.email}</small>
+            <div className="profile-section__box--details--left-user">
+              <p className="profile-section__box--details--left-user_name">
+              {
+                user.full_name
+              } {
+                user.is_subscribed ? (<i
+                className = "fad fa-badge-check"
+                style={{ color: "var(--color-primary)" }}
+              ></i>):(null)
+              }
             </p>
+            <p className="profile-section__box--details--left-user_email"><small> {
+                user.email
+              } </small></p>
+            </div>
+            
           </div>
           <div className="profile-section__box--details--right">
-            <p onClick={signOutStart}>
-              <strong>Logout</strong>
+            <p onClick={()=> signOut()}>
+              <strong>{logout}</strong>
             </p>
             <div>
               <i
@@ -80,7 +102,7 @@ const Profile = ({
             <div>
               <Link to="/pricing">
                 <i
-                  className="fa fa-badge-dollar"
+                  className="fad fa-badge-dollar"
                   style={{ color: "var(--color-primary)" }}
                 ></i>
                 Pricing

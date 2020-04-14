@@ -8,7 +8,7 @@
     transition: all 0.3s;
     box-sizing: border-box;
     cursor: pointer;
-    position: fixed;
+    position: absolute;
     top: 22px;
     right: 15px;
     border-radius: 50px;
@@ -76,7 +76,6 @@
     flex-grow: 1;
     right: 0;
     width: 25rem;
-    margin-top: 5.55rem;
     transform: translateX(250px);
     transition: transform 250ms ease-in-out;
     background-color: var(--color-bg);
