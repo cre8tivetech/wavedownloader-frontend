@@ -30,50 +30,21 @@ const HashTagCollectionPreview = ({
   const [loadBar, setLoadBar] = useState();
   // const []
   useEffect(() => {
-    console.log(history);
-    console.log(postType);
-    console.log(data);
+    // console.log(history);
     setLoadBar(100);
-    // console.log(like_count);
-    // if (is_video) {
-    //   setView('post-card__detail--more-views show');
-    //   // setCollectionType(
-    //   //   <i
-    //   //     className="fad fa-play play"
-    //   //     style={{ color: 'var(--color-light)' }}
-    //   //   ></i>
-    //   // );
-    // } else {
-    //   setView('post-card__detail--more-views hide');
-    //   // setCollectionType('');
-    // }
-    // return () => {
-    //   console.log('will unmount');
-    // };
   }, [setLoadBar]);
 
   function downloadFile(shortcode, e) {
     e.preventDefault();
-    // console.log(e.currentTarget.querySelector('div').className);
     const loaderbtn = e.currentTarget.querySelector("div");
-    // const downloadbtn = e.target;
     const downloadbtn = e.target;
     loaderbtn.className = "loader show";
     downloadbtn.className = "hide";
-    console.log(downloadBtn);
     fetchHashTagPostsDownload(shortcode);
-    // setTimeout(() => {
-    //   console.log('Downloading post');
-    // }, 4000);
-    // console.log(loaderbtn);
-    // setDownloading('loader show');
-    // setDownloadBtn('hide');
-    console.log("downloaded");
     loaderbtn.className = "loader hide";
     downloadbtn.className = "show";
     history.push("/posts");
-    // return await values.add('<div className="show"></div>');
-    // await e.target.classList.add('show');
+
   }
 
   return (
@@ -114,22 +85,7 @@ const HashTagCollectionPreview = ({
               ))}
             </div>
           </div>
-          {/* <div className="post-card__detail--more">
-            <div className="post-card__detail--more-like">
-              <i
-                className="fad fa-users"
-                style={{ color: 'var(--color-tertiary)' }}
-              ></i>
-              <p>{followers}</p>
-            </div>
-            <div className="post-card__detail--more-comment">
-              <i
-                className="fad fa-user-friends"
-                style={{ color: 'var(--color-secondary)' }}
-              ></i>
-              <p>{following}</p>
-            </div>
-          </div> */}
+          
         </div>
         <div className="post-card__collections">
           {postType === "all" || postType === "top" ? (

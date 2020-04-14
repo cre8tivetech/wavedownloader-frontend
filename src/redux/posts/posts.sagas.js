@@ -79,11 +79,12 @@ export function* fetchPostsAsync() {
 export function* fetchUserNamePostsAsync() {
   yield console.log('I am fired');
   const {userName, numberOfPost} = yield select(credentials);
-  const token = yield select(userToken.key);
+  const token = yield select(userToken);
+  console.log(token)
   yield console.log(userName);
   yield console.log(numberOfPost);
   try {
-    const result = yield usernamePostApi(userName, numberOfPost, token).then(
+    const result = yield usernamePostApi(userName, numberOfPost, token.key).then(
       function(response) {
         return response;
       }
@@ -100,11 +101,11 @@ export function* fetchUserNamePostsAsync() {
 export function* fetchHashTagPostsAsync() {
   yield console.log('I am fired');
   const { hashTag, postType } = yield select(hashTagForm);
-   const token = yield select(userToken.key);
+   const token = yield select(userToken);
   yield console.log(hashTag);
   yield console.log(postType);
   try {
-    const result = yield hashtagPostApi(hashTag, token).then(function(
+    const result = yield hashtagPostApi(hashTag, token.key).then(function (
       response
     ) {
       return response;
@@ -120,10 +121,10 @@ export function* fetchHashTagPostsAsync() {
 export function* fetchHighlightPostsAsync() {
   yield console.log('I am fired');
   const username = yield select(highlightForm);
-  const token = yield select(userToken.key);
+  const token = yield select(userToken);
   yield console.log(username);
   try {
-    const result = yield highlightPostApi(username, token).then(function(
+    const result = yield highlightPostApi(username, token.key).then(function (
       response
     ) {
       return response;
@@ -139,9 +140,9 @@ export function* fetchHighlightPostsAsync() {
 export function* fetchStoryPostsAsync() {
   yield console.log('I am fired');
   const userName = yield select(storyUserName);
-  const token = yield select(userToken.key);
+  const token = yield select(userToken);
   try {
-      const result = yield storyPostApi(userName, token).then(function(response) {
+      const result = yield storyPostApi(userName, token.key).then(function (response) {
         return response;
       });
       yield console.log(result);

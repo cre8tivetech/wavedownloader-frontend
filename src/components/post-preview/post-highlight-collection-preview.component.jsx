@@ -16,10 +16,9 @@ const PostHighlightCollectionPreview = ({ owner, post }) => {
     is_verified
   } = owner;
   const [loadBar, setLoadBar] = useState();
-  // const []
+
   useEffect(() => {
     setLoadBar(100);
-
     // return () => {
     //   console.log('will unmount');
     // };
@@ -33,13 +32,10 @@ const PostHighlightCollectionPreview = ({ owner, post }) => {
     const downloadbtn = e.target;
     loaderbtn.className = "loader show";
     downloadbtn.className = "hide";
-    console.log(loaderbtn);
     const method = "GET";
     const min = 1;
     const max = 100;
     const rand = min + Math.random() * (max - min);
-    console.log(rand);
-    console.log(mediatype);
     await Axios.request({
       url,
       method,
@@ -66,7 +62,6 @@ const PostHighlightCollectionPreview = ({ owner, post }) => {
         }
       })
       .then(() => {
-        console.log("downloaded");
         loaderbtn.className = "loader hide";
         downloadbtn.className = "show";
       });
