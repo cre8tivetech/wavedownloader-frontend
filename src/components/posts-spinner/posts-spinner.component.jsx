@@ -9,7 +9,7 @@ const PostsSpinner = WrappedComponent => {
     const [barColor, setBarColor] = useState(
       "linear-gradient(92deg, #038125 0%, #fbff00 100%)"
     );
-    const [errorMessage, setErrorMessage] = useState();
+    // const [errorMessage] = useState();
     const [errorDisplay, setErrorDIsplay] = useState("none");
     const reload = () => {
       window.location.reload(false);
@@ -25,35 +25,6 @@ const PostsSpinner = WrappedComponent => {
           setErrorDIsplay("none");
         }, 10000);
       }
-      // else if (postError === null) {
-      //   setLoadBar(99.9);
-      //   setBarColor("linear-gradient(92deg, #038125 0%, #fbff00 100%)");
-      //   setErrorDIsplay("none");
-      //   setTimeout(() => {
-      //     setBarColor("red");
-      //     setErrorDIsplay("block");
-      //     setErrorMessage(
-      //       "Sorry, No internet connection. Please try again later!"
-      //     );
-      //   }, 5000);
-      //   setTimeout(() => {
-      //     setErrorDIsplay("none");
-      //   }, 10000);
-      // } else {
-      //   setLoadBar(99.9);
-      //   setBarColor("red");
-      //   setTimeout(() => {
-      //     setErrorDIsplay("none");
-      //     setErrorMessage(
-      //       "__Sorry, No internet connection. Please try again later"
-      //     );
-      //     setErrorDIsplay("block");
-      //   }, 5000);
-
-      //   setTimeout(() => {
-      //     setErrorDIsplay("none");
-      //   }, 10000);
-      // }
     }, [setLoadBar, setBarColor, setErrorDIsplay, postError]);
 
     return isLoading ? (
@@ -71,7 +42,7 @@ const PostsSpinner = WrappedComponent => {
               className="fad fa-bug"
               style={{ color: "var(--color-light)" }}
             ></i>
-            {postError ? postError : errorMessage}
+            {postError ? postError : null}
           </p>
         </div>
         <div className="spinner-card">
