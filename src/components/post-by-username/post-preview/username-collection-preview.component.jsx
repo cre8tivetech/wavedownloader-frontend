@@ -36,11 +36,10 @@ const UserNameCollectionPreview = ({
   const [loadBar, setLoadBar] = useState();
   // const []
   useEffect(() => {
-    console.log(history);
-    console.log(data);
+     
     setLoadBar(100);
   }, [setLoadBar]);
-
+  
   function downloadFile(shortcode, e) {
     e.preventDefault();
     // console.log(e.currentTarget.querySelector('div').className);
@@ -49,15 +48,14 @@ const UserNameCollectionPreview = ({
     const downloadbtn = e.target;
     loaderbtn.className = "loader show";
     downloadbtn.className = "hide";
-    console.log(downloadBtn);
+     
     setTimeout(() => {
-      console.log("Downloading post");
       fetchUserNamePostsDownload(shortcode);
     }, 2000);
-    console.log(loaderbtn);
+     
     // setDownloading("loader show");
     setDownloadBtn("hide");
-    console.log("downloaded");
+     
     setTimeout(() => {
       loaderbtn.className = "loader hide";
       downloadbtn.className = "show";

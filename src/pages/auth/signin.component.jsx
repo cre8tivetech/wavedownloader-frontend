@@ -32,9 +32,9 @@ const SignIn = ({ signInStart, error }) => {
     event.preventDefault();
     const btn = event.currentTarget.querySelector("button");
     const loaderbtn = btn.querySelector("div");
-    console.log(loaderbtn);
+     
     const downloadbtn = btn.querySelector("p");
-    console.log(downloadbtn);
+     
     loaderbtn.className = "loader show";
     downloadbtn.className = "hide";
     setCredentials({

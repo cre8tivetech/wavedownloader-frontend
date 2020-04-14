@@ -13,7 +13,6 @@ export const usernamePostApi = async (username, numberOfPost, token) => {
     'Content-Type': 'application/json',
     Authorization: 'Bearer ' + token,
   };
-  console.log(token)
   const apiUrl =
     process.env.REACT_APP_API +
     process.env.REACT_APP_USERNAME_POST +

@@ -32,7 +32,6 @@ const storyUserName = state => state.posts.storyForm;
 const userToken = (state) => state.user.token;
 
 export function* fetchPostsAsync() {
-  yield console.log('I am fired');
   const url = yield select(link);
   const shortCode = yield select(shortcode);
   const idCode = yield select(idcode);
@@ -41,33 +40,25 @@ export function* fetchPostsAsync() {
     const result = yield singlePostApi(url).then(function(response) {
       return response;
     });
-    yield console.log(result);
     if(result.data.__typename === "GraphSidecar"){
-      console.log("SLidecard post");
       yield put(fetchSingleCollectionPostsSuccess(result));    
       }else if (result.data.__typename === 'GraphImage' ||  result.data.__typename === 'GraphVideo') {
-        console.log("Single post initiated");
         yield put(fetchSinglePostsSuccess(result.data));
       }
     } else if (shortCode) {
       const result = yield shortcodePostApi(shortCode).then(function(response) {
         return response;
       });
-      yield console.log(result);
       if(result.data.__typename === "GraphSidecar"){
-        console.log("SLidecard post");
         yield put(fetchSingleCollectionPostsSuccess(result));    
       }else if (result.data.__typename === 'GraphImage' ||  result.data.__typename === 'GraphVideo') {
-        console.log("Single post initiated");
         yield put(fetchSinglePostsSuccess(result.data));
       }
     }else if(idCode) {
       const result = yield idcodePostApi(idCode).then(function(response) {
         return response;
       });
-      yield console.log(result);
       if(result.data.__typename === "GraphHighlightReel"){
-        console.log("Single Highlight post");
         yield put(fetchSingleHighlightCollectionPostsSuccess(result.data));    
       }
     }
@@ -77,41 +68,29 @@ export function* fetchPostsAsync() {
 }
 
 export function* fetchUserNamePostsAsync() {
-  yield console.log('I am fired');
   const {userName, numberOfPost} = yield select(credentials);
   const token = yield select(userToken);
-  console.log(token)
-  yield console.log(userName);
-  yield console.log(numberOfPost);
   try {
     const result = yield usernamePostApi(userName, numberOfPost, token.key).then(
       function(response) {
         return response;
       }
     );
-    yield console.log(result.data);
-      console.log('Username post initiated');
       yield put(fetchUserNamePostsSuccess(result));
   } catch (error) {
-    yield console.log(error.response.data.error);
     yield put(fetchPostsFailure(error.response ? error.response.data.message || error.response.data.error  : "No Internet!!.  Poor internet connection, Please check your connectivity, and try again later"));
   }
 }
 
 export function* fetchHashTagPostsAsync() {
-  yield console.log('I am fired');
   const { hashTag, postType } = yield select(hashTagForm);
    const token = yield select(userToken);
-  yield console.log(hashTag);
-  yield console.log(postType);
   try {
     const result = yield hashtagPostApi(hashTag, token.key).then(function (
       response
     ) {
       return response;
     });
-    yield console.log(result.data);
-    console.log('HashTag post initiated');
     yield put(fetchHashTagPostsSuccess(result));
   } catch (error) {
     yield put(fetchPostsFailure(error.response ? error.response.data.message || error.response.data.error  : "No Internet!!.  Poor internet connection, Please check your connectivity, and try again later"));
@@ -119,18 +98,15 @@ export function* fetchHashTagPostsAsync() {
 }
 
 export function* fetchHighlightPostsAsync() {
-  yield console.log('I am fired');
+
   const username = yield select(highlightForm);
   const token = yield select(userToken);
-  yield console.log(username);
   try {
     const result = yield highlightPostApi(username, token.key).then(function (
       response
     ) {
       return response;
     });
-    yield console.log(result.data);
-    console.log('HashTag post initiated');
     yield put(fetchHighlightPostsSuccess(result.data));
   } catch (error) {
     yield put(fetchPostsFailure(error.response ? error.response.data.message || error.response.data.error  : "No Internet!!.  Poor internet connection, Please check your connectivity, and try again later"));
@@ -138,15 +114,12 @@ export function* fetchHighlightPostsAsync() {
 }
 
 export function* fetchStoryPostsAsync() {
-  yield console.log('I am fired');
   const userName = yield select(storyUserName);
   const token = yield select(userToken);
   try {
       const result = yield storyPostApi(userName, token.key).then(function (response) {
         return response;
       });
-      yield console.log(result);
-        console.log('Single post initiated');
         yield put(fetchStoryPostsSuccess(result.data));
   } catch (error) {
     yield put(fetchPostsFailure(error.response ? error.response.data.message || error.response.data.error  : "No Internet!!.  Poor internet connection, Please check your connectivity, and try again later"));
@@ -155,10 +128,8 @@ export function* fetchStoryPostsAsync() {
 
 // SINGLE POST ADD
 export function* fetchPostsUrl({ payload: { url } }) {
-         yield console.log('I am fired');
          try {
            const data = yield {url:url};
-           // yield console.log(data);
            yield put(fetchPostsAdd(data));
          } catch (error) {
            yield put(fetchPostsFailure(error.message));
@@ -174,10 +145,8 @@ export function* fetchPostsAdd() {
 
 // USERNAME POST DOWNLOAD
 export function* fetchUserNamePosts({ payload: { shortcode } }) {
-  yield console.log('I am fired');
   try {
     const data = yield { shortcode: shortcode };
-    // yield console.log(data);
     yield put(fetchUserNamePostDownload(data));
   } catch (error) {
     yield put(fetchPostsFailure(error.message));
@@ -194,10 +163,8 @@ export function* fetchUserNamePostDownload() {
 
 // USERNAME POST ADD
 export function* fetchPostsCredentials({ payload: { userName, numberOfPost } }) {
-         yield console.log('I am fired');
          try {
            const data = yield { userName, numberOfPost };
-           // yield console.log(data);
            yield put(fetchUserNamePostsCredentials(data));
          } catch (error) {
            yield put(fetchPostsFailure(error.message));
@@ -211,10 +178,8 @@ export function* fetchUserNamePostsCredentials() {
 
 // HASHTAG POST DOWNLOAD SAGAS
 export function* fetchHashTagPosts({ payload: { shortcode } }) {
-  yield console.log('I am fired');
   try {
     const data = yield { shortcode: shortcode };
-    // yield console.log(data);
     yield put(fetchHashTagPostDownload(data));
   } catch (error) {
     yield put(fetchPostsFailure(error.message));
@@ -233,10 +198,8 @@ export function* fetchHashTagPostDownload() {
 export function* fetchPostsHashTagForm({
   payload: { hashTag, postType },
 }) {
-  yield console.log('I am fired');
   try {
     const data = yield { hashTag, postType };
-    // yield console.log(data);
     yield put(fetchHashTagPostsFormData(data));
   } catch (error) {
     
@@ -255,10 +218,8 @@ export function* fetchHashTagPostsFormData() {
 export function* fetchHighlightForm({
   payload: { username },
 }) {
-  yield console.log('I am fired');
   try {
     const data = yield {username};
-    // yield console.log(data);
     yield put(fetchHighlightPostsFormData(data));
   } catch (error) {
     yield put(fetchPostsFailure(error.message));
@@ -274,10 +235,8 @@ export function* fetchHighlightPostsFormData() {
 
 // HIGHLIGHT POST DOWNLOAD
 export function* fetchHighlightPosts({ payload: { idcode } }) {
-  yield console.log('I am fired');
   try {
     const data = yield { idcode: idcode };
-    // yield console.log(data);
     yield put(fetchHighlightPostDownload(data));
   } catch (error) {
     yield put(fetchPostsFailure(error.message));
@@ -293,10 +252,8 @@ export function* fetchHighlightPostDownload() {
 
 // STORY POST ADD SAGAS
 export function* fetchStoryPost({ payload: { storyForm } }) {
-         yield console.log('I am fired');
          try {
            const data = yield { storyForm };
-           // yield console.log(data);
            yield put(fetchStoryCredentials(data));
          } catch (error) {
            yield put(fetchPostsFailure(error.message));

@@ -22,11 +22,7 @@ const PostCollectionPreview = ({ data, downloadName, history }) => {
   const [loadBar, setLoadBar] = useState();
   // const []
   useEffect(() => {
-    console.log(results[0]);
-    console.log(history);
-    console.log(data);
     setLoadBar(100);
-    console.log(like_count);
     if (is_video) {
       setView("post-card__detail--more-views show");
       // setCollectionType(
@@ -39,9 +35,6 @@ const PostCollectionPreview = ({ data, downloadName, history }) => {
       setView("post-card__detail--more-views hide");
       // setCollectionType('');
     }
-    // return () => {
-    //   console.log('will unmount');
-    // };
   }, [setLoadBar]);
 
   async function downloadFile(url, e, mediatype) {
@@ -52,13 +45,10 @@ const PostCollectionPreview = ({ data, downloadName, history }) => {
     const downloadbtn = e.target;
     loaderbtn.className = "loader show";
     downloadbtn.className = "hide";
-    console.log(loaderbtn);
     const method = "GET";
     const min = 1;
     const max = 100;
     const rand = min + Math.random() * (max - min);
-    console.log(rand);
-    console.log(mediatype);
     await Axios.request({
       url,
       method,
@@ -85,7 +75,6 @@ const PostCollectionPreview = ({ data, downloadName, history }) => {
         }
       })
       .then(() => {
-        console.log("downloaded");
         loaderbtn.className = "loader hide";
         downloadbtn.className = "show";
       });

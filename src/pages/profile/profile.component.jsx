@@ -31,9 +31,6 @@ const Profile = ({
   useEffect(() => {
     checkUserSession();
     startLoader();
-    console.log(subscription);
-    console.log(subDaysRemaining());
-    
   }, [checkUserSession]);
   
   const subDaysRemaining = () => {
@@ -45,12 +42,6 @@ const Profile = ({
       const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
 
       const diffDays = Math.round(Math.abs((expiredDate - thisDate) / oneDay));
-
-      // const loginExp = new Date();
-      // const timeExp = loginExp.setHours(loginExp.getHours + 10);
-      // console.log(new Date(timeExp)); 
-
-      console.log(diffDays);
       setSubDays(diffDays);
     } else {
       setSubDays(0);

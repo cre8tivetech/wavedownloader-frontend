@@ -29,20 +29,13 @@ const Navigation = ({ user, signOutStart }) => {
   };
 
   const navToggle = e => {
-    // console.log(click);
-    // console.log(
-    //   e.currentTarget.parentElement.querySelectorAll("div")[3],
-    //   "clicked"
-    // );
     if (click === "close") {
       // setClick("open");
-      console.log(click);
     } else if (click === "open") {
       setClick("close");
-      // console.log(click);
     }
   };
-  // console.log(currentUser);
+
   useEffect(() => checkMode(), []);
   const signout = () => {
     signOutStart();

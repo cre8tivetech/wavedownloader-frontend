@@ -29,9 +29,7 @@ const HighlightCollectionPreview = ({
   const [view, setView] = useState();
   const [loadBar, setLoadBar] = useState();
   useEffect(() => {
-    console.log(history.location);
     setLoadBar(100);
-    console.log(owner);
     // setUrl(history.location.data.url);
     if (post.is_video) {
       setView("post-card__detail--more-views show");
@@ -48,35 +46,25 @@ const HighlightCollectionPreview = ({
     if (!post.text) {
       post.text = "No caption text for this post";
     }
-    // return () => {
-    //   console.log("will unmount");
-    // };
   }, [setLoadBar]);
 
   function downloadFile(idcode, e) {
     e.preventDefault();
-    // console.log(e.currentTarget.querySelector('div').className);
     const loaderbtn = e.currentTarget.querySelector("div");
-    // const downloadbtn = e.target;
     const downloadbtn = e.target;
     loaderbtn.className = "loader show";
     downloadbtn.className = "hide";
-    console.log(downloadBtn);
     setTimeout(() => {
-      console.log("Downloading post");
       fetchHighlightPostsDownload(idcode);
     }, 2000);
-    console.log(loaderbtn);
     setDownloading("loader show");
     setDownloadBtn("hide");
-    console.log("downloaded");
+
     setTimeout(() => {
       loaderbtn.className = "loader hide";
       downloadbtn.className = "show";
       history.push("/posts");
     }, 3000);
-    // return await values.add('<div className="show"></div>');
-    // await e.target.classList.add('show');
   }
 
   return (

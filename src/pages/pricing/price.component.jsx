@@ -16,7 +16,6 @@ const Price = ({
   opt,
   userPaymentStart
 }) => {
-  console.log(email);
   const key = process.env.REACT_APP_RAVE_PUBLIC_KEY; // RavePay PUBLIC KEY
   const amountText = amount.toString().split(".");
   const { opt1, opt2, opt3, opt4, opt5, opt6 } = opt;
@@ -28,7 +27,6 @@ const Price = ({
     currency: "USD",
     PBFPubKey: key,
     onSuccess: response => {
-      console.log("fgfffff");
       callback(response);
     },
     onClose: () => {
@@ -36,11 +34,9 @@ const Price = ({
     }
   };
   const callback = response => {
-    console.log(response);
     const txref = response.tx.txRef;
     const chargeResponse = response.tx.chargeResponseCode;
     if (chargeResponse === "00" || chargeResponse === "0") {
-      console.log("txref: ", txref);
       userPaymentStart(txref);
       // window.location = "https://your_URL/api/v1/rave/verify?txref="+txref; //Add your success page here
     } else {

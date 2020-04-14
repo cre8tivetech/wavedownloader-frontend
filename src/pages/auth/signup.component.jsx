@@ -23,7 +23,6 @@ const SignUp = ({ signUpStart, success, error }) => {
     setLoadBar(0);
   };
   useEffect(() => {
-    console.log(success);
     if (error) {
       setMessage(<div className="errorMessage">{error}</div>);
     }
@@ -36,9 +35,9 @@ const SignUp = ({ signUpStart, success, error }) => {
     event.preventDefault();
     const btn = event.currentTarget.querySelector("button");
     const loaderbtn = btn.querySelector("div");
-    console.log(loaderbtn);
+     
     const downloadbtn = btn.querySelector("p");
-    console.log(downloadbtn);
+     
     loaderbtn.className = "loader show";
     downloadbtn.className = "hide";
     setCredentials({

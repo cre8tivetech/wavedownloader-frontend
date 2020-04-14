@@ -18,7 +18,6 @@ const PostsSpinner = WrappedComponent => {
       if (postError) {
         setLoadBar(99.9);
         setBarColor("red");
-        console.log(postError);
         setTimeout(() => {
           setErrorDIsplay("block");
         }, 3000);

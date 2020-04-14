@@ -24,7 +24,6 @@ const INITIAL_STATE = {
 const postsReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case PostsActionTypes.FETCH_POSTS_ADD:
-      console.log('adding');
       return {
         ...state,
         userCollections: null,
@@ -36,14 +35,12 @@ const postsReducer = (state = INITIAL_STATE, action) => {
         errorMessage: null,
       };
     case PostsActionTypes.FETCH_POSTS_START:
-      console.log('starting');
       return {
         ...state,
         isFetching: true,
         errorMessage: null,
       };
     case PostsActionTypes.FETCH_SINGLE_POSTS_SUCCESS:
-      console.log('working');
       return {
         ...state,
         isFetching: false,
@@ -55,7 +52,6 @@ const postsReducer = (state = INITIAL_STATE, action) => {
       };
 
     case PostsActionTypes.FETCH_SINGLE_POSTS_COLLECTION_SUCCESS:
-      console.log('slide');
       return {
         ...state,
         isFetching: false,
@@ -67,7 +63,6 @@ const postsReducer = (state = INITIAL_STATE, action) => {
       };
 
     case PostsActionTypes.FETCH_SINGLE_HIGHLIGHT_POSTS_COLLECTION_SUCCESS:
-      console.log('slide');
       return {
         ...state,
         isFetching: false,
@@ -82,7 +77,6 @@ const postsReducer = (state = INITIAL_STATE, action) => {
 
     // USERNAME POST
     case PostsActionTypes.FETCH_USERNAME_POSTS_ADD:
-      console.log('username collection added');
       return {
         ...state,
         credentials: action.payload,
@@ -97,7 +91,6 @@ const postsReducer = (state = INITIAL_STATE, action) => {
       };
 
     case PostsActionTypes.FETCH_USERNAME_POSTS_START:
-      console.log('username collection start');
       return {
         ...state,
         isFetching: true,
@@ -105,7 +98,6 @@ const postsReducer = (state = INITIAL_STATE, action) => {
       };
 
     case PostsActionTypes.FETCH_USERNAME_POSTS_SUCCESS:
-      console.log('username collection success');
       return {
         ...state,
         isFetching: false,
@@ -118,7 +110,6 @@ const postsReducer = (state = INITIAL_STATE, action) => {
       };
 
     case PostsActionTypes.FETCH_USERNAME_POSTS_DOWNLOAD:
-      console.log('username download fetching');
       return {
         ...state,
         isFetching: true,
@@ -128,7 +119,6 @@ const postsReducer = (state = INITIAL_STATE, action) => {
     // HASHTAG POSTS
 
     case PostsActionTypes.FETCH_HASHTAG_POSTS_ADD:
-      console.log('hashtag collection added');
       return {
         ...state,
         hashTagForm: action.payload,
@@ -141,7 +131,6 @@ const postsReducer = (state = INITIAL_STATE, action) => {
       };
 
     case PostsActionTypes.FETCH_HASHTAG_POSTS_START:
-      console.log('hashtag collection start');
       return {
         ...state,
         isFetching: true,
@@ -149,7 +138,6 @@ const postsReducer = (state = INITIAL_STATE, action) => {
       };
 
     case PostsActionTypes.FETCH_HASHTAG_POSTS_SUCCESS:
-      console.log('hashtag collection success');
       return {
         ...state,
         isFetching: false,
@@ -163,7 +151,6 @@ const postsReducer = (state = INITIAL_STATE, action) => {
       };
 
     case PostsActionTypes.FETCH_HASHTAG_POSTS_DOWNLOAD:
-      console.log('hashTag download fetching');
       return {
         ...state,
         isFetching: true,
@@ -173,7 +160,6 @@ const postsReducer = (state = INITIAL_STATE, action) => {
     // HIGHLIGHT POSTS
 
     case PostsActionTypes.FETCH_HIGHLIGHT_POSTS_ADD:
-      console.log('highlight collection added');
       return {
         ...state,
         highlightForm: action.payload,
@@ -188,7 +174,6 @@ const postsReducer = (state = INITIAL_STATE, action) => {
       };
 
     case PostsActionTypes.FETCH_HIGHLIGHT_POSTS_START:
-      console.log('highlight collection start');
       return {
         ...state,
         isFetching: true,
@@ -196,7 +181,6 @@ const postsReducer = (state = INITIAL_STATE, action) => {
       };
 
     case PostsActionTypes.FETCH_HIGHLIGHT_POSTS_SUCCESS:
-      console.log('highlight collection success');
       return {
         ...state,
         isFetching: false,
@@ -211,7 +195,6 @@ const postsReducer = (state = INITIAL_STATE, action) => {
       };
 
     case PostsActionTypes.FETCH_HIGHLIGHT_POSTS_DOWNLOAD:
-      console.log('highlight download fetching');
       return {
         ...state,
         isFetching: true,
@@ -221,7 +204,6 @@ const postsReducer = (state = INITIAL_STATE, action) => {
     // STORY POSTS
 
     case PostsActionTypes.FETCH_STORY_POSTS_ADD:
-      console.log('story collection added');
       return {
         ...state,
         credentials: null,
@@ -235,7 +217,6 @@ const postsReducer = (state = INITIAL_STATE, action) => {
       };
 
     case PostsActionTypes.FETCH_STORY_POSTS_START:
-      console.log('hashtag collection start');
       return {
         ...state,
         isFetching: true,
@@ -243,7 +224,6 @@ const postsReducer = (state = INITIAL_STATE, action) => {
       };
 
     case PostsActionTypes.FETCH_STORY_POSTS_SUCCESS:
-      console.log('hashtag collection success');
       return {
         ...state,
         isFetching: false,

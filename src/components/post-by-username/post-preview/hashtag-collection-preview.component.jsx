@@ -30,11 +30,7 @@ const HashTagCollectionPreview = ({
   const [loadBar, setLoadBar] = useState();
   // const []
   useEffect(() => {
-    console.log(history);
-    console.log(postType);
-    console.log(data);
     setLoadBar(100);
-    // console.log(like_count);
     // if (is_video) {
     //   setView('post-card__detail--more-views show');
     //   // setCollectionType(
@@ -48,32 +44,19 @@ const HashTagCollectionPreview = ({
     //   // setCollectionType('');
     // }
     // return () => {
-    //   console.log('will unmount');
     // };
   }, [setLoadBar]);
 
   function downloadFile(shortcode, e) {
     e.preventDefault();
-    // console.log(e.currentTarget.querySelector('div').className);
     const loaderbtn = e.currentTarget.querySelector("div");
-    // const downloadbtn = e.target;
     const downloadbtn = e.target;
     loaderbtn.className = "loader show";
     downloadbtn.className = "hide";
-    console.log(downloadBtn);
     fetchHashTagPostsDownload(shortcode);
-    // setTimeout(() => {
-    //   console.log('Downloading post');
-    // }, 4000);
-    // console.log(loaderbtn);
-    // setDownloading('loader show');
-    // setDownloadBtn('hide');
-    console.log("downloaded");
     loaderbtn.className = "loader hide";
     downloadbtn.className = "show";
     history.push("/posts");
-    // return await values.add('<div className="show"></div>');
-    // await e.target.classList.add('show');
   }
 
   return (

@@ -78,7 +78,7 @@ const SinglePost = ({ fetchPostsAdd }) => {
                 <input
                   type="text"
                   className="form__input--box"
-                  placeholder="Url"
+                  placeholder="Enter Url"
                   value={url}
                   onChange={handleChange}
                   id="url"

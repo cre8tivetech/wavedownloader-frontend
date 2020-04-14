@@ -18,7 +18,6 @@ const HashTagPostsOverview = ({
   useEffect(() => {
     setError({ errorMessage: errorMessage });
   }, [errorMessage]);
-  console.log(hashTagCollections);
   return hashTagCollections ? (
     <div className="posts-overview">
       <HashTagCollectionPreview

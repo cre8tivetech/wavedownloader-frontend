@@ -13,7 +13,6 @@ const UserNamePostsOverview = ({ userCollections, errorMessage }) => {
   useEffect(() => {
     setError({ errorMessage: errorMessage });
   }, [errorMessage]);
-  console.log(userCollections);
   return userCollections ? (
     <div className="posts-overview">
       <UserNameCollectionPreview {...userCollections} {...error} />

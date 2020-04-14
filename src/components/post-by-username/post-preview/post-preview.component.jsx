@@ -8,9 +8,7 @@ const PostPreview = ({ __typename, owner, post, history }) => {
   const [view, setView] = useState();
   const [loadBar, setLoadBar] = useState();
   useEffect(() => {
-    console.log(history.location);
     setLoadBar(100);
-    console.log(owner);
     // setUrl(history.location.data.url);
     if (post.is_video) {
       setView("post-card__detail--more-views show");
@@ -40,13 +38,13 @@ const PostPreview = ({ __typename, owner, post, history }) => {
     const downloadbtn = e.target;
     loaderbtn.className = "loader show";
     downloadbtn.className = "hide";
-    console.log(loaderbtn);
+     
     const method = "GET";
     const min = 1;
     const max = 100;
     const rand = min + Math.random() * (max - min);
-    console.log(rand);
-    console.log(mediatype);
+     
+     
     await Axios.request({
       url,
       method,
@@ -73,7 +71,7 @@ const PostPreview = ({ __typename, owner, post, history }) => {
         }
       })
       .then(() => {
-        console.log("downloaded");
+         
         loaderbtn.className = "loader hide";
         downloadbtn.className = "show";
       });

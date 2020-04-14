@@ -7,7 +7,6 @@ import Navigation from '../navigation/navigation.component';
 import { withRouter } from 'react-router-dom';
 import '../navigation/navigation.styles.scss';
 const Header = (props) => {
-  // console.log(Good);
 
   // <!-- HEADER -->
   return (

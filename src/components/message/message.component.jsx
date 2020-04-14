@@ -7,7 +7,6 @@ const Message = props => {
   
   const message = props.history.location.state;
   // const [hide, setHide] = useState();
-  console.log(props.history);
   // useEffect(() => {
   //   setTimeout(() => {
   //     setHide("message-section");

@@ -24,13 +24,10 @@ const userExpire = (state) => state.user.token.expire;
 
 export function* getSnapshotFromUserAuth(userAuth) {
   try {
-    yield console.log(userAuth);
     const data = yield put(
       signInSuccess(userAuth)
     );
-    console.log(data);
   } catch (error) {
-    console.log('error2', error);
     yield put(
       signInFailure(
         error.response
@@ -48,20 +45,16 @@ export function* signIn({ payload: { email, password } }) {
     const result = yield signInApi(email, password).then(function(response) {
       return response.data.data;
     });
-    console.log(tokenExpiration());
-    console.log(result);
     const token = {
       key: result.token,
       expire: tokenExpiration()
     }
-    console.log(token);
     yield put(setToken(token));
     yield put(setSubscription(result.subscription));
     yield put(setDownloads(result.downloads));
     yield getSnapshotFromUserAuth(result.user);
     
   } catch (error) {
-    console.log("error1", error)
     yield put(signInFailure(error.response ? error.response.data.message || error.response.data.error  : "No Internet!!.  Poor internet connection, Please check your connectivity, and try again later"));
   }
 }
@@ -88,31 +81,20 @@ const tokenExpiration = () =>  {
   const loginExp = new Date();
   const timeExp = loginExp.setHours(loginExp.getHours() + 12);
   const result = new Date(timeExp);
-  console.log(result);
   return result ;
 }
 
 export function* isUserAuthenticated() {
-  console.log("checking session");
   try {
     const expire = yield select(userExpire);
     if (new Date(expire) <= new Date(Date.now())) {
-      const message = "Login Session as expired, 🙏 Please re-login!!";
-      
+      const message = "Login Session as expired, 🙏 Please re-login!!"; 
       yield put(setMessage(message));
-      yield console.log("logging out");
       yield put(signOutStart());
     }
-    // const userAuth = yield select(userActive);
-    // if (!userAuth) return;
-    // yield getSnapshotFromUserAuth(userAuth);
   } catch (error) {
-    console.log("Logging out");
     yield delay(5000);
-      console.log("Logged out");
-      yield put(setMessage(null));
-    
-    // yield put(signInFailure(error));
+    yield put(setMessage(null));
   }
 }
 
@@ -120,21 +102,17 @@ export function* signOut() {
   try {
     yield delay(3000);
     yield put(signOutSuccess());
-    yield console.log(userActive)
   } catch (error) {
     yield put(signOutFailure(error));
   }
 }
 
 export function* signUp({ payload: { userName, email, password } }) {
-  console.log(userName, email, password);
   try {
     // const { user } = yield auth.createUserWithEmailAndPassword(email, password);
     const result = yield signUpApi(userName, email, password).then(function(response) {
       return response.data.data;
     });
-    console.log("SIgnup was successful");
-    console.log(result);
     yield put(signUpSuccess(result));
   } catch (error) {
     yield put(signUpFailure(error.response ? error.response.data.message || error.response.data.error  : "No Internet!!.  Poor internet connection, Please check your connectivity, and try again later"));
@@ -142,7 +120,6 @@ export function* signUp({ payload: { userName, email, password } }) {
 }
 
 export function* makePayment({ payload: txref  }) {
-  console.log(txref);
   const token = yield select(userToken);
 
   try {
@@ -151,7 +128,6 @@ export function* makePayment({ payload: txref  }) {
     ) {
       return response.data.data;
     });
-    console.log(result);
     yield put(setSubscription(result.subscription));
     yield getSnapshotFromUserAuth(result.user);
   } catch (error) {
@@ -174,10 +150,6 @@ export function* onSignInByTokenStart() {
 export function* onCheckUserSession() {
   yield takeLatest(UserActionTypes.CHECK_USER_SESSION, isUserAuthenticated);
 }
-
-// export function* onCheckSession() {
-//   yield takeLatest(UserActionTypes.CHECK_USER_SESSION, isUserAuthenticated);
-// }
 
 export function* onSignOutStart() {
   yield takeLatest(UserActionTypes.SIGN_OUT_START, signOut);
