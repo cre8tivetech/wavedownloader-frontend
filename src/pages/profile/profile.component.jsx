@@ -30,6 +30,7 @@ const Profile = ({
   };
   useEffect(() => {
     checkUserSession();
+    subDaysRemaining();
     startLoader();
   }, [checkUserSession]);
   
