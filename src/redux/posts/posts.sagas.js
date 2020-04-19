@@ -37,12 +37,13 @@ export function* fetchPostsAsync() {
   const idCode = yield select(idcode);
   try {
     if(url) {
-    const result = yield singlePostApi(url).then(function(response) {
-      return response;
-    });
-    if(result.data.__typename === "GraphSidecar"){
-      yield put(fetchSingleCollectionPostsSuccess(result));    
-      }else if (result.data.__typename === 'GraphImage' ||  result.data.__typename === 'GraphVideo') {
+      const result = yield singlePostApi(url).then(function(response) {
+        return response;
+      });
+      
+      if (result.data.__typename === "GraphSidecar"){
+        yield put(fetchSingleCollectionPostsSuccess(result));    
+      } else if (result.data.__typename === 'GraphImage' ||  result.data.__typename === 'GraphVideo') {
         yield put(fetchSinglePostsSuccess(result.data));
       }
     } else if (shortCode) {
@@ -77,7 +78,7 @@ export function* fetchUserNamePostsAsync() {
       }
     );
     // yield console.log(result);
-      yield put(fetchUserNamePostsSuccess(result));
+    yield put(fetchUserNamePostsSuccess(result));
   } catch (error) {
     yield put(fetchPostsFailure(error.response ? error.response.data.message || error.response.data.error  : "No Internet!!.  Poor internet connection, Please check your connectivity, and try again later"));
   }
@@ -121,9 +122,15 @@ export function* fetchStoryPostsAsync() {
       const result = yield storyPostApi(userName, token.key).then(function(response) {
         return response;
       });
+      console.log(result);
         yield put(fetchStoryPostsSuccess(result.data));
   } catch (error) {
+    if (error.response.data.message === "No story to show") {
+      console.log("No story");
+      yield put(fetchStoryPostsSuccess(error.response.data));
+    }else {
     yield put(fetchPostsFailure(error.response ? error.response.data.message || error.response.data.error  : "No Internet!!.  Poor internet connection, Please check your connectivity, and try again later"));
+    }
   }
 }
 

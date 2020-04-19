@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import Accordion from "../../components/accordion/accordion.component";
 import LoadingBar from "react-top-loading-bar";
-import "./post-by-username.styles.scss";
 import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { checkUserSession } from "../../redux/user/user.actions";

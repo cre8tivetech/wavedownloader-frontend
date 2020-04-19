@@ -1,32 +1,38 @@
-import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
-import { createStructuredSelector } from "reselect";
+import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 import {
   selectStoryCollections,
-  selectError
-} from "../../redux/posts/posts.selector";
-import "./posts-overview.styles.scss";
-import StoryCollectionPreview from "../post-preview/story-collection-preview.component";
+  selectStoryForm,
+  selectError,
+} from '../../redux/posts/posts.selector';
+import './posts-overview.styles.scss';
+import StoryCollectionPreview from '../post-preview/story-collection-preview.component';
+import NoStory from '../../pages/Error/no-story.component';
 
-const StoryPostsOverview = ({ stories, errorMessage }) => {
+const StoryPostsOverview = ({ stories, errorMessage, credentials }) => {
   // const downloadName = source.split('/');
   // const link = { url: source, downloadName: downloadName[4] };
   const [error, setError] = useState();
+  console.log(stories);
   useEffect(() => {
     setError({ errorMessage: errorMessage });
   }, [errorMessage]);
-  return stories ? (
+  return stories.post ? (
     <div className="posts-overview">
       {/* {collections.map(({ ,...otherCollectionProps }) => ( */}
       <StoryCollectionPreview {...stories} {...error} />
       {/* ))} */}
     </div>
-  ) : null;
+  ) : (
+    <NoStory userName={credentials} />
+  );
 };
 
 const mapStateToProps = createStructuredSelector({
   stories: selectStoryCollections,
-  errorMessage: selectError
+  credentials: selectStoryForm,
+  errorMessage: selectError,
 });
 
 export default connect(mapStateToProps)(StoryPostsOverview);

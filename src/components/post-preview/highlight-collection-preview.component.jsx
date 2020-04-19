@@ -1,18 +1,16 @@
-import React, { useState, useEffect } from "react";
-import LoadingBar from "react-top-loading-bar";
-// import "../../pages/posts/posts.styles.scss";
-// import "./post-collection-preview.styles.scss";
-import Axios from "axios";
-import { withRouter } from "react-router-dom";
-import { fetchHighlightPostsDownload } from "../../redux/posts/posts.actions";
-import { connect } from "react-redux";
+import React, { useState, useEffect } from 'react';
+import LoadingBar from 'react-top-loading-bar';
+import { withRouter } from 'react-router-dom';
+import { fetchHighlightPostsDownload } from '../../redux/posts/posts.actions';
+import { connect } from 'react-redux';
+import crying from '../../assets/crying.svg';
 
 const HighlightCollectionPreview = ({
   owner,
   post,
   length,
   history,
-  fetchHighlightPostsDownload
+  fetchHighlightPostsDownload,
 }) => {
   // const { url, setUrl } = useState();
   const {
@@ -22,19 +20,19 @@ const HighlightCollectionPreview = ({
     followers,
     following,
     biography,
-    is_verified
+    is_verified,
   } = owner;
-  const [downloading, setDownloading] = useState("loader hide");
-  const [downloadBtn, setDownloadBtn] = useState("show");
+  const [downloading, setDownloading] = useState('loader hide');
+  const [downloadBtn, setDownloadBtn] = useState('show');
   const [view, setView] = useState();
   const [loadBar, setLoadBar] = useState();
   useEffect(() => {
     // console.log(history.location);
     setLoadBar(100);
-     
+
     // setUrl(history.location.data.url);
     if (post.is_video) {
-      setView("post-card__detail--more-views show");
+      setView('post-card__detail--more-views show');
       // setCollectionType(
       //   <i
       //     className="fad fa-play play"
@@ -42,11 +40,11 @@ const HighlightCollectionPreview = ({
       //   ></i>
       // );
     } else {
-      setView("post-card__detail--more-views hide");
+      setView('post-card__detail--more-views hide');
       // setCollectionType('');
     }
     if (!post.text) {
-      post.text = "No caption text for this post";
+      post.text = 'No caption text for this post';
     }
     // return () => {
     //   console.log("will unmount");
@@ -56,23 +54,23 @@ const HighlightCollectionPreview = ({
   function downloadFile(idcode, e) {
     e.preventDefault();
     // console.log(e.currentTarget.querySelector('div').className);
-    const loaderbtn = e.currentTarget.querySelector("div");
+    const loaderbtn = e.currentTarget.querySelector('div');
     // const downloadbtn = e.target;
     const downloadbtn = e.target;
-    loaderbtn.className = "loader show";
-    downloadbtn.className = "hide";
-     
+    loaderbtn.className = 'loader show';
+    downloadbtn.className = 'hide';
+
     setTimeout(() => {
       fetchHighlightPostsDownload(idcode);
     }, 2000);
-     
-    setDownloading("loader show");
-    setDownloadBtn("hide");
-     
+
+    setDownloading('loader show');
+    setDownloadBtn('hide');
+
     setTimeout(() => {
-      loaderbtn.className = "loader hide";
-      downloadbtn.className = "show";
-      history.push("/posts");
+      loaderbtn.className = 'loader hide';
+      downloadbtn.className = 'show';
+      history.push('/posts');
     }, 3000);
     // return await values.add('<div className="show"></div>');
     // await e.target.classList.add('show');
@@ -97,7 +95,7 @@ const HighlightCollectionPreview = ({
                   {is_verified ? (
                     <i
                       className="fa fa-badge-check"
-                      style={{ color: "var(--color-verify)" }}
+                      style={{ color: 'var(--color-verify)' }}
                     ></i>
                   ) : null}
                 </strong>
@@ -111,7 +109,7 @@ const HighlightCollectionPreview = ({
             {/* <img src={} alt="" /> */}
             <i
               className="fad fa-book-user"
-              style={{ color: "var(--color-primary-light)" }}
+              style={{ color: 'var(--color-primary-light)' }}
             ></i>
             <p>{biography}</p>
           </div>
@@ -120,82 +118,103 @@ const HighlightCollectionPreview = ({
             <div className="post-card__detail--more-like">
               <i
                 className="fad fa-users"
-                style={{ color: "var(--color-tertiary)" }}
+                style={{ color: 'var(--color-tertiary)' }}
               ></i>
               <p>{followers}</p>
             </div>
             <div className="post-card__detail--more-comment">
               <i
                 className="fad fa-user-friends"
-                style={{ color: "var(--color-secondary)" }}
+                style={{ color: 'var(--color-secondary)' }}
               ></i>
               <p>{following}</p>
             </div>
           </div>
         </div>
 
-        <div className="post-card__collections multiple">
-          {post
-            // .filter((item, idx) => idx < 10)
-            .map((item, i) => (
-              <div key={i} className="post-card__collections--card">
-                <div className="post-card__collections--card-media">
-                  {item.is_video ? (
-                    <div className="post-card__collections--card-media_box">
-                      <video
-                        controls
-                        controlsList="nodownload"
-                        src={item.video_url}
-                      ></video>
-                    </div>
-                  ) : (
-                    <div
-                      className="post-card__collections--card-media_box"
-                      style={{
-                        backgroundImage: `url(${item.display_url})`,
-                        backgroundPosition: "center",
-                        backgroundSize: "cover",
-                        backgroundRepeat: "no-repeat"
-                      }}
-                    ></div>
-                  )}
-                  {item.is_video ? (
-                    <a
-                      onClick={e => downloadFile(item.video_url, e, ".mp4")}
-                      target="__blank"
-                      className="post-card__collections--card-media_download-btn"
-                      data-method="get"
-                    >
-                      <div className="loader hide"></div>
-                      <p className="show">
-                        Save <i className="fad fa-save"></i>
-                      </p>
-                    </a>
-                  ) : (
-                    <a
-                      onClick={e => downloadFile(item.id, e)}
-                      target="__blank"
-                      className="post-card__collections--card-media_download-btn"
-                      data-method="get"
-                    >
-                      <div className="loader hide"></div>
-                      <p>
-                        Save <i className="fad fa-save"></i>
-                      </p>
-                    </a>
-                  )}
+        {post.length >= 1 ? (
+          <div className="post-card__collections multiple">
+            {post
+              // .filter((item, idx) => idx < 10)
+              .map((item, i) => (
+                <div key={i} className="post-card__collections--card">
+                  <div className="post-card__collections--card-media">
+                    {item.is_video ? (
+                      <div className="post-card__collections--card-media_box">
+                        <video
+                          controls
+                          controlsList="nodownload"
+                          src={item.video_url}
+                        ></video>
+                      </div>
+                    ) : (
+                      <div
+                        className="post-card__collections--card-media_box"
+                        style={{
+                          backgroundImage: `url(${item.display_url})`,
+                          backgroundPosition: 'center',
+                          backgroundSize: 'cover',
+                          backgroundRepeat: 'no-repeat',
+                        }}
+                      ></div>
+                    )}
+                    {item.is_video ? (
+                      <a
+                        onClick={(e) => downloadFile(item.video_url, e, '.mp4')}
+                        target="__blank"
+                        className="post-card__collections--card-media_download-btn"
+                        data-method="get"
+                      >
+                        <div className="loader hide"></div>
+                        <p className="show">
+                          Save <i className="fad fa-save"></i>
+                        </p>
+                      </a>
+                    ) : (
+                      <a
+                        onClick={(e) => downloadFile(item.id, e)}
+                        target="__blank"
+                        className="post-card__collections--card-media_download-btn"
+                        data-method="get"
+                      >
+                        <div className="loader hide"></div>
+                        <p>
+                          Save <i className="fad fa-save"></i>
+                        </p>
+                      </a>
+                    )}
+                  </div>
                 </div>
-              </div>
-              // <CollectionItem key={item.id} item={item} />
-            ))}
-        </div>
+                // <CollectionItem key={item.id} item={item} />
+              ))}
+          </div>
+        ) : (
+          <div className="noHighlight">
+            <div className="noHighlight__box">
+              <img src={crying} alt="" srcset="" />
+              <h1>SORRY!</h1>
+              <h2>
+                No highlight for <span>@{full_name}</span>
+              </h2>
+              <h2>
+                Or <span>@{full_name}</span> Might be a Private User{' '}
+              </h2>
+              <h3>
+                If Private User, You can send us a mail @{' '}
+                <span>wavedownloader@gmail.com</span> specifying the name of the
+                private user e.g({full_name}). We will send you a feedback
+                message as soon as they accept our request
+              </h3>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
 };
-const mapDispatchToProps = dispatch => ({
-  fetchHighlightPostsDownload: shortcode =>
-    dispatch(fetchHighlightPostsDownload(shortcode))
+const mapDispatchToProps = (dispatch) => ({
+  fetchHighlightPostsDownload: (shortcode) =>
+    dispatch(fetchHighlightPostsDownload(shortcode)),
 });
 
 export default withRouter(

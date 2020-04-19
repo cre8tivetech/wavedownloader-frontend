@@ -18,7 +18,7 @@ import {
 } from './user.actions';
 
 
-const userActive = state => state.user.currentUser;
+// const userActive = state => state.user.currentUser;
 const userToken = (state) => state.user.token.key;
 const userExpire = (state) => state.user.token.expire;
 
