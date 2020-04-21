@@ -1,12 +1,13 @@
 import Axios from 'axios';
 export const signUpApi = async (username, email, password) => {
   const collectionsMap = await Axios.post(
-    process.env.REACT_APP_API + process.env.REACT_APP_SIGNUP, {
+    process.env.REACT_APP_API + process.env.REACT_APP_SIGNUP,
+    {
       email: email,
       full_name: username,
-      password: password
+      password: password,
     }
-  )
+  );
   return collectionsMap;
 };
 
@@ -23,10 +24,23 @@ export const signInApi = async (email, password) => {
 
 export const signInByTokenApi = async (token) => {
   const collectionsMap = await Axios.post(
-    process.env.REACT_APP_API + process.env.REACT_APP_SIGNIN,
+    process.env.REACT_APP_API + process.env.REACT_APP_SIGNBYTOKEN,
     {
       token,
     }
   );
+  return collectionsMap;
+};
+
+export const resendConfirmEmailApi = async (token) => {
+  const headers = {
+    'Content-Type': 'application/json',
+    Authorization: 'Bearer ' + token,
+  };
+  const url =
+    process.env.REACT_APP_API + process.env.REACT_APP_RESEND_CONFIRM_EMAIL;
+  const collectionsMap = await Axios.get(url, {
+    headers: headers,
+  });
   return collectionsMap;
 };

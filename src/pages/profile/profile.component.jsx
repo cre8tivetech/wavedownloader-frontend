@@ -1,28 +1,36 @@
-import React, { useState, useEffect, useCallback } from "react";
-import LoadingBar from "react-top-loading-bar";
-import { connect } from "react-redux";
-import { createStructuredSelector } from "reselect";
-import "./profile.styles.scss";
-import { Link, withRouter } from "react-router-dom";
+import React, { useState, useEffect, useCallback } from 'react';
+import LoadingBar from 'react-top-loading-bar';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import './profile.styles.scss';
+import { Link, withRouter } from 'react-router-dom';
 import {
   selectCurrentUser,
-  selectSubscription
-} from "../../redux/user/user.selector";
-import { signOutStart, checkUserSession } from "../../redux/user/user.actions";
-import downloads from "../../assets/download(1).svg";
-import confirmation from "../../assets/mail(1).svg";
-import sub_time from "../../assets/sale(1).svg";
-import plan from "../../assets/subscription(1).svg";
+  selectSubscription,
+  selectMessage,
+} from '../../redux/user/user.selector';
+import {
+  signOutStart,
+  checkUserSession,
+  resendConfirmEmail,
+} from '../../redux/user/user.actions';
+import downloads from '../../assets/download(1).svg';
+import confirmation from '../../assets/mail(1).svg';
+import sub_time from '../../assets/sale(1).svg';
+import plan from '../../assets/subscription(1).svg';
 
 const Profile = ({
-    user,
-    subscription,
-    signOutStart,
-    checkUserSession
-  }) => {
+  user,
+  subscription,
+  signOutStart,
+  checkUserSession,
+  resendConfirmEmail,
+  message,
+}) => {
   const [loadBar, setLoadBar] = useState(0);
-  const [logout, setLogout] = useState("Logout");
+  const [logout, setLogout] = useState('Logout');
   const [subDays, setSubDays] = useState();
+  const [confirmText, setConfirmText] = useState('Resend Confirmation Email');
   const startLoader = useCallback(() => {
     setLoadBar(100);
   }, []);
@@ -33,22 +41,34 @@ const Profile = ({
     checkUserSession();
     subDaysRemaining();
     startLoader();
-  }, [checkUserSession]);
+    if (message) {
+      setConfirmText('Resend Confirmation Email');
+    }
+  }, [checkUserSession, message]);
 
   const signOut = () => {
-    setLogout("Logging out...")
+    setLogout('Logging out...');
     signOutStart();
     setTimeout(() => {
-      setLogout("Logout");
+      setLogout('Logout');
     }, 3000);
   };
-  
+
+  const resendEmailConfirm = () => {
+    setConfirmText('Sending Email...');
+    resendConfirmEmail();
+  };
+
   const subDaysRemaining = () => {
     if (user.is_subscribed) {
       // const subDate = subscription.subscribed_at.split("-");
-      const expDate = subscription.expired_at.split("-");
+      const expDate = subscription.expired_at.split('-');
       const thisDate = new Date(Date.now());
-      const expiredDate = new Date(expDate[0], expDate[1], expDate[2].split("T")[0]);
+      const expiredDate = new Date(
+        expDate[0],
+        expDate[1],
+        expDate[2].split('T')[0]
+      );
       const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
 
       const diffDays = Math.round(Math.abs((expiredDate - thisDate) / oneDay));
@@ -71,31 +91,31 @@ const Profile = ({
             <div className="profile-section__box--details--left-image">
               {user.full_name.charAt(0).toUpperCase()}
             </div>
-            <div className="profile-section__box--details--left-user">
-              <p className="profile-section__box--details--left-user_name">
-              {
-                user.full_name
-              } {
-                user.is_subscribed ? (<i
-                className = "fad fa-badge-check"
-                style={{ color: "var(--color-primary)" }}
-              ></i>):(null)
-              }
-            </p>
-            <p className="profile-section__box--details--left-user_email"><small> {
-                user.email
-              } </small></p>
-            </div>
-            
+            <Link to="/profile">
+              <div className="profile-section__box--details--left-user">
+                <p className="profile-section__box--details--left-user_name">
+                  {user.full_name}{' '}
+                  {user.is_subscribed ? (
+                    <i
+                      className="fad fa-badge-check"
+                      style={{ color: 'var(--color-primary)' }}
+                    ></i>
+                  ) : null}
+                </p>
+                <p className="profile-section__box--details--left-user_email">
+                  <small> {user.email} </small>
+                </p>
+              </div>
+            </Link>
           </div>
           <div className="profile-section__box--details--right">
-            <p onClick={()=> signOut()}>
+            <p onClick={() => signOut()}>
               <strong>{logout}</strong>
             </p>
             <div>
               <i
                 className="fad fa-history"
-                style={{ color: "var(--color-primary)" }}
+                style={{ color: 'var(--color-primary)' }}
               ></i>
               Download History
             </div>
@@ -103,7 +123,7 @@ const Profile = ({
               <Link to="/pricing">
                 <i
                   className="fad fa-badge-dollar"
-                  style={{ color: "var(--color-primary)" }}
+                  style={{ color: 'var(--color-primary)' }}
                 ></i>
                 Pricing
               </Link>
@@ -114,6 +134,12 @@ const Profile = ({
           <p>
             <strong>My Overview</strong>
           </p>
+          {!user.is_email_confirm ? (
+            <p className="resendBtn btn" onClick={() => resendEmailConfirm()}>
+              &#128233; {confirmText}
+            </p>
+          ) : null}
+
           <div className="profile-section__box--overview_container">
             <div className="profile-section__box--overview_container_box">
               <img
@@ -123,11 +149,11 @@ const Profile = ({
               />
               <p>Subscription Plan</p>
               {user.is_subscribed ? (
-                <strong style={{ color: "var(--color-danger-1)" }}>
+                <strong style={{ color: 'var(--color-danger-1)' }}>
                   {subscription.subscribed_type}
                 </strong>
               ) : (
-                <strong style={{ color: "var(--color-danger-1)" }}>NO</strong>
+                <strong style={{ color: 'var(--color-danger-1)' }}>FREE</strong>
               )}
             </div>
             <div className="profile-section__box--overview_container_box">
@@ -138,9 +164,9 @@ const Profile = ({
               />
               <p>Email Confirmation</p>
               {user.is_email_confirm ? (
-                <strong style={{ color: "var(--color-danger-1)" }}>YES</strong>
+                <strong style={{ color: 'var(--color-danger-1)' }}>YES</strong>
               ) : (
-                <strong style={{ color: "var(--color-danger-1)" }}>NO</strong>
+                <strong style={{ color: 'var(--color-danger-1)' }}>NO</strong>
               )}
             </div>
             <div className="profile-section__box--overview_container_box">
@@ -150,7 +176,7 @@ const Profile = ({
                 alt=""
               />
               <p>Subscription Time</p>
-              <strong style={{ color: "var(--color-danger-1)" }}>
+              <strong style={{ color: 'var(--color-danger-1)' }}>
                 {subDays} Days
               </strong>
             </div>
@@ -161,7 +187,7 @@ const Profile = ({
                 alt=""
               />
               <p>Total Downloads</p>
-              <strong style={{ color: "var(--color-danger-1)" }}>0</strong>
+              <strong style={{ color: 'var(--color-danger-1)' }}>0</strong>
             </div>
           </div>
         </div>
@@ -171,10 +197,12 @@ const Profile = ({
 };
 const mapStateToProps = createStructuredSelector({
   user: selectCurrentUser,
-  subscription: selectSubscription
+  subscription: selectSubscription,
+  message: selectMessage,
 });
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   signOutStart: () => dispatch(signOutStart()),
+  resendConfirmEmail: () => dispatch(resendConfirmEmail()),
   checkUserSession: () => dispatch(checkUserSession()),
 });
 export default withRouter(

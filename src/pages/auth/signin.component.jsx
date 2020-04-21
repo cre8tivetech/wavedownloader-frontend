@@ -1,18 +1,18 @@
-import React, { useState, useEffect, useCallback } from "react";
-import LoadingBar from "react-top-loading-bar";
-import { withRouter } from "react-router-dom";
-import { Link } from "react-router-dom";
-import { createStructuredSelector } from "reselect";
-import { signInStart } from "../../redux/user/user.actions";
-import { connect } from "react-redux";
-import "./signin-signup.styles.scss";
-import { selectError } from "../../redux/user/user.selector";
+import React, { useState, useEffect, useCallback } from 'react';
+import LoadingBar from 'react-top-loading-bar';
+import { withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { createStructuredSelector } from 'reselect';
+import { signInStart } from '../../redux/user/user.actions';
+import { connect } from 'react-redux';
+import './signin-signup.styles.scss';
+import { selectError } from '../../redux/user/user.selector';
 const SignIn = ({ signInStart, error }) => {
   const [loadBar, setLoadBar] = useState(0);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState('');
   const [userCredentials, setCredentials] = useState({
-    email: "",
-    password: ""
+    email: '',
+    password: '',
   });
 
   const { email, password } = userCredentials;
@@ -28,29 +28,29 @@ const SignIn = ({ signInStart, error }) => {
     }
     startLoader();
   }, [error]);
-  const handleSubmit = async event => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const btn = event.currentTarget.querySelector("button");
-    const loaderbtn = btn.querySelector("div");
-     
-    const downloadbtn = btn.querySelector("p");
-     
-    loaderbtn.className = "loader show";
-    downloadbtn.className = "hide";
+    const btn = event.currentTarget.querySelector('button');
+    const loaderbtn = btn.querySelector('div');
+
+    const downloadbtn = btn.querySelector('p');
+
+    loaderbtn.className = 'loader show';
+    downloadbtn.className = 'hide';
     setCredentials({
-      email: "",
-      password: ""
+      email: '',
+      password: '',
     });
     await signInStart(email, password);
     setTimeout(() => {
-      loaderbtn.className = "loader hide";
-      downloadbtn.className = "show";
-    }, 15000);
+      loaderbtn.className = 'loader hide';
+      downloadbtn.className = 'show';
+    }, 13000);
   };
 
-  const handleChange = event => {
+  const handleChange = (event) => {
     const { name, value } = event.target;
-
+    setErrorMessage('');
     setCredentials({ ...userCredentials, [name]: value });
   };
 
@@ -77,7 +77,7 @@ const SignIn = ({ signInStart, error }) => {
             <div className="form__input">
               <i
                 className="fad fa-envelope"
-                style={{ color: "var(--color-primary)" }}
+                style={{ color: 'var(--color-primary)' }}
               ></i>
               <input
                 type="email"
@@ -97,7 +97,7 @@ const SignIn = ({ signInStart, error }) => {
             <div className="form__input">
               <i
                 className="fad fa-lock"
-                style={{ color: "var(--color-primary)" }}
+                style={{ color: 'var(--color-primary)' }}
               ></i>
               <input
                 type="password"
@@ -133,10 +133,10 @@ const SignIn = ({ signInStart, error }) => {
 };
 
 const mapStateToProps = createStructuredSelector({
-  error: selectError
+  error: selectError,
 });
-const mapDispatchToProps = dispatch => ({
-  signInStart: (email, password) => dispatch(signInStart({ email, password }))
+const mapDispatchToProps = (dispatch) => ({
+  signInStart: (email, password) => dispatch(signInStart({ email, password })),
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SignIn));

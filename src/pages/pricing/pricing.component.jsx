@@ -1,21 +1,17 @@
-import React, { useState, useEffect, useCallback } from "react";
-import LoadingBar from "react-top-loading-bar";
-import { connect } from "react-redux";
-import { createStructuredSelector } from "reselect";
-import "../pricing/pricing.styles.scss";
-import { Link, withRouter } from "react-router-dom";
-import { selectCurrentUser } from "../../redux/user/user.selector";
-import { signOutStart, checkUserSession } from "../../redux/user/user.actions";
-import free from "../../assets/message.svg";
-import basic from "../../assets/plane(1).svg";
-import premium from "../../assets/rocket.svg";
-import Price from "./price.component";
+import React, { useState, useEffect, useCallback } from 'react';
+import LoadingBar from 'react-top-loading-bar';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import '../pricing/pricing.styles.scss';
+import { Link, withRouter } from 'react-router-dom';
+import { selectCurrentUser } from '../../redux/user/user.selector';
+import { signOutStart, checkUserSession } from '../../redux/user/user.actions';
+import free from '../../assets/message.svg';
+import basic from '../../assets/plane(1).svg';
+import premium from '../../assets/rocket.svg';
+import Price from './price.component';
 
-const Pricing = ({
-    user,
-    signOutStart,
-    checkUserSession
-  }) => {
+const Pricing = ({ user, signOutStart, checkUserSession }) => {
   const [loadBar, setLoadBar] = useState(0);
   // const [ref, setRef] = useState({
   //   basicREf: `basicMonthly-${Date.now()}`,
@@ -25,24 +21,24 @@ const Pricing = ({
     amount: {
       freeP: 0.0,
       basicP: 4.99,
-      premiumP: 7.99
+      premiumP: 7.99,
     },
     ref: {
       basicREf: `basicMonthly-${Date.now()}`,
-      premiumREf: `premiumMonthly-${Date.now()}`
+      premiumREf: `premiumMonthly-${Date.now()}`,
     },
-    type: "per month"
+    type: 'per month',
   });
 
   const { amount, ref, type } = plan;
   const { freeP, basicP, premiumP } = amount;
   const { basicREf, premiumREf } = ref;
-  const freeAmount = freeP.toString().split(".");
+  const freeAmount = freeP.toString().split('.');
   // const basicAmount = basicP.toString().split('.');
   // const premiumAmount = premiumP.toString().split('.');
   const [planSelect, setPlanSelect] = useState({
-    month: "plan-type btn active",
-    year: "plan-type btn"
+    month: 'plan-type btn active',
+    year: 'plan-type btn',
   });
 
   const startLoader = useCallback(() => {
@@ -61,17 +57,17 @@ const Pricing = ({
       amount: {
         freeP: 0,
         basicP: 4.99,
-        premiumP: 7.99
+        premiumP: 7.99,
       },
       ref: {
         basicREf: `basicMonthly-${Date.now()}`,
-        premiumREf: `premiumMonthly-${Date.now()}`
+        premiumREf: `premiumMonthly-${Date.now()}`,
       },
-      type: "per month"
+      type: 'per month',
     });
     setPlanSelect({
-      month: "plan-type btn active",
-      year: "plan-type btn"
+      month: 'plan-type btn active',
+      year: 'plan-type btn',
     });
   };
 
@@ -80,17 +76,17 @@ const Pricing = ({
       amount: {
         freeP: 0,
         basicP: 49.99,
-        premiumP: 99.99
+        premiumP: 99.99,
       },
       ref: {
         basicREf: `basicAnnually-${Date.now()}`,
-        premiumREf: `premiumAnnually-${Date.now()}`
+        premiumREf: `premiumAnnually-${Date.now()}`,
       },
-      type: "per year"
+      type: 'per year',
     });
     setPlanSelect({
-      month: "plan-type btn",
-      year: "plan-type btn active"
+      month: 'plan-type btn',
+      year: 'plan-type btn active',
     });
   };
 
@@ -100,17 +96,17 @@ const Pricing = ({
     email: user.email,
     reference: basicREf,
     type,
-    classname: "basic",
-    classnameImg: "basic-img",
-    classnameBg: "basic-bg",
+    classname: 'basic',
+    classnameImg: 'basic-img',
+    classnameBg: 'basic-bg',
     opt: {
-      opt1: "fa fa-check basic",
-      opt2: "fa fa-check basic",
-      opt3: "fa fa-check basic",
-      opt4: "fa fa-times basic",
-      opt5: "fa fa-times basic",
-      opt6: "fa fa-check basic"
-    }
+      opt1: 'fa fa-check basic',
+      opt2: 'fa fa-check basic',
+      opt3: 'fa fa-check basic',
+      opt4: 'fa fa-times basic',
+      opt5: 'fa fa-times basic',
+      opt6: 'fa fa-check basic',
+    },
   };
 
   const premiumData = {
@@ -119,17 +115,17 @@ const Pricing = ({
     email: user.email,
     reference: premiumREf,
     type,
-    classname: "premium",
-    classnameImg: "premium-img",
-    classnameBg: "premium-bg",
+    classname: 'premium',
+    classnameImg: 'premium-img',
+    classnameBg: 'premium-bg',
     opt: {
-      opt1: "fa fa-check premium",
-      opt2: "fa fa-check premium",
-      opt3: "fa fa-check premium",
-      opt4: "fa fa-check premium",
-      opt5: "fa fa-check premium",
-      opt6: "fa fa-check premium"
-    }
+      opt1: 'fa fa-check premium',
+      opt2: 'fa fa-check premium',
+      opt3: 'fa fa-check premium',
+      opt4: 'fa fa-check premium',
+      opt5: 'fa fa-check premium',
+      opt6: 'fa fa-check premium',
+    },
   };
 
   return (
@@ -147,9 +143,20 @@ const Pricing = ({
               {user.full_name.charAt(0).toUpperCase()}
             </div>
             <Link to="/profile">
-              <p>
-                {user.full_name} <small>{user.email}</small>
-              </p>
+              <div className="profile-section__box--details--left-user">
+                <p className="profile-section__box--details--left-user_name">
+                  {user.full_name}{' '}
+                  {user.is_subscribed ? (
+                    <i
+                      className="fad fa-badge-check"
+                      style={{ color: 'var(--color-primary)' }}
+                    ></i>
+                  ) : null}
+                </p>
+                <p className="profile-section__box--details--left-user_email">
+                  <small> {user.email} </small>
+                </p>
+              </div>
             </Link>
           </div>
           <div className="profile-section__box--details--right">
@@ -220,8 +227,8 @@ const Pricing = ({
                   <p>Check download history</p>
                 </div> */}
                 <div className="plan">
-                <Link to="/"> 
-                  <div className="plan-btn btn free-bg">Get now</div>
+                  <Link to="/">
+                    <div className="plan-btn btn free-bg">Get now</div>
                   </Link>
                 </div>
               </div>
@@ -236,9 +243,9 @@ const Pricing = ({
   );
 };
 const mapStateToProps = createStructuredSelector({
-  user: selectCurrentUser
+  user: selectCurrentUser,
 });
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   signOutStart: () => dispatch(signOutStart()),
   checkUserSession: () => dispatch(checkUserSession()),
 });

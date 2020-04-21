@@ -1,6 +1,7 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
+
 import './themes/mixins.scss';
 import './App.scss';
 import './resources.scss';
@@ -27,12 +28,11 @@ import PostsSpinner from './components/posts-spinner/posts-spinner.component';
 import SignIn from './pages/auth/signin.component';
 import SignUp from './pages/auth/signup.component';
 import Profile from './pages/profile/profile.component';
-
 import Pricing from './pages/pricing/pricing.component';
 import {
   selectCurrentUser,
   selectSubscription,
-  selectToken
+  selectToken,
 } from './redux/user/user.selector';
 import {
   checkUserSession,
@@ -42,22 +42,23 @@ import {
 import Message from './components/message/message.component';
 import Error404 from './pages/Error/error404.component';
 import Alert from './components/message/alert.component';
+import Confirmation from './pages/auth/confirmation.component';
 
 const App = ({
-    checkUserSession,
-    currentUser,
-    token,
-    setMessage,
-  }) => {
-
+  checkUserSession,
+  currentUser,
+  token,
+  setMessage,
+  location,
+}) => {
   useEffect(() => {
     checkUserSession();
   }, [checkUserSession, currentUser, setMessage, token]);
 
   return (
     <div className="App">
-      <Header />
-      <Alert/>
+      {location.pathname !== '/confirmation/' && <Header />}
+      <Alert />
       <Message />
       <Switch>
         <Route exact path="/" component={Home} />
@@ -303,21 +304,34 @@ const App = ({
           render={() => (currentUser ? <Redirect to="/" /> : <SignUp />)}
         />
         <Route exact path="/spinner" component={PostsSpinner} />
-        {/* add 404 page */ }
-        <Route path="*" component={Error404} />
+        <Route exact path="/confirmation/" component={Confirmation} />
+        {/* add 404 page */}
+        <Route
+          path="*"
+          render={() =>
+            location.pathname !== '/confirmation' ||
+            location.pathname !== '/confirmation/:data' ? (
+              <Confirmation />
+            ) : (
+              <Error404 />
+            )
+          }
+        />
+
         {/* <Footer /> */}
       </Switch>
     </div>
-  );};
+  );
+};
 
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
   token: selectToken,
 });
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   checkUserSession: () => dispatch(checkUserSession()),
   signOutStart: () => dispatch(signOutStart()),
   // setMessage: (message)=> dispatch(setMessage(message))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

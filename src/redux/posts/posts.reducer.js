@@ -31,7 +31,8 @@ const postsReducer = (state = INITIAL_STATE, action) => {
         slideCollections: null,
         source: action.payload,
         isFetching: true,
-        isSlide: false,isSingleHighlight: false,
+        isSlide: false,
+        isSingleHighlight: false,
         errorMessage: null,
       };
     case PostsActionTypes.FETCH_POSTS_START:
@@ -44,10 +45,10 @@ const postsReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         isFetching: false,
-        slideCollections: null,
-        singleHighlightCollections: null,
+        // slideCollections: null,
+        // singleHighlightCollections: null,
         collections: action.payload,
-        userCollections: null,
+        // userCollections: null,
         errorMessage: null,
       };
 
@@ -73,7 +74,6 @@ const postsReducer = (state = INITIAL_STATE, action) => {
         singleHighlightCollections: action.payload,
         errorMessage: null,
       };
-
 
     // USERNAME POST
     case PostsActionTypes.FETCH_USERNAME_POSTS_ADD:
@@ -101,7 +101,8 @@ const postsReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         isFetching: false,
-        isSlide: false,isSingleHighlight: false,
+        isSlide: false,
+        isSingleHighlight: false,
         slideCollections: null,
         hashTagCollections: null,
         storyCollections: null,
@@ -141,7 +142,8 @@ const postsReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         isFetching: false,
-        isSlide: false,isSingleHighlight: false,
+        isSlide: false,
+        isSingleHighlight: false,
         collections: null,
         userCollections: null,
         slideCollections: null,
@@ -184,7 +186,8 @@ const postsReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         isFetching: false,
-        isSlide: false,isSingleHighlight: false,
+        isSlide: false,
+        isSingleHighlight: false,
         collections: null,
         userCollections: null,
         hashTagCollections: null,
@@ -227,7 +230,8 @@ const postsReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         isFetching: false,
-        isSlide: false,isSingleHighlight: false,
+        isSlide: false,
+        isSingleHighlight: false,
         collections: null,
         userCollections: null,
         slideCollections: null,
