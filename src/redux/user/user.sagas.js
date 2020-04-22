@@ -6,6 +6,7 @@ import {
   signInApi,
   signInByTokenApi,
   resendConfirmEmailApi,
+  changePasswordApi,
 } from '../../Api/auth';
 import { paymentVerifyApi } from '../../Api/payment';
 import {
@@ -34,7 +35,7 @@ export function* getSnapshotFromUserAuth(userAuth) {
       signInFailure(
         error.response
           ? error.response.data.message || error.response.data.error
-          : 'No Internet!!.  Poor internet connection, Please check your connectivity, and try again later'
+          : 'Oops!!, Poor internet connection, Please check your connectivity, And try again'
       )
     );
   }
@@ -58,7 +59,7 @@ export function* signIn({ payload: { email, password } }) {
       signInFailure(
         error.response
           ? error.response.data.message || error.response.data.error
-          : 'No Internet!!.  Poor internet connection, Please check your connectivity, and try again later'
+          : 'Oops!!, Poor internet connection, Please check your connectivity, And try again'
       )
     );
   }
@@ -82,7 +83,7 @@ export function* signByToken({ payload: token }) {
       signInFailure(
         error.response
           ? error.response.data.message || error.response.data.error
-          : 'No Internet!!.  Poor internet connection, Please check your connectivity, and try again later'
+          : 'Oops!!, Poor internet connection, Please check your connectivity, And try again'
       )
     );
   }
@@ -97,6 +98,36 @@ const tokenExpiration = () => {
 };
 
 export function* isResendConfirmEmail() {
+  const token = yield select(userToken);
+  const result = yield resendConfirmEmailApi(token).then(function (response) {
+    return response.data.data;
+  });
+  if (result) {
+    yield put(setMessage({ type: 'success', message: result.message }));
+    yield delay(6000);
+    yield put(setMessage(null));
+  }
+}
+
+export function* isChangePassword({ payload: { old_password, new_password } }) {
+  console.log(old_password, '___', new_password);
+  const token = yield select(userToken);
+  const result = yield changePasswordApi(
+    token,
+    old_password,
+    new_password
+  ).then(function (response) {
+    return response.data.data;
+  });
+  console.log(result);
+  if (result) {
+    yield put(setMessage({ type: 'success', message: result.message }));
+    yield delay(6000);
+    yield put(setMessage(null));
+  }
+}
+
+export function* isForgetPassword() {
   const token = yield select(userToken);
   const result = yield resendConfirmEmailApi(token).then(function (response) {
     return response.data.data;
@@ -148,7 +179,7 @@ export function* signUp({ payload: { userName, email, password } }) {
       signUpFailure(
         error.response
           ? error.response.data.message || error.response.data.error
-          : 'No Internet!!.  Poor internet connection, Please check your connectivity, and try again later'
+          : 'Oops!!, Poor internet connection, Please check your connectivity, And try again'
       )
     );
   }
@@ -186,6 +217,14 @@ export function* onResendConfirmEmail() {
   yield takeLatest(UserActionTypes.RESEND_CONFIRM_EMAIL, isResendConfirmEmail);
 }
 
+export function* onChangePassword() {
+  yield takeLatest(UserActionTypes.CHANGE_PASSWORD, isChangePassword);
+}
+
+export function* onForgetPassword() {
+  yield takeLatest(UserActionTypes.FORGET_PASSWORD, isForgetPassword);
+}
+
 export function* onCheckUserSession() {
   yield takeLatest(UserActionTypes.CHECK_USER_SESSION, isUserAuthenticated);
 }
@@ -211,6 +250,8 @@ export function* userSagas() {
     call(onSignInStart),
     call(onSignInByTokenStart),
     call(onResendConfirmEmail),
+    call(onChangePassword),
+    call(onForgetPassword),
     call(onCheckUserSession),
     call(onSignOutStart),
     call(onSignUpStart),

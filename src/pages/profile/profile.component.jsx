@@ -112,13 +112,15 @@ const Profile = ({
             <p onClick={() => signOut()}>
               <strong>{logout}</strong>
             </p>
-            <div>
-              <i
-                className="fad fa-history"
-                style={{ color: 'var(--color-primary)' }}
-              ></i>
-              Download History
-            </div>
+            {user && user.is_email_confirm ? (
+              <div>
+                <i
+                  className="fad fa-history"
+                  style={{ color: 'var(--color-primary)' }}
+                ></i>
+                Download History
+              </div>
+            ) : null}
             <div>
               <Link to="/pricing">
                 <i
@@ -128,6 +130,17 @@ const Profile = ({
                 Pricing
               </Link>
             </div>
+            {user && user.is_email_confirm ? (
+              <div>
+                <Link to="/change-password">
+                  <i
+                    className="fad fa-user-lock"
+                    style={{ color: 'var(--color-primary)' }}
+                  ></i>
+                  Change Password
+                </Link>
+              </div>
+            ) : null}
           </div>
         </div>
         <div className="profile-section__box--overview">

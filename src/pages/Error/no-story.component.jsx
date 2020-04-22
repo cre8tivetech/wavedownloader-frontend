@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import crying from '../../assets/crying1.svg';
 import './no-story.styles.scss';
 const NoStory = ({ userName }) => {
-  console.log(userName);
   return (
     <div className="noStory-section card">
       <img src={crying} alt="" />
@@ -22,7 +21,7 @@ const NoStory = ({ userName }) => {
       </h3>
 
       <Link to="/">
-        <div className="btn">
+        <div className="back-btn btn">
           <i className="fad fa-long-arrow-left"> </i> Go back
         </div>
       </Link>

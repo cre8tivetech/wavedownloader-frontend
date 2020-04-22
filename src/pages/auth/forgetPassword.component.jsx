@@ -5,17 +5,16 @@ import { Link } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 import { signInStart } from '../../redux/user/user.actions';
 import { connect } from 'react-redux';
-import './signin-signup.styles.scss';
+import './forgetPassword.styles.scss';
 import { selectError } from '../../redux/user/user.selector';
-const SignIn = ({ signInStart, error }) => {
+const ForgotPassword = ({ signInStart, error }) => {
   const [loadBar, setLoadBar] = useState(0);
   const [errorMessage, setErrorMessage] = useState('');
   const [userCredentials, setCredentials] = useState({
     email: '',
-    password: '',
   });
 
-  const { email, password } = userCredentials;
+  const { email } = userCredentials;
   const startLoader = useCallback(() => {
     setLoadBar(100);
   }, []);
@@ -39,9 +38,8 @@ const SignIn = ({ signInStart, error }) => {
     downloadbtn.className = 'hide';
     setCredentials({
       email: '',
-      password: '',
     });
-    await signInStart(email, password);
+    await signInStart(email);
     setTimeout(() => {
       loaderbtn.className = 'loader hide';
       downloadbtn.className = 'show';
@@ -62,14 +60,10 @@ const SignIn = ({ signInStart, error }) => {
         color="linear-gradient(92deg, #038125 0%, #fbff00 100%)"
         onLoaderFinished={() => onLoaderFinished}
       />
-      <div className="signin-signup__type">
-        <Link to="/signin" className="btn active">
-          <p>Sign In</p>
-        </Link>
-        <Link to="/signup" className="btn">
-          <p>Sign Up</p>
-        </Link>
-      </div>
+      <p className="signin-signup__header">
+        <strong>Forget Password</strong>
+      </p>
+
       <div className="signin-signup__form">
         {errorMessage}
         <form onSubmit={handleSubmit} className="form">
@@ -82,7 +76,7 @@ const SignIn = ({ signInStart, error }) => {
               <input
                 type="email"
                 className="form__input--box"
-                placeholder="Email"
+                placeholder="Type Your Email"
                 id="email"
                 name="email"
                 value={email}
@@ -93,38 +87,12 @@ const SignIn = ({ signInStart, error }) => {
                 Email
               </label>
             </div>
-
-            <div className="form__input">
-              <i
-                className="fad fa-lock"
-                style={{ color: 'var(--color-primary)' }}
-              ></i>
-              <input
-                type="password"
-                className="form__input--box"
-                placeholder="Password"
-                id="password"
-                name="password"
-                value={password}
-                onChange={handleChange}
-                required
-              />
-              <label htmlFor="password" className="form__input--label">
-                Password
-              </label>
-            </div>
           </div>
           <div className="form__group">
             <button type="submit" className=" submit_btn btn btn--green">
               <div className="loader hide"></div>
-              <p>Sign In</p>
+              <p>Send</p>
             </button>
-            <Link to="/forgot-password" className="auth-link">
-              <p>Forgot your password?</p>
-            </Link>
-            <Link to="/signup" className="auth-link">
-              <p>Don't have an account? Signup</p>
-            </Link>
           </div>
         </form>
       </div>
@@ -139,4 +107,6 @@ const mapDispatchToProps = (dispatch) => ({
   signInStart: (email, password) => dispatch(signInStart({ email, password })),
 });
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SignIn));
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(ForgotPassword)
+);

@@ -16,6 +16,7 @@
 
   @include respond(phone) {
     width: 80%;
+    margin: 10rem auto;
   }
 
   h1 {
@@ -47,6 +48,14 @@
 
   img {
     width: 20rem;
+
+    @include respond(tabPort) {
+      width: 16rem;
+    }
+
+    @include respond(phone) {
+      width: 12rem;
+    }
   }
 
   div {

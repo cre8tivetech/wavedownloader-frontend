@@ -140,13 +140,16 @@
         div {
           font-size: 1.6rem;
           cursor: pointer;
+          padding: 0.5rem 0;
 
           @include respond(tabPort) {
             font-size: 1.4rem;
+            padding: 0.3rem 0;
           }
 
           @include respond(phone) {
             font-size: 1.2rem;
+            padding: 0.2rem 0;
           }
 
           a {

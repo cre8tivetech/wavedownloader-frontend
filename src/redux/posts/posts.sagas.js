@@ -34,6 +34,7 @@ export function* fetchPostsAsync() {
   const url = yield select(link);
   const shortCode = yield select(shortcode);
   const idCode = yield select(idcode);
+  const token = yield select(userToken);
   try {
     if (url) {
       const result = yield singlePostApi(url).then(function (response) {
@@ -49,11 +50,11 @@ export function* fetchPostsAsync() {
         yield put(fetchSinglePostsSuccess(result.data));
       }
     } else if (shortCode) {
-      const result = yield shortcodePostApi(shortCode).then(function (
-        response
-      ) {
-        return response;
-      });
+      const result = yield shortcodePostApi(shortCode, token.key).then(
+        function (response) {
+          return response;
+        }
+      );
       if (result.data.__typename === 'GraphSidecar') {
         yield put(fetchSingleCollectionPostsSuccess(result));
       } else if (
@@ -63,7 +64,9 @@ export function* fetchPostsAsync() {
         yield put(fetchSinglePostsSuccess(result.data));
       }
     } else if (idCode) {
-      const result = yield idcodePostApi(idCode).then(function (response) {
+      const result = yield idcodePostApi(idCode, token.key).then(function (
+        response
+      ) {
         return response;
       });
       if (result.data.__typename === 'GraphHighlightReel') {
@@ -75,7 +78,7 @@ export function* fetchPostsAsync() {
       fetchPostsFailure(
         error.response
           ? error.response.data.message || error.response.data.error
-          : 'No Internet!!.  Poor internet connection, Please check your connectivity, and try again later'
+          : 'Oops!!, Poor internet connection, Please check your connectivity, And try again'
       )
     );
   }
@@ -98,7 +101,7 @@ export function* fetchUserNamePostsAsync() {
       fetchPostsFailure(
         error.response
           ? error.response.data.message || error.response.data.error
-          : 'No Internet!!.  Poor internet connection, Please check your connectivity, and try again later'
+          : 'Oops!!, Poor internet connection, Please check your connectivity, And try again'
       )
     );
   }
@@ -119,7 +122,7 @@ export function* fetchHashTagPostsAsync() {
       fetchPostsFailure(
         error.response
           ? error.response.data.message || error.response.data.error
-          : 'No Internet!!.  Poor internet connection, Please check your connectivity, and try again later'
+          : 'Oops!!, Poor internet connection, Please check your connectivity, And try again'
       )
     );
   }
@@ -140,7 +143,7 @@ export function* fetchHighlightPostsAsync() {
       fetchPostsFailure(
         error.response
           ? error.response.data.message || error.response.data.error
-          : 'No Internet!!.  Poor internet connection, Please check your connectivity, and try again later'
+          : 'Oops!!, Poor internet connection, Please check your connectivity, And try again'
       )
     );
   }
@@ -157,17 +160,23 @@ export function* fetchStoryPostsAsync() {
     });
     yield put(fetchStoryPostsSuccess(result.data));
   } catch (error) {
-    if (error.response.data.message === 'No story to show') {
-      yield put(fetchStoryPostsSuccess(error.response.data));
-    } else {
+    if (error.response)
+      if (error.response.data.message === 'No story to show') {
+        yield put(fetchStoryPostsSuccess(error.response.data));
+      } else
+        yield put(
+          fetchPostsFailure(
+            error.response
+              ? error.response.data.message || error.response.data.error
+              : 'Oops!!, Poor internet connection, Please check your connectivity, And try again'
+          )
+        );
+    else if (error.message === 'Network Error')
       yield put(
         fetchPostsFailure(
-          error.response
-            ? error.response.data.message || error.response.data.error
-            : 'No Internet!!.  Poor internet connection, Please check your connectivity, and try again later'
+          'Oops!!, Poor internet connection, Please check your connectivity, And try again'
         )
       );
-    }
   }
 }
 

@@ -27,33 +27,29 @@ import StoryPosts from './pages/posts/story-posts.component';
 import PostsSpinner from './components/posts-spinner/posts-spinner.component';
 import SignIn from './pages/auth/signin.component';
 import SignUp from './pages/auth/signup.component';
+import ChangePassword from './pages/auth/changePassword.component';
+import ForgetPassword from './pages/auth/forgetPassword.component';
 import Profile from './pages/profile/profile.component';
 import Pricing from './pages/pricing/pricing.component';
 import {
   selectCurrentUser,
-  selectSubscription,
+  // selectSubscription,
   selectToken,
 } from './redux/user/user.selector';
 import {
   checkUserSession,
   signOutStart,
-  setMessage,
+  // setMessage,
 } from './redux/user/user.actions';
 import Message from './components/message/message.component';
 import Error404 from './pages/Error/error404.component';
 import Alert from './components/message/alert.component';
 import Confirmation from './pages/auth/confirmation.component';
 
-const App = ({
-  checkUserSession,
-  currentUser,
-  token,
-  setMessage,
-  location,
-}) => {
+const App = ({ checkUserSession, currentUser, token, location }) => {
   useEffect(() => {
     checkUserSession();
-  }, [checkUserSession, currentUser, setMessage, token]);
+  }, [checkUserSession, currentUser, token]);
 
   return (
     <div className="App">
@@ -64,8 +60,6 @@ const App = ({
         <Route exact path="/" component={Home} />
         <Route exact path="/posts" component={Posts} />
         <Route exact path="/single-post" component={SinglePost} />
-        {/* Post-by-username */}
-        {/* <Route exact path="/post-by-username" component={PostByUsername} /> */}
         <Route
           exact
           path="/post-by-username"
@@ -303,21 +297,26 @@ const App = ({
           path="/signup"
           render={() => (currentUser ? <Redirect to="/" /> : <SignUp />)}
         />
-        <Route exact path="/spinner" component={PostsSpinner} />
-        <Route exact path="/confirmation/" component={Confirmation} />
-        {/* add 404 page */}
         <Route
-          path="*"
+          path="/change-password"
           render={() =>
-            location.pathname !== '/confirmation' ||
-            location.pathname !== '/confirmation/:data' ? (
-              <Confirmation />
+            currentUser && currentUser.is_email_confirm ? (
+              <ChangePassword />
             ) : (
-              <Error404 />
+              <Redirect to="/" />
             )
           }
         />
-
+        <Route
+          path="/forgot-password"
+          render={() =>
+            currentUser ? <Redirect to="/" /> : <ForgetPassword />
+          }
+        />
+        <Route exact path="/spinner" component={PostsSpinner} />
+        <Route exact path="/confirmation/" component={Confirmation} />
+        {/* add 404 page */}
+        <Route path="*" component={Error404} />
         {/* <Footer /> */}
       </Switch>
     </div>

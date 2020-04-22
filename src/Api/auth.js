@@ -44,3 +44,16 @@ export const resendConfirmEmailApi = async (token) => {
   });
   return collectionsMap;
 };
+
+export const changePasswordApi = async (token, old_password, new_password) => {
+  const headers = {
+    'Content-Type': 'application/json',
+    Authorization: 'Bearer ' + token,
+  };
+  const url = process.env.REACT_APP_API + process.env.REACT_APP_CHANGE_PASSWORD;
+  const data = { old_password, new_password };
+  const collectionsMap = await Axios.patch(url, data, {
+    headers: headers,
+  });
+  return collectionsMap;
+};

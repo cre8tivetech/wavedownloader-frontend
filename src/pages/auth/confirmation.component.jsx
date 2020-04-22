@@ -33,27 +33,13 @@ const Confirmation = ({ currentUser, signInByTokenStart }) => {
           history.push('/profile');
         }, 8000);
       }, 8000);
-    // setText1('Done');
-  }, [
-    signInByTokenStart,
-    // currentUser,
-    // setTimeout,
-    // setText1,
-    // setText2,
-    // setConfirmImage,
-    // token,
-  ]);
+  }, [signInByTokenStart]);
 
   return (
     <div className="confirmation-section card">
       <img src={confirmImage} alt="" />
       <h1 style={{ color: textColor }}>{text1}</h1>
       <h2>{text2}</h2>
-      {/* <Link to="/">
-        <div className="btn">
-          <i className="fad fa-long-arrow-left"></i> Go back
-        </div>
-      </Link> */}
     </div>
   );
 };

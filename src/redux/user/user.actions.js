@@ -28,6 +28,21 @@ export const resendConfirmEmail = () => ({
   type: UserActionTypes.RESEND_CONFIRM_EMAIL,
 });
 
+export const changePassword = (passwords) => ({
+  type: UserActionTypes.CHANGE_PASSWORD,
+  payload: passwords,
+});
+
+export const forgetPassword = (email) => ({
+  type: UserActionTypes.FORGET_PASSWORD,
+  payload: email,
+});
+
+export const resetPassword = (resetData) => ({
+  type: UserActionTypes.RESET_PASSWORD,
+  payload: resetData,
+});
+
 export const setToken = (token) => ({
   type: UserActionTypes.SET_TOKEN,
   payload: token,

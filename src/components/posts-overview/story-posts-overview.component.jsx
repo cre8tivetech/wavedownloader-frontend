@@ -11,10 +11,7 @@ import StoryCollectionPreview from '../post-preview/story-collection-preview.com
 import NoStory from '../../pages/Error/no-story.component';
 
 const StoryPostsOverview = ({ stories, errorMessage, credentials }) => {
-  // const downloadName = source.split('/');
-  // const link = { url: source, downloadName: downloadName[4] };
   const [error, setError] = useState();
-  console.log(stories);
   useEffect(() => {
     setError({ errorMessage: errorMessage });
   }, [errorMessage]);
