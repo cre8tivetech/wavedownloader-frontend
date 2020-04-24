@@ -292,7 +292,7 @@ const App = ({ checkUserSession, currentUser, token, location }) => {
         />
         <Route
           path="/signin"
-          render={() => (currentUser ? <Redirect to="/" /> : <SignIn />)}
+          render={() => (currentUser ? <Redirect to="/profile" /> : <SignIn />)}
         />
         <Route
           path="/signup"

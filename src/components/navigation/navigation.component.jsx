@@ -1,83 +1,83 @@
-import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { useHistory } from "react-router-dom";
-import { createStructuredSelector } from "reselect";
-import { selectCurrentUser } from "../../redux/user/user.selector";
-import { signOutStart } from "../../redux/user/user.actions";
-import "./navigation.styles.scss";
+import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import { createStructuredSelector } from 'reselect';
+import { selectCurrentUser } from '../../redux/user/user.selector';
+import { signOutStart } from '../../redux/user/user.actions';
+import './navigation.styles.scss';
 
 const Navigation = ({ user, signOutStart }) => {
-  const [mode, setMode] = useState(localStorage.getItem("mode"));
-  const [logout, setLogout] = useState("Logout");
-  const [click, setClick] = useState("close");
+  const [mode, setMode] = useState(localStorage.getItem('mode'));
+  const [logout, setLogout] = useState('Logout');
+  const [click, setClick] = useState('close');
   const history = useHistory();
   const checkMode = () => {
-    if (mode === "dark") {
-      const root = document.querySelector(":root");
-      const toggle = document.querySelector(".toggle");
-      toggle.classList.add("dark-mode");
-      root.style.setProperty("--color-bg", "#030805");
-      root.style.setProperty("--color-bg-2", "#050c07");
-      root.style.setProperty("--color-light", "#030805");
-      root.style.setProperty("--color-card", "#050e08");
-      root.style.setProperty("--color-text-1", "#a3a3a3");
-      root.style.setProperty("--color-text-2", "#cccccc");
-      root.style.setProperty("--color-btn-hover", "#0b1d12");
-      root.style.setProperty("--scrollbarBG", "#020503");
-      root.style.setProperty("--box-shadow", "rgba(255,255,255,0.35)");
+    if (mode === 'dark') {
+      const root = document.querySelector(':root');
+      const toggle = document.querySelector('.toggle');
+      toggle.classList.add('dark-mode');
+      root.style.setProperty('--color-bg', '#030805');
+      root.style.setProperty('--color-bg-2', '#050c07');
+      root.style.setProperty('--color-light', '#030805');
+      root.style.setProperty('--color-card', '#050e08');
+      root.style.setProperty('--color-text-1', '#a3a3a3');
+      root.style.setProperty('--color-text-2', '#cccccc');
+      root.style.setProperty('--color-btn-hover', '#0b1d12');
+      root.style.setProperty('--scrollbarBG', '#020503');
+      root.style.setProperty('--box-shadow', 'rgba(255,255,255,0.35)');
     }
   };
 
-  const navToggle = e => {
-    if (click === "close") {
+  const navToggle = (e) => {
+    if (click === 'close') {
       // setClick("open");
-    } else if (click === "open") {
-      setClick("close");
+    } else if (click === 'open') {
+      setClick('close');
     }
   };
 
   useEffect(() => checkMode(), []);
   const signOut = () => {
-    setLogout("Logging out...")
+    setLogout('Logging out...');
     signOutStart();
     setTimeout(() => {
-      history.push("/");
-      setLogout("Logout");
+      history.push('/');
+      setLogout('Logout');
     }, 3000);
   };
   const toggleMode = () => {
-    const root = document.querySelector(":root");
-    const toggle = document.querySelector(".toggle");
+    const root = document.querySelector(':root');
+    const toggle = document.querySelector('.toggle');
     // const bgColor = root.style.getPropertyValue('--bg-color')
-    if (mode === "dark") {
-      root.style.setProperty("--color-bg", "#fcfcfc");
-      root.style.setProperty("--color-bg-2", "#eeeeee");
-      root.style.setProperty("--color-light", "#ffffff");
-      root.style.setProperty("--color-card", "#f4f2f2");
-      root.style.setProperty("--color-text-1", "#777777");
-      root.style.setProperty("--color-text-2", "#242424");
-      root.style.setProperty("--color-btn-hover", "#0b1d12");
-      root.style.setProperty("--scrollbarBG", "#e4ffeb");
+    if (mode === 'dark') {
+      root.style.setProperty('--color-bg', '#fcfcfc');
+      root.style.setProperty('--color-bg-2', '#eeeeee');
+      root.style.setProperty('--color-light', '#ffffff');
+      root.style.setProperty('--color-card', '#f4f2f2');
+      root.style.setProperty('--color-text-1', '#777777');
+      root.style.setProperty('--color-text-2', '#242424');
+      root.style.setProperty('--color-btn-hover', '#0b1d12');
+      root.style.setProperty('--scrollbarBG', '#e4ffeb');
 
-      root.style.setProperty("--box-shadow", "rgba(0,0,0,0.35)");
-      localStorage.setItem("mode", "light");
-      setMode("light");
+      root.style.setProperty('--box-shadow', 'rgba(0,0,0,0.35)');
+      localStorage.setItem('mode', 'light');
+      setMode('light');
     } else {
-      root.style.setProperty("--color-bg", "#030805");
-      root.style.setProperty("--color-bg-2", "#050c07");
-      root.style.setProperty("--color-light", "#030805");
-      root.style.setProperty("--color-card", "#050e08");
-      root.style.setProperty("--color-text-1", "#a3a3a3");
-      root.style.setProperty("--color-text-2", "#cccccc");
-      root.style.setProperty("--color-btn-hover", "#0b1d12");
-      root.style.setProperty("--scrollbarBG", "#020503");
+      root.style.setProperty('--color-bg', '#030805');
+      root.style.setProperty('--color-bg-2', '#050c07');
+      root.style.setProperty('--color-light', '#030805');
+      root.style.setProperty('--color-card', '#050e08');
+      root.style.setProperty('--color-text-1', '#a3a3a3');
+      root.style.setProperty('--color-text-2', '#cccccc');
+      root.style.setProperty('--color-btn-hover', '#0b1d12');
+      root.style.setProperty('--scrollbarBG', '#020503');
 
-      root.style.setProperty("--box-shadow", "rgba(255,255,255,0.35)");
-      localStorage.setItem("mode", "dark");
-      setMode("dark");
+      root.style.setProperty('--box-shadow', 'rgba(255,255,255,0.35)');
+      localStorage.setItem('mode', 'dark');
+      setMode('dark');
     }
-    toggle.classList.toggle("dark-mode");
+    toggle.classList.toggle('dark-mode');
   };
   return (
     // <!-- NAV MENU -->
@@ -86,7 +86,7 @@ const Navigation = ({ user, signOutStart }) => {
       <label
         htmlFor="openSidebarMenu"
         className="navigation__sidebarIconToggle"
-        onClick={e => navToggle(e)}
+        onClick={(e) => navToggle(e)}
       >
         <div className="navigation__spinner navigation__diagonal navigation__part-1"></div>
         <div className="navigation__spinner navigation__horizontal"></div>
@@ -108,7 +108,7 @@ const Navigation = ({ user, signOutStart }) => {
               <Link className="login" to="/signin">
                 <i
                   className="fad fa-lock"
-                  style={{ color: "var(--color-primary)" }}
+                  style={{ color: 'var(--color-primary)' }}
                 ></i>
                 <p>Login</p>
               </Link>
@@ -116,34 +116,38 @@ const Navigation = ({ user, signOutStart }) => {
           )}
 
           <li>
-            <a
-              href="#"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Twitter
-            </a>
+            <Link className="links" to="/">
+              <i
+                className="fad fa-home"
+                style={{ color: 'var(--color-primary)' }}
+              ></i>
+              <p>Home</p>
+            </Link>
           </li>
           <li>
-            <a
-              href="#"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              YouTube
-            </a>
+            <Link className="links" to="/profile">
+              <i
+                className="fad fa-user"
+                style={{ color: 'var(--color-primary)' }}
+              ></i>
+              <p>Profile</p>
+            </Link>
           </li>
           <li>
-            <a
-              href="#"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Linkedin
-            </a>
+            <Link className="links" to="/pricing">
+              <i
+                className="fad fa-usd-circle"
+                style={{ color: 'var(--color-primary)' }}
+              ></i>
+              <p>Pricing</p>
+            </Link>
           </li>
           <li>
             <div className="toggle-wrapp">
+              <i
+                className="fad fa-palette"
+                style={{ color: 'var(--color-primary)' }}
+              ></i>
               <p>Dark Mode</p>
               <span className="toggle" onClick={toggleMode}></span>
             </div>
@@ -162,11 +166,11 @@ const Navigation = ({ user, signOutStart }) => {
   );
 };
 const mapStateToProps = createStructuredSelector({
-  user: selectCurrentUser
+  user: selectCurrentUser,
 });
 
-const mapDispatchToProps = dispatch => ({
-  signOutStart: () => dispatch(signOutStart())
+const mapDispatchToProps = (dispatch) => ({
+  signOutStart: () => dispatch(signOutStart()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Navigation);

@@ -33,8 +33,37 @@
       @include respond(phone) {
         margin: 0 0.5rem;
       }
-
       &--left {
+      .home{
+        display: flex;
+        flex-direction: row;
+        list-style: none;
+        color: var(--color-text-1);
+        text-transform: capitalize;
+        font-weight: bold;
+        font-size: 1.3rem;
+        padding: 1rem;
+        align-items: center;
+        // margin-bottom: ;
+        cursor: pointer;
+
+        @include respond(tabPort) {
+          font-size: 1.2rem;
+        }
+
+        @include respond(phone) {
+          font-size: 1rem;
+        }
+
+        i {
+          margin: 0.5rem 0.8rem 0.6rem 0rem;
+        }
+
+        &:hover {
+          color: var(--color-primary);
+        }
+      }
+      &-box {
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -106,6 +135,7 @@
           }
         }
       }
+    }
 
       &--right {
         display: flex;
