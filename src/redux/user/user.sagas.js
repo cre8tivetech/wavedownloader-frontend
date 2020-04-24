@@ -7,6 +7,8 @@ import {
   signInByTokenApi,
   resendConfirmEmailApi,
   changePasswordApi,
+  forgetPasswordApi,
+  resetPasswordApi,
 } from '../../Api/auth';
 import { paymentVerifyApi } from '../../Api/payment';
 import {
@@ -99,42 +101,108 @@ const tokenExpiration = () => {
 
 export function* isResendConfirmEmail() {
   const token = yield select(userToken);
-  const result = yield resendConfirmEmailApi(token).then(function (response) {
-    return response.data.data;
-  });
-  if (result) {
-    yield put(setMessage({ type: 'success', message: result.message }));
-    yield delay(6000);
+  try {
+    const result = yield resendConfirmEmailApi(token).then(function (response) {
+      return response.data.data;
+    });
+    if (result) {
+      yield put(setMessage({ type: 'success', message: result.message }));
+      yield delay(6000);
+      yield put(setMessage(null));
+    }
+  } catch (error) {
+    yield put(
+      setMessage({
+        type: 'error',
+        message: error.response
+          ? error.response.data.message || error.response.data.error
+          : 'Oops!!, Poor internet connection, Please check your connectivity, And try again',
+      })
+    );
+    yield delay(8000);
     yield put(setMessage(null));
   }
 }
 
 export function* isChangePassword({ payload: { old_password, new_password } }) {
-  console.log(old_password, '___', new_password);
   const token = yield select(userToken);
-  const result = yield changePasswordApi(
-    token,
-    old_password,
-    new_password
-  ).then(function (response) {
-    return response.data.data;
-  });
-  console.log(result);
-  if (result) {
-    yield put(setMessage({ type: 'success', message: result.message }));
-    yield delay(6000);
+  try {
+    const result = yield changePasswordApi(
+      token,
+      old_password,
+      new_password
+    ).then(function (response) {
+      return response.data.data;
+    });
+    if (result) {
+      yield put(setMessage({ type: 'success', message: result.message }));
+      yield delay(6000);
+      yield put(setMessage(null));
+    }
+  } catch (error) {
+    yield put(
+      setMessage({
+        type: 'error',
+        message: error.response
+          ? error.response.data.message || error.response.data.error
+          : 'Oops!!, Poor internet connection, Please check your connectivity, And try again',
+      })
+    );
+    yield delay(8000);
     yield put(setMessage(null));
   }
 }
 
-export function* isForgetPassword() {
-  const token = yield select(userToken);
-  const result = yield resendConfirmEmailApi(token).then(function (response) {
-    return response.data.data;
-  });
-  if (result) {
-    yield put(setMessage({ type: 'success', message: result.message }));
-    yield delay(6000);
+export function* isForgetPassword({ payload: email }) {
+  console.log(email);
+  try {
+    const result = yield forgetPasswordApi(email).then(function (response) {
+      return response.data.data;
+    });
+    console.log(result);
+    if (result) {
+      yield put(setMessage({ type: 'success', message: result.message }));
+      yield delay(8000);
+      yield put(setMessage(null));
+    }
+  } catch (error) {
+    yield put(
+      setMessage({
+        type: 'error',
+        message: error.response
+          ? error.response.data.message || error.response.data.error
+          : 'Oops!!, Poor internet connection, Please check your connectivity, And try again',
+      })
+    );
+    yield delay(8000);
+    yield put(setMessage(null));
+  }
+}
+
+export function* isResetPassword({ payload: { token, new_password } }) {
+  console.log(token, '__', new_password);
+  try {
+    const result = yield resetPasswordApi(token, new_password).then(function (
+      response
+    ) {
+      return response.data.data;
+    });
+    console.log(result);
+    if (result) {
+      yield put(setMessage({ type: 'success', message: result.message }));
+      yield delay(6000);
+      yield put(setMessage(null));
+    }
+  } catch (error) {
+    yield put(
+      setMessage({
+        type: 'error',
+        message: error.response
+          ? error.response.data.message || error.response.data.error
+          : 'Oops!!, Poor internet connection, Please check your connectivity, And try again',
+      })
+    );
+    yield delay(5000);
     yield put(setMessage(null));
   }
 }
@@ -225,6 +293,10 @@ export function* onForgetPassword() {
   yield takeLatest(UserActionTypes.FORGET_PASSWORD, isForgetPassword);
 }
 
+export function* onResetPassword() {
+  yield takeLatest(UserActionTypes.RESET_PASSWORD, isResetPassword);
+}
+
 export function* onCheckUserSession() {
   yield takeLatest(UserActionTypes.CHECK_USER_SESSION, isUserAuthenticated);
 }
@@ -252,6 +324,7 @@ export function* userSagas() {
     call(onResendConfirmEmail),
     call(onChangePassword),
     call(onForgetPassword),
+    call(onResetPassword),
     call(onCheckUserSession),
     call(onSignOutStart),
     call(onSignUpStart),

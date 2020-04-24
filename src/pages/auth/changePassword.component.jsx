@@ -65,7 +65,6 @@ const ChangePassword = ({
       old_password: '',
       new_password: '',
     });
-    console.log('WOrking');
     await changePassword(old_password, new_password);
     setTimeout(() => {
       loaderbtn.className = 'loader hide';

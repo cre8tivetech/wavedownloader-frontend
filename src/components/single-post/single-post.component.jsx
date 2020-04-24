@@ -1,17 +1,17 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { connect } from "react-redux";
-import LoadingBar from "react-top-loading-bar";
-import { useHistory } from "react-router-dom";
-import Accordion from "../../components/accordion/accordion.component";
-import { Link, withRouter } from "react-router-dom";
-import { fetchPostsAdd } from "../../redux/posts/posts.actions";
+import React, { useState, useEffect, useCallback } from 'react';
+import { connect } from 'react-redux';
+import LoadingBar from 'react-top-loading-bar';
+import { useHistory } from 'react-router-dom';
+import Accordion from '../../components/accordion/accordion.component';
+import { Link, withRouter } from 'react-router-dom';
+import { fetchPostsAdd } from '../../redux/posts/posts.actions';
 
 const SinglePost = ({ fetchPostsAdd }) => {
   const [loadBar, setLoadBar] = useState(0);
-  const [url, setUrl] = useState("");
+  const [url, setUrl] = useState('');
   const startLoader = useCallback(() => {
     setLoadBar(100);
-  }, [])
+  }, []);
   const onLoaderFinished = () => {
     setLoadBar(0);
   };
@@ -19,20 +19,16 @@ const SinglePost = ({ fetchPostsAdd }) => {
   useEffect(() => {
     startLoader();
   }, [startLoader]);
-  useCallback(
-    () => {
-      startLoader();
-    },
-    [startLoader],
-  )
-  
+  useCallback(() => {
+    startLoader();
+  }, [startLoader]);
 
-  const handleSubmit = event => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     fetchPostsAdd(url);
-    history.push("/posts");
+    history.push('/posts');
   };
-  const handleChange = event => {
+  const handleChange = (event) => {
     setUrl(event.target.value);
   };
   return (
@@ -44,7 +40,7 @@ const SinglePost = ({ fetchPostsAdd }) => {
         onLoaderFinished={() => onLoaderFinished}
       />
       <div className="options card">
-        <Link to="/single-post" className="btn options--active">
+        <Link to="/" className="btn options--active">
           <p>Single Post</p>
         </Link>
         <Link to="/post-by-username" className="btn">
@@ -80,7 +76,7 @@ const SinglePost = ({ fetchPostsAdd }) => {
               <div className="form__input">
                 <i
                   className="fad fa-link"
-                  style={{ color: "var(--color-primary)" }}
+                  style={{ color: 'var(--color-primary)' }}
                 ></i>
                 <input
                   type="text"
@@ -97,10 +93,7 @@ const SinglePost = ({ fetchPostsAdd }) => {
               </div>
             </div>
             <div className="form__group">
-              <button
-                type="submit"
-                className="btn btn--green"
-              >
+              <button type="submit" className="btn btn--green">
                 Download ➤
               </button>
             </div>
@@ -113,7 +106,7 @@ const SinglePost = ({ fetchPostsAdd }) => {
             <p>
               <i
                 className="fad fa-bells"
-                style={{ color: "var(--color-primary-light)" }}
+                style={{ color: 'var(--color-primary-light)' }}
               ></i>
               Updates
             </p>
@@ -124,7 +117,7 @@ const SinglePost = ({ fetchPostsAdd }) => {
                 <strong>
                   <i
                     className="fad fa-gifts"
-                    style={{ color: "var(--color-danger-1)" }}
+                    style={{ color: 'var(--color-danger-1)' }}
                   ></i>
                   Season Greetings 2019 Everyone!UPDATE (23 December 2019):
                 </strong>
@@ -140,7 +133,7 @@ const SinglePost = ({ fetchPostsAdd }) => {
                 <strong>
                   <i
                     className="fad fa-cog"
-                    style={{ color: "var(--color-dark)" }}
+                    style={{ color: 'var(--color-dark)' }}
                   ></i>
                   UPDATE (15 November 2019):
                 </strong>
@@ -155,7 +148,7 @@ const SinglePost = ({ fetchPostsAdd }) => {
                 <strong>
                   <i
                     className="fad fa-star"
-                    style={{ color: "var(--color-dark)" }}
+                    style={{ color: 'var(--color-dark)' }}
                   ></i>
                   UPDATE (12 October 2018):
                 </strong>
@@ -173,7 +166,7 @@ const SinglePost = ({ fetchPostsAdd }) => {
             <p>
               <i
                 className="fad fa-question-circle"
-                style={{ color: "var(--color-primary)" }}
+                style={{ color: 'var(--color-primary)' }}
               ></i>
               Frequently asked question
             </p>
@@ -215,7 +208,7 @@ const SinglePost = ({ fetchPostsAdd }) => {
     </div>
   );
 };
-const mapDispatchToProps = dispatch => ({
-  fetchPostsAdd: url => dispatch(fetchPostsAdd(url))
+const mapDispatchToProps = (dispatch) => ({
+  fetchPostsAdd: (url) => dispatch(fetchPostsAdd(url)),
 });
 export default withRouter(connect(null, mapDispatchToProps)(SinglePost));

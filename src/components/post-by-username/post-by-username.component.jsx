@@ -1,18 +1,17 @@
-import React, { useState, useEffect, useCallback } from "react";
-import Accordion from "../../components/accordion/accordion.component";
-import LoadingBar from "react-top-loading-bar";
-import { useHistory } from "react-router-dom";
-import { Link } from "react-router-dom";
-import { checkUserSession } from "../../redux/user/user.actions";
-import { fetchUserNamePostsAdd } from "../../redux/posts/posts.actions";
-import { connect } from "react-redux";
-
+import React, { useState, useEffect, useCallback } from 'react';
+import Accordion from '../../components/accordion/accordion.component';
+import LoadingBar from 'react-top-loading-bar';
+import { useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { checkUserSession } from '../../redux/user/user.actions';
+import { fetchUserNamePostsAdd } from '../../redux/posts/posts.actions';
+import { connect } from 'react-redux';
 
 const PostByUserName = ({ fetchUserNamePostsAdd, checkUserSession }) => {
   const [loadBar, setLoadBar] = useState(0);
   const [postForm, setPostForm] = useState({
-    userName: "",
-    numberOfPost: ""
+    userName: '',
+    numberOfPost: '',
   });
   const { userName, numberOfPost } = postForm;
 
@@ -28,12 +27,12 @@ const PostByUserName = ({ fetchUserNamePostsAdd, checkUserSession }) => {
     startLoader();
   }, [startLoader, checkUserSession]);
 
-  const handleSubmit = event => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     fetchUserNamePostsAdd(userName, numberOfPost);
-    history.push("/username-posts");
+    history.push('/username-posts');
   };
-  const handleChange = event => {
+  const handleChange = (event) => {
     const { name, value } = event.target;
 
     setPostForm({ ...postForm, [name]: value });
@@ -47,7 +46,7 @@ const PostByUserName = ({ fetchUserNamePostsAdd, checkUserSession }) => {
         onLoaderFinished={() => onLoaderFinished}
       />
       <div className="options card">
-        <Link to="/single-post" className="btn">
+        <Link to="/" className="btn">
           <p>Single Post</p>
         </Link>
         <Link to="/post-by-username" className="btn options--active">
@@ -73,7 +72,7 @@ const PostByUserName = ({ fetchUserNamePostsAdd, checkUserSession }) => {
         </p>
         <div className="download__text download__text--2">
           <p>
-            <span>NEW</span>{" "}
+            <span>NEW</span>{' '}
             <small>Files encrypted are changed for faster reuploading!</small>
           </p>
         </div>
@@ -84,7 +83,7 @@ const PostByUserName = ({ fetchUserNamePostsAdd, checkUserSession }) => {
               <div className="form__input">
                 <i
                   className="fad fa-user"
-                  style={{ color: "var(--color-primary)" }}
+                  style={{ color: 'var(--color-primary)' }}
                 ></i>
                 <input
                   type="text"
@@ -137,7 +136,7 @@ const PostByUserName = ({ fetchUserNamePostsAdd, checkUserSession }) => {
               <div className="form__input">
                 <i
                   className="fad fa-sort-numeric-down"
-                  style={{ color: "var(--color-primary)" }}
+                  style={{ color: 'var(--color-primary)' }}
                 ></i>
                 <input
                   type="number"
@@ -168,7 +167,7 @@ const PostByUserName = ({ fetchUserNamePostsAdd, checkUserSession }) => {
             <p>
               <i
                 className="fad fa-bells"
-                style={{ color: "var(--color-primary-light)" }}
+                style={{ color: 'var(--color-primary-light)' }}
               ></i>
               Updates
             </p>
@@ -179,7 +178,7 @@ const PostByUserName = ({ fetchUserNamePostsAdd, checkUserSession }) => {
                 <strong>
                   <i
                     className="fad fa-gifts"
-                    style={{ color: "var(--color-danger-1)" }}
+                    style={{ color: 'var(--color-danger-1)' }}
                   ></i>
                   Season Greetings 2019 Everyone!UPDATE (23 December 2019):
                 </strong>
@@ -195,7 +194,7 @@ const PostByUserName = ({ fetchUserNamePostsAdd, checkUserSession }) => {
                 <strong>
                   <i
                     className="fad fa-cog"
-                    style={{ color: "var(--color-dark)" }}
+                    style={{ color: 'var(--color-dark)' }}
                   ></i>
                   UPDATE (15 November 2019):
                 </strong>
@@ -210,7 +209,7 @@ const PostByUserName = ({ fetchUserNamePostsAdd, checkUserSession }) => {
                 <strong>
                   <i
                     className="fad fa-star"
-                    style={{ color: "var(--color-dark)" }}
+                    style={{ color: 'var(--color-dark)' }}
                   ></i>
                   UPDATE (12 October 2018):
                 </strong>
@@ -228,7 +227,7 @@ const PostByUserName = ({ fetchUserNamePostsAdd, checkUserSession }) => {
             <p>
               <i
                 className="fad fa-question-circle"
-                style={{ color: "var(--color-primary)" }}
+                style={{ color: 'var(--color-primary)' }}
               ></i>
               Frequently asked question
             </p>
@@ -270,7 +269,7 @@ const PostByUserName = ({ fetchUserNamePostsAdd, checkUserSession }) => {
     </div>
   );
 };
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   fetchUserNamePostsAdd: (userName, numberOfPost) =>
     dispatch(fetchUserNamePostsAdd({ userName, numberOfPost })),
   checkUserSession: () => dispatch(checkUserSession()),

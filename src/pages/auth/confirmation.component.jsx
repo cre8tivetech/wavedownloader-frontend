@@ -18,7 +18,25 @@ const Confirmation = ({ currentUser, signInByTokenStart }) => {
   const getToken = result[1].split('&');
   const token = getToken[0];
 
+  const mode = localStorage.getItem('mode');
+
+  const checkMode = () => {
+    if (mode === 'dark') {
+      const root = document.querySelector(':root');
+      root.style.setProperty('--color-bg', '#030805');
+      root.style.setProperty('--color-bg-2', '#050c07');
+      root.style.setProperty('--color-light', '#030805');
+      root.style.setProperty('--color-card', '#050e08');
+      root.style.setProperty('--color-text-1', '#a3a3a3');
+      root.style.setProperty('--color-text-2', '#cccccc');
+      root.style.setProperty('--color-btn-hover', '#0b1d12');
+      root.style.setProperty('--scrollbarBG', '#020503');
+      root.style.setProperty('--box-shadow', 'rgba(255,255,255,0.35)');
+    }
+  };
+
   useEffect(() => {
+    checkMode();
     signInByTokenStart(token);
     currentUser &&
       setTimeout(() => {

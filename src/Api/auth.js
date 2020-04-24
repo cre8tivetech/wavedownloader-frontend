@@ -57,3 +57,20 @@ export const changePasswordApi = async (token, old_password, new_password) => {
   });
   return collectionsMap;
 };
+
+export const forgetPasswordApi = async (email) => {
+  const url = process.env.REACT_APP_API + process.env.REACT_APP_FORGET_PASSWORD;
+  const data = email;
+  const collectionsMap = await Axios.post(url, data);
+  return collectionsMap;
+};
+
+export const resetPasswordApi = async (token, password) => {
+  const collectionsMap = await Axios.patch(
+    process.env.REACT_APP_API + process.env.REACT_APP_RESET_PASSWORD + token,
+    {
+      password,
+    }
+  );
+  return collectionsMap;
+};

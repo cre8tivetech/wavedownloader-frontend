@@ -1,21 +1,18 @@
-import React, { useState, useEffect, useCallback } from "react";
-import Accordion from "../accordion/accordion.component";
-import LoadingBar from "react-top-loading-bar";
-import { useHistory, withRouter } from "react-router-dom";
-import { Link } from "react-router-dom";
-import { fetchHighlightPostsAdd } from "../../redux/posts/posts.actions";
-import { connect } from "react-redux";
-import { checkUserSession } from "../../redux/user/user.actions";
+import React, { useState, useEffect, useCallback } from 'react';
+import Accordion from '../accordion/accordion.component';
+import LoadingBar from 'react-top-loading-bar';
+import { useHistory, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { fetchHighlightPostsAdd } from '../../redux/posts/posts.actions';
+import { connect } from 'react-redux';
+import { checkUserSession } from '../../redux/user/user.actions';
 
-const Highlight = ({
-    fetchHighlightPostsAdd,
-    checkUserSession
-  }) => {
+const Highlight = ({ fetchHighlightPostsAdd, checkUserSession }) => {
   const [loadBar, setLoadBar] = useState(0);
-  const [username, setUsername] = useState("");
+  const [username, setUsername] = useState('');
   const startLoader = useCallback(() => {
     setLoadBar(100);
-  },[]);
+  }, []);
   const onLoaderFinished = () => {
     setLoadBar(0);
   };
@@ -25,12 +22,12 @@ const Highlight = ({
     startLoader();
   }, [startLoader, checkUserSession]);
 
-  const handleSubmit = event => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     fetchHighlightPostsAdd(username);
-    history.push("/highlight-posts");
+    history.push('/highlight-posts');
   };
-  const handleChange = event => {
+  const handleChange = (event) => {
     setUsername(event.target.value);
   };
   return (
@@ -42,7 +39,7 @@ const Highlight = ({
         onLoaderFinished={() => onLoaderFinished}
       />
       <div className="options card">
-        <Link to="/single-post" className="btn">
+        <Link to="/" className="btn">
           <p>Single Post</p>
         </Link>
         <Link to="/post-by-username" className="btn">
@@ -68,7 +65,7 @@ const Highlight = ({
         </p>
         <div className="download__text download__text--2">
           <p>
-            <span>NEW</span>{" "}
+            <span>NEW</span>{' '}
             <small>Files encrypted are changed for faster reuploading!</small>
           </p>
         </div>
@@ -79,7 +76,7 @@ const Highlight = ({
               <div className="form__input">
                 <i
                   className="fad fa-user"
-                  style={{ color: "var(--color-primary)" }}
+                  style={{ color: 'var(--color-primary)' }}
                 ></i>
                 <input
                   type="text"
@@ -109,7 +106,7 @@ const Highlight = ({
             <p>
               <i
                 className="fad fa-bells"
-                style={{ color: "var(--color-primary-light)" }}
+                style={{ color: 'var(--color-primary-light)' }}
               ></i>
               Updates
             </p>
@@ -120,7 +117,7 @@ const Highlight = ({
                 <strong>
                   <i
                     className="fad fa-gifts"
-                    style={{ color: "var(--color-danger-1)" }}
+                    style={{ color: 'var(--color-danger-1)' }}
                   ></i>
                   Season Greetings 2019 Everyone!UPDATE (23 December 2019):
                 </strong>
@@ -136,7 +133,7 @@ const Highlight = ({
                 <strong>
                   <i
                     className="fad fa-cog"
-                    style={{ color: "var(--color-dark)" }}
+                    style={{ color: 'var(--color-dark)' }}
                   ></i>
                   UPDATE (15 November 2019):
                 </strong>
@@ -151,7 +148,7 @@ const Highlight = ({
                 <strong>
                   <i
                     className="fad fa-star"
-                    style={{ color: "var(--color-dark)" }}
+                    style={{ color: 'var(--color-dark)' }}
                   ></i>
                   UPDATE (12 October 2018):
                 </strong>
@@ -169,7 +166,7 @@ const Highlight = ({
             <p>
               <i
                 className="fad fa-question-circle"
-                style={{ color: "var(--color-primary)" }}
+                style={{ color: 'var(--color-primary)' }}
               ></i>
               Frequently asked question
             </p>
@@ -211,8 +208,9 @@ const Highlight = ({
     </div>
   );
 };
-const mapDispatchToProps = dispatch => ({
-  fetchHighlightPostsAdd: username => dispatch(fetchHighlightPostsAdd(username)),
+const mapDispatchToProps = (dispatch) => ({
+  fetchHighlightPostsAdd: (username) =>
+    dispatch(fetchHighlightPostsAdd(username)),
   checkUserSession: () => dispatch(checkUserSession()),
 });
 export default withRouter(connect(null, mapDispatchToProps)(Highlight));

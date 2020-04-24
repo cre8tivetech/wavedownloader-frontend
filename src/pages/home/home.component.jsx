@@ -1,20 +1,37 @@
-import React, { useState, useEffect, useCallback } from "react";
-import LoadingBar from "react-top-loading-bar";
-import Accordion from "../../components/accordion/accordion.component";
-import "./home.styles.scss";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect, useCallback } from 'react';
+import { connect } from 'react-redux';
+import LoadingBar from 'react-top-loading-bar';
+import { useHistory } from 'react-router-dom';
+import Accordion from '../../components/accordion/accordion.component';
+import { Link, withRouter } from 'react-router-dom';
+import { fetchPostsAdd } from '../../redux/posts/posts.actions';
+import './home.styles.scss';
 
-const Home = () => {
+const Home = ({ fetchPostsAdd }) => {
   const [loadBar, setLoadBar] = useState(0);
+  const [url, setUrl] = useState('');
   const startLoader = useCallback(() => {
     setLoadBar(100);
   }, []);
   const onLoaderFinished = () => {
     setLoadBar(0);
   };
+  const history = useHistory();
   useEffect(() => {
     startLoader();
-  });
+  }, [startLoader]);
+  useCallback(() => {
+    startLoader();
+  }, [startLoader]);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    fetchPostsAdd(url);
+    history.push('/posts');
+  };
+  const handleChange = (event) => {
+    setUrl(event.target.value);
+  };
   return (
     <div className="home-section">
       <LoadingBar
@@ -24,9 +41,6 @@ const Home = () => {
         onLoaderFinished={() => onLoaderFinished}
       />
       <div className="options card">
-        <Link to="/single-post" className="btn">
-          <p>Single Post</p>
-        </Link>
         <Link to="/post-by-username" className="btn">
           <span>Pro</span>
           <p>Posts By Username</p>
@@ -54,14 +68,43 @@ const Home = () => {
             video!
           </p>
         </div>
+        <div className="download__form">
+          <form onSubmit={handleSubmit} className="form">
+            <div className="form__group">
+              <div className="form__input">
+                <i
+                  className="fad fa-link"
+                  style={{ color: 'var(--color-primary)' }}
+                ></i>
+                <input
+                  type="text"
+                  className="form__input--box"
+                  placeholder="Enter Url"
+                  value={url}
+                  onChange={handleChange}
+                  id="url"
+                  required
+                />
+                <label htmlFor="url" className="form__input--label">
+                  URL
+                </label>
+              </div>
+            </div>
+            <div className="form__group">
+              <button type="submit" className="btn btn--green">
+                Download ➤
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
-      <div className="update-faq">
+      <div className="update-faq card">
         <div className="update">
           <div className="update__title">
             <p>
               <i
                 className="fad fa-bells"
-                style={{ color: "var(--color-primary-light)" }}
+                style={{ color: 'var(--color-primary-light)' }}
               ></i>
               Updates
             </p>
@@ -72,7 +115,7 @@ const Home = () => {
                 <strong>
                   <i
                     className="fad fa-gifts"
-                    style={{ color: "var(--color-danger-1)" }}
+                    style={{ color: 'var(--color-danger-1)' }}
                   ></i>
                   Season Greetings 2019 Everyone!UPDATE (23 December 2019):
                 </strong>
@@ -88,7 +131,7 @@ const Home = () => {
                 <strong>
                   <i
                     className="fad fa-cog"
-                    style={{ color: "var(--color-dark)" }}
+                    style={{ color: 'var(--color-dark)' }}
                   ></i>
                   UPDATE (15 November 2019):
                 </strong>
@@ -103,7 +146,7 @@ const Home = () => {
                 <strong>
                   <i
                     className="fad fa-star"
-                    style={{ color: "var(--color-dark)" }}
+                    style={{ color: 'var(--color-dark)' }}
                   ></i>
                   UPDATE (12 October 2018):
                 </strong>
@@ -121,7 +164,7 @@ const Home = () => {
             <p>
               <i
                 className="fad fa-question-circle"
-                style={{ color: "var(--color-primary)" }}
+                style={{ color: 'var(--color-primary)' }}
               ></i>
               Frequently asked question
             </p>
@@ -163,4 +206,7 @@ const Home = () => {
     </div>
   );
 };
-export default Home;
+const mapDispatchToProps = (dispatch) => ({
+  fetchPostsAdd: (url) => dispatch(fetchPostsAdd(url)),
+});
+export default withRouter(connect(null, mapDispatchToProps)(Home));

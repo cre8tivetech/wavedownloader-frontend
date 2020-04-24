@@ -14,7 +14,6 @@ import './themes/update-faq.scss';
 import { createStructuredSelector } from 'reselect';
 import Header from './components/header/header.component';
 import Home from './pages/home/home.component';
-import SinglePost from './components/single-post/single-post.component';
 import PostByUsername from './components/post-by-username/post-by-username.component';
 import PostByHashtag from './components/post-by-hashtag/post-by-hashtag.component';
 import Highlight from './components/highlight/highlight.component';
@@ -45,21 +44,23 @@ import Message from './components/message/message.component';
 import Error404 from './pages/Error/error404.component';
 import Alert from './components/message/alert.component';
 import Confirmation from './pages/auth/confirmation.component';
+import ResetPassword from './pages/auth/resetPassword.component';
 
 const App = ({ checkUserSession, currentUser, token, location }) => {
   useEffect(() => {
     checkUserSession();
   }, [checkUserSession, currentUser, token]);
 
+  const headerExclusionArray = ['/confirmation/', '/reset-password/'];
   return (
     <div className="App">
-      {location.pathname !== '/confirmation/' && <Header />}
+      {/* {location.pathname !== '/confirmation/' && <Header />} */}
+      {headerExclusionArray.indexOf(location.pathname) < 0 && <Header />}
       <Alert />
       <Message />
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/posts" component={Posts} />
-        <Route exact path="/single-post" component={SinglePost} />
         <Route
           exact
           path="/post-by-username"
@@ -315,6 +316,7 @@ const App = ({ checkUserSession, currentUser, token, location }) => {
         />
         <Route exact path="/spinner" component={PostsSpinner} />
         <Route exact path="/confirmation/" component={Confirmation} />
+        <Route exact path="/reset-password/" component={ResetPassword} />
         {/* add 404 page */}
         <Route path="*" component={Error404} />
         {/* <Footer /> */}

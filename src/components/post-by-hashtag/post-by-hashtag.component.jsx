@@ -1,20 +1,17 @@
-import React, { useState, useEffect, useCallback } from "react";
-import Accordion from "../accordion/accordion.component";
-import LoadingBar from "react-top-loading-bar";
-import { useHistory } from "react-router-dom";
-import { fetchHashTagPostsAdd } from "../../redux/posts/posts.actions";
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import { checkUserSession } from "../../redux/user/user.actions";
+import React, { useState, useEffect, useCallback } from 'react';
+import Accordion from '../accordion/accordion.component';
+import LoadingBar from 'react-top-loading-bar';
+import { useHistory } from 'react-router-dom';
+import { fetchHashTagPostsAdd } from '../../redux/posts/posts.actions';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { checkUserSession } from '../../redux/user/user.actions';
 
-const PostByHashtag = ({
-    fetchHashTagPostsAdd,
-    checkUserSession
-  }) => {
+const PostByHashtag = ({ fetchHashTagPostsAdd, checkUserSession }) => {
   const [loadBar, setLoadBar] = useState(0);
   const [hashTagForm, setHashTagForm] = useState({
-    hashTag: "",
-    postType: ""
+    hashTag: '',
+    postType: '',
   });
   const { hashTag, postType } = hashTagForm;
   const startLoader = useCallback(() => {
@@ -28,12 +25,12 @@ const PostByHashtag = ({
     checkUserSession();
     startLoader();
   }, [startLoader, checkUserSession]);
-  const handleSubmit = event => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     fetchHashTagPostsAdd(hashTag, postType);
-    history.push("/hashtag-posts");
+    history.push('/hashtag-posts');
   };
-  const handleChange = event => {
+  const handleChange = (event) => {
     const { name, value } = event.target;
 
     setHashTagForm({ ...hashTagForm, [name]: value });
@@ -48,7 +45,7 @@ const PostByHashtag = ({
         onLoaderFinished={() => onLoaderFinished}
       />
       <div className="options card">
-        <Link to="/single-post" className="btn">
+        <Link to="/" className="btn">
           <p>Single Post</p>
         </Link>
         <Link to="/post-by-username" className="btn">
@@ -74,7 +71,7 @@ const PostByHashtag = ({
         </p>
         <div className="download__text download__text--2">
           <p>
-            <span>NEW</span>{" "}
+            <span>NEW</span>{' '}
             <small>Files encrypted are changed for faster reuploading!</small>
           </p>
         </div>
@@ -85,7 +82,7 @@ const PostByHashtag = ({
               <div className="form__input">
                 <i
                   className="fad fa-hashtag"
-                  style={{ color: "var(--color-primary)" }}
+                  style={{ color: 'var(--color-primary)' }}
                 ></i>
                 <input
                   type="text"
@@ -106,7 +103,7 @@ const PostByHashtag = ({
               <div className="form__input">
                 <i
                   className="fad fa-images"
-                  style={{ color: "var(--color-primary)" }}
+                  style={{ color: 'var(--color-primary)' }}
                 ></i>
                 <select
                   className="form__input--box"
@@ -138,7 +135,7 @@ const PostByHashtag = ({
             <p>
               <i
                 className="fad fa-bells"
-                style={{ color: "var(--color-primary-light)" }}
+                style={{ color: 'var(--color-primary-light)' }}
               ></i>
               Updates
             </p>
@@ -149,7 +146,7 @@ const PostByHashtag = ({
                 <strong>
                   <i
                     className="fad fa-gifts"
-                    style={{ color: "var(--color-danger-1)" }}
+                    style={{ color: 'var(--color-danger-1)' }}
                   ></i>
                   Season Greetings 2019 Everyone!UPDATE (23 December 2019):
                 </strong>
@@ -165,7 +162,7 @@ const PostByHashtag = ({
                 <strong>
                   <i
                     className="fad fa-cog"
-                    style={{ color: "var(--color-dark)" }}
+                    style={{ color: 'var(--color-dark)' }}
                   ></i>
                   UPDATE (15 November 2019):
                 </strong>
@@ -180,7 +177,7 @@ const PostByHashtag = ({
                 <strong>
                   <i
                     className="fad fa-star"
-                    style={{ color: "var(--color-dark)" }}
+                    style={{ color: 'var(--color-dark)' }}
                   ></i>
                   UPDATE (12 October 2018):
                 </strong>
@@ -198,7 +195,7 @@ const PostByHashtag = ({
             <p>
               <i
                 className="fad fa-question-circle"
-                style={{ color: "var(--color-primary)" }}
+                style={{ color: 'var(--color-primary)' }}
               ></i>
               Frequently asked question
             </p>
@@ -240,7 +237,7 @@ const PostByHashtag = ({
     </div>
   );
 };
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   fetchHashTagPostsAdd: (hashTag, postType) =>
     dispatch(fetchHashTagPostsAdd({ hashTag, postType })),
   checkUserSession: () => dispatch(checkUserSession()),

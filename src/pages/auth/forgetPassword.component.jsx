@@ -3,11 +3,11 @@ import LoadingBar from 'react-top-loading-bar';
 import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
-import { signInStart } from '../../redux/user/user.actions';
+import { forgetPassword } from '../../redux/user/user.actions';
 import { connect } from 'react-redux';
 import './forgetPassword.styles.scss';
 import { selectError } from '../../redux/user/user.selector';
-const ForgotPassword = ({ signInStart, error }) => {
+const ForgotPassword = ({ forgetPassword, error }) => {
   const [loadBar, setLoadBar] = useState(0);
   const [errorMessage, setErrorMessage] = useState('');
   const [userCredentials, setCredentials] = useState({
@@ -39,11 +39,11 @@ const ForgotPassword = ({ signInStart, error }) => {
     setCredentials({
       email: '',
     });
-    await signInStart(email);
+    await forgetPassword(email);
     setTimeout(() => {
       loaderbtn.className = 'loader hide';
       downloadbtn.className = 'show';
-    }, 15000);
+    }, 13000);
   };
 
   const handleChange = (event) => {
@@ -104,7 +104,7 @@ const mapStateToProps = createStructuredSelector({
   error: selectError,
 });
 const mapDispatchToProps = (dispatch) => ({
-  signInStart: (email, password) => dispatch(signInStart({ email, password })),
+  forgetPassword: (email) => dispatch(forgetPassword({ email })),
 });
 
 export default withRouter(
