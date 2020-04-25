@@ -24,6 +24,7 @@ import {
   signUpFailure,
   signUpSuccess,
 } from './user.actions';
+import { getDownloadsApi, getSubscriptionApi } from '../../Api/api';
 
 // const userActive = state => state.user.currentUser;
 const userToken = (state) => state.user.token.key;
@@ -52,16 +53,28 @@ export function* signIn({ payload: { email, password } }) {
       key: result.token,
       expire: tokenExpiration(),
     };
-    yield put(setToken(token));
-    yield put(setSubscription(result.subscription));
-    yield put(setDownloads(result.downloads));
-    yield getSnapshotFromUserAuth(result.user);
+    if (result) {
+      const download = yield getDownloadsApi(token.key).then(function (
+        response
+      ) {
+        return response.data.data;
+      });
+      const subscription = yield getSubscriptionApi(token.key).then(function (
+        response
+      ) {
+        return response.data.data;
+      });
+      yield put(setToken(token));
+      yield put(setSubscription(subscription.subscription));
+      yield put(setDownloads(download.downloads));
+      yield getSnapshotFromUserAuth(result.user);
+    }
   } catch (error) {
     yield put(
       signInFailure(
         error.response
           ? error.response.data.message || error.response.data.error
-          : 'Oops!!, Poor internet connection, Please check your connectivity, And try again'
+          : 'Sign in failed, Please check your connectivity, And try again'
       )
     );
   }
@@ -76,10 +89,22 @@ export function* signByToken({ payload: token }) {
       key: result.token,
       expire: tokenExpiration(),
     };
-    yield put(setToken(tokens));
-    yield put(setSubscription(result.subscription));
-    yield put(setDownloads(result.downloads));
-    yield getSnapshotFromUserAuth(result.user);
+    if (result) {
+      const download = yield getDownloadsApi(token.key).then(function (
+        response
+      ) {
+        return response.data.data;
+      });
+      const subscription = yield getSubscriptionApi(token.key).then(function (
+        response
+      ) {
+        return response.data.data;
+      });
+      yield put(setToken(tokens));
+      yield put(setSubscription(subscription.subscription));
+      yield put(setDownloads(download.downloads));
+      yield getSnapshotFromUserAuth(result.user);
+    }
   } catch (error) {
     yield put(
       signInFailure(

@@ -1,19 +1,21 @@
-import React, { useState, useEffect } from "react";
-import LoadingBar from "react-top-loading-bar";
-import Axios from "axios";
-import { withRouter } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import LoadingBar from 'react-top-loading-bar';
+import Axios from 'axios';
+import { withRouter } from 'react-router-dom';
+import { saveDownload } from '../../redux/posts/posts.actions';
 
-const PostPreview = ({ __typename, owner, post, history }) => {
+const PostPreview = ({ __typename, owner, post, history, saveDownload }) => {
   // const { url, setUrl } = useState();
   const [view, setView] = useState();
   const [loadBar, setLoadBar] = useState();
   useEffect(() => {
     // console.log(history.location);
     setLoadBar(100);
-     
+
     // setUrl(history.location.data.url);
     if (post.is_video) {
-      setView("post-card__detail--more-views show");
+      setView('post-card__detail--more-views show');
       // setCollectionType(
       //   <i
       //     className="fad fa-play play"
@@ -21,11 +23,11 @@ const PostPreview = ({ __typename, owner, post, history }) => {
       //   ></i>
       // );
     } else {
-      setView("post-card__detail--more-views hide");
+      setView('post-card__detail--more-views hide');
       // setCollectionType('');
     }
     if (!post.text) {
-      post.text = "No caption text for this post";
+      post.text = 'No caption text for this post';
     }
     // return () => {
     //   console.log("will unmount");
@@ -34,34 +36,34 @@ const PostPreview = ({ __typename, owner, post, history }) => {
 
   async function downloadFile(url, e, mediatype) {
     e.preventDefault();
+    const downloadData = { owner, post, __typename };
     // console.log(e.currentTarget.querySelector('div').className);
-    const loaderbtn = e.currentTarget.querySelector("div");
+    const loaderbtn = e.currentTarget.querySelector('div');
     const downloadName = makeDownloadName(10);
     const downloadbtn = e.target;
-    loaderbtn.className = "loader show";
-    downloadbtn.className = "hide";
-     
-    const method = "GET";
+    loaderbtn.className = 'loader show';
+    downloadbtn.className = 'hide';
+
+    const method = 'GET';
     const min = 1;
     const max = 100;
-    const rand = min + Math.random() * (max - min);
-     
-     
+    // const rand = min + Math.random() * (max - min);
+
     await Axios.request({
       url,
       method,
-      responseType: "blob" //important
+      responseType: 'blob', //important
     })
       .then(({ data }) => {
         const downloadUrl = window.URL.createObjectURL(new Blob([data]));
 
-        const link = document.createElement("a");
+        const link = document.createElement('a');
 
         link.href = downloadUrl;
 
         link.setAttribute(
-          "download",
-          "wavedownloader-" + downloadName + mediatype
+          'download',
+          'wavedownloader-' + downloadName + mediatype
         ); //any other extension
 
         document.body.appendChild(link);
@@ -73,16 +75,16 @@ const PostPreview = ({ __typename, owner, post, history }) => {
         }
       })
       .then(() => {
-         
-        loaderbtn.className = "loader hide";
-        downloadbtn.className = "show";
+        loaderbtn.className = 'loader hide';
+        downloadbtn.className = 'show';
+        saveDownload(downloadData);
       });
   }
 
   function makeDownloadName(length) {
-    var result = "";
+    var result = '';
     var characters =
-      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789wavedownloaderJOshmatJjenUche007AdaStepheNNwakwuoInstagram";
+      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789wavedownloaderJOshmatJjenUche007AdaStepheNNwakwuoInstagram';
     var charactersLength = characters.length;
     for (var i = 0; i < length; i++) {
       result += characters.charAt(Math.floor(Math.random() * charactersLength));
@@ -112,7 +114,7 @@ const PostPreview = ({ __typename, owner, post, history }) => {
               <p>
                 <i
                   className="fad fa-calendar-alt"
-                  style={{ color: "var(--color-grey-dark-1)" }}
+                  style={{ color: 'var(--color-grey-dark-1)' }}
                 ></i>
                 <small>{post.posted_on.date}</small>
               </p>
@@ -121,7 +123,7 @@ const PostPreview = ({ __typename, owner, post, history }) => {
           <div className="post-card__detail--info">
             <i
               className="fad fa-pen-alt"
-              style={{ color: "var(--color-primary-light)" }}
+              style={{ color: 'var(--color-primary-light)' }}
             ></i>
             <p>{post.text}</p>
           </div>
@@ -129,21 +131,21 @@ const PostPreview = ({ __typename, owner, post, history }) => {
             <div className="post-card__detail--more-like">
               <i
                 className="fad fa-heart"
-                style={{ color: "var(--color-danger-1)" }}
+                style={{ color: 'var(--color-danger-1)' }}
               ></i>
               <p>{post.like_count}</p>
             </div>
             <div className="post-card__detail--more-comment">
               <i
                 className="fad fa-comment"
-                style={{ color: "var(--color-secondary)" }}
+                style={{ color: 'var(--color-secondary)' }}
               ></i>
               <p>{post.comment_count}</p>
             </div>
             <div className={view}>
               <i
                 className="fad fa-eye"
-                style={{ color: "var(--color-tertiary)" }}
+                style={{ color: 'var(--color-tertiary)' }}
               ></i>
               <p>{post.video_view_count}</p>
             </div>
@@ -163,15 +165,15 @@ const PostPreview = ({ __typename, owner, post, history }) => {
                   className="post-card__collections--card-media_box"
                   style={{
                     backgroundImage: `url(${post.display_url})`,
-                    backgroundPosition: "center",
-                    backgroundSize: "cover",
-                    backgroundRepeat: "no-repeat"
+                    backgroundPosition: 'center',
+                    backgroundSize: 'cover',
+                    backgroundRepeat: 'no-repeat',
                   }}
                 ></div>
               )}
               {post.is_video ? (
                 <a
-                  onClick={e => downloadFile(post.video_url, e, ".mp4")}
+                  onClick={(e) => downloadFile(post.video_url, e, '.mp4')}
                   target="__blank"
                   className="post-card__collections--card-media_download-btn"
                   data-method="get"
@@ -183,7 +185,7 @@ const PostPreview = ({ __typename, owner, post, history }) => {
                 </a>
               ) : (
                 <a
-                  onClick={e => downloadFile(post.display_url, e, ".jpg")}
+                  onClick={(e) => downloadFile(post.display_url, e, '.jpg')}
                   target="__blank"
                   className="post-card__collections--card-media_download-btn"
                   data-method="get"
@@ -202,4 +204,8 @@ const PostPreview = ({ __typename, owner, post, history }) => {
   );
 };
 
-export default withRouter(PostPreview);
+const mapDispatchToProps = (dispatch) => ({
+  saveDownload: (downloadData) => dispatch(saveDownload(downloadData)),
+});
+
+export default withRouter(connect(null, mapDispatchToProps)(PostPreview));

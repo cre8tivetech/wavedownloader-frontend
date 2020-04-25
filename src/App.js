@@ -45,6 +45,7 @@ import Error404 from './pages/Error/error404.component';
 import Alert from './components/message/alert.component';
 import Confirmation from './pages/auth/confirmation.component';
 import ResetPassword from './pages/auth/resetPassword.component';
+import DownloadHistory from './pages/downloads/downloadHistory.component';
 
 const App = ({ checkUserSession, currentUser, token, location }) => {
   useEffect(() => {
@@ -280,7 +281,14 @@ const App = ({ checkUserSession, currentUser, token, location }) => {
         <Route
           path="/profile"
           render={() =>
-            !currentUser ? <Home /> && <Redirect to="/" /> : <Profile />
+            !currentUser ? <SignIn /> && <Redirect to="/signin" /> : <Profile />
+          }
+        />
+        <Route
+          exact
+          path="/download-history"
+          render={() =>
+            !currentUser ? <Redirect to="/signin" /> : <DownloadHistory />
           }
         />
         <Route

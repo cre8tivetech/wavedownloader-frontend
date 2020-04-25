@@ -1,11 +1,19 @@
-import React, { useState, useEffect } from "react";
-import LoadingBar from "react-top-loading-bar";
-import "../../pages/posts/posts.styles.scss";
-import "./post-collection-preview.styles.scss";
-import Axios from "axios";
-import { withRouter } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import LoadingBar from 'react-top-loading-bar';
+import '../../pages/posts/posts.styles.scss';
+import './post-collection-preview.styles.scss';
+import Axios from 'axios';
+import { withRouter } from 'react-router-dom';
+import { saveDownload } from '../../redux/posts/posts.actions';
+import { setMessage } from '../../redux/user/user.actions';
 
-const PostHighlightCollectionPreview = ({ owner, post }) => {
+const PostHighlightCollectionPreview = ({
+  owner,
+  post,
+  saveDownload,
+  setMessage,
+}) => {
   const {
     profile_pic_url,
     username,
@@ -13,7 +21,7 @@ const PostHighlightCollectionPreview = ({ owner, post }) => {
     biography,
     followers,
     following,
-    is_verified
+    is_verified,
   } = owner;
   const [loadBar, setLoadBar] = useState();
 
@@ -24,33 +32,44 @@ const PostHighlightCollectionPreview = ({ owner, post }) => {
     // };
   }, [setLoadBar]);
 
-  async function downloadFile(url, e, mediatype) {
+  async function downloadFile(post, url, e, mediatype) {
+    console.log(post);
+    if (!post || !url || !e || !mediatype) {
+      setMessage({ type: 'error', message: 'Post already deleted by owner' });
+      return setTimeout(() => {
+        setMessage(null);
+      }, 5000);
+    }
     e.preventDefault();
     // console.log(e.currentTarget.querySelector('div').className);
-    const loaderbtn = e.currentTarget.querySelector("div");
+    let __typename;
+    if (post.is_video) __typename = 'GraphVideo';
+    if (!post.is_video) __typename = 'GraphImage';
+    const downloadData = { owner, post, __typename };
+    const loaderbtn = e.currentTarget.querySelector('div');
     const downloadName = makeDownloadName(10);
     const downloadbtn = e.target;
-    loaderbtn.className = "loader show";
-    downloadbtn.className = "hide";
-    const method = "GET";
+    loaderbtn.className = 'loader show';
+    downloadbtn.className = 'hide';
+    const method = 'GET';
     const min = 1;
     const max = 100;
     const rand = min + Math.random() * (max - min);
     await Axios.request({
       url,
       method,
-      responseType: "blob" //important
+      responseType: 'blob', //important
     })
       .then(({ data }) => {
         const downloadUrl = window.URL.createObjectURL(new Blob([data]));
 
-        const link = document.createElement("a");
+        const link = document.createElement('a');
 
         link.href = downloadUrl;
 
         link.setAttribute(
-          "download",
-          "wavedownloader-" + downloadName + mediatype
+          'download',
+          'wavedownloader-' + downloadName + mediatype
         ); //any other extension
 
         document.body.appendChild(link);
@@ -62,17 +81,18 @@ const PostHighlightCollectionPreview = ({ owner, post }) => {
         }
       })
       .then(() => {
-        loaderbtn.className = "loader hide";
-        downloadbtn.className = "show";
+        loaderbtn.className = 'loader hide';
+        downloadbtn.className = 'show';
+        saveDownload(downloadData);
       });
     // return await values.add('<div className="show"></div>');
     // await e.target.classList.add('show');
   }
 
   function makeDownloadName(length) {
-    var result = "";
+    var result = '';
     var characters =
-      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789wavedownloaderJOshmatJjenUche007AdaStepheNNwakwuoInstagram";
+      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789wavedownloaderJOshmatJjenUche007AdaStepheNNwakwuoInstagram';
     var charactersLength = characters.length;
     for (var i = 0; i < length; i++) {
       result += characters.charAt(Math.floor(Math.random() * charactersLength));
@@ -95,11 +115,11 @@ const PostHighlightCollectionPreview = ({ owner, post }) => {
             <div className="post-card__detail--image-name">
               <p>
                 <strong>
-                  @{full_name}{" "}
+                  @{full_name}{' '}
                   {is_verified ? (
                     <i
                       className="fa fa-badge-check"
-                      style={{ color: "var(--color-verify)" }}
+                      style={{ color: 'var(--color-verify)' }}
                     ></i>
                   ) : null}
                 </strong>
@@ -120,7 +140,7 @@ const PostHighlightCollectionPreview = ({ owner, post }) => {
             {/* <img src={} alt="" /> */}
             <i
               className="fad fa-book-user"
-              style={{ color: "var(--color-primary-light)" }}
+              style={{ color: 'var(--color-primary-light)' }}
             ></i>
             <p>{biography}</p>
           </div>
@@ -129,14 +149,14 @@ const PostHighlightCollectionPreview = ({ owner, post }) => {
             <div className="post-card__detail--more-like">
               <i
                 className="fad fa-users"
-                style={{ color: "var(--color-tertiary)" }}
+                style={{ color: 'var(--color-tertiary)' }}
               ></i>
               <p>{followers}</p>
             </div>
             <div className="post-card__detail--more-comment">
               <i
                 className="fad fa-user-friends"
-                style={{ color: "var(--color-secondary)" }}
+                style={{ color: 'var(--color-secondary)' }}
               ></i>
               <p>{following}</p>
             </div>
@@ -161,15 +181,17 @@ const PostHighlightCollectionPreview = ({ owner, post }) => {
                       className="post-card__collections--card-media_box"
                       style={{
                         backgroundImage: `url(${item.display_url})`,
-                        backgroundPosition: "center",
-                        backgroundSize: "cover",
-                        backgroundRepeat: "no-repeat"
+                        backgroundPosition: 'center',
+                        backgroundSize: 'cover',
+                        backgroundRepeat: 'no-repeat',
                       }}
                     ></div>
                   )}
                   {item.is_video ? (
                     <a
-                      onClick={e => downloadFile(item.video_url, e, ".mp4")}
+                      onClick={(e) =>
+                        downloadFile(item, item.video_url, e, '.mp4')
+                      }
                       target="__blank"
                       className="post-card__collections--card-media_download-btn"
                       data-method="get"
@@ -181,7 +203,9 @@ const PostHighlightCollectionPreview = ({ owner, post }) => {
                     </a>
                   ) : (
                     <a
-                      onClick={e => downloadFile(item.display_url, e, ".jpg")}
+                      onClick={(e) =>
+                        downloadFile(item, item.display_url, e, '.jpg')
+                      }
                       target="__blank"
                       className="post-card__collections--card-media_download-btn"
                       data-method="get"
@@ -202,4 +226,11 @@ const PostHighlightCollectionPreview = ({ owner, post }) => {
   );
 };
 
-export default withRouter(PostHighlightCollectionPreview);
+const mapDispatchToProps = (dispatch) => ({
+  setMessage: (message) => dispatch(setMessage(message)),
+  saveDownload: (downloadData) => dispatch(saveDownload(downloadData)),
+});
+
+export default withRouter(
+  connect(null, mapDispatchToProps)(PostHighlightCollectionPreview)
+);

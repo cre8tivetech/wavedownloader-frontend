@@ -1,0 +1,53 @@
+@import '../../themes/mixins.scss';
+
+.download-section{
+  display: flex;
+  position: relative;
+  overflow: hidden;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+
+}
+.download-selection{
+  display: flex;
+  position: relative;
+  overflow: hidden;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  &__btn {
+    padding: 0.3rem 2rem;
+    background-color: var(--color-text-1);
+    color: white;
+    border: 0.1rem solid var(--color-text-1);
+    border-radius: 0;
+    // :not(:first-child)
+    @include respond(phone) {
+      margin: 0 1rem;
+      padding: 0rem 1rem;
+    }
+    p{
+      display: inline-block;
+      width: 100%;
+      height: 100%;
+    }
+
+    &:hover{
+      border: 0.1rem solid var(--color-primary);
+    }
+  }
+  &>* {
+    margin-bottom: 1rem;
+    &:not(:first-child){
+      margin-left: 2rem;
+    }
+  }
+}
+
+.active {
+  background-color: var(--color-primary);
+  color: white;
+  border: none;
+}

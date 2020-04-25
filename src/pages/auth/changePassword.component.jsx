@@ -89,25 +89,34 @@ const ChangePassword = ({
       <div className="profile-section__box card">
         <div className="profile-section__box--details">
           <div className="profile-section__box--details--left">
-            <div className="profile-section__box--details--left-image">
-              {user.full_name.charAt(0).toUpperCase()}
-            </div>
-            <Link to="/profile">
-              <div className="profile-section__box--details--left-user">
-                <p className="profile-section__box--details--left-user_name">
-                  {user.full_name}{' '}
-                  {user.is_subscribed ? (
-                    <i
-                      className="fad fa-badge-check"
-                      style={{ color: 'var(--color-primary)' }}
-                    ></i>
-                  ) : null}
-                </p>
-                <p className="profile-section__box--details--left-user_email">
-                  <small> {user.email} </small>
-                </p>
-              </div>
+            <Link className="home" to="/">
+              <i
+                className="fad fa-home"
+                style={{ color: 'var(--color-primary)' }}
+              ></i>
+              <p>Home</p>
             </Link>
+            <div className="profile-section__box--details--left-box">
+              <div className="profile-section__box--details--left-box-image">
+                {user.full_name.charAt(0).toUpperCase()}
+              </div>
+              <Link to="/profile">
+                <div className="profile-section__box--details--left-box-user">
+                  <p className="profile-section__box--details--left-box-user_name">
+                    {user.full_name}{' '}
+                    {user.is_subscribed ? (
+                      <i
+                        className="fad fa-badge-check"
+                        style={{ color: 'var(--color-primary)' }}
+                      ></i>
+                    ) : null}
+                  </p>
+                  <p className="profile-section__box--details--left-box-user_email">
+                    <small> {user.email} </small>
+                  </p>
+                </div>
+              </Link>
+            </div>
           </div>
           <div className="profile-section__box--details--right">
             <p onClick={() => signOut()}>
@@ -115,11 +124,13 @@ const ChangePassword = ({
             </p>
             {user && user.is_email_confirm ? (
               <div>
-                <i
-                  className="fad fa-history"
-                  style={{ color: 'var(--color-primary)' }}
-                ></i>
-                Download History
+                <Link to="/download-history">
+                  <i
+                    className="fad fa-badge-dollar"
+                    style={{ color: 'var(--color-primary)' }}
+                  ></i>
+                  Download History
+                </Link>
               </div>
             ) : null}
             <div>

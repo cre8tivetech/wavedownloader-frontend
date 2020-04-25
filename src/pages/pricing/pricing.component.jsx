@@ -184,11 +184,13 @@ const Pricing = ({ user, signOutStart, checkUserSession }) => {
             </p>
             {user && user.is_email_confirm ? (
               <div>
-                <i
-                  className="fad fa-history"
-                  style={{ color: 'var(--color-primary)' }}
-                ></i>
-                Download History
+                <Link to="/download-history">
+                  <i
+                    className="fad fa-badge-dollar"
+                    style={{ color: 'var(--color-primary)' }}
+                  ></i>
+                  Download History
+                </Link>
               </div>
             ) : null}
             <div>

@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from "react";
-import LoadingBar from "react-top-loading-bar";
-import "../../pages/posts/posts.styles.scss";
-import "./post-collection-preview.styles.scss";
-import Axios from "axios";
-import { withRouter } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import LoadingBar from 'react-top-loading-bar';
+import '../../pages/posts/posts.styles.scss';
+import './post-collection-preview.styles.scss';
+import Axios from 'axios';
+import { withRouter } from 'react-router-dom';
+import { saveDownload } from '../../redux/posts/posts.actions';
+import { setMessage } from '../../redux/user/user.actions';
 
-const PostCollectionPreview = ({ data, downloadName, history }) => {
+const PostCollectionPreview = ({ data, history, saveDownload, setMessage }) => {
   const [view, setView] = useState();
   const results = data.post.filter((datas, i) => {
     return datas;
@@ -16,15 +19,16 @@ const PostCollectionPreview = ({ data, downloadName, history }) => {
     text,
     video_view_count,
     is_video,
-    posted_on
+    posted_on,
   } = results[0];
   const { profile_pic_url, username, full_name } = data.owner;
+  const owner = data.owner;
   const [loadBar, setLoadBar] = useState();
   // const []
   useEffect(() => {
-    setLoadBar(100);    
+    setLoadBar(100);
     if (is_video) {
-      setView("post-card__detail--more-views show");
+      setView('post-card__detail--more-views show');
       // setCollectionType(
       //   <i
       //     className="fad fa-play play"
@@ -32,7 +36,7 @@ const PostCollectionPreview = ({ data, downloadName, history }) => {
       //   ></i>
       // );
     } else {
-      setView("post-card__detail--more-views hide");
+      setView('post-card__detail--more-views hide');
       // setCollectionType('');
     }
     // return () => {
@@ -40,36 +44,45 @@ const PostCollectionPreview = ({ data, downloadName, history }) => {
     // };
   }, [setLoadBar]);
 
-  async function downloadFile(url, e, mediatype) {
+  async function downloadFile(post, url, e, mediatype) {
+    if (!post || !url || !e || !mediatype) {
+      setMessage({ type: 'error', message: 'Post already deleted by owner' });
+      return setTimeout(() => {
+        setMessage(null);
+      }, 5000);
+    }
     e.preventDefault();
     // console.log(e.currentTarget.querySelector('div').className);
-    const loaderbtn = e.currentTarget.querySelector("div");
+    let __typename;
+    if (post.is_video) __typename = 'GraphVideo';
+    if (!post.is_video) __typename = 'GraphImage';
+    const downloadData = { owner, post, __typename };
+    const loaderbtn = e.currentTarget.querySelector('div');
     const downloadName = makeDownloadName(10);
     const downloadbtn = e.target;
-    loaderbtn.className = "loader show";
-    downloadbtn.className = "hide";
-     
-    const method = "GET";
+    loaderbtn.className = 'loader show';
+    downloadbtn.className = 'hide';
+
+    const method = 'GET';
     const min = 1;
     const max = 100;
     const rand = min + Math.random() * (max - min);
-     
-     
+
     await Axios.request({
       url,
       method,
-      responseType: "blob" //important
+      responseType: 'blob', //important
     })
       .then(({ data }) => {
         const downloadUrl = window.URL.createObjectURL(new Blob([data]));
 
-        const link = document.createElement("a");
+        const link = document.createElement('a');
 
         link.href = downloadUrl;
 
         link.setAttribute(
-          "download",
-          "wavedownloader-" + downloadName + mediatype
+          'download',
+          'wavedownloader-' + downloadName + mediatype
         ); //any other extension
 
         document.body.appendChild(link);
@@ -81,17 +94,17 @@ const PostCollectionPreview = ({ data, downloadName, history }) => {
         }
       })
       .then(() => {
-         
-        loaderbtn.className = "loader hide";
-        downloadbtn.className = "show";
+        loaderbtn.className = 'loader hide';
+        downloadbtn.className = 'show';
+        saveDownload(downloadData);
       });
     // return await values.add('<div className="show"></div>');
     // await e.target.classList.add('show');
   }
   function makeDownloadName(length) {
-    var result = "";
+    var result = '';
     var characters =
-      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789wavedownloaderJOshmatJjenUche007AdaStepheNNwakwuoInstagram";
+      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789wavedownloaderJOshmatJjenUche007AdaStepheNNwakwuoInstagram';
     var charactersLength = characters.length;
     for (var i = 0; i < length; i++) {
       result += characters.charAt(Math.floor(Math.random() * charactersLength));
@@ -121,7 +134,7 @@ const PostCollectionPreview = ({ data, downloadName, history }) => {
               <p>
                 <i
                   className="fad fa-calendar-alt"
-                  style={{ color: "var(--color-grey-dark-1)" }}
+                  style={{ color: 'var(--color-grey-dark-1)' }}
                 ></i>
                 <small>{posted_on.date}</small>
               </p>
@@ -131,7 +144,7 @@ const PostCollectionPreview = ({ data, downloadName, history }) => {
             {/* <img src={} alt="" /> */}
             <i
               className="fad fa-pen-alt"
-              style={{ color: "var(--color-primary-light)" }}
+              style={{ color: 'var(--color-primary-light)' }}
             ></i>
             <p>{text}</p>
           </div>
@@ -140,21 +153,21 @@ const PostCollectionPreview = ({ data, downloadName, history }) => {
             <div className="post-card__detail--more-like">
               <i
                 className="fad fa-heart"
-                style={{ color: "var(--color-danger-1)" }}
+                style={{ color: 'var(--color-danger-1)' }}
               ></i>
               <p>{like_count}</p>
             </div>
             <div className="post-card__detail--more-comment">
               <i
                 className="fad fa-comment"
-                style={{ color: "var(--color-secondary)" }}
+                style={{ color: 'var(--color-secondary)' }}
               ></i>
               <p>{comment_count}</p>
             </div>
             <div className={view}>
               <i
                 className="fad fa-eye"
-                style={{ color: "var(--color-tertiary)" }}
+                style={{ color: 'var(--color-tertiary)' }}
               ></i>
               <p>{video_view_count}</p>
             </div>
@@ -177,15 +190,17 @@ const PostCollectionPreview = ({ data, downloadName, history }) => {
                       className="post-card__collections--card-media_box"
                       style={{
                         backgroundImage: `url(${item.display_url})`,
-                        backgroundPosition: "center",
-                        backgroundSize: "cover",
-                        backgroundRepeat: "no-repeat"
+                        backgroundPosition: 'center',
+                        backgroundSize: 'cover',
+                        backgroundRepeat: 'no-repeat',
                       }}
                     ></div>
                   )}
                   {is_video ? (
                     <a
-                      onClick={e => downloadFile(item.video_url, e, ".mp4")}
+                      onClick={(e) =>
+                        downloadFile(item, item.video_url, e, '.mp4')
+                      }
                       target="__blank"
                       className="post-card__collections--card-media_download-btn"
                       data-method="get"
@@ -197,7 +212,9 @@ const PostCollectionPreview = ({ data, downloadName, history }) => {
                     </a>
                   ) : (
                     <a
-                      onClick={e => downloadFile(item.display_url, e, ".jpg")}
+                      onClick={(e) =>
+                        downloadFile(item, item.display_url, e, '.jpg')
+                      }
                       target="__blank"
                       className="post-card__collections--card-media_download-btn"
                       data-method="get"
@@ -218,4 +235,11 @@ const PostCollectionPreview = ({ data, downloadName, history }) => {
   );
 };
 
-export default withRouter(PostCollectionPreview);
+const mapDispatchToProps = (dispatch) => ({
+  setMessage: (message) => dispatch(setMessage(message)),
+  saveDownload: (downloadData) => dispatch(saveDownload(downloadData)),
+});
+
+export default withRouter(
+  connect(null, mapDispatchToProps)(PostCollectionPreview)
+);

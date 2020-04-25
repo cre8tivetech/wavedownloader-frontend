@@ -1,6 +1,6 @@
 import PostsActionTypes from './posts.types';
 
-export const fetchPostsAdd = url => ({
+export const fetchPostsAdd = (url) => ({
   type: PostsActionTypes.FETCH_POSTS_ADD,
   payload: url,
 });
@@ -10,105 +10,114 @@ export const fetchPostsStart = (url) => ({
   payload: url,
 });
 
-export const fetchSinglePostsSuccess = data => ({
+export const fetchSinglePostsSuccess = (data) => ({
   type: PostsActionTypes.FETCH_SINGLE_POSTS_SUCCESS,
   payload: data,
 });
-export const fetchSingleCollectionPostsSuccess = data => ({
+export const fetchSingleCollectionPostsSuccess = (data) => ({
   type: PostsActionTypes.FETCH_SINGLE_POSTS_COLLECTION_SUCCESS,
   payload: data,
 });
-export const fetchSingleHighlightCollectionPostsSuccess = data => ({
+export const fetchSingleHighlightCollectionPostsSuccess = (data) => ({
   type: PostsActionTypes.FETCH_SINGLE_HIGHLIGHT_POSTS_COLLECTION_SUCCESS,
   payload: data,
 });
 
 // USERNAME POST credentials
 
-export const fetchUserNamePostsAdd = credentials => ({
+export const fetchUserNamePostsAdd = (credentials) => ({
   type: PostsActionTypes.FETCH_USERNAME_POSTS_ADD,
   payload: credentials,
 });
 
-export const fetchUserNamePostsStart = datas => ({
+export const fetchUserNamePostsStart = (datas) => ({
   type: PostsActionTypes.FETCH_USERNAME_POSTS_START,
   payload: datas,
 });
 
-export const fetchUserNamePostsSuccess = data => ({
+export const fetchUserNamePostsSuccess = (data) => ({
   type: PostsActionTypes.FETCH_USERNAME_POSTS_SUCCESS,
   payload: data,
 });
 
-export const fetchUserNamePostsDownload = shortcode => ({
+export const fetchUserNamePostsDownload = (shortcode) => ({
   type: PostsActionTypes.FETCH_USERNAME_POSTS_DOWNLOAD,
   payload: shortcode,
 });
 
-
 // HASH TAG POST
-export const fetchHashTagPostsAdd = hashTagFormData => ({
+export const fetchHashTagPostsAdd = (hashTagFormData) => ({
   type: PostsActionTypes.FETCH_HASHTAG_POSTS_ADD,
   payload: hashTagFormData,
 });
 
-export const fetchHashTagPostsStart = datas => ({
+export const fetchHashTagPostsStart = (datas) => ({
   type: PostsActionTypes.FETCH_HASHTAG_POSTS_START,
   payload: datas,
 });
 
-export const fetchHashTagPostsSuccess = data => ({
+export const fetchHashTagPostsSuccess = (data) => ({
   type: PostsActionTypes.FETCH_HASHTAG_POSTS_SUCCESS,
   payload: data,
 });
 
-export const fetchHashTagPostsDownload = shortcode => ({
+export const fetchHashTagPostsDownload = (shortcode) => ({
   type: PostsActionTypes.FETCH_HASHTAG_POSTS_DOWNLOAD,
   payload: shortcode,
 });
 
-
 // HIGHLIGHT POST
-export const fetchHighlightPostsAdd = highlightForm => ({
+export const fetchHighlightPostsAdd = (highlightForm) => ({
   type: PostsActionTypes.FETCH_HIGHLIGHT_POSTS_ADD,
   payload: highlightForm,
 });
 
-export const fetchHighlightPostsStart = datas => ({
+export const fetchHighlightPostsStart = (datas) => ({
   type: PostsActionTypes.FETCH_HIGHLIGHT_POSTS_START,
   payload: datas,
 });
 
-export const fetchHighlightPostsSuccess = data => ({
+export const fetchHighlightPostsSuccess = (data) => ({
   type: PostsActionTypes.FETCH_HIGHLIGHT_POSTS_SUCCESS,
   payload: data,
 });
 
-export const fetchHighlightPostsDownload = idcode => ({
+export const fetchHighlightPostsDownload = (idcode) => ({
   type: PostsActionTypes.FETCH_HIGHLIGHT_POSTS_DOWNLOAD,
   payload: idcode,
 });
 
-
 // STORIES POST
-export const fetchStoryPostsAdd = credentials => ({
+export const fetchStoryPostsAdd = (credentials) => ({
   type: PostsActionTypes.FETCH_STORY_POSTS_ADD,
   payload: credentials,
 });
 
-export const fetchStoryPostsStart = datas => ({
+export const fetchStoryPostsStart = (datas) => ({
   type: PostsActionTypes.FETCH_STORY_POSTS_START,
   payload: datas,
 });
 
-export const fetchStoryPostsSuccess = data => ({
+export const fetchStoryPostsSuccess = (data) => ({
   type: PostsActionTypes.FETCH_STORY_POSTS_SUCCESS,
   payload: data,
 });
 
+export const saveDownload = (downloadData) => ({
+  type: PostsActionTypes.SAVE_DOWNLOAD,
+  payload: downloadData,
+});
+
+export const getDownload = () => ({
+  type: PostsActionTypes.GET_DOWNLOAD,
+});
+
+export const getSubscription = () => ({
+  type: PostsActionTypes.GET_SUBSCRIPTION,
+});
 
 // FAILURE TO GET POST ACTION
-export const fetchPostsFailure = errorMessage => ({
+export const fetchPostsFailure = (errorMessage) => ({
   type: PostsActionTypes.FETCH_POSTS_FAILURE,
   payload: errorMessage,
 });

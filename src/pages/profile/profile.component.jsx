@@ -8,24 +8,28 @@ import {
   selectCurrentUser,
   selectSubscription,
   selectMessage,
+  selectDownload,
 } from '../../redux/user/user.selector';
 import {
   signOutStart,
   checkUserSession,
   resendConfirmEmail,
 } from '../../redux/user/user.actions';
-import downloads from '../../assets/download(1).svg';
+import downloadImage from '../../assets/download(1).svg';
 import confirmation from '../../assets/mail(1).svg';
 import sub_time from '../../assets/sale(1).svg';
 import plan from '../../assets/subscription(1).svg';
+import { getDownload } from '../../redux/posts/posts.actions';
 
 const Profile = ({
   user,
   subscription,
+  download,
   signOutStart,
   checkUserSession,
   resendConfirmEmail,
   message,
+  // getDownload,
 }) => {
   const [loadBar, setLoadBar] = useState(0);
   const [logout, setLogout] = useState('Logout');
@@ -38,13 +42,16 @@ const Profile = ({
     setLoadBar(0);
   };
   useEffect(() => {
+    // getDownload();
     checkUserSession();
     subDaysRemaining();
     startLoader();
+    console.log(download.length);
+    console.log(message);
     if (message) {
       setConfirmText('Resend Confirmation Email');
     }
-  }, [checkUserSession, message]);
+  }, [checkUserSession]);
 
   const signOut = () => {
     setLogout('Logging out...');
@@ -123,11 +130,13 @@ const Profile = ({
             </p>
             {user && user.is_email_confirm ? (
               <div>
-                <i
-                  className="fad fa-history"
-                  style={{ color: 'var(--color-primary)' }}
-                ></i>
-                Download History
+                <Link to="/download-history">
+                  <i
+                    className="fad fa-badge-dollar"
+                    style={{ color: 'var(--color-primary)' }}
+                  ></i>
+                  Download History
+                </Link>
               </div>
             ) : null}
             <div>
@@ -205,11 +214,13 @@ const Profile = ({
             <div className="profile-section__box--overview_container_box">
               <img
                 className="profile-section__box--overview_container_box-img"
-                src={downloads}
+                src={downloadImage}
                 alt=""
               />
               <p>Total Downloads</p>
-              <strong style={{ color: 'var(--color-danger-1)' }}>0</strong>
+              <strong style={{ color: 'var(--color-danger-1)' }}>
+                {download.length}
+              </strong>
             </div>
           </div>
         </div>
@@ -221,11 +232,13 @@ const mapStateToProps = createStructuredSelector({
   user: selectCurrentUser,
   subscription: selectSubscription,
   message: selectMessage,
+  download: selectDownload,
 });
 const mapDispatchToProps = (dispatch) => ({
   signOutStart: () => dispatch(signOutStart()),
   resendConfirmEmail: () => dispatch(resendConfirmEmail()),
   checkUserSession: () => dispatch(checkUserSession()),
+  // getDownload: () => dispatch(getDownload()),
 });
 export default withRouter(
   connect(mapStateToProps, mapDispatchToProps)(Profile)

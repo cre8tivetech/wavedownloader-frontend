@@ -1,4 +1,4 @@
-import { takeLatest, call, put, all } from 'redux-saga/effects';
+import { takeLatest, call, put, all, delay } from 'redux-saga/effects';
 import PostActionTypes from './posts.types';
 import { select } from 'redux-saga/effects';
 import {
@@ -9,6 +9,8 @@ import {
   highlightPostApi,
   shortcodePostApi,
   idcodePostApi,
+  saveDownloadApi,
+  getDownloadsApi,
 } from '../../Api/api';
 import {
   fetchSinglePostsSuccess,
@@ -20,6 +22,7 @@ import {
   fetchStoryPostsSuccess,
   fetchPostsFailure,
 } from './posts.actions';
+import { setMessage, setDownloads } from '../user/user.actions';
 
 const link = (state) => state.posts.source;
 const credentials = (state) => state.posts.credentials;
@@ -178,6 +181,53 @@ export function* fetchStoryPostsAsync() {
         )
       );
   }
+}
+
+// SAVE DOWNLOAD
+export function* saveDownloadAsync({ payload: downloadData }) {
+  const token = yield select(userToken);
+  console.log(downloadData);
+  try {
+    const result = yield saveDownloadApi(token.key, downloadData).then(
+      function (response) {
+        return response.data.data;
+      }
+    );
+    console.log(result);
+    if (result)
+      yield put(setMessage({ type: 'success', message: result.message }));
+    yield put(setDownloads(result.downloads));
+    yield delay(6000);
+    yield put(setMessage(null));
+
+    // yield put(fetchStoryPostsSuccess(result.data));
+  } catch (error) {
+    if (error.response)
+      yield put(
+        fetchPostsFailure(
+          error.response
+            ? error.response.data.message || error.response.data.error
+            : 'Oops!!, Poor internet connection, Please check your connectivity, And try again'
+        )
+      );
+    else if (error.message === 'Network Error')
+      yield put(
+        fetchPostsFailure(
+          'Oops!!, Poor internet connection, Please check your connectivity, And try again'
+        )
+      );
+  }
+}
+
+// GET DOWNLOAD
+export function* getDownloadAsync() {
+  const token = yield select(userToken);
+  try {
+    const result = yield getDownloadsApi(token.key).then(function (response) {
+      return response.data.data;
+    });
+    yield put(setDownloads(result.downloads));
+  } catch (error) {}
 }
 
 // SINGLE POST ADD
@@ -345,6 +395,14 @@ export function* onFetchStoryPostsStart() {
   );
 }
 
+export function* onSaveDownload() {
+  yield takeLatest(PostActionTypes.SAVE_DOWNLOAD, saveDownloadAsync);
+}
+
+export function* onGetDownload() {
+  yield takeLatest(PostActionTypes.GET_DOWNLOAD, getDownloadAsync);
+}
+
 // MAIN SAGA
 export function* postsSagas() {
   yield all([
@@ -353,5 +411,7 @@ export function* postsSagas() {
     call(onFetchHashTagPostsStart),
     call(onFetchHighlightPostsStart),
     call(onFetchStoryPostsStart),
+    call(onSaveDownload),
+    call(onGetDownload),
   ]);
 }

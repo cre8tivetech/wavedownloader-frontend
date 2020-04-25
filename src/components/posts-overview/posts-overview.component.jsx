@@ -1,29 +1,30 @@
-import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
-import { createStructuredSelector } from "reselect";
+import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 import {
   selectCollection,
   selectSlideCollection,
   selectSingleHighlightCollection,
   selectSource,
-  selectError
-} from "../../redux/posts/posts.selector";
-import "./posts-overview.styles.scss";
-import PostPreview from "../post-preview/post-preview.component";
-import PostCollectionPreview from "../post-preview/post-collection-preview.component";
-import PostHighlightCollectionPreview from "../post-preview/post-highlight-collection-preview.component";
+  selectError,
+} from '../../redux/posts/posts.selector';
+import './posts-overview.styles.scss';
+import PostPreview from '../post-preview/post-preview.component';
+import PostCollectionPreview from '../post-preview/post-collection-preview.component';
+import PostHighlightCollectionPreview from '../post-preview/post-highlight-collection-preview.component';
 const PostsOverview = ({
   collections,
   slideCollections,
   singleHighlightCollections,
   // source,
-  errorMessage
+  errorMessage,
 }) => {
   // const downloadName = source.split('/');
   // const link = { url: source, downloadName: downloadName[4] };
   const [error, setError] = useState();
   useEffect(() => {
     setError({ errorMessage: errorMessage });
+    console.log(collections);
   }, [errorMessage]);
   return collections ? (
     <div className="posts-overview">
@@ -58,7 +59,7 @@ const mapStateToProps = createStructuredSelector({
   slideCollections: selectSlideCollection,
   singleHighlightCollections: selectSingleHighlightCollection,
   source: selectSource,
-  errorMessage: selectError
+  errorMessage: selectError,
 });
 
 export default connect(mapStateToProps)(PostsOverview);
