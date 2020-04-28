@@ -8,6 +8,8 @@ const INITIAL_STATE = {
   token: null,
   success: null,
   error: null,
+  isLoading: null,
+  confirmMessage: null,
 };
 
 const userReducer = (state = INITIAL_STATE, action) => {
@@ -16,6 +18,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
     case UserActionTypes.CHECK_USER_SESSION:
       return {
         ...state,
+        isLoading: null,
         error: null,
         success: null,
       };
@@ -47,9 +50,40 @@ const userReducer = (state = INITIAL_STATE, action) => {
         error: null,
         success: null,
       };
+    case UserActionTypes.FORGET_PASSWORD_START:
+      return {
+        ...state,
+        isLoading: true,
+        error: null,
+        success: null,
+      };
+    case UserActionTypes.FORGET_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        error: null,
+        success: null,
+      };
+    case UserActionTypes.RESEND_CONFIRM_EMAIL_START:
+      return {
+        ...state,
+        isLoading: true,
+        message: action.payload,
+        error: null,
+        success: null,
+      };
+    case UserActionTypes.RESEND_CONFIRM_EMAIL_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        message: action.payload,
+        error: null,
+        success: null,
+      };
     case UserActionTypes.SIGN_UP_START:
       return {
         ...state,
+        isLoading: true,
         currentUser: null,
         token: null,
         error: null,
@@ -58,12 +92,14 @@ const userReducer = (state = INITIAL_STATE, action) => {
     case UserActionTypes.SIGN_UP_SUCCESS:
       return {
         ...state,
+        isLoading: false,
         success: action.payload,
         error: null,
       };
     case UserActionTypes.SIGN_IN_START:
       return {
         ...state,
+        isLoading: true,
         currentUser: null,
         token: null,
         error: null,
@@ -71,12 +107,14 @@ const userReducer = (state = INITIAL_STATE, action) => {
     case UserActionTypes.SIGN_IN_SUCCESS:
       return {
         ...state,
+        isLoading: false,
         currentUser: action.payload,
         error: null,
       };
     case UserActionTypes.SIGN_OUT_SUCCESS:
       return {
         ...state,
+        isLoading: false,
         currentUser: null,
         subscription: null,
         downloads: null,
@@ -88,6 +126,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
     case UserActionTypes.SIGN_UP_FAILURE:
       return {
         ...state,
+        isLoading: false,
         error: action.payload,
       };
     default:

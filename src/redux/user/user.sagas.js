@@ -23,6 +23,8 @@ import {
   signOutFailure,
   signUpFailure,
   signUpSuccess,
+  resendConfirmEmailSuccess,
+  forgetPasswordSuccess,
 } from './user.actions';
 import { getDownloadsApi, getSubscriptionApi } from '../../Api/api';
 
@@ -90,12 +92,12 @@ export function* signByToken({ payload: token }) {
       expire: tokenExpiration(),
     };
     if (result) {
-      const download = yield getDownloadsApi(token.key).then(function (
+      const download = yield getDownloadsApi(tokens.key).then(function (
         response
       ) {
         return response.data.data;
       });
-      const subscription = yield getSubscriptionApi(token.key).then(function (
+      const subscription = yield getSubscriptionApi(tokens.key).then(function (
         response
       ) {
         return response.data.data;
@@ -131,6 +133,7 @@ export function* isResendConfirmEmail() {
       return response.data.data;
     });
     if (result) {
+      // yield put(resendConfirmEmailSuccess(""));
       yield put(setMessage({ type: 'success', message: result.message }));
       yield delay(6000);
       yield put(setMessage(null));
@@ -179,13 +182,12 @@ export function* isChangePassword({ payload: { old_password, new_password } }) {
 }
 
 export function* isForgetPassword({ payload: email }) {
-  console.log(email);
   try {
     const result = yield forgetPasswordApi(email).then(function (response) {
       return response.data.data;
     });
-    console.log(result);
     if (result) {
+      yield put(forgetPasswordSuccess());
       yield put(setMessage({ type: 'success', message: result.message }));
       yield delay(8000);
       yield put(setMessage(null));
@@ -205,14 +207,12 @@ export function* isForgetPassword({ payload: email }) {
 }
 
 export function* isResetPassword({ payload: { token, new_password } }) {
-  console.log(token, '__', new_password);
   try {
     const result = yield resetPasswordApi(token, new_password).then(function (
       response
     ) {
       return response.data.data;
     });
-    console.log(result);
     if (result) {
       yield put(setMessage({ type: 'success', message: result.message }));
       yield delay(6000);
@@ -307,7 +307,10 @@ export function* onSignInByTokenStart() {
 }
 
 export function* onResendConfirmEmail() {
-  yield takeLatest(UserActionTypes.RESEND_CONFIRM_EMAIL, isResendConfirmEmail);
+  yield takeLatest(
+    UserActionTypes.RESEND_CONFIRM_EMAIL_START,
+    isResendConfirmEmail
+  );
 }
 
 export function* onChangePassword() {
@@ -315,7 +318,7 @@ export function* onChangePassword() {
 }
 
 export function* onForgetPassword() {
-  yield takeLatest(UserActionTypes.FORGET_PASSWORD, isForgetPassword);
+  yield takeLatest(UserActionTypes.FORGET_PASSWORD_START, isForgetPassword);
 }
 
 export function* onResetPassword() {

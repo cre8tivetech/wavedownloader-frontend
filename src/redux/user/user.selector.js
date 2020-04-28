@@ -29,3 +29,12 @@ export const selectDownload = createSelector(
   [selectUser],
   (user) => user.downloads
 );
+export const selectIsLoading = createSelector(
+  [selectUser],
+  (user) => user.isLoading
+);
+
+export const selectIsConfirmMessage = createSelector(
+  [selectUser],
+  (user) => user.confirmMessage
+);

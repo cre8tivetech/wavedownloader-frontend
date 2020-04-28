@@ -19,7 +19,6 @@ const Confirmation = ({ currentUser, signInByTokenStart }) => {
   const token = getToken[0];
 
   const mode = localStorage.getItem('mode');
-
   const checkMode = () => {
     if (mode === 'dark') {
       const root = document.querySelector(':root');
@@ -37,9 +36,11 @@ const Confirmation = ({ currentUser, signInByTokenStart }) => {
 
   useEffect(() => {
     checkMode();
-    signInByTokenStart(token);
-    currentUser &&
+    // !currentUser && console.log('NO token');
+    !currentUser.is_email_confirm && signInByTokenStart(token);
+    currentUser.is_email_confirm &&
       setTimeout(() => {
+        console.log(currentUser);
         setConfirmImage(imageLoaded);
         setTextColor('var(--color-primary)');
         setText1('Email confirmed successfully');
@@ -51,7 +52,7 @@ const Confirmation = ({ currentUser, signInByTokenStart }) => {
           history.push('/profile');
         }, 8000);
       }, 8000);
-  }, [signInByTokenStart]);
+  }, [currentUser]);
 
   return (
     <div className="confirmation-section card">

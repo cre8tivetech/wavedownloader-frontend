@@ -6,8 +6,8 @@ import { createStructuredSelector } from 'reselect';
 import { signInStart } from '../../redux/user/user.actions';
 import { connect } from 'react-redux';
 import './signin-signup.styles.scss';
-import { selectError } from '../../redux/user/user.selector';
-const SignIn = ({ signInStart, error }) => {
+import { selectError, selectIsLoading } from '../../redux/user/user.selector';
+const SignIn = ({ signInStart, error, isLoading }) => {
   const [loadBar, setLoadBar] = useState(0);
   const [errorMessage, setErrorMessage] = useState('');
   const [userCredentials, setCredentials] = useState({
@@ -27,24 +27,24 @@ const SignIn = ({ signInStart, error }) => {
       setErrorMessage(<div className="errorMessage">{error}</div>);
     }
     startLoader();
-  }, [error]);
+  }, [error, isLoading]);
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const btn = event.currentTarget.querySelector('button');
-    const loaderbtn = btn.querySelector('div');
+    // const btn = event.currentTarget.querySelector('button');
+    // const loaderbtn = btn.querySelector('div');
 
-    const downloadbtn = btn.querySelector('p');
+    // const downloadbtn = btn.querySelector('p');
 
-    loaderbtn.className = 'loader show';
-    downloadbtn.className = 'hide';
+    // loaderbtn.className = 'loader show';
+    // downloadbtn.className = 'hide';
     setCredentials({
       email: '',
       password: '',
     });
     await signInStart(email, password);
     setTimeout(() => {
-      loaderbtn.className = 'loader hide';
-      downloadbtn.className = 'show';
+      // loaderbtn.className = 'loader hide';
+      // downloadbtn.className = 'show';
     }, 15000);
   };
 
@@ -116,8 +116,7 @@ const SignIn = ({ signInStart, error }) => {
           </div>
           <div className="form__group">
             <button type="submit" className=" submit_btn btn btn--green">
-              <div className="loader hide"></div>
-              <p>Sign In</p>
+              {isLoading ? <div className="loader"></div> : <p>Sign In</p>}
             </button>
             <Link to="/forgot-password" className="auth-link">
               <p>Forgot your password?</p>
@@ -134,6 +133,7 @@ const SignIn = ({ signInStart, error }) => {
 
 const mapStateToProps = createStructuredSelector({
   error: selectError,
+  isLoading: selectIsLoading,
 });
 const mapDispatchToProps = (dispatch) => ({
   signInStart: (email, password) => dispatch(signInStart({ email, password })),

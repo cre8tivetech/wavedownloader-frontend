@@ -1,19 +1,23 @@
-import React, { useState, useEffect, useCallback } from "react";
-import LoadingBar from "react-top-loading-bar";
-import { createStructuredSelector } from "reselect";
-import { Link } from "react-router-dom";
-import { signUpStart } from "../../redux/user/user.actions";
-import { connect } from "react-redux";
-import { selectError, selectSuccess } from "../../redux/user/user.selector";
-import "./signin-signup.styles.scss";
-const SignUp = ({ signUpStart, success, error }) => {
+import React, { useState, useEffect, useCallback } from 'react';
+import LoadingBar from 'react-top-loading-bar';
+import { createStructuredSelector } from 'reselect';
+import { Link } from 'react-router-dom';
+import { signUpStart } from '../../redux/user/user.actions';
+import { connect } from 'react-redux';
+import {
+  selectError,
+  selectSuccess,
+  selectIsLoading,
+} from '../../redux/user/user.selector';
+import './signin-signup.styles.scss';
+const SignUp = ({ signUpStart, success, error, isLoading }) => {
   const [loadBar, setLoadBar] = useState(0);
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState('');
   const [userCredentials, setCredentials] = useState({
-    userName: "",
-    email: "",
-    password: "",
-    confirmPassword: ""
+    userName: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
   });
   const { userName, email, password, confirmPassword } = userCredentials;
   const startLoader = useCallback(() => {
@@ -31,20 +35,17 @@ const SignUp = ({ signUpStart, success, error }) => {
     }
     startLoader();
   }, [success, error]);
-  const handleSubmit = async event => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const btn = event.currentTarget.querySelector("button");
-    const loaderbtn = btn.querySelector("div");
-     
-    const downloadbtn = btn.querySelector("p");
-     
-    loaderbtn.className = "loader show";
-    downloadbtn.className = "hide";
+    // const btn = event.currentTarget.querySelector('button');
+    // const loaderbtn = btn.querySelector('div');
+    // const downloadbtn = btn.querySelector('p');
+
     setCredentials({
-      userName: "",
-      email: "",
-      password: "",
-      confirmPassword: ""
+      userName: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
     });
 
     if (password !== confirmPassword) {
@@ -52,13 +53,10 @@ const SignUp = ({ signUpStart, success, error }) => {
       return;
     }
     signUpStart(userName, email, password);
-    setTimeout(() => {
-      loaderbtn.className = "loader hide";
-      downloadbtn.className = "show";
-    }, 7000);
+    setTimeout(() => {}, 7000);
   };
 
-  const handleChange = event => {
+  const handleChange = (event) => {
     const { name, value } = event.target;
 
     setCredentials({ ...userCredentials, [name]: value });
@@ -89,7 +87,7 @@ const SignUp = ({ signUpStart, success, error }) => {
             <div className="form__input">
               <i
                 className="fad fa-user"
-                style={{ color: "var(--color-primary)" }}
+                style={{ color: 'var(--color-primary)' }}
               ></i>
               <input
                 type="text"
@@ -109,7 +107,7 @@ const SignUp = ({ signUpStart, success, error }) => {
             <div className="form__input">
               <i
                 className="fad fa-envelope"
-                style={{ color: "var(--color-primary)" }}
+                style={{ color: 'var(--color-primary)' }}
               ></i>
               <input
                 type="email"
@@ -129,7 +127,7 @@ const SignUp = ({ signUpStart, success, error }) => {
             <div className="form__input">
               <i
                 className="fad fa-lock"
-                style={{ color: "var(--color-primary)" }}
+                style={{ color: 'var(--color-primary)' }}
               ></i>
               <input
                 type="password"
@@ -149,7 +147,7 @@ const SignUp = ({ signUpStart, success, error }) => {
             <div className="form__input">
               <i
                 className="fad fa-lock"
-                style={{ color: "var(--color-primary)" }}
+                style={{ color: 'var(--color-primary)' }}
               ></i>
               <input
                 type="password"
@@ -168,8 +166,7 @@ const SignUp = ({ signUpStart, success, error }) => {
           </div>
           <div className="form__group">
             <button type="submit" className=" submit_btn btn btn--green">
-              <div className="loader hide"></div>
-              <p>Sign Up</p>
+              {isLoading ? <div className="loader"></div> : <p>Sign In</p>}
             </button>
             <Link to="/signin" className="auth-link">
               <p>Already a member? Sign In</p>
@@ -183,12 +180,13 @@ const SignUp = ({ signUpStart, success, error }) => {
 
 const mapStateToProps = createStructuredSelector({
   error: selectError,
-  success: selectSuccess
+  success: selectSuccess,
+  isLoading: selectIsLoading,
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   signUpStart: (userName, email, password) =>
-    dispatch(signUpStart({ userName, email, password }))
+    dispatch(signUpStart({ userName, email, password })),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignUp);

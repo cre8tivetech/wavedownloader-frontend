@@ -24,8 +24,13 @@ export const signInByTokenStart = (token) => ({
   payload: token,
 });
 
-export const resendConfirmEmail = () => ({
-  type: UserActionTypes.RESEND_CONFIRM_EMAIL,
+export const resendConfirmEmailStart = () => ({
+  type: UserActionTypes.RESEND_CONFIRM_EMAIL_START,
+});
+
+export const resendConfirmEmailSuccess = (message) => ({
+  type: UserActionTypes.RESEND_CONFIRM_EMAIL_SUCCESS,
+  payload: message,
 });
 
 export const changePassword = (passwords) => ({
@@ -33,9 +38,13 @@ export const changePassword = (passwords) => ({
   payload: passwords,
 });
 
-export const forgetPassword = (email) => ({
-  type: UserActionTypes.FORGET_PASSWORD,
+export const forgetPasswordStart = (email) => ({
+  type: UserActionTypes.FORGET_PASSWORD_START,
   payload: email,
+});
+
+export const forgetPasswordSuccess = () => ({
+  type: UserActionTypes.FORGET_PASSWORD_SUCCESS,
 });
 
 export const resetPassword = (resetData) => ({

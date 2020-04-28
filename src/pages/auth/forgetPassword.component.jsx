@@ -3,11 +3,11 @@ import LoadingBar from 'react-top-loading-bar';
 import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
-import { forgetPassword } from '../../redux/user/user.actions';
+import { forgetPasswordStart } from '../../redux/user/user.actions';
 import { connect } from 'react-redux';
 import './forgetPassword.styles.scss';
-import { selectError } from '../../redux/user/user.selector';
-const ForgotPassword = ({ forgetPassword, error }) => {
+import { selectError, selectIsLoading } from '../../redux/user/user.selector';
+const ForgotPassword = ({ forgetPasswordStart, error, isLoading }) => {
   const [loadBar, setLoadBar] = useState(0);
   const [errorMessage, setErrorMessage] = useState('');
   const [userCredentials, setCredentials] = useState({
@@ -29,21 +29,14 @@ const ForgotPassword = ({ forgetPassword, error }) => {
   }, [error]);
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const btn = event.currentTarget.querySelector('button');
-    const loaderbtn = btn.querySelector('div');
+    // const btn = event.currentTarget.querySelector('button');
+    // const loaderbtn = btn.querySelector('div');
 
-    const downloadbtn = btn.querySelector('p');
-
-    loaderbtn.className = 'loader show';
-    downloadbtn.className = 'hide';
+    // const downloadbtn = btn.querySelector('p');
     setCredentials({
       email: '',
     });
-    await forgetPassword(email);
-    setTimeout(() => {
-      loaderbtn.className = 'loader hide';
-      downloadbtn.className = 'show';
-    }, 13000);
+    await forgetPasswordStart(email);
   };
 
   const handleChange = (event) => {
@@ -90,8 +83,7 @@ const ForgotPassword = ({ forgetPassword, error }) => {
           </div>
           <div className="form__group">
             <button type="submit" className=" submit_btn btn btn--green">
-              <div className="loader hide"></div>
-              <p>Send</p>
+              {isLoading ? <div className="loader"></div> : <p>Send</p>}
             </button>
           </div>
         </form>
@@ -102,9 +94,10 @@ const ForgotPassword = ({ forgetPassword, error }) => {
 
 const mapStateToProps = createStructuredSelector({
   error: selectError,
+  isLoading: selectIsLoading,
 });
 const mapDispatchToProps = (dispatch) => ({
-  forgetPassword: (email) => dispatch(forgetPassword({ email })),
+  forgetPasswordStart: (email) => dispatch(forgetPasswordStart({ email })),
 });
 
 export default withRouter(

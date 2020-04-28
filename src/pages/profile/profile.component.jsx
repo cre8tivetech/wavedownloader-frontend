@@ -9,11 +9,12 @@ import {
   selectSubscription,
   selectMessage,
   selectDownload,
+  selectIsLoading,
 } from '../../redux/user/user.selector';
 import {
   signOutStart,
   checkUserSession,
-  resendConfirmEmail,
+  resendConfirmEmailStart,
 } from '../../redux/user/user.actions';
 import downloadImage from '../../assets/download(1).svg';
 import confirmation from '../../assets/mail(1).svg';
@@ -27,8 +28,9 @@ const Profile = ({
   download,
   signOutStart,
   checkUserSession,
-  resendConfirmEmail,
+  resendConfirmEmailStart,
   message,
+  isLoading,
   // getDownload,
 }) => {
   const [loadBar, setLoadBar] = useState(0);
@@ -46,12 +48,12 @@ const Profile = ({
     checkUserSession();
     subDaysRemaining();
     startLoader();
-    console.log(download.length);
-    console.log(message);
-    if (message) {
+    // console.log(download.length);
+    // console.log(message);
+    if (!isLoading) {
       setConfirmText('Resend Confirmation Email');
     }
-  }, [checkUserSession]);
+  }, [checkUserSession, isLoading]);
 
   const signOut = () => {
     setLogout('Logging out...');
@@ -63,7 +65,7 @@ const Profile = ({
 
   const resendEmailConfirm = () => {
     setConfirmText('Sending Email...');
-    resendConfirmEmail();
+    resendConfirmEmailStart();
   };
 
   const subDaysRemaining = () => {
@@ -233,10 +235,11 @@ const mapStateToProps = createStructuredSelector({
   subscription: selectSubscription,
   message: selectMessage,
   download: selectDownload,
+  isLoading: selectIsLoading,
 });
 const mapDispatchToProps = (dispatch) => ({
   signOutStart: () => dispatch(signOutStart()),
-  resendConfirmEmail: () => dispatch(resendConfirmEmail()),
+  resendConfirmEmailStart: () => dispatch(resendConfirmEmailStart()),
   checkUserSession: () => dispatch(checkUserSession()),
   // getDownload: () => dispatch(getDownload()),
 });

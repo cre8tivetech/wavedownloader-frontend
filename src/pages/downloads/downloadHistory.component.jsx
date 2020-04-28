@@ -17,7 +17,7 @@ import {
 import {
   signOutStart,
   checkUserSession,
-  resendConfirmEmail,
+  resendConfirmEmailStart,
 } from '../../redux/user/user.actions';
 import { getDownload } from '../../redux/posts/posts.actions';
 import { setMessage } from '../../redux/user/user.actions';
@@ -27,7 +27,7 @@ const DownloadHistory = ({
   download,
   signOutStart,
   checkUserSession,
-  resendConfirmEmail,
+  resendConfirmEmailStart,
   message,
   getDownload,
   setMessage,
@@ -65,7 +65,7 @@ const DownloadHistory = ({
 
   const resendEmailConfirm = () => {
     setConfirmText('Sending Email...');
-    resendConfirmEmail();
+    resendConfirmEmailStart();
   };
 
   const mySelection = (type, e) => {
@@ -323,7 +323,7 @@ const mapStateToProps = createStructuredSelector({
 });
 const mapDispatchToProps = (dispatch) => ({
   signOutStart: () => dispatch(signOutStart()),
-  resendConfirmEmail: () => dispatch(resendConfirmEmail()),
+  resendConfirmEmailStart: () => dispatch(resendConfirmEmailStart()),
   checkUserSession: () => dispatch(checkUserSession()),
   getDownload: () => dispatch(getDownload()),
   setMessage: (message) => dispatch(setMessage(message)),

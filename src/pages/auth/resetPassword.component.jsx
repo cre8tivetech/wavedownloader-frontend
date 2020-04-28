@@ -31,7 +31,6 @@ const ResetPassword = ({
   // const result = data.split('=');
   // const getToken = result[1].split('&');
   // const token = getToken[0];
-  // console.log(data);
 
   const mode = localStorage.getItem('mode');
 
@@ -88,7 +87,6 @@ const ResetPassword = ({
           setText2(null);
         }, 1000);
       }, 5000);
-    console.log(message);
     if (message)
       if (message.type === 'success') {
         setConfirmImage(imageLoaded);
