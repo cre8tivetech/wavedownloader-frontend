@@ -40,7 +40,6 @@ const Confirmation = ({ currentUser, signInByTokenStart }) => {
     !currentUser.is_email_confirm && signInByTokenStart(token);
     currentUser.is_email_confirm &&
       setTimeout(() => {
-        console.log(currentUser);
         setConfirmImage(imageLoaded);
         setTextColor('var(--color-primary)');
         setText1('Email confirmed successfully');

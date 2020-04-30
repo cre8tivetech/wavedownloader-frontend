@@ -186,14 +186,12 @@ export function* fetchStoryPostsAsync() {
 // SAVE DOWNLOAD
 export function* saveDownloadAsync({ payload: downloadData }) {
   const token = yield select(userToken);
-  console.log(downloadData);
   try {
     const result = yield saveDownloadApi(token.key, downloadData).then(
       function (response) {
         return response.data.data;
       }
     );
-    console.log(result);
     if (result)
       yield put(setMessage({ type: 'success', message: result.message }));
     yield put(setDownloads(result.downloads));

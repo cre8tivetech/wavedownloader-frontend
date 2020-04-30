@@ -7,12 +7,15 @@ import Axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import { saveDownload } from '../../redux/posts/posts.actions';
 import { setMessage } from '../../redux/user/user.actions';
+import { createStructuredSelector } from 'reselect';
+import { selectCurrentUser } from '../../redux/user/user.selector';
 
 const PostHighlightCollectionPreview = ({
   owner,
   post,
   saveDownload,
   setMessage,
+  user,
 }) => {
   const {
     profile_pic_url,
@@ -33,7 +36,6 @@ const PostHighlightCollectionPreview = ({
   }, [setLoadBar]);
 
   async function downloadFile(post, url, e, mediatype) {
-    console.log(post);
     if (!post || !url || !e || !mediatype) {
       setMessage({ type: 'error', message: 'Post already deleted by owner' });
       return setTimeout(() => {
@@ -83,7 +85,9 @@ const PostHighlightCollectionPreview = ({
       .then(() => {
         loaderbtn.className = 'loader hide';
         downloadbtn.className = 'show';
-        saveDownload(downloadData);
+        {
+          user && user.is_subscribed && saveDownload(downloadData);
+        }
       });
     // return await values.add('<div className="show"></div>');
     // await e.target.classList.add('show');
@@ -225,6 +229,10 @@ const PostHighlightCollectionPreview = ({
     </div>
   );
 };
+
+const mapStateToProps = createStructuredSelector({
+  user: selectCurrentUser,
+});
 
 const mapDispatchToProps = (dispatch) => ({
   setMessage: (message) => dispatch(setMessage(message)),

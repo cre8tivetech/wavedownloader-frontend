@@ -73,39 +73,19 @@ const Profile = ({
 
   const subDaysRemaining = () => {
     if (user.is_subscribed) {
-      var date1 = new Date('06/30/2019');
-      var date2 = new Date('07/30/2019');
-
-      // To calculate the time difference of two dates
-      var Difference_In_Time = date2.getTime() - date1.getTime();
-
-      // To calculate the no. of days between two dates
-      var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
-
-      console.log(Difference_In_Days);
-
       //NOTE  DATE CONSTRUCTOR USES 0 FOR JAN, (THEREFORE JAN = JAN - 1)
       const expDate = subscription.expired_at.split('-');
       const nowDate = new Date(Date.now());
-      console.log(nowDate);
       const thisDate = new Date(Date.now());
-      console.log(expDate);
       const expiredDate = new Date(
         expDate[0],
         expDate[1] - 1,
         expDate[2].split('T')[0]
       );
-      // const expiredDate = new Date(2020, 1, 9);
-      console.log(expDate[2].split('T')[0]);
-      console.log(thisDate);
-      console.log(expiredDate);
-      // const oneDay = 24 * 3600 * 1000; // hours*minutes*seconds*milliseconds
-
-      // const diffDays = Math.ceil(Math.abs((thisDate - expiredDate) / oneDay));
-
-      var timeDiff = Math.abs(thisDate.getTime() - expiredDate.getTime());
-      var diffDays = Math.ceil(timeDiff / (24 * 3600 * 1000));
-      console.log(diffDays);
+      const oneDay = 24 * 3600 * 1000; // hours*minutes*seconds*milliseconds
+      const diffDays = Math.round(Math.abs((thisDate - expiredDate) / oneDay));
+      // var timeDiff = Math.abs(thisDate.getTime() - expiredDate.getTime());
+      // var diffDays = Math.ceil(timeDiff / (24 * 3600 * 1000));
       setSubDays(diffDays);
     } else {
       setSubDays(0);

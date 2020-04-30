@@ -7,8 +7,16 @@ import Axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import { saveDownload } from '../../redux/posts/posts.actions';
 import { setMessage } from '../../redux/user/user.actions';
+import { createStructuredSelector } from 'reselect';
+import { selectCurrentUser } from '../../redux/user/user.selector';
 
-const PostCollectionPreview = ({ data, history, saveDownload, setMessage }) => {
+const PostCollectionPreview = ({
+  data,
+  history,
+  saveDownload,
+  setMessage,
+  user,
+}) => {
   const [view, setView] = useState();
   const results = data.post.filter((datas, i) => {
     return datas;
@@ -96,7 +104,9 @@ const PostCollectionPreview = ({ data, history, saveDownload, setMessage }) => {
       .then(() => {
         loaderbtn.className = 'loader hide';
         downloadbtn.className = 'show';
-        saveDownload(downloadData);
+        {
+          user && user.is_subscribed && saveDownload(downloadData);
+        }
       });
     // return await values.add('<div className="show"></div>');
     // await e.target.classList.add('show');
@@ -235,11 +245,15 @@ const PostCollectionPreview = ({ data, history, saveDownload, setMessage }) => {
   );
 };
 
+const mapStateToProps = createStructuredSelector({
+  user: selectCurrentUser,
+});
+
 const mapDispatchToProps = (dispatch) => ({
   setMessage: (message) => dispatch(setMessage(message)),
   saveDownload: (downloadData) => dispatch(saveDownload(downloadData)),
 });
 
 export default withRouter(
-  connect(null, mapDispatchToProps)(PostCollectionPreview)
+  connect(mapStateToProps, mapDispatchToProps)(PostCollectionPreview)
 );

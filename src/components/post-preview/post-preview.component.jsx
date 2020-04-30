@@ -19,7 +19,6 @@ const PostPreview = ({
   const [view, setView] = useState();
   const [loadBar, setLoadBar] = useState();
   useEffect(() => {
-    // console.log(history.location);
     setLoadBar(100);
 
     // setUrl(history.location.data.url);

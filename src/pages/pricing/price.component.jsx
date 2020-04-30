@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { withRouter, useHistory } from 'react-router-dom';
 import { RaveProvider, RavePaymentButton } from 'react-ravepayment';
-import { setPaymentData } from '../../redux/user/user.actions';
+import { setPaymentData, setMessage } from '../../redux/user/user.actions';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { selectPaymentData } from '../../redux/user/user.selector';
@@ -17,6 +17,7 @@ const Price = ({
   classnameBg,
   opt,
   setPaymentData,
+  setMessage,
   paymentData,
 }) => {
   const key = process.env.REACT_APP_RAVE_PUBLIC_KEY; // RavePay PUBLIC KEY
@@ -31,17 +32,16 @@ const Price = ({
     currency: 'USD',
     PBFPubKey: key,
     onSuccess: (response) => {
-      console.log('Payment successfull');
+      // console.log('Payment successfull');
       callback(response);
     },
     onClose: () => {
-      console.log('Payment closed');
+      // console.log('Payment closed');
     },
   };
   // useEffect(() => {}, [paymentData]);
   const callback = (response) => {
     const txref = response.tx.txRef;
-    console.log('This is the response returned after a charge', response);
     const chargeResponse = response.tx.chargeResponseCode;
     if (chargeResponse === '00' || chargeResponse === '0') {
       setTimeout(() => {
@@ -52,7 +52,8 @@ const Price = ({
       }, 3000);
       // window.location = "https://your_URL/api/v1/rave/verify?txref="+txref; //Add your success page here
     } else {
-      console.log('Payment Failed');
+      setMessage({ type: 'error', message: 'Payment Failed' });
+      // console.log('Payment Failed');
     }
   };
 
@@ -120,5 +121,6 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = (dispatch) => ({
   setPaymentData: (txref) => dispatch(setPaymentData(txref)),
+  setMessage: (message) => dispatch(setMessage(message)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Price);

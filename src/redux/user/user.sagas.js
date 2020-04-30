@@ -289,7 +289,6 @@ export function* makePayment({ payload: txref }) {
     ) {
       return response.data.data;
     });
-    console.log('result', result);
     yield put(setSubscription(result.subscription));
     yield getSnapshotFromUserAuth(result.user);
     yield put(setMessage({ type: 'success', message: result.message }));

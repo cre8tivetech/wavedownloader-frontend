@@ -48,7 +48,6 @@ const DownloadHistory = ({
   useEffect(() => {
     checkUserSession();
     getDownload();
-    console.log(download);
     startLoader();
     if (message) {
       setConfirmText('Resend Confirmation Email');

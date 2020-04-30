@@ -89,7 +89,6 @@ const Pricing = ({
     startLoader();
     if (isLoading) {
       setTimeout(() => {
-        console.log(paymentData);
         userPaymentStart(paymentData);
       }, 5000);
     }
