@@ -189,7 +189,7 @@ const PostCollectionPreview = ({
             .map((item, i) => (
               <div key={i} className="post-card__collections--card">
                 <div className="post-card__collections--card-media ">
-                  {is_video ? (
+                  {item.is_video ? (
                     <video
                       controls
                       controlsList="nodownload"
@@ -206,7 +206,7 @@ const PostCollectionPreview = ({
                       }}
                     ></div>
                   )}
-                  {is_video ? (
+                  {item.is_video ? (
                     <a
                       onClick={(e) =>
                         downloadFile(item, item.video_url, e, '.mp4')

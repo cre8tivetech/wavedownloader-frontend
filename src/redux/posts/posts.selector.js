@@ -100,3 +100,8 @@ export const selectIsCollectionsLoaded = createSelector(
   [selectPosts],
   (posts) => !!posts.collections
 );
+
+export const selectDownloadData = createSelector(
+  [selectPosts],
+  (posts) => !!posts.downloadData
+);

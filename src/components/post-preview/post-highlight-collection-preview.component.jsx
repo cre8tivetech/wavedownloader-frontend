@@ -8,7 +8,10 @@ import { withRouter } from 'react-router-dom';
 import { saveDownload } from '../../redux/posts/posts.actions';
 import { setMessage } from '../../redux/user/user.actions';
 import { createStructuredSelector } from 'reselect';
-import { selectCurrentUser } from '../../redux/user/user.selector';
+import {
+  selectCurrentUser,
+  selectIsLoading,
+} from '../../redux/user/user.selector';
 
 const PostHighlightCollectionPreview = ({
   owner,
@@ -232,6 +235,7 @@ const PostHighlightCollectionPreview = ({
 
 const mapStateToProps = createStructuredSelector({
   user: selectCurrentUser,
+  isLoading: selectIsLoading,
 });
 
 const mapDispatchToProps = (dispatch) => ({

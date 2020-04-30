@@ -15,6 +15,7 @@ const INITIAL_STATE = {
   shortcode: null,
   idcode: null,
   source: null,
+  downloadData: null,
   isFetching: false,
   isSlide: false,
   isSingleHighlight: false,
@@ -237,6 +238,15 @@ const postsReducer = (state = INITIAL_STATE, action) => {
         slideCollections: null,
         hashTagCollections: null,
         storyCollections: action.payload,
+        errorMessage: null,
+      };
+
+    // SET DOWNLOAD
+    case PostsActionTypes.SET_DOWNLOAD_DATA:
+      return {
+        ...state,
+        downloadData: action.payload,
+        isFetching: true,
         errorMessage: null,
       };
 

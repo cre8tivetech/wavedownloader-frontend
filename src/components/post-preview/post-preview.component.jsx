@@ -44,6 +44,7 @@ const PostPreview = ({
 
   async function downloadFile(url, e, mediatype) {
     e.preventDefault();
+    console.log(url);
     const downloadData = { owner, post, __typename };
     // console.log(e.currentTarget.querySelector('div').className);
     const loaderbtn = e.currentTarget.querySelector('div');

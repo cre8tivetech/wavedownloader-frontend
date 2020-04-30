@@ -103,6 +103,11 @@ export const fetchStoryPostsSuccess = (data) => ({
   payload: data,
 });
 
+export const setDownloadData = (data) => ({
+  type: PostsActionTypes.SET_DOWNLOAD_DATA,
+  payload: data,
+});
+
 export const saveDownload = (downloadData) => ({
   type: PostsActionTypes.SAVE_DOWNLOAD,
   payload: downloadData,

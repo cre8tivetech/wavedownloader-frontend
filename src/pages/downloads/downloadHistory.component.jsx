@@ -141,6 +141,9 @@ const DownloadHistory = ({
       .then(() => {
         loaderbtn.className = 'loader hide';
         downloadbtn.className = 'show';
+      })
+      .catch((error) => {
+        console.log(error.message);
       });
     // return await values.add('<div className="show"></div>');
     // await e.target.classList.add('show');

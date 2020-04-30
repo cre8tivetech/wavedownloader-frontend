@@ -38,6 +38,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
         downloads: action.payload,
         error: null,
         success: null,
+        isLoading: null,
       };
     case UserActionTypes.SET_SUBSCRIPTION:
       return {
