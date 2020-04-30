@@ -113,7 +113,7 @@ const Pricing = ({
           setText2('Redirecting back to profile...');
           setTimeout(() => {
             setMessage(null);
-            setLoading(null);
+            // setLoading(null);
             history.push('/profile');
           }, 10000);
         }, 5000);

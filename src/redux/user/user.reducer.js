@@ -19,11 +19,11 @@ const userReducer = (state = INITIAL_STATE, action) => {
     case UserActionTypes.CHECK_USER_SESSION:
       return {
         ...state,
-        // isLoading: false,
+        // isLoading: true,
         error: null,
         // message: null,
         success: null,
-        // paymentData: null,
+        // paymentData: '',
       };
     case UserActionTypes.SET_TOKEN:
       return {
@@ -56,7 +56,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
     case UserActionTypes.SET_LOADING:
       return {
         ...state,
-        isLoading: null,
+        isLoading: action.payload,
         message: null,
         error: null,
         success: null,
