@@ -10,6 +10,7 @@ const INITIAL_STATE = {
   error: null,
   isLoading: null,
   confirmMessage: null,
+  paymentData: null,
 };
 
 const userReducer = (state = INITIAL_STATE, action) => {
@@ -18,9 +19,11 @@ const userReducer = (state = INITIAL_STATE, action) => {
     case UserActionTypes.CHECK_USER_SESSION:
       return {
         ...state,
-        isLoading: null,
+        // isLoading: false,
         error: null,
+        // message: null,
         success: null,
+        // paymentData: null,
       };
     case UserActionTypes.SET_TOKEN:
       return {
@@ -49,6 +52,53 @@ const userReducer = (state = INITIAL_STATE, action) => {
         message: action.payload,
         error: null,
         success: null,
+      };
+    case UserActionTypes.SET_LOADING:
+      return {
+        ...state,
+        isLoading: null,
+        message: null,
+        error: null,
+        success: null,
+        paymentData: null,
+      };
+    case UserActionTypes.SET_PAYMENT_DATA:
+      return {
+        ...state,
+        message: null,
+        paymentData: action.payload,
+        isLoading: true,
+        error: null,
+        success: null,
+      };
+
+    case UserActionTypes.USER_PAYMENT_START:
+      return {
+        ...state,
+        message: null,
+        isLoading: true,
+        error: null,
+        success: null,
+      };
+
+    case UserActionTypes.USER_PAYMENT_SUCCESS:
+      return {
+        ...state,
+        message: null,
+        isLoading: false,
+        error: null,
+        success: null,
+        // paymentData: null,
+      };
+
+    case UserActionTypes.USER_PAYMENT_FAILURE:
+      return {
+        ...state,
+        message: action.payload,
+        isLoading: false,
+        error: null,
+        success: null,
+        // paymentData: null,
       };
     case UserActionTypes.FORGET_PASSWORD_START:
       return {

@@ -122,7 +122,7 @@ const ChangePassword = ({
             <p onClick={() => signOut()}>
               <strong>{logout}</strong>
             </p>
-            {user && user.is_email_confirm ? (
+            {user && user.is_email_confirm && user.is_subscribed ? (
               <div>
                 <Link to="/download-history">
                   <i

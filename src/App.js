@@ -288,7 +288,13 @@ const App = ({ checkUserSession, currentUser, token, location }) => {
           exact
           path="/download-history"
           render={() =>
-            !currentUser ? <Redirect to="/signin" /> : <DownloadHistory />
+            currentUser &&
+            currentUser.is_email_confirm &&
+            currentUser.is_subscribed ? (
+              <DownloadHistory />
+            ) : (
+              <Redirect to="/" />
+            )
           }
         />
         <Route

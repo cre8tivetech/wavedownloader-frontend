@@ -72,6 +72,15 @@ export const setMessage = (message) => ({
   payload: message,
 });
 
+export const setLoading = (condition) => ({
+  type: UserActionTypes.SET_LOADING,
+  payload: condition,
+});
+
+export const setPaymentData = (txref) => ({
+  type: UserActionTypes.SET_PAYMENT_DATA,
+  payload: txref,
+});
 export const userPaymentStart = (txref) => ({
   type: UserActionTypes.USER_PAYMENT_START,
   payload: txref,
@@ -79,6 +88,11 @@ export const userPaymentStart = (txref) => ({
 
 export const userPaymentSucesss = (ref) => ({
   type: UserActionTypes.USER_PAYMENT_SUCCESS,
+});
+
+export const userPaymentFailure = (message) => ({
+  type: UserActionTypes.USER_PAYMENT_FAILURE,
+  payload: message,
 });
 
 export const signOutStart = () => ({

@@ -38,3 +38,8 @@ export const selectIsConfirmMessage = createSelector(
   [selectUser],
   (user) => user.confirmMessage
 );
+
+export const selectPaymentData = createSelector(
+  [selectUser],
+  (user) => user.paymentData
+);

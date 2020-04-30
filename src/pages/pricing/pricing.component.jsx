@@ -2,21 +2,46 @@ import React, { useState, useEffect, useCallback } from 'react';
 import LoadingBar from 'react-top-loading-bar';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import imageLoading from '../../assets/Ripple-2.svg';
+import imageSuccessLoaded from '../../assets/thumbs-up.gif';
+import imageErrorLoaded from '../../assets/cloudcry.webp';
+// import imageErrorLoaded from '../../assets/tears.gif';
 import '../pricing/pricing.styles.scss';
-import { Link, withRouter } from 'react-router-dom';
-import { selectCurrentUser } from '../../redux/user/user.selector';
-import { signOutStart, checkUserSession } from '../../redux/user/user.actions';
+import { Link, withRouter, useHistory } from 'react-router-dom';
+import {
+  selectCurrentUser,
+  selectPaymentData,
+  selectMessage,
+  selectIsLoading,
+} from '../../redux/user/user.selector';
+import {
+  signOutStart,
+  checkUserSession,
+  userPaymentStart,
+  setMessage,
+  setLoading,
+} from '../../redux/user/user.actions';
 import free from '../../assets/message.svg';
 import basic from '../../assets/plane(1).svg';
 import premium from '../../assets/rocket.svg';
 import Price from './price.component';
 
-const Pricing = ({ user, signOutStart, checkUserSession }) => {
+const Pricing = ({
+  user,
+  signOutStart,
+  checkUserSession,
+  paymentData,
+  userPaymentStart,
+  setMessage,
+  message,
+  isLoading,
+  setLoading,
+}) => {
   const [loadBar, setLoadBar] = useState(0);
-  // const [ref, setRef] = useState({
-  //   basicREf: `basicMonthly-${Date.now()}`,
-  //   premiumREf: `premiumMonthly-${Date.now()}`,
-  // });
+  const [verifyImage, setVerifyImage] = useState(imageLoading);
+  const [textColor, setTextColor] = useState();
+  const [text1, setText1] = useState('Verifying Payment...');
+  const [text2, setText2] = useState('Please Wait...');
   const [logout, setLogout] = useState('Logout');
   const [plan, setPlan] = useState({
     amount: {
@@ -42,6 +67,8 @@ const Pricing = ({ user, signOutStart, checkUserSession }) => {
     year: 'plan-type btn',
   });
 
+  const history = useHistory();
+
   const startLoader = useCallback(() => {
     setLoadBar(100);
   }, []);
@@ -60,7 +87,40 @@ const Pricing = ({ user, signOutStart, checkUserSession }) => {
   useEffect(() => {
     checkUserSession();
     startLoader();
-  }, [checkUserSession]);
+    if (isLoading) {
+      setTimeout(() => {
+        console.log(paymentData);
+        userPaymentStart(paymentData);
+      }, 5000);
+    }
+    if (message) {
+      if (message.type === 'error') {
+        setVerifyImage(imageErrorLoaded);
+        setText1('Sorry, An error occur while verifying your payment');
+        setText2('Redirecting back to profile...');
+        setTimeout(() => {
+          setMessage(null);
+          setLoading(null);
+          history.push('/profile');
+        }, 5000);
+      }
+
+      if (message.type === 'success') {
+        setVerifyImage(imageSuccessLoaded);
+        setText1('Payment was verified successfully');
+        setText2('Adding subscription, please wait...');
+        setTimeout(() => {
+          setText1('Subscription was added successfully');
+          setText2('Redirecting back to profile...');
+          setTimeout(() => {
+            setMessage(null);
+            setLoading(null);
+            history.push('/profile');
+          }, 10000);
+        }, 5000);
+      }
+    }
+  }, [isLoading, userPaymentStart, paymentData, message]);
 
   const monthly = () => {
     setPlan({
@@ -138,14 +198,23 @@ const Pricing = ({ user, signOutStart, checkUserSession }) => {
     },
   };
 
+  // if (!paymentData)
   return (
     <div className="profile-section">
+      {paymentData && (
+        <div className="verifying">
+          <img src={verifyImage} alt="" />
+          <h1 style={{ color: textColor }}>{text1}</h1>
+          <h2>{text2}</h2>
+        </div>
+      )}
       <LoadingBar
         progress={loadBar}
         height={3}
         color="linear-gradient(92deg, #038125 0%, #fbff00 100%)"
         onLoaderFinished={() => onLoaderFinished}
       />
+
       <div className="profile-section__box card">
         <div className="profile-section__box--details">
           <div className="profile-section__box--details--left">
@@ -182,7 +251,7 @@ const Pricing = ({ user, signOutStart, checkUserSession }) => {
             <p onClick={() => signOut()}>
               <strong>{logout}</strong>
             </p>
-            {user && user.is_email_confirm ? (
+            {user && user.is_email_confirm && user.is_subscribed ? (
               <div>
                 <Link to="/download-history">
                   <i
@@ -294,10 +363,16 @@ const Pricing = ({ user, signOutStart, checkUserSession }) => {
 };
 const mapStateToProps = createStructuredSelector({
   user: selectCurrentUser,
+  message: selectMessage,
+  isLoading: selectIsLoading,
+  paymentData: selectPaymentData,
 });
 const mapDispatchToProps = (dispatch) => ({
   signOutStart: () => dispatch(signOutStart()),
   checkUserSession: () => dispatch(checkUserSession()),
+  userPaymentStart: (txref) => dispatch(userPaymentStart(txref)),
+  setMessage: (msg) => dispatch(setMessage(msg)),
+  setLoading: (conditon) => dispatch(setLoading(conditon)),
 });
 export default withRouter(
   connect(mapStateToProps, mapDispatchToProps)(Pricing)

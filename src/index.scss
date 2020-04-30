@@ -25,6 +25,22 @@ body {
   color: var(--color-grey-dark-2);
   line-height: 1.6;
   background-color: var(--color-bg);
+
+  .checkout {
+    position: relative;
+    height: 200vh;
+    background: rgba(224, 224, 224, 0.075);
+    overflow: scroll;
+  }
+}
+
+.checkout-modal--loaded{
+  .checkout {
+    position: relative;
+    height: 200vh;
+    background: rgba(224, 224, 224, 0.075);
+    overflow: scroll;
+  }
 }
 
 code {

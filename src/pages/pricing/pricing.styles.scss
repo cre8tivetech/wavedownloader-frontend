@@ -379,3 +379,46 @@
     }
   }
 }
+.verifying {
+  position:fixed;
+  overflow:hidden;
+  top: 0rem;
+  left: 0rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(black, 0.9);
+  text-align: center;
+  filter: alpha(opacity=90);
+  /* For IE8 and earlier */
+  z-index: 1;
+  // &::after {
+  //   clear: both;
+  //   content: "";
+  //   display: table;
+  // }
+  img {
+    align-items: center;
+    width: 25%;
+    // height: 50%;
+
+    @include respond(tabPort) {
+      width: 35%;
+    }
+
+    @include respond(phone) {
+      width: 60%;
+    }
+  }
+
+  h1 {
+    align-items: center;
+    margin: 0;
+  }
+}
+.checkout {
+  background: none !important;
+}

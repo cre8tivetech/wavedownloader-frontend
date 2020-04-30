@@ -4,8 +4,17 @@ import LoadingBar from 'react-top-loading-bar';
 import Axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import { saveDownload } from '../../redux/posts/posts.actions';
+import { selectCurrentUser } from '../../redux/user/user.selector';
+import { createStructuredSelector } from 'reselect';
 
-const PostPreview = ({ __typename, owner, post, history, saveDownload }) => {
+const PostPreview = ({
+  __typename,
+  owner,
+  post,
+  history,
+  saveDownload,
+  user,
+}) => {
   // const { url, setUrl } = useState();
   const [view, setView] = useState();
   const [loadBar, setLoadBar] = useState();
@@ -32,7 +41,7 @@ const PostPreview = ({ __typename, owner, post, history, saveDownload }) => {
     // return () => {
     //   console.log("will unmount");
     // };
-  }, [setLoadBar]);
+  }, [setLoadBar, user]);
 
   async function downloadFile(url, e, mediatype) {
     e.preventDefault();
@@ -77,7 +86,9 @@ const PostPreview = ({ __typename, owner, post, history, saveDownload }) => {
       .then(() => {
         loaderbtn.className = 'loader hide';
         downloadbtn.className = 'show';
-        saveDownload(downloadData);
+        {
+          user && user.is_subscribed && saveDownload(downloadData);
+        }
       });
   }
 
@@ -204,8 +215,14 @@ const PostPreview = ({ __typename, owner, post, history, saveDownload }) => {
   );
 };
 
+const mapStateToProps = createStructuredSelector({
+  user: selectCurrentUser,
+});
+
 const mapDispatchToProps = (dispatch) => ({
   saveDownload: (downloadData) => dispatch(saveDownload(downloadData)),
 });
 
-export default withRouter(connect(null, mapDispatchToProps)(PostPreview));
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(PostPreview)
+);

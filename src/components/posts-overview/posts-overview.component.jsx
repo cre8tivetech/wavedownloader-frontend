@@ -24,7 +24,6 @@ const PostsOverview = ({
   const [error, setError] = useState();
   useEffect(() => {
     setError({ errorMessage: errorMessage });
-    console.log(collections);
   }, [errorMessage]);
   return collections ? (
     <div className="posts-overview">

@@ -25,6 +25,8 @@ import {
   signUpSuccess,
   resendConfirmEmailSuccess,
   forgetPasswordSuccess,
+  userPaymentSucesss,
+  userPaymentFailure,
 } from './user.actions';
 import { getDownloadsApi, getSubscriptionApi } from '../../Api/api';
 
@@ -287,10 +289,24 @@ export function* makePayment({ payload: txref }) {
     ) {
       return response.data.data;
     });
+    console.log('result', result);
     yield put(setSubscription(result.subscription));
     yield getSnapshotFromUserAuth(result.user);
+    yield put(setMessage({ type: 'success', message: result.message }));
+    yield delay(6000);
+    yield put(setMessage(null));
   } catch (error) {
-    yield put(signUpFailure(error));
+    // yield put(())
+    yield put(
+      userPaymentFailure({
+        type: 'error',
+        message: error.response
+          ? error.response.data.message || error.response.data.error
+          : 'Oops!!, Poor internet connection, Please check your connectivity, And try again',
+      })
+    );
+    // yield delay(6000);
+    // yield put(setMessage(null));
   }
 }
 

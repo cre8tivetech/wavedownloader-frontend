@@ -1,8 +1,10 @@
-import React from "react";
-import { withRouter } from "react-router-dom";
-import { RaveProvider, RavePaymentButton } from "react-ravepayment";
-import { userPaymentStart } from "../../redux/user/user.actions";
-import { connect } from "react-redux";
+import React, { useState, useEffect } from 'react';
+import { withRouter, useHistory } from 'react-router-dom';
+import { RaveProvider, RavePaymentButton } from 'react-ravepayment';
+import { setPaymentData } from '../../redux/user/user.actions';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import { selectPaymentData } from '../../redux/user/user.selector';
 
 const Price = ({
   img,
@@ -14,44 +16,55 @@ const Price = ({
   classnameImg,
   classnameBg,
   opt,
-  userPaymentStart
+  setPaymentData,
+  paymentData,
 }) => {
   const key = process.env.REACT_APP_RAVE_PUBLIC_KEY; // RavePay PUBLIC KEY
-  const amountText = amount.toString().split(".");
+  const amountText = amount.toString().split('.');
   const { opt1, opt2, opt3, opt4, opt5, opt6 } = opt;
+  const history = useHistory();
   const config = {
     txref: reference,
     customer_email: email,
     // customer_phone: "234099940409",
     amount: amount,
-    currency: "USD",
+    currency: 'USD',
     PBFPubKey: key,
-    onSuccess: response => {
+    onSuccess: (response) => {
+      console.log('Payment successfull');
       callback(response);
     },
     onClose: () => {
-      console.log("Payment closed");
-    }
+      console.log('Payment closed');
+    },
   };
-  const callback = response => {
+  // useEffect(() => {}, [paymentData]);
+  const callback = (response) => {
     const txref = response.tx.txRef;
+    console.log('This is the response returned after a charge', response);
     const chargeResponse = response.tx.chargeResponseCode;
-    if (chargeResponse === "00" || chargeResponse === "0") {
-      userPaymentStart(txref);
+    if (chargeResponse === '00' || chargeResponse === '0') {
+      setTimeout(() => {
+        setTimeout(() => {
+          history.go();
+        }, 1000);
+        setPaymentData(txref);
+      }, 3000);
       // window.location = "https://your_URL/api/v1/rave/verify?txref="+txref; //Add your success page here
     } else {
-      console.log("Payment Failed");
+      console.log('Payment Failed');
     }
   };
+
   return (
-    <div className={"pricing-section_box--container_box " + classname}>
-      <div className={"pricing-section_box--container_box-top " + classnameImg}>
+    <div className={'pricing-section_box--container_box ' + classname}>
+      <div className={'pricing-section_box--container_box-top ' + classnameImg}>
         <div className="pricing-section_box--container_box-top-title">
           <h2>{classname}</h2>
         </div>
         <img src={img} alt="" />
       </div>
-      <div className={"pricing-section_box--container_box-bottom " + classname}>
+      <div className={'pricing-section_box--container_box-bottom ' + classname}>
         <div className="sub-type">
           <h1>
             <span>$</span>
@@ -91,7 +104,7 @@ const Price = ({
                 </div> */}
         <div className="plan">
           <RaveProvider {...config}>
-            <RavePaymentButton className={"plan-btn btn " + classnameBg}>
+            <RavePaymentButton className={'plan-btn btn ' + classnameBg}>
               Buy now
             </RavePaymentButton>
           </RaveProvider>
@@ -101,7 +114,11 @@ const Price = ({
   );
 };
 
-const mapDispatchToProps = dispatch => ({
-  userPaymentStart: txref => dispatch(userPaymentStart(txref))
+const mapStateToProps = createStructuredSelector({
+  paymentData: selectPaymentData,
 });
-export default connect(null, mapDispatchToProps)(Price);
+
+const mapDispatchToProps = (dispatch) => ({
+  setPaymentData: (txref) => dispatch(setPaymentData(txref)),
+});
+export default connect(mapStateToProps, mapDispatchToProps)(Price);
