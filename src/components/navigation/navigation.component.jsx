@@ -34,6 +34,7 @@ const Navigation = ({ user, signOutStart }) => {
       // setClick("open");
     } else if (click === 'open') {
       setClick('close');
+
     }
   };
 
@@ -101,7 +102,7 @@ const Navigation = ({ user, signOutStart }) => {
                 <p>
                   {user.full_name} <small>{user.email}</small>
                 </p>
-              </Link>
+              </Link> 
             </li>
           ) : (
             <li>
@@ -115,7 +116,7 @@ const Navigation = ({ user, signOutStart }) => {
             </li>
           )}
 
-          <li>
+          <li onClick={(e) => navToggle(e)}>
             <Link className="links" to="/">
               <i
                 className="fad fa-home"

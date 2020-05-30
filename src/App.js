@@ -14,15 +14,15 @@ import './themes/update-faq.scss';
 import { createStructuredSelector } from 'reselect';
 import Header from './components/header/header.component';
 import Home from './pages/home/home.component';
-import PostByUsername from './components/post-by-username/post-by-username.component';
-import PostByHashtag from './components/post-by-hashtag/post-by-hashtag.component';
-import Highlight from './components/highlight/highlight.component';
-import Stories from './components/stories/stories.component';
-import Posts from './pages/posts/posts.component';
-import UserNamePosts from './pages/posts/username-posts.component';
-import HashTagPosts from './pages/posts/hashtag-posts.component';
-import HighlightPosts from './pages/posts/highlight-posts.component';
-import StoryPosts from './pages/posts/story-posts.component';
+import PostByUsername from './components/instagram/post-by-username/post-by-username.component';
+import PostByHashtag from './components/instagram/post-by-hashtag/post-by-hashtag.component';
+import Highlight from './components/instagram/highlight/highlight.component';
+import Stories from './components/instagram/stories/stories.component';
+import InstagramPosts from './pages/instagram/posts.component';
+import UserNamePosts from './pages/instagram/username-posts.component';
+import HashTagPosts from './pages/instagram/hashtag-posts.component';
+import HighlightPosts from './pages/instagram/highlight-posts.component';
+import StoryPosts from './pages/instagram/story-posts.component';
 import PostsSpinner from './components/posts-spinner/posts-spinner.component';
 import SignIn from './pages/auth/signin.component';
 import SignUp from './pages/auth/signup.component';
@@ -61,10 +61,10 @@ const App = ({ checkUserSession, currentUser, token, location }) => {
       <Message />
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route exact path="/posts" component={Posts} />
+        <Route exact path="/instagram/posts" component={InstagramPosts} />
         <Route
           exact
-          path="/post-by-username"
+          path="/instagram/post-by-username"
           render={() =>
             !currentUser ? (
               <Redirect
@@ -91,7 +91,7 @@ const App = ({ checkUserSession, currentUser, token, location }) => {
         {/* Post-by-hashtag */}
         <Route
           exact
-          path="/post-by-hashtag"
+          path="/instagram/post-by-hashtag"
           render={() =>
             !currentUser ? (
               <Redirect
@@ -118,7 +118,7 @@ const App = ({ checkUserSession, currentUser, token, location }) => {
         {/* Post-by-username */}
         <Route
           exact
-          path="/highlight"
+          path="/instagram/highlight"
           render={() =>
             !currentUser ? (
               <Redirect
@@ -145,7 +145,7 @@ const App = ({ checkUserSession, currentUser, token, location }) => {
         {/* Post-by-username */}
         <Route
           exact
-          path="/stories"
+          path="/instagram/stories"
           render={() =>
             !currentUser ? (
               <Redirect
@@ -173,7 +173,7 @@ const App = ({ checkUserSession, currentUser, token, location }) => {
         {/* <Route exact path="/username-posts" component={UserNamePosts} /> */}
         <Route
           exact
-          path="/username-posts"
+          path="/instagram/username-posts"
           render={() =>
             !currentUser ? (
               <Redirect
@@ -200,7 +200,7 @@ const App = ({ checkUserSession, currentUser, token, location }) => {
         {/* Post-by-username */}
         <Route
           exact
-          path="/hashtag-posts"
+          path="/instagram/hashtag-posts"
           render={() =>
             !currentUser ? (
               <Redirect
@@ -227,7 +227,7 @@ const App = ({ checkUserSession, currentUser, token, location }) => {
         {/* Post-by-username */}
         <Route
           exact
-          path="/highlight-posts"
+          path="/instagram/highlight-posts"
           render={() =>
             !currentUser ? (
               <Redirect
@@ -254,7 +254,7 @@ const App = ({ checkUserSession, currentUser, token, location }) => {
         {/* Post-by-username */}
         <Route
           exact
-          path="/story-posts"
+          path="/instagram/story-posts"
           render={() =>
             !currentUser ? (
               <Redirect

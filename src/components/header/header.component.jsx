@@ -6,21 +6,25 @@ import './header.styles.scss';
 import Navigation from '../navigation/navigation.component';
 import { withRouter } from 'react-router-dom';
 import '../navigation/navigation.styles.scss';
-const Header = (props) => {
+const Header = ({ history }) => {
 
   // <!-- HEADER -->
   return (
     <div className="header">
-      <div className="header__logo">
-        <i
-          onClick={props.history.goBack}
+      <div className="container">
+        {history.location.pathname!=='/'&&
+          history.location.pathname!=='/profile'?
+        (<i
+          onClick={history.goBack}
           className="fad fa-long-arrow-left back"
           style={{ color: 'var(--color-primary-light)' }}
-        ></i>
-        <Link to="/">
-          <img className="header__logo--img-1" src={Logo1} alt="" />
-          <img className="header__logo--img-2" src={Logo2} alt="" />
-        </Link>
+        ></i>): null}
+        <div className="logo">
+          <Link to="/">
+            <img className="logo--img-1" src={Logo1} alt="" />
+            <img className="logo--img-2" src={Logo2} alt="" />
+          </Link>
+        </div>
       </div>
       {/* <!-- NAV MENU --> */}
       <Navigation />

@@ -1,16 +1,20 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { connect } from 'react-redux';
+import Accordion from '../../accordion/accordion.component';
 import LoadingBar from 'react-top-loading-bar';
 import { useHistory } from 'react-router-dom';
-import Accordion from '../../components/accordion/accordion.component';
-import { ProFeaturesInstagram, ProFeaturesYoutube } from '../../components/pro-features/pro-features.component';
-import { Link, withRouter } from 'react-router-dom';
-import { fetchPostsAdd } from '../../redux/posts/posts.actions';
-import './home.styles.scss';
+import { Link } from 'react-router-dom';
+import { checkUserSession } from '../../../redux/user/user.actions';
+import { fetchUserNamePostsAdd } from '../../../redux/posts/posts.actions';
+import { connect } from 'react-redux';
 
-const Home = ({ fetchPostsAdd }) => {
+const PostByUserName = ({ fetchUserNamePostsAdd, checkUserSession }) => {
   const [loadBar, setLoadBar] = useState(0);
-  const [url, setUrl] = useState('');
+  const [postForm, setPostForm] = useState({
+    userName: '',
+    numberOfPost: '',
+  });
+  const { userName, numberOfPost } = postForm;
+
   const startLoader = useCallback(() => {
     setLoadBar(100);
   }, []);
@@ -19,19 +23,19 @@ const Home = ({ fetchPostsAdd }) => {
   };
   const history = useHistory();
   useEffect(() => {
+    checkUserSession();
     startLoader();
-  }, [startLoader]);
-  useCallback(() => {
-    startLoader();
-  }, [startLoader]);
+  }, [startLoader, checkUserSession]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    fetchPostsAdd(url);
-    history.push('/instagram/posts');
+    fetchUserNamePostsAdd(userName, numberOfPost);
+    history.push('/username-posts');
   };
   const handleChange = (event) => {
-    setUrl(event.target.value);
+    const { name, value } = event.target;
+
+    setPostForm({ ...postForm, [name]: value });
   };
   return (
     <div className="home-section">
@@ -41,53 +45,122 @@ const Home = ({ fetchPostsAdd }) => {
         color="linear-gradient(92deg, #038125 0%, #fbff00 100%)"
         onLoaderFinished={() => onLoaderFinished}
       />
-    
+      <div className="options card">
+        <Link to="/" className="btn">
+          <p>Single Post</p>
+        </Link>
+        <Link to="/post-by-username" className="btn options--active">
+          <span>Pro</span>
+          <p>Posts By Username</p>
+        </Link>
+        <Link to="/post-by-hashtag" className="btn">
+          <span>Pro</span>
+          <p>Posts By Hashtag</p>
+        </Link>
+        <Link to="/highlight" className="btn">
+          <span>Pro</span>
+          <p>Highlight</p>
+        </Link>
+        <Link to="/stories" className="btn">
+          <span>Pro</span>
+          <p>Stories</p>
+        </Link>
+      </div>
       <div className="download card">
         <p className="download__text download__text--1">
-          Download Instagram Post (Image, Video and Carousel)
+          Download Instagram Post By Username!
         </p>
         <div className="download__text download__text--2">
           <p>
-            <span>NEW</span>Download Youtube Videos
+            <span>NEW</span>{' '}
+            <small>Files encrypted are changed for faster reuploading!</small>
           </p>
         </div>
         <div className="download__form">
           <form onSubmit={handleSubmit} className="form">
             <div className="form__group">
+              {/* UserName */}
               <div className="form__input">
                 <i
-                  className="fad fa-link"
+                  className="fad fa-user"
                   style={{ color: 'var(--color-primary)' }}
                 ></i>
                 <input
                   type="text"
                   className="form__input--box"
-                  placeholder="Enter Url"
-                  value={url}
+                  placeholder="Username"
+                  id="username"
+                  name="userName"
+                  value={userName}
                   onChange={handleChange}
-                  id="url"
                   required
                 />
-                <label htmlFor="url" className="form__input--label">
-                  URL
+                <label htmlFor="username" className="form__input--label">
+                  UserName
+                </label>
+              </div>
+
+              {/* Post Type */}
+              {/* <div className="form__input">
+                <i
+                  className="fad fa-images"
+                  style={{ color: "var(--color-primary)" }}
+                ></i>
+                <select
+                  className="form__input--box"
+                  placeholder="Select post type"
+                  required
+                  name="postType"
+                  value={postType}
+                  onChange={handleChange}
+                  // value={this.state.value} onChange={this.handleChange}
+                >
+                  <option
+                    value=""
+                    disabled
+                    name="postType"
+                    onChange={handleChange}
+                    defaultValue
+                    hidden
+                  >
+                    Select Post Type
+                  </option>
+                  <option value="all">All</option>
+                  <option value="GraphVideo">Video</option>
+                  <option value="GraphImage">Image</option>
+                  <option value="GraphSidecar">Slide</option>
+                </select>
+              </div> */}
+
+              {/* Number of post */}
+              <div className="form__input">
+                <i
+                  className="fad fa-sort-numeric-down"
+                  style={{ color: 'var(--color-primary)' }}
+                ></i>
+                <input
+                  type="number"
+                  className="form__input--box"
+                  placeholder="Numbers of post (Min 5) (Max 50)"
+                  id="numbers-of-post"
+                  min="5"
+                  max="50"
+                  onChange={handleChange}
+                  name="numberOfPost"
+                  value={numberOfPost}
+                  required
+                />
+                <label htmlFor="numbers-of-post" className="form__input--label">
+                  (Min 5) (Max 50)
                 </label>
               </div>
             </div>
             <div className="form__group">
-              <button type="submit" className="btn btn--green">
-                Download ➤
-              </button>
+              <button className="btn btn--green">Download ➤</button>
             </div>
           </form>
         </div>
       </div>
-
-      <div className="premium-features">
-        <h3>Our Premium Features</h3>
-        <ProFeaturesInstagram />
-        <ProFeaturesYoutube />
-      </div>
-
       <div className="update-faq card">
         <div className="update">
           <div className="update__title">
@@ -197,6 +270,8 @@ const Home = ({ fetchPostsAdd }) => {
   );
 };
 const mapDispatchToProps = (dispatch) => ({
-  fetchPostsAdd: (url) => dispatch(fetchPostsAdd(url)),
+  fetchUserNamePostsAdd: (userName, numberOfPost) =>
+    dispatch(fetchUserNamePostsAdd({ userName, numberOfPost })),
+  checkUserSession: () => dispatch(checkUserSession()),
 });
-export default withRouter(connect(null, mapDispatchToProps)(Home));
+export default connect(null, mapDispatchToProps)(PostByUserName);

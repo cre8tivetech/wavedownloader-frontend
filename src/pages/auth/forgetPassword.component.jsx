@@ -83,7 +83,7 @@ const ForgotPassword = ({ forgetPasswordStart, error, isLoading }) => {
           </div>
           <div className="form__group">
             <button type="submit" className=" submit_btn btn btn--green">
-              {isLoading ? <div className="loader"></div> : <p>Send</p>}
+              {isLoading ? <div className="loader"></div> : <p>Submit</p>}
             </button>
           </div>
         </form>

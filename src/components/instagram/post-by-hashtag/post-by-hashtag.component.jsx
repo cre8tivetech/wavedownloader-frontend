@@ -1,16 +1,19 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { connect } from 'react-redux';
+import Accordion from '../../accordion/accordion.component';
 import LoadingBar from 'react-top-loading-bar';
 import { useHistory } from 'react-router-dom';
-import Accordion from '../../components/accordion/accordion.component';
-import { ProFeaturesInstagram, ProFeaturesYoutube } from '../../components/pro-features/pro-features.component';
-import { Link, withRouter } from 'react-router-dom';
-import { fetchPostsAdd } from '../../redux/posts/posts.actions';
-import './home.styles.scss';
+import { fetchHashTagPostsAdd } from '../../../redux/posts/posts.actions';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { checkUserSession } from '../../../redux/user/user.actions';
 
-const Home = ({ fetchPostsAdd }) => {
+const PostByHashtag = ({ fetchHashTagPostsAdd, checkUserSession }) => {
   const [loadBar, setLoadBar] = useState(0);
-  const [url, setUrl] = useState('');
+  const [hashTagForm, setHashTagForm] = useState({
+    hashTag: '',
+    postType: '',
+  });
+  const { hashTag, postType } = hashTagForm;
   const startLoader = useCallback(() => {
     setLoadBar(100);
   }, []);
@@ -19,20 +22,20 @@ const Home = ({ fetchPostsAdd }) => {
   };
   const history = useHistory();
   useEffect(() => {
+    checkUserSession();
     startLoader();
-  }, [startLoader]);
-  useCallback(() => {
-    startLoader();
-  }, [startLoader]);
-
+  }, [startLoader, checkUserSession]);
   const handleSubmit = (event) => {
     event.preventDefault();
-    fetchPostsAdd(url);
-    history.push('/instagram/posts');
+    fetchHashTagPostsAdd(hashTag, postType);
+    history.push('/hashtag-posts');
   };
   const handleChange = (event) => {
-    setUrl(event.target.value);
+    const { name, value } = event.target;
+
+    setHashTagForm({ ...hashTagForm, [name]: value });
   };
+
   return (
     <div className="home-section">
       <LoadingBar
@@ -41,53 +44,91 @@ const Home = ({ fetchPostsAdd }) => {
         color="linear-gradient(92deg, #038125 0%, #fbff00 100%)"
         onLoaderFinished={() => onLoaderFinished}
       />
-    
+      <div className="options card">
+        <Link to="/" className="btn">
+          <p>Single Post</p>
+        </Link>
+        <Link to="/post-by-username" className="btn">
+          <span>Pro</span>
+          <p>Posts By Username</p>
+        </Link>
+        <Link to="/post-by-hashtag" className="btn options--active">
+          <span>Pro</span>
+          <p>Posts By Hashtag</p>
+        </Link>
+        <Link to="/highlight" className="btn">
+          <span>Pro</span>
+          <p>Highlight</p>
+        </Link>
+        <Link to="/stories" className="btn">
+          <span>Pro</span>
+          <p>Stories</p>
+        </Link>
+      </div>
       <div className="download card">
         <p className="download__text download__text--1">
-          Download Instagram Post (Image, Video and Carousel)
+          Download #HashTag Posts!
         </p>
         <div className="download__text download__text--2">
           <p>
-            <span>NEW</span>Download Youtube Videos
+            <span>NEW</span>{' '}
+            <small>Files encrypted are changed for faster reuploading!</small>
           </p>
         </div>
         <div className="download__form">
           <form onSubmit={handleSubmit} className="form">
             <div className="form__group">
+              {/* HashTag */}
               <div className="form__input">
                 <i
-                  className="fad fa-link"
+                  className="fad fa-hashtag"
                   style={{ color: 'var(--color-primary)' }}
                 ></i>
                 <input
                   type="text"
+                  id="hashtag"
                   className="form__input--box"
-                  placeholder="Enter Url"
-                  value={url}
+                  placeholder="HashTag Name"
+                  name="hashTag"
+                  value={hashTag}
                   onChange={handleChange}
-                  id="url"
                   required
                 />
-                <label htmlFor="url" className="form__input--label">
-                  URL
+                <label htmlFor="hashtag" className="form__input--label">
+                  #HashTag Name
                 </label>
+              </div>
+
+              {/* Post Type */}
+              <div className="form__input">
+                <i
+                  className="fad fa-images"
+                  style={{ color: 'var(--color-primary)' }}
+                ></i>
+                <select
+                  className="form__input--box"
+                  placeholder="Select post type"
+                  required
+                  name="postType"
+                  value={postType}
+                  onChange={handleChange}
+                  // value={this.state.value} onChange={this.handleChange}
+                >
+                  <option value="" disabled defaultValue hidden>
+                    Select Post Type
+                  </option>
+                  <option value="all">All</option>
+                  <option value="top">Top Posts</option>
+                  <option value="most">Most Recent</option>
+                </select>
               </div>
             </div>
             <div className="form__group">
-              <button type="submit" className="btn btn--green">
-                Download ➤
-              </button>
+              <button className="btn btn--green">Download ➤</button>
             </div>
           </form>
         </div>
       </div>
-
-      <div className="premium-features">
-        <h3>Our Premium Features</h3>
-        <ProFeaturesInstagram />
-        <ProFeaturesYoutube />
-      </div>
-
       <div className="update-faq card">
         <div className="update">
           <div className="update__title">
@@ -197,6 +238,8 @@ const Home = ({ fetchPostsAdd }) => {
   );
 };
 const mapDispatchToProps = (dispatch) => ({
-  fetchPostsAdd: (url) => dispatch(fetchPostsAdd(url)),
+  fetchHashTagPostsAdd: (hashTag, postType) =>
+    dispatch(fetchHashTagPostsAdd({ hashTag, postType })),
+  checkUserSession: () => dispatch(checkUserSession()),
 });
-export default withRouter(connect(null, mapDispatchToProps)(Home));
+export default connect(null, mapDispatchToProps)(PostByHashtag);
