@@ -1,16 +1,15 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { connect } from 'react-redux';
+import Accordion from '../../accordion/accordion.component';
 import LoadingBar from 'react-top-loading-bar';
-import { useHistory } from 'react-router-dom';
-import Accordion from '../../components/accordion/accordion.component';
-import { ProFeaturesInstagram, ProFeaturesYoutube } from '../../components/pro-features/pro-features.component';
-import { Link, withRouter } from 'react-router-dom';
-import { fetchPostsAdd } from '../../redux/posts/posts.actions';
-import './home.styles.scss';
+import { useHistory, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { fetchHighlightPostsAdd } from '../../../redux/posts/posts.actions';
+import { connect } from 'react-redux';
+import { checkUserSession } from '../../../redux/user/user.actions';
 
-const Home = ({ fetchPostsAdd }) => {
+const Highlight = ({ fetchHighlightPostsAdd, checkUserSession }) => {
   const [loadBar, setLoadBar] = useState(0);
-  const [url, setUrl] = useState('');
+  const [username, setUsername] = useState('');
   const startLoader = useCallback(() => {
     setLoadBar(100);
   }, []);
@@ -19,19 +18,17 @@ const Home = ({ fetchPostsAdd }) => {
   };
   const history = useHistory();
   useEffect(() => {
+    checkUserSession();
     startLoader();
-  }, [startLoader]);
-  useCallback(() => {
-    startLoader();
-  }, [startLoader]);
+  }, [startLoader, checkUserSession]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    fetchPostsAdd(url);
-    history.push('/instagram/posts');
+    fetchHighlightPostsAdd(username);
+    history.push('/highlight-posts');
   };
   const handleChange = (event) => {
-    setUrl(event.target.value);
+    setUsername(event.target.value);
   };
   return (
     <div className="home-section">
@@ -41,35 +38,57 @@ const Home = ({ fetchPostsAdd }) => {
         color="linear-gradient(92deg, #038125 0%, #fbff00 100%)"
         onLoaderFinished={() => onLoaderFinished}
       />
-    
+      <div className="options card">
+        <Link to="/" className="btn">
+          <p>Single Post</p>
+        </Link>
+        <Link to="/post-by-username" className="btn">
+          <span>Pro</span>
+          <p>Posts By Username</p>
+        </Link>
+        <Link to="/post-by-hashtag" className="btn">
+          <span>Pro</span>
+          <p>Posts By Hashtag</p>
+        </Link>
+        <Link to="/highlight" className="btn options--active">
+          <span>Pro</span>
+          <p>Highlight</p>
+        </Link>
+        <Link to="/stories" className="btn">
+          <span>Pro</span>
+          <p>Stories</p>
+        </Link>
+      </div>
       <div className="download card">
         <p className="download__text download__text--1">
-          Download Instagram Post (Image, Video and Carousel)
+          Download Instagram Highlights Post!
         </p>
         <div className="download__text download__text--2">
           <p>
-            <span>NEW</span>Download Youtube Videos
+            <span>NEW</span>{' '}
+            <small>Files encrypted are changed for faster reuploading!</small>
           </p>
         </div>
         <div className="download__form">
           <form onSubmit={handleSubmit} className="form">
             <div className="form__group">
+              {/* UserName */}
               <div className="form__input">
                 <i
-                  className="fad fa-link"
+                  className="fad fa-user"
                   style={{ color: 'var(--color-primary)' }}
                 ></i>
                 <input
                   type="text"
                   className="form__input--box"
-                  placeholder="Enter Url"
-                  value={url}
+                  placeholder="Username"
+                  id="username"
+                  value={username}
                   onChange={handleChange}
-                  id="url"
                   required
                 />
-                <label htmlFor="url" className="form__input--label">
-                  URL
+                <label htmlFor="username" className="form__input--label">
+                  UserName
                 </label>
               </div>
             </div>
@@ -81,13 +100,6 @@ const Home = ({ fetchPostsAdd }) => {
           </form>
         </div>
       </div>
-
-      <div className="premium-features">
-        <h3>Our Premium Features</h3>
-        <ProFeaturesInstagram />
-        <ProFeaturesYoutube />
-      </div>
-
       <div className="update-faq card">
         <div className="update">
           <div className="update__title">
@@ -197,6 +209,8 @@ const Home = ({ fetchPostsAdd }) => {
   );
 };
 const mapDispatchToProps = (dispatch) => ({
-  fetchPostsAdd: (url) => dispatch(fetchPostsAdd(url)),
+  fetchHighlightPostsAdd: (username) =>
+    dispatch(fetchHighlightPostsAdd(username)),
+  checkUserSession: () => dispatch(checkUserSession()),
 });
-export default withRouter(connect(null, mapDispatchToProps)(Home));
+export default withRouter(connect(null, mapDispatchToProps)(Highlight));

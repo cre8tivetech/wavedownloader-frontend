@@ -1,14 +1,14 @@
 @import '../../themes/mixins.scss';
 
 .profile-section {
-  width: 80%;
+  width: 70%;
   margin: 0 auto;
 
   @include respond(tabPort) {
     width: 85%;
   }
 
-  @include respond(phone) {
+  @include respond(phone) { 
     width: 95%;
   }
 

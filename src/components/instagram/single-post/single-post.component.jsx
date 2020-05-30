@@ -2,13 +2,11 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { connect } from 'react-redux';
 import LoadingBar from 'react-top-loading-bar';
 import { useHistory } from 'react-router-dom';
-import Accordion from '../../components/accordion/accordion.component';
-import { ProFeaturesInstagram, ProFeaturesYoutube } from '../../components/pro-features/pro-features.component';
+import Accordion from '../../accordion/accordion.component';
 import { Link, withRouter } from 'react-router-dom';
-import { fetchPostsAdd } from '../../redux/posts/posts.actions';
-import './home.styles.scss';
+import { fetchPostsAdd } from '../../../redux/posts/posts.actions';
 
-const Home = ({ fetchPostsAdd }) => {
+const SinglePost = ({ fetchPostsAdd }) => {
   const [loadBar, setLoadBar] = useState(0);
   const [url, setUrl] = useState('');
   const startLoader = useCallback(() => {
@@ -28,7 +26,7 @@ const Home = ({ fetchPostsAdd }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     fetchPostsAdd(url);
-    history.push('/instagram/posts');
+    history.push('/posts');
   };
   const handleChange = (event) => {
     setUrl(event.target.value);
@@ -41,14 +39,35 @@ const Home = ({ fetchPostsAdd }) => {
         color="linear-gradient(92deg, #038125 0%, #fbff00 100%)"
         onLoaderFinished={() => onLoaderFinished}
       />
-    
+      <div className="options card">
+        <Link to="/" className="btn options--active">
+          <p>Single Post</p>
+        </Link>
+        <Link to="/post-by-username" className="btn">
+          <span>Pro</span>
+          <p>Posts By Username</p>
+        </Link>
+        <Link to="/post-by-hashtag" className="btn">
+          <span>Pro</span>
+          <p>Posts By Hashtag</p>
+        </Link>
+        <Link to="/highlight" className="btn">
+          <span>Pro</span>
+          <p>Highlight</p>
+        </Link>
+        <Link to="/stories" className="btn">
+          <span>Pro</span>
+          <p>Stories</p>
+        </Link>
+      </div>
       <div className="download card">
         <p className="download__text download__text--1">
-          Download Instagram Post (Image, Video and Carousel)
+          Download any Instagram Post! (Image or Video)
         </p>
         <div className="download__text download__text--2">
           <p>
-            <span>NEW</span>Download Youtube Videos
+            <span>NEW</span>Download any post which contain multiple images or
+            video!
           </p>
         </div>
         <div className="download__form">
@@ -81,13 +100,6 @@ const Home = ({ fetchPostsAdd }) => {
           </form>
         </div>
       </div>
-
-      <div className="premium-features">
-        <h3>Our Premium Features</h3>
-        <ProFeaturesInstagram />
-        <ProFeaturesYoutube />
-      </div>
-
       <div className="update-faq card">
         <div className="update">
           <div className="update__title">
@@ -199,4 +211,4 @@ const Home = ({ fetchPostsAdd }) => {
 const mapDispatchToProps = (dispatch) => ({
   fetchPostsAdd: (url) => dispatch(fetchPostsAdd(url)),
 });
-export default withRouter(connect(null, mapDispatchToProps)(Home));
+export default withRouter(connect(null, mapDispatchToProps)(SinglePost));

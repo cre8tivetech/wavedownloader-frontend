@@ -166,11 +166,9 @@ const SignUp = ({ signUpStart, success, error, isLoading }) => {
           </div>
           <div className="form__group">
             <button type="submit" className=" submit_btn btn btn--green">
-              {isLoading ? <div className="loader"></div> : <p>Sign In</p>}
+              {isLoading ? <div className="loader"></div> : <p>Submit</p>}
             </button>
-            <Link to="/signin" className="auth-link">
-              <p>Already a member? Sign In</p>
-            </Link>
+            <p>Already a member? <Link to="/signin" className="auth-link">Sign In</Link></p>
           </div>
         </form>
       </div>
