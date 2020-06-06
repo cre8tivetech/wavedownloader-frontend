@@ -24,8 +24,9 @@ const PostPreview = ({
   // const { url, setUrl } = useState();
   const [loadBar, setLoadBar] = useState();
   const [time, setTime] = useState();
-  const [videoItag, setVideoItag] = useState(formats? 22 : 18);
+  const [videoItag, setVideoItag] = useState(formats.find(i => i.itag === 22) ? 22 : 18);
   const [format, setFormat] = useState('mp4');
+
   useEffect(() => {
     setLoadBar(100);
 
@@ -138,10 +139,9 @@ const PostPreview = ({
               ></div>
               <a
                 // onClick={(e) => downloadFile(post.display_url, e, '.jpg')}
-                target="__blank"
                 href={`${process.env.REACT_APP_API}youtube/download/?videoId=${videoId}&title=${title}&itag=${videoItag}&format=${format}`}
                 className="post-card__collections--card-media_download-btn"
-                data-method="get"
+                // data-method="get"
               >
                 <div className="loader hide"></div>
                 <p>
@@ -157,7 +157,7 @@ const PostPreview = ({
               {i.container.split('/')[1].toUpperCase() + ' ' + i.qualityLabel.split('p')[0]}
               </option>)
             )}
-            <option value={1}>MP3 360</option>
+            <option value={1}>MP3 Audio</option>
           </select>
         </div>
       </div>
