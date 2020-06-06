@@ -203,6 +203,62 @@
     }
   }
 
+  &__select {
+    width: 30%;
+    margin: 0 auto;
+    border: 2px solid var(--color-primary);
+    // color: var(--color-primary);
+    position: relative;
+    display: flex;
+    // width: 20em;
+    height: 3em;
+    line-height: 3;
+    background: var(--color-bg);
+    overflow: hidden;
+    border-radius: .25em;
+
+    select {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      -ms-appearance: none;
+      appearance: none;
+      outline: 0;
+      box-shadow: none;
+      border: 0 !important;
+      background: var(--color-bg);
+      background-image: none;
+    }
+    /* Remove IE arrow */
+    select::-ms-expand {
+      display: none;
+    }
+    select {
+      flex: 1;
+      padding: 0 .5em;
+      color: var(--color-primary);
+      cursor: pointer;
+    }
+    /* Arrow */
+    &::after {
+      content: '\25BC';
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 0 1em;
+      background: var(--color-primary);
+      color: #fff;
+      cursor: pointer;
+      pointer-events: none;
+      -webkit-transition: .25s all ease;
+      -o-transition: .25s all ease;
+      transition: .25s all ease;
+    }
+    /* Transition */
+    &:hover::after {
+      color: #000;
+    }
+  }
+
   &__collections {
     // display: flex;
     position: relative;

@@ -4,7 +4,7 @@ import LoadingBar from 'react-top-loading-bar';
 import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { checkUserSession } from '../../../redux/user/user.actions';
-import { fetchUserNamePostsAdd } from '../../../redux/posts/posts.actions';
+import { fetchUserNamePostsAdd } from '../../../redux/instagram/instagram.actions';
 import { connect } from 'react-redux';
 
 const PostByUserName = ({ fetchUserNamePostsAdd, checkUserSession }) => {

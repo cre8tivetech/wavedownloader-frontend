@@ -1,4 +1,4 @@
-const PostsActionTypes = {
+const InstagramActionTypes = {
   FETCH_POSTS_ADD: 'FETCH_POSTS_ADD',
   FETCH_POSTS_START: 'FETCH_POSTS_START',
   FETCH_POSTS_FAILURE: 'FETCH_POSTS_FAILURE',
@@ -42,4 +42,4 @@ const PostsActionTypes = {
   GET_SUBSCRIPTION: 'GET_SUBSCRIPTION',
 };
 
-export default PostsActionTypes;
+export default InstagramActionTypes;

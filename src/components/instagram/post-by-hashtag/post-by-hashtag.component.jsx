@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import Accordion from '../../accordion/accordion.component';
 import LoadingBar from 'react-top-loading-bar';
 import { useHistory } from 'react-router-dom';
-import { fetchHashTagPostsAdd } from '../../../redux/posts/posts.actions';
+import { fetchHashTagPostsAdd } from '../../../redux/instagram/instagram.actions';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { checkUserSession } from '../../../redux/user/user.actions';

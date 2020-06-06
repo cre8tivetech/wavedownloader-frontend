@@ -5,7 +5,7 @@ import {
   selectStoryCollections,
   selectStoryForm,
   selectError,
-} from '../../../redux/posts/posts.selector';
+} from '../../../redux/instagram/instagram.selector';
 import './posts-overview.styles.scss';
 import StoryCollectionPreview from '../post-preview/story-collection-preview.component';
 import NoStory from '../../../pages/Error/no-story.component';

@@ -7,7 +7,7 @@ import videoLayer from '../../../assets/video.svg';
 import photoLayer from '../../../assets/photo.svg';
 import './post-collection-preview.styles.scss';
 import { withRouter } from 'react-router-dom';
-import { fetchHashTagPostsDownload } from '../../../redux/posts/posts.actions';
+import { fetchHashTagPostsDownload } from '../../../redux/instagram/instagram.actions';
 import { connect } from 'react-redux';
 
 const HashTagCollectionPreview = ({

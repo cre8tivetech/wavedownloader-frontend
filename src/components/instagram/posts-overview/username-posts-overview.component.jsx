@@ -5,7 +5,7 @@ import {
   selectUserCollections,
   selectCredentials,
   selectError,
-} from '../../../redux/posts/posts.selector';
+} from '../../../redux/instagram/instagram.selector';
 
 import './posts-overview.styles.scss';
 import UserNameCollectionPreview from '../post-preview/username-collection-preview.component';

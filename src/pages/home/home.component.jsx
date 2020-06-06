@@ -5,10 +5,11 @@ import { useHistory } from 'react-router-dom';
 import Accordion from '../../components/accordion/accordion.component';
 import { ProFeaturesInstagram, ProFeaturesYoutube } from '../../components/pro-features/pro-features.component';
 import { Link, withRouter } from 'react-router-dom';
-import { fetchPostsAdd } from '../../redux/posts/posts.actions';
+import { fetchPostsAdd } from '../../redux/instagram/instagram.actions';
+import { fetchVideoStart } from '../../redux/youtube/youtube.actions';
 import './home.styles.scss';
 
-const Home = ({ fetchPostsAdd }) => {
+const Home = ({ fetchPostsAdd, fetchVideoStart }) => {
   const [loadBar, setLoadBar] = useState(0);
   const [url, setUrl] = useState('');
   const startLoader = useCallback(() => {
@@ -27,8 +28,16 @@ const Home = ({ fetchPostsAdd }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    fetchPostsAdd(url);
-    history.push('/instagram/posts');
+    const checkUrl = url.split('/')[2]
+    if (checkUrl.includes('instagram')) {
+      fetchPostsAdd(url);
+      history.push('/instagram/posts');
+    }
+    if (checkUrl.includes('youtube')) {
+      console.log('url: ', url)
+      fetchVideoStart(url);
+      history.push('/youtube/video');
+    }
   };
   const handleChange = (event) => {
     setUrl(event.target.value);
@@ -198,5 +207,6 @@ const Home = ({ fetchPostsAdd }) => {
 };
 const mapDispatchToProps = (dispatch) => ({
   fetchPostsAdd: (url) => dispatch(fetchPostsAdd(url)),
+  fetchVideoStart: (url) => dispatch(fetchVideoStart(url)),
 });
 export default withRouter(connect(null, mapDispatchToProps)(Home));

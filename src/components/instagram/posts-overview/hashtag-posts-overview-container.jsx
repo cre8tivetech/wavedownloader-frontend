@@ -7,7 +7,7 @@ import {
   selectError,
   selectCollection,
   selectIsCollectionsLoaded,
-} from '../../../redux/posts/posts.selector';
+} from '../../../redux/instagram/instagram.selector';
 import PostsSpinner from '../../posts-spinner/posts-spinner.component';
 import HashTagPostsOverview from './hashtag-posts-overview.component';
 

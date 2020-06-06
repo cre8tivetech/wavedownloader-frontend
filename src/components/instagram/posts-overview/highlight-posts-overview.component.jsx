@@ -4,7 +4,7 @@ import { createStructuredSelector } from "reselect";
 import {
   selectHighlightCollections,
   selectError
-} from "../../../redux/posts/posts.selector";
+} from "../../../redux/instagram/instagram.selector";
 import "./posts-overview.styles.scss";
 import HighlightCollectionPreview from "../post-preview/highlight-collection-preview.component";
 

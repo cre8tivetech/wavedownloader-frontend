@@ -7,7 +7,7 @@ import {
   selectSingleHighlightCollection,
   selectSource,
   selectError,
-} from '../../../redux/posts/posts.selector';
+} from '../../../redux/instagram/instagram.selector';
 import './posts-overview.styles.scss';
 import PostPreview from '../post-preview/post-preview.component';
 import PostCollectionPreview from '../post-preview/post-collection-preview.component';
