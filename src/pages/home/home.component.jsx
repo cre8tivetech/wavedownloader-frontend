@@ -12,6 +12,7 @@ import './home.styles.scss';
 const Home = ({ fetchPostsAdd, fetchVideoStart }) => {
   const [loadBar, setLoadBar] = useState(0);
   const [url, setUrl] = useState('');
+  const [error, setError] = useState(false);
   const startLoader = useCallback(() => {
     setLoadBar(100);
   }, []);
@@ -28,15 +29,19 @@ const Home = ({ fetchPostsAdd, fetchVideoStart }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    setError(false)
     const checkUrl = url.split('/')[2]
     if (checkUrl.includes('instagram')) {
       fetchPostsAdd(url);
       history.push('/instagram/posts');
     }
-    if (checkUrl.includes('youtube')) {
+    else if (checkUrl.includes('youtube') || checkUrl.includes('youtu')) {
       console.log('url: ', url)
       fetchVideoStart(url);
       history.push('/youtube/video');
+    }
+    else {
+      setError(true)
     }
   };
   const handleChange = (event) => {
@@ -81,6 +86,7 @@ const Home = ({ fetchPostsAdd, fetchVideoStart }) => {
                   URL
                 </label>
               </div>
+              {error && (<span className="url-error">wavedownloader does not support downloading from this website</span>)}
             </div>
             <div className="form__group">
               <button type="submit" className="btn btn--green">
