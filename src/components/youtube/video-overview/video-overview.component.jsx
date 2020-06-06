@@ -5,7 +5,6 @@ import {
   selectCollections,
   selectError,
 } from '../../../redux/youtube/youtube.selectors';
-// import './video-overview.styles.scss';
 import VideoPreview from '../video-preview/video-preview.component';
 
 const VideoOverview = ({
