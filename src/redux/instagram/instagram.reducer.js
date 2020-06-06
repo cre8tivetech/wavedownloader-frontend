@@ -1,4 +1,4 @@
-import PostsActionTypes from './posts.types';
+import InstagramActionTypes from './instagram.types';
 
 const INITIAL_STATE = {
   collections: null,
@@ -22,9 +22,9 @@ const INITIAL_STATE = {
   errorMessage: null,
 };
 
-const postsReducer = (state = INITIAL_STATE, action) => {
+const instagramReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case PostsActionTypes.FETCH_POSTS_ADD:
+    case InstagramActionTypes.FETCH_POSTS_ADD:
       return {
         ...state,
         userCollections: null,
@@ -36,13 +36,13 @@ const postsReducer = (state = INITIAL_STATE, action) => {
         isSingleHighlight: false,
         errorMessage: null,
       };
-    case PostsActionTypes.FETCH_POSTS_START:
+    case InstagramActionTypes.FETCH_POSTS_START:
       return {
         ...state,
         isFetching: true,
         errorMessage: null,
       };
-    case PostsActionTypes.FETCH_SINGLE_POSTS_SUCCESS:
+    case InstagramActionTypes.FETCH_SINGLE_POSTS_SUCCESS:
       return {
         ...state,
         isFetching: false,
@@ -53,7 +53,7 @@ const postsReducer = (state = INITIAL_STATE, action) => {
         errorMessage: null,
       };
 
-    case PostsActionTypes.FETCH_SINGLE_POSTS_COLLECTION_SUCCESS:
+    case InstagramActionTypes.FETCH_SINGLE_POSTS_COLLECTION_SUCCESS:
       return {
         ...state,
         isFetching: false,
@@ -64,7 +64,7 @@ const postsReducer = (state = INITIAL_STATE, action) => {
         errorMessage: null,
       };
 
-    case PostsActionTypes.FETCH_SINGLE_HIGHLIGHT_POSTS_COLLECTION_SUCCESS:
+    case InstagramActionTypes.FETCH_SINGLE_HIGHLIGHT_POSTS_COLLECTION_SUCCESS:
       return {
         ...state,
         isFetching: false,
@@ -77,7 +77,7 @@ const postsReducer = (state = INITIAL_STATE, action) => {
       };
 
     // USERNAME POST
-    case PostsActionTypes.FETCH_USERNAME_POSTS_ADD:
+    case InstagramActionTypes.FETCH_USERNAME_POSTS_ADD:
       return {
         ...state,
         credentials: action.payload,
@@ -91,14 +91,14 @@ const postsReducer = (state = INITIAL_STATE, action) => {
         errorMessage: null,
       };
 
-    case PostsActionTypes.FETCH_USERNAME_POSTS_START:
+    case InstagramActionTypes.FETCH_USERNAME_POSTS_START:
       return {
         ...state,
         isFetching: true,
         errorMessage: null,
       };
 
-    case PostsActionTypes.FETCH_USERNAME_POSTS_SUCCESS:
+    case InstagramActionTypes.FETCH_USERNAME_POSTS_SUCCESS:
       return {
         ...state,
         isFetching: false,
@@ -111,7 +111,7 @@ const postsReducer = (state = INITIAL_STATE, action) => {
         errorMessage: null,
       };
 
-    case PostsActionTypes.FETCH_USERNAME_POSTS_DOWNLOAD:
+    case InstagramActionTypes.FETCH_USERNAME_POSTS_DOWNLOAD:
       return {
         ...state,
         isFetching: true,
@@ -120,7 +120,7 @@ const postsReducer = (state = INITIAL_STATE, action) => {
 
     // HASHTAG POSTS
 
-    case PostsActionTypes.FETCH_HASHTAG_POSTS_ADD:
+    case InstagramActionTypes.FETCH_HASHTAG_POSTS_ADD:
       return {
         ...state,
         hashTagForm: action.payload,
@@ -132,14 +132,14 @@ const postsReducer = (state = INITIAL_STATE, action) => {
         errorMessage: null,
       };
 
-    case PostsActionTypes.FETCH_HASHTAG_POSTS_START:
+    case InstagramActionTypes.FETCH_HASHTAG_POSTS_START:
       return {
         ...state,
         isFetching: true,
         errorMessage: null,
       };
 
-    case PostsActionTypes.FETCH_HASHTAG_POSTS_SUCCESS:
+    case InstagramActionTypes.FETCH_HASHTAG_POSTS_SUCCESS:
       return {
         ...state,
         isFetching: false,
@@ -153,7 +153,7 @@ const postsReducer = (state = INITIAL_STATE, action) => {
         errorMessage: null,
       };
 
-    case PostsActionTypes.FETCH_HASHTAG_POSTS_DOWNLOAD:
+    case InstagramActionTypes.FETCH_HASHTAG_POSTS_DOWNLOAD:
       return {
         ...state,
         isFetching: true,
@@ -162,7 +162,7 @@ const postsReducer = (state = INITIAL_STATE, action) => {
 
     // HIGHLIGHT POSTS
 
-    case PostsActionTypes.FETCH_HIGHLIGHT_POSTS_ADD:
+    case InstagramActionTypes.FETCH_HIGHLIGHT_POSTS_ADD:
       return {
         ...state,
         highlightForm: action.payload,
@@ -176,14 +176,14 @@ const postsReducer = (state = INITIAL_STATE, action) => {
         errorMessage: null,
       };
 
-    case PostsActionTypes.FETCH_HIGHLIGHT_POSTS_START:
+    case InstagramActionTypes.FETCH_HIGHLIGHT_POSTS_START:
       return {
         ...state,
         isFetching: true,
         errorMessage: null,
       };
 
-    case PostsActionTypes.FETCH_HIGHLIGHT_POSTS_SUCCESS:
+    case InstagramActionTypes.FETCH_HIGHLIGHT_POSTS_SUCCESS:
       return {
         ...state,
         isFetching: false,
@@ -198,7 +198,7 @@ const postsReducer = (state = INITIAL_STATE, action) => {
         errorMessage: null,
       };
 
-    case PostsActionTypes.FETCH_HIGHLIGHT_POSTS_DOWNLOAD:
+    case InstagramActionTypes.FETCH_HIGHLIGHT_POSTS_DOWNLOAD:
       return {
         ...state,
         isFetching: true,
@@ -207,7 +207,7 @@ const postsReducer = (state = INITIAL_STATE, action) => {
 
     // STORY POSTS
 
-    case PostsActionTypes.FETCH_STORY_POSTS_ADD:
+    case InstagramActionTypes.FETCH_STORY_POSTS_ADD:
       return {
         ...state,
         credentials: null,
@@ -220,14 +220,14 @@ const postsReducer = (state = INITIAL_STATE, action) => {
         errorMessage: null,
       };
 
-    case PostsActionTypes.FETCH_STORY_POSTS_START:
+    case InstagramActionTypes.FETCH_STORY_POSTS_START:
       return {
         ...state,
         isFetching: true,
         errorMessage: null,
       };
 
-    case PostsActionTypes.FETCH_STORY_POSTS_SUCCESS:
+    case InstagramActionTypes.FETCH_STORY_POSTS_SUCCESS:
       return {
         ...state,
         isFetching: false,
@@ -242,7 +242,7 @@ const postsReducer = (state = INITIAL_STATE, action) => {
       };
 
     // SET DOWNLOAD
-    case PostsActionTypes.SET_DOWNLOAD_DATA:
+    case InstagramActionTypes.SET_DOWNLOAD_DATA:
       return {
         ...state,
         downloadData: action.payload,
@@ -250,7 +250,7 @@ const postsReducer = (state = INITIAL_STATE, action) => {
         errorMessage: null,
       };
 
-    case PostsActionTypes.FETCH_POSTS_FAILURE:
+    case InstagramActionTypes.FETCH_POSTS_FAILURE:
       return {
         ...state,
         isFetching: true,
@@ -261,4 +261,4 @@ const postsReducer = (state = INITIAL_STATE, action) => {
   }
 };
 
-export default postsReducer;
+export default instagramReducer;

@@ -19,7 +19,7 @@ import {
   checkUserSession,
   resendConfirmEmailStart,
 } from '../../redux/user/user.actions';
-import { getDownload } from '../../redux/posts/posts.actions';
+import { getDownload } from '../../redux/instagram/instagram.actions';
 import { setMessage } from '../../redux/user/user.actions';
 
 const DownloadHistory = ({

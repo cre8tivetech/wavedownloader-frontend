@@ -1,129 +1,129 @@
-import PostsActionTypes from './posts.types';
+import InstagramActionTypes from './instagram.types';
 
 export const fetchPostsAdd = (url) => ({
-  type: PostsActionTypes.FETCH_POSTS_ADD,
+  type: InstagramActionTypes.FETCH_POSTS_ADD,
   payload: url,
 });
 
 export const fetchPostsStart = (url) => ({
-  type: PostsActionTypes.FETCH_POSTS_START,
+  type: InstagramActionTypes.FETCH_POSTS_START,
   payload: url,
 });
 
 export const fetchSinglePostsSuccess = (data) => ({
-  type: PostsActionTypes.FETCH_SINGLE_POSTS_SUCCESS,
+  type: InstagramActionTypes.FETCH_SINGLE_POSTS_SUCCESS,
   payload: data,
 });
 export const fetchSingleCollectionPostsSuccess = (data) => ({
-  type: PostsActionTypes.FETCH_SINGLE_POSTS_COLLECTION_SUCCESS,
+  type: InstagramActionTypes.FETCH_SINGLE_POSTS_COLLECTION_SUCCESS,
   payload: data,
 });
 export const fetchSingleHighlightCollectionPostsSuccess = (data) => ({
-  type: PostsActionTypes.FETCH_SINGLE_HIGHLIGHT_POSTS_COLLECTION_SUCCESS,
+  type: InstagramActionTypes.FETCH_SINGLE_HIGHLIGHT_POSTS_COLLECTION_SUCCESS,
   payload: data,
 });
 
 // USERNAME POST credentials
 
 export const fetchUserNamePostsAdd = (credentials) => ({
-  type: PostsActionTypes.FETCH_USERNAME_POSTS_ADD,
+  type: InstagramActionTypes.FETCH_USERNAME_POSTS_ADD,
   payload: credentials,
 });
 
 export const fetchUserNamePostsStart = (datas) => ({
-  type: PostsActionTypes.FETCH_USERNAME_POSTS_START,
+  type: InstagramActionTypes.FETCH_USERNAME_POSTS_START,
   payload: datas,
 });
 
 export const fetchUserNamePostsSuccess = (data) => ({
-  type: PostsActionTypes.FETCH_USERNAME_POSTS_SUCCESS,
+  type: InstagramActionTypes.FETCH_USERNAME_POSTS_SUCCESS,
   payload: data,
 });
 
 export const fetchUserNamePostsDownload = (shortcode) => ({
-  type: PostsActionTypes.FETCH_USERNAME_POSTS_DOWNLOAD,
+  type: InstagramActionTypes.FETCH_USERNAME_POSTS_DOWNLOAD,
   payload: shortcode,
 });
 
 // HASH TAG POST
 export const fetchHashTagPostsAdd = (hashTagFormData) => ({
-  type: PostsActionTypes.FETCH_HASHTAG_POSTS_ADD,
+  type: InstagramActionTypes.FETCH_HASHTAG_POSTS_ADD,
   payload: hashTagFormData,
 });
 
 export const fetchHashTagPostsStart = (datas) => ({
-  type: PostsActionTypes.FETCH_HASHTAG_POSTS_START,
+  type: InstagramActionTypes.FETCH_HASHTAG_POSTS_START,
   payload: datas,
 });
 
 export const fetchHashTagPostsSuccess = (data) => ({
-  type: PostsActionTypes.FETCH_HASHTAG_POSTS_SUCCESS,
+  type: InstagramActionTypes.FETCH_HASHTAG_POSTS_SUCCESS,
   payload: data,
 });
 
 export const fetchHashTagPostsDownload = (shortcode) => ({
-  type: PostsActionTypes.FETCH_HASHTAG_POSTS_DOWNLOAD,
+  type: InstagramActionTypes.FETCH_HASHTAG_POSTS_DOWNLOAD,
   payload: shortcode,
 });
 
 // HIGHLIGHT POST
 export const fetchHighlightPostsAdd = (highlightForm) => ({
-  type: PostsActionTypes.FETCH_HIGHLIGHT_POSTS_ADD,
+  type: InstagramActionTypes.FETCH_HIGHLIGHT_POSTS_ADD,
   payload: highlightForm,
 });
 
 export const fetchHighlightPostsStart = (datas) => ({
-  type: PostsActionTypes.FETCH_HIGHLIGHT_POSTS_START,
+  type: InstagramActionTypes.FETCH_HIGHLIGHT_POSTS_START,
   payload: datas,
 });
 
 export const fetchHighlightPostsSuccess = (data) => ({
-  type: PostsActionTypes.FETCH_HIGHLIGHT_POSTS_SUCCESS,
+  type: InstagramActionTypes.FETCH_HIGHLIGHT_POSTS_SUCCESS,
   payload: data,
 });
 
 export const fetchHighlightPostsDownload = (idcode) => ({
-  type: PostsActionTypes.FETCH_HIGHLIGHT_POSTS_DOWNLOAD,
+  type: InstagramActionTypes.FETCH_HIGHLIGHT_POSTS_DOWNLOAD,
   payload: idcode,
 });
 
 // STORIES POST
 export const fetchStoryPostsAdd = (credentials) => ({
-  type: PostsActionTypes.FETCH_STORY_POSTS_ADD,
+  type: InstagramActionTypes.FETCH_STORY_POSTS_ADD,
   payload: credentials,
 });
 
 export const fetchStoryPostsStart = (datas) => ({
-  type: PostsActionTypes.FETCH_STORY_POSTS_START,
+  type: InstagramActionTypes.FETCH_STORY_POSTS_START,
   payload: datas,
 });
 
 export const fetchStoryPostsSuccess = (data) => ({
-  type: PostsActionTypes.FETCH_STORY_POSTS_SUCCESS,
+  type: InstagramActionTypes.FETCH_STORY_POSTS_SUCCESS,
   payload: data,
 });
 
 export const setDownloadData = (data) => ({
-  type: PostsActionTypes.SET_DOWNLOAD_DATA,
+  type: InstagramActionTypes.SET_DOWNLOAD_DATA,
   payload: data,
 });
 
 export const saveDownload = (downloadData) => ({
-  type: PostsActionTypes.SAVE_DOWNLOAD,
+  type: InstagramActionTypes.SAVE_DOWNLOAD,
   payload: downloadData,
 });
 
 export const getDownload = () => ({
-  type: PostsActionTypes.GET_DOWNLOAD,
+  type: InstagramActionTypes.GET_DOWNLOAD,
 });
 
 export const getSubscription = () => ({
-  type: PostsActionTypes.GET_SUBSCRIPTION,
+  type: InstagramActionTypes.GET_SUBSCRIPTION,
 });
 
 // FAILURE TO GET POST ACTION
 export const fetchPostsFailure = (errorMessage) => ({
-  type: PostsActionTypes.FETCH_POSTS_FAILURE,
+  type: InstagramActionTypes.FETCH_POSTS_FAILURE,
   payload: errorMessage,
 });
 

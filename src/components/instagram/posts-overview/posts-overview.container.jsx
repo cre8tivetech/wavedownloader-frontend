@@ -9,7 +9,7 @@ import {
   selectError,
   selectCollection,
   selectIsCollectionsLoaded
-} from "../../../redux/posts/posts.selector";
+} from "../../../redux/instagram/instagram.selector";
 import PostsOverview from "./posts-overview.component";
 import PostsSpinner from "../../posts-spinner/posts-spinner.component";
 

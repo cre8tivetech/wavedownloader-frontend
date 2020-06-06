@@ -3,7 +3,7 @@ import Accordion from '../../accordion/accordion.component';
 import LoadingBar from 'react-top-loading-bar';
 import { useHistory, withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { fetchStoryPostsAdd } from '../../../redux/posts/posts.actions';
+import { fetchStoryPostsAdd } from '../../../redux/instagram/instagram.actions';
 import { connect } from 'react-redux';
 import { checkUserSession } from '../../../redux/user/user.actions';
 

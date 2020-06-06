@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import LoadingBar from 'react-top-loading-bar';
 import { withRouter } from 'react-router-dom';
-import { fetchHighlightPostsDownload } from '../../../redux/posts/posts.actions';
+import { fetchHighlightPostsDownload } from '../../../redux/instagram/instagram.actions';
 import { connect } from 'react-redux';
 import crying from '../../../assets/crying.svg';
 

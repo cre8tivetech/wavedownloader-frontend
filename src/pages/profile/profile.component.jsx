@@ -21,7 +21,7 @@ import downloadImage from '../../assets/download(1).svg';
 import confirmation from '../../assets/mail(1).svg';
 import sub_time from '../../assets/sale(1).svg';
 import plan from '../../assets/subscription(1).svg';
-import { getDownload } from '../../redux/posts/posts.actions';
+import { getDownload } from '../../redux/instagram/instagram.actions';
 
 const Profile = ({
   user,

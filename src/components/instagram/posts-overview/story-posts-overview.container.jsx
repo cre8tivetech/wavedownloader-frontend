@@ -7,7 +7,7 @@ import {
   selectStoryCollections,
   selectIsCollectionsLoaded,
   selectError
-} from "../../../redux/posts/posts.selector";
+} from "../../../redux/instagram/instagram.selector";
 import PostsSpinner from "../../posts-spinner/posts-spinner.component";
 import StoryPostsOverview from "./story-posts-overview.component";
 

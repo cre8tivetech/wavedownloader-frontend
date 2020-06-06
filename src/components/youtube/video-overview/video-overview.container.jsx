@@ -4,23 +4,23 @@ import { compose } from "redux";
 
 import {
   selectIsCollectionFetching,
-  selectHighlightCollections,
-  selectIsCollectionsLoaded,
-  selectError
-} from "../../../redux/instagram/instagram.selector";
+  selectError,
+  selectCollections,
+  selectIsCollectionsLoaded
+} from "../../../redux/youtube/youtube.selectors";
+import VideoOverview from "./video-overview.component";
 import PostsSpinner from "../../posts-spinner/posts-spinner.component";
-import HighlightPostsOverview from "./highlight-posts-overview.component";
 
 const mapStateToProps = createStructuredSelector({
   isLoading: selectIsCollectionFetching,
   postError: selectError,
-  highlightCollections: selectHighlightCollections,
+  collection: selectCollections,
   isLoaded: selectIsCollectionsLoaded
 });
 
-const HighlightPostsOverviewContainer = compose(
+const VideoOverviewContainer = compose(
   connect(mapStateToProps),
   PostsSpinner
-)(HighlightPostsOverview);
+)(VideoOverview);
 
-export default HighlightPostsOverviewContainer;
+export default VideoOverviewContainer;

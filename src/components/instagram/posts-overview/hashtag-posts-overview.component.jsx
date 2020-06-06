@@ -5,7 +5,7 @@ import {
   selectHashTagCollections,
   selectHashTagPostType,
   selectError
-} from "../../../redux/posts/posts.selector";
+} from "../../../redux/instagram/instagram.selector";
 
 import "./posts-overview.styles.scss";
 import HashTagCollectionPreview from "../post-preview/hashtag-collection-preview.component";

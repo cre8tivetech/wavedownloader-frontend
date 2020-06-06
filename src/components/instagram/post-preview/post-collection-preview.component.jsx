@@ -5,7 +5,7 @@ import '../../../pages/instagram/posts.styles.scss';
 import './post-collection-preview.styles.scss';
 import Axios from 'axios';
 import { withRouter } from 'react-router-dom';
-import { saveDownload } from '../../../redux/posts/posts.actions';
+import { saveDownload } from '../../../redux/instagram/instagram.actions';
 import { setMessage } from '../../../redux/user/user.actions';
 import { createStructuredSelector } from 'reselect';
 import { selectCurrentUser } from '../../../redux/user/user.selector';

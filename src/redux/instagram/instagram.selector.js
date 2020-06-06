@@ -1,65 +1,65 @@
 import { createSelector } from 'reselect';
 
-const selectPosts = (state) => state.posts;
+const selectInstagram = (state) => state.instagram;
 
 export const selectCollections = createSelector(
-  [selectPosts],
-  (posts) => posts.collections
+  [selectInstagram],
+  (instagram) => instagram.collections
 );
 
 export const selectSlideCollection = createSelector(
-  [selectPosts],
-  (posts) => posts.slideCollections
+  [selectInstagram],
+  (instagram) => instagram.slideCollections
 );
 
 export const selectSingleHighlightCollection = createSelector(
-  [selectPosts],
-  (posts) => posts.singleHighlightCollections
+  [selectInstagram],
+  (instagram) => instagram.singleHighlightCollections
 );
 
 export const selectUserCollections = createSelector(
-  [selectPosts],
-  (posts) => posts.userCollections
+  [selectInstagram],
+  (instagram) => instagram.userCollections
 );
 
 export const selectHashTagCollections = createSelector(
-  [selectPosts],
-  (posts) => posts.hashTagCollections
+  [selectInstagram],
+  (instagram) => instagram.hashTagCollections
 );
 
 export const selectHighlightCollections = createSelector(
-  [selectPosts],
-  (posts) => posts.highlightCollections
+  [selectInstagram],
+  (instagram) => instagram.highlightCollections
 );
 
 export const selectStoryCollections = createSelector(
-  [selectPosts],
-  (posts) => posts.storyCollections
+  [selectInstagram],
+  (instagram) => instagram.storyCollections
 );
 
 export const selectHashTagPostType = createSelector(
-  [selectPosts],
-  (posts) => posts.hashTagForm
+  [selectInstagram],
+  (instagram) => instagram.hashTagForm
 );
 
 export const selectSources = createSelector(
-  [selectPosts],
-  (posts) => posts.source
+  [selectInstagram],
+  (instagram) => instagram.source
 );
 
 export const selectCredentials = createSelector(
-  [selectPosts],
-  (posts) => posts.credentials
+  [selectInstagram],
+  (instagram) => instagram.credentials
 );
 
 export const selectStoryForm = createSelector(
-  [selectPosts],
-  (posts) => posts.storyForm
+  [selectInstagram],
+  (instagram) => instagram.storyForm
 );
 
 export const selectErrors = createSelector(
-  [selectPosts],
-  (posts) => posts.errorMessage
+  [selectInstagram],
+  (instagram) => instagram.errorMessage
 );
 
 export const selectCollectionsForPreview = createSelector(
@@ -82,26 +82,26 @@ export const selectError = createSelector([selectErrors], (error) =>
 );
 
 export const selectIsCollectionFetching = createSelector(
-  [selectPosts],
-  (posts) => posts.isFetching
+  [selectInstagram],
+  (instagram) => instagram.isFetching
 );
 
 export const selectIsSlideCollectionFetching = createSelector(
-  [selectPosts],
-  (posts) => posts.isSlide
+  [selectInstagram],
+  (instagram) => instagram.isSlide
 );
 
 export const selectIsSingleHighlightCollectionFetching = createSelector(
-  [selectPosts],
-  (posts) => posts.isSingleHighlight
+  [selectInstagram],
+  (instagram) => instagram.isSingleHighlight
 );
 
 export const selectIsCollectionsLoaded = createSelector(
-  [selectPosts],
-  (posts) => !!posts.collections
+  [selectInstagram],
+  (instagram) => !!instagram.collections
 );
 
 export const selectDownloadData = createSelector(
-  [selectPosts],
-  (posts) => !!posts.downloadData
+  [selectInstagram],
+  (instagram) => !!instagram.downloadData
 );

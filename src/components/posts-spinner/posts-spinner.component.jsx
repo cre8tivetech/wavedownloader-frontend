@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./posts-spinner.style.scss";
 import LoadingBar from "react-top-loading-bar";
-import { selectError } from "../../redux/posts/posts.selector";
+import { selectError } from "../../redux/instagram/instagram.selector";
 import { createStructuredSelector } from "reselect";
 const PostsSpinner = WrappedComponent => {
   const Spinner = ({ isLoading, isSlide, postError, ...otherProps }) => {

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import LoadingBar from 'react-top-loading-bar';
 import Axios from 'axios';
 import { withRouter } from 'react-router-dom';
-import { saveDownload } from '../../../redux/posts/posts.actions';
+import { saveDownload } from '../../../redux/instagram/instagram.actions';
 import { selectCurrentUser } from '../../../redux/user/user.selector';
 import { createStructuredSelector } from 'reselect';
 

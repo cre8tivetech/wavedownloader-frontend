@@ -1,11 +1,13 @@
 import { all, call } from 'redux-saga/effects';
-import { postsSagas } from './posts/posts.sagas';
+import { instagramSagas } from './instagram/instagram.sagas';
+import { youtubeSagas } from './youtube/youtube.sagas';
 import { userSagas } from './user/user.sagas';
 // import { cartSagas } from './cart/cart.sagas';
 
 export default function* rootSaga() {
   yield all([
-    call(postsSagas),
+    call(instagramSagas),
+    call(youtubeSagas),
     call(userSagas),
     // call(cartSagas)
   ]);

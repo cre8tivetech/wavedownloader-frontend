@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { Route } from "react-router-dom";
-import { fetchUserNamePostsStart } from "../../redux/posts/posts.actions";
+import { fetchUserNamePostsStart } from "../../redux/instagram/instagram.actions";
 import UserNamePostsOverviewContainer from "../../components/instagram/posts-overview/username-posts-overview.container";
 import { checkUserSession } from "../../redux/user/user.actions";
 

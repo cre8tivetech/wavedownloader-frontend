@@ -1,5 +1,5 @@
 import { takeLatest, call, put, all, delay } from 'redux-saga/effects';
-import PostActionTypes from './posts.types';
+import InstagramActionTypes from './instagram.types';
 import { select } from 'redux-saga/effects';
 import {
   singlePostApi,
@@ -21,16 +21,16 @@ import {
   fetchHighlightPostsSuccess,
   fetchStoryPostsSuccess,
   fetchPostsFailure,
-} from './posts.actions';
+} from './instagram.actions';
 import { setMessage, setDownloads } from '../user/user.actions';
 
-const link = (state) => state.posts.source;
-const credentials = (state) => state.posts.credentials;
-const shortcode = (state) => state.posts.shortcode;
-const idcode = (state) => state.posts.idcode;
-const hashTagForm = (state) => state.posts.hashTagForm;
-const highlightForm = (state) => state.posts.highlightForm;
-const storyUserName = (state) => state.posts.storyForm;
+const link = (state) => state.instagram.source;
+const credentials = (state) => state.instagram.credentials;
+const shortcode = (state) => state.instagram.shortcode;
+const idcode = (state) => state.instagram.idcode;
+const hashTagForm = (state) => state.instagram.hashTagForm;
+const highlightForm = (state) => state.instagram.highlightForm;
+const storyUserName = (state) => state.instagram.storyForm;
 const userToken = (state) => state.user.token;
 
 export function* fetchPostsAsync() {
@@ -239,7 +239,7 @@ export function* fetchPostsUrl({ payload: { url } }) {
 }
 
 export function* fetchPostsAdd() {
-  yield takeLatest(PostActionTypes.FETCH_POSTS_ADD, fetchPostsUrl);
+  yield takeLatest(InstagramActionTypes.FETCH_POSTS_ADD, fetchPostsUrl);
 }
 
 // USERNAME POST DOWNLOAD
@@ -254,7 +254,7 @@ export function* fetchUserNamePosts({ payload: { shortcode } }) {
 
 export function* fetchUserNamePostDownload() {
   yield takeLatest(
-    PostActionTypes.FETCH_USERNAME_POSTS_DOWNLOAD,
+    InstagramActionTypes.FETCH_USERNAME_POSTS_DOWNLOAD,
     fetchUserNamePosts
   );
 }
@@ -273,7 +273,7 @@ export function* fetchPostsCredentials({
 
 export function* fetchUserNamePostsCredentials() {
   yield takeLatest(
-    PostActionTypes.FETCH_USERNAME_POSTS_ADD,
+    InstagramActionTypes.FETCH_USERNAME_POSTS_ADD,
     fetchPostsCredentials
   );
 }
@@ -290,7 +290,7 @@ export function* fetchHashTagPosts({ payload: { shortcode } }) {
 
 export function* fetchHashTagPostDownload() {
   yield takeLatest(
-    PostActionTypes.FETCH_USERNAME_POSTS_DOWNLOAD,
+    InstagramActionTypes.FETCH_USERNAME_POSTS_DOWNLOAD,
     fetchHashTagPosts
   );
 }
@@ -307,7 +307,7 @@ export function* fetchPostsHashTagForm({ payload: { hashTag, postType } }) {
 
 export function* fetchHashTagPostsFormData() {
   yield takeLatest(
-    PostActionTypes.FETCH_HASHTAG_POSTS_ADD,
+    InstagramActionTypes.FETCH_HASHTAG_POSTS_ADD,
     fetchPostsHashTagForm
   );
 }
@@ -324,7 +324,7 @@ export function* fetchHighlightForm({ payload: { username } }) {
 
 export function* fetchHighlightPostsFormData() {
   yield takeLatest(
-    PostActionTypes.FETCH_HIGHLIGHT_POSTS_ADD,
+    InstagramActionTypes.FETCH_HIGHLIGHT_POSTS_ADD,
     fetchHighlightForm
   );
 }
@@ -341,7 +341,7 @@ export function* fetchHighlightPosts({ payload: { idcode } }) {
 
 export function* fetchHighlightPostDownload() {
   yield takeLatest(
-    PostActionTypes.FETCH_HIGHLIGHT_POSTS_DOWNLOAD,
+    InstagramActionTypes.FETCH_HIGHLIGHT_POSTS_DOWNLOAD,
     fetchHighlightPosts
   );
 }
@@ -357,52 +357,52 @@ export function* fetchStoryPost({ payload: { storyForm } }) {
 }
 
 export function* fetchStoryCredentials() {
-  yield takeLatest(PostActionTypes.FETCH_STORY_POSTS_ADD, fetchStoryPost);
+  yield takeLatest(InstagramActionTypes.FETCH_STORY_POSTS_ADD, fetchStoryPost);
 }
 
 // POST START SAGAS //
 export function* fetchPostsStart() {
-  yield takeLatest(PostActionTypes.FETCH_POSTS_START, fetchPostsAsync);
+  yield takeLatest(InstagramActionTypes.FETCH_POSTS_START, fetchPostsAsync);
 }
 
 export function* onFetchUserNamePostsStart() {
   yield takeLatest(
-    PostActionTypes.FETCH_USERNAME_POSTS_START,
+    InstagramActionTypes.FETCH_USERNAME_POSTS_START,
     fetchUserNamePostsAsync
   );
 }
 
 export function* onFetchHashTagPostsStart() {
   yield takeLatest(
-    PostActionTypes.FETCH_HASHTAG_POSTS_START,
+    InstagramActionTypes.FETCH_HASHTAG_POSTS_START,
     fetchHashTagPostsAsync
   );
 }
 
 export function* onFetchHighlightPostsStart() {
   yield takeLatest(
-    PostActionTypes.FETCH_HIGHLIGHT_POSTS_START,
+    InstagramActionTypes.FETCH_HIGHLIGHT_POSTS_START,
     fetchHighlightPostsAsync
   );
 }
 
 export function* onFetchStoryPostsStart() {
   yield takeLatest(
-    PostActionTypes.FETCH_STORY_POSTS_START,
+    InstagramActionTypes.FETCH_STORY_POSTS_START,
     fetchStoryPostsAsync
   );
 }
 
 export function* onSaveDownload() {
-  yield takeLatest(PostActionTypes.SAVE_DOWNLOAD, saveDownloadAsync);
+  yield takeLatest(InstagramActionTypes.SAVE_DOWNLOAD, saveDownloadAsync);
 }
 
 export function* onGetDownload() {
-  yield takeLatest(PostActionTypes.GET_DOWNLOAD, getDownloadAsync);
+  yield takeLatest(InstagramActionTypes.GET_DOWNLOAD, getDownloadAsync);
 }
 
 // MAIN SAGA
-export function* postsSagas() {
+export function* instagramSagas() {
   yield all([
     call(fetchPostsStart),
     call(onFetchUserNamePostsStart),

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { Route } from "react-router-dom";
-import { fetchHashTagPostsStart } from "../../redux/posts/posts.actions";
+import { fetchHashTagPostsStart } from "../../redux/instagram/instagram.actions";
 import HashTagPostsOverviewContainer from "../../components/instagram/posts-overview/hashtag-posts-overview-container";
 import { checkUserSession } from "../../redux/user/user.actions";
 
