@@ -42,3 +42,27 @@ export const ProFeaturesYoutube = () => {
     </div>
   )
 }
+
+export const SupportedResources = () => {
+  return (
+    <div className="card">
+      {/* <div className="feature-icon"><img src={YoutubeLogo} alt='instagram logo' /></div> */}
+      <div className="options">
+        <Link to="#" className="options--resources">
+          <p>instagram.com</p>
+        </Link>
+        <Link to="#" className="options--resources">
+          <p>youtube.com</p>
+        </Link>
+        <Link to="#" className="options--resources">
+          <span>Coming Soon</span>
+          <p>twitter.com</p>
+        </Link>
+        <Link to="#" className="options--resources">
+          <span>Coming Soon</span>
+          <p>facebook.com</p>
+        </Link>
+      </div>
+    </div>
+  )
+}

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import LoadingBar from 'react-top-loading-bar';
 import { useHistory } from 'react-router-dom';
 import Accordion from '../../components/accordion/accordion.component';
-import { ProFeaturesInstagram, ProFeaturesYoutube } from '../../components/pro-features/pro-features.component';
+import { ProFeaturesInstagram, ProFeaturesYoutube, SupportedResources } from '../../components/pro-features/pro-features.component';
 import { Link, withRouter } from 'react-router-dom';
 import { fetchPostsAdd } from '../../redux/instagram/instagram.actions';
 import { fetchVideoStart } from '../../redux/youtube/youtube.actions';
@@ -58,13 +58,13 @@ const Home = ({ fetchPostsAdd, fetchVideoStart }) => {
     
       <div className="download card">
         <p className="download__text download__text--1">
-          Download Instagram Post (Image, Video and Carousel)
+          Online Post & Video Downloader
         </p>
-        <div className="download__text download__text--2">
+        {/* <div className="download__text download__text--2">
           <p>
             <span>NEW</span>Download Youtube Videos
           </p>
-        </div>
+        </div> */}
         <div className="download__form">
           <form onSubmit={handleSubmit} className="form">
             <div className="form__group">
@@ -76,7 +76,7 @@ const Home = ({ fetchPostsAdd, fetchVideoStart }) => {
                 <input
                   type="text"
                   className="form__input--box"
-                  placeholder="Enter Url"
+                  placeholder="Enter post or video URL here"
                   value={url}
                   onChange={handleChange}
                   id="url"
@@ -98,7 +98,12 @@ const Home = ({ fetchPostsAdd, fetchVideoStart }) => {
       </div>
 
       <div className="premium-features">
-        <h3>Our Premium Features</h3>
+        <h3>Supported Resources</h3>
+        <SupportedResources />
+      </div>
+
+      <div className="premium-features">
+        <h3>Premium Features</h3>
         <ProFeaturesInstagram />
         <ProFeaturesYoutube />
       </div>
@@ -176,34 +181,62 @@ const Home = ({ fetchPostsAdd, fetchVideoStart }) => {
           </div>
           <div className="faq__content">
             <Accordion
-              title="What is your return policy?"
-              content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+              title="How do I download instagram post?"
+              content={`<div class="collapsible-body" style="display: block;"><span>Wavedownloader makes that <b>really easy</b>! 
+        
+              <p>
+                <u>Desktop</u><br>
+                1. Go to the Instagram post you'd like to download.<br>
+                2. Copy the URL<br>
+                3. Go <a href="/">HERE</a> and paste it into the top input box (the one that says "Enter URL")<br>
+                4. Click "DOWNLOAD"<br>
+                5. You will be directed to a page displaying the image with the ability to download the image there!<br>
+              </p>
+              <p>
+                <u>Mobile</u><br>
+                1. Go to the Instagram post you'd like to download.<br>
+                2. Tap the three vertical dots at the right upper corner of the screen.<br>
+                3. Click "Copy Link<br>
+                3. Go <a href="/">HERE</a> and paste it into the top input box (the one that says "Enter URL")<br>
+                4. Click "DOWNLOAD"<br>
+                5. You will be directed to a page displaying the image with the ability to download the image there!<br>
+              </p>
+              </span></div>`}
             />
             <Accordion
-              title="How do I track my order?"
-              content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+              title="Can I download all posts from an instagram user?"
+              content={`<div class="collapsible-body" style="display: block;"><span><b>Yes!</b>
+                You can do this using one of our instagram premium features "POST BY USERNAME".
+                You will need to signup for Wavedownloader PRO to have access to this feature.
+              </span></div>`}
             />
             <Accordion
-              title="Can I purchase items again?"
-              content="
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-              </br>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-              </br>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-              "
+              title="Can I download posts by instagram hashtag?"
+              content={`<div class="collapsible-body" style="display: block;"><span><b>Yes!</b>
+                You can do this using one of our instagram premium features "POST BY HASHTAG".
+                You will need to signup for Wavedownloader PRO to have access to this feature.
+              </span></div>`}
             />
             <Accordion
-              title="How do I track my order?"
-              content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+              title="Can I download instagram user highlight?"
+              content={`<div class="collapsible-body" style="display: block;"><span><b>Yes!</b>
+                You can do this using one of our instagram premium features "HIGHLIGHT".
+                You will need to signup for Wavedownloader PRO to have access to this feature.
+              </span></div>`}
             />
             <Accordion
-              title="How do I track my order?"
-              content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+               title="Can I download instagram user stories?"
+               content={`<div class="collapsible-body" style="display: block;"><span><b>Yes!</b>
+                 You can do this using one of our instagram premium features "STORIES".
+                 You will need to signup for Wavedownloader PRO to have access to this feature.
+               </span></div>`}
             />
             <Accordion
-              title="What is your return policy?"
-              content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+              title="Is it safe to reupload?"
+              content={`<div class="collapsible-body" style="display: block;"><span><b>Yes!</b>
+              As you may not know, many people have been getting banned recently for using automated 
+              tools. They are not safe! Wave downloader however is 100% safe.
+            </span></div>`}
             />
           </div>
         </div>
