@@ -15,12 +15,14 @@ const youtubeReducer = (state = INITIAL_STATE, action) => {
         ...state,
         isFetching: true,
         errorMessage: null,
+        videoData: null,
       };
     case YoutubeActionTypes.FETCH_VIDEO_FAILURE:
       return {
         ...state,
         isFetching: false,
         errorMessage: action.payload,
+        videoData: null,
       };
     case YoutubeActionTypes.FETCH_VIDEO_SUCCESS:
       return {
