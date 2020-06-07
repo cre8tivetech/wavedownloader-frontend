@@ -12,7 +12,7 @@
     margin: 8rem auto 5rem auto;
     background-color: var(--color-card);
     box-shadow: 0 1.5rem 2rem rgba(black, 0.1);
-    padding: 1rem;
+    padding: 30px 0;
 
     @include respond(tabLand) {
       width: 85%;

@@ -14,6 +14,7 @@ const PostPreview = ({
   lengthSeconds,
   title,
   shortDescription,
+  publishDate,
   thumbnail,
   videoId,
   viewCount,
@@ -21,7 +22,6 @@ const PostPreview = ({
   saveDownload,
   user,
 }) => {
-  // const { url, setUrl } = useState();
   const [loadBar, setLoadBar] = useState();
   const [time, setTime] = useState();
   const [videoItag, setVideoItag] = useState(formats.find(i => i.itag === 22) ? 22 : 18);
@@ -50,7 +50,6 @@ const PostPreview = ({
   }, [setLoadBar, user]);
 
   const changeOption = (e) => {
-    // const format = document.getElementById("format").value;
     const { value } = e.currentTarget
 
     setVideoItag(value)
@@ -60,8 +59,6 @@ const PostPreview = ({
     else {
       setFormat('mp4')
     }
-    console.log(videoItag)
-    console.log(format)
 
   };
 
@@ -81,16 +78,12 @@ const PostPreview = ({
               <p>
                 <strong>{author}</strong>
               </p>
-              {/* <p>
-                <small>{owner.username}</small>
-              </p> */}
               <p>
                 <i
                   className="fad fa-calendar-alt"
                   style={{ color: 'var(--color-grey-dark-1)' }}
                 ></i>
-                {/* <small>{post.posted_on.date}</small> */}
-                <small>Today</small>
+                <small> {publishDate}</small>
               </p>
             </div>
           </div>
@@ -157,7 +150,7 @@ const PostPreview = ({
               {i.container.split('/')[1].toUpperCase() + ' ' + i.qualityLabel.split('p')[0]}
               </option>)
             )}
-            <option value={1}>MP3 Audio</option>
+            <option value={1}>MP3 audio</option>
           </select>
         </div>
       </div>
