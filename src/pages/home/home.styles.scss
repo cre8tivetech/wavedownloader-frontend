@@ -26,6 +26,14 @@
 
     h3 {
       font-size: 2rem;
+
+      @include respond(tabLand) {
+        font-size: 1.7rem;
+      }
+
+      @include respond(tabPort) {
+        font-size: 1.5rem;
+      }
     }
 
     .card{
@@ -135,6 +143,25 @@
             }
           }
         }
+        
+        &--resources {
+          background-color: var(--color-secondary);
+          color: white;
+          cursor: default;
+
+          p {
+            color: var(--color-light);
+          }
+
+          &:hover {
+            background-color: var(--color-secondary);
+            color: white;
+
+            p {
+              color: var(--color-light);
+            }
+          }
+        }
 
         .update__box {
           &>* {
@@ -164,20 +191,22 @@
 
     &__text {
       position: relative;
-      font-size: 2.2rem;
+      font-size: 2.5rem;
+      font-weight: bold;
       font-family: Helvetica;
       margin: 5px auto;
+      padding-bottom: 10px;
 
       @include respond(tabLand) {
-        font-size: 1.9rem;
+        font-size: 2.2rem;
       }
 
       @include respond(tabPort) {
-        font-size: 1.7rem;
+        font-size: 2rem;
       }
 
       @include respond(phone) {
-        font-size: 1.5rem;
+        font-size: 1.7rem;
       }
 
       p {
