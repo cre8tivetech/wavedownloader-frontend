@@ -55,11 +55,8 @@ const App = ({ checkUserSession, currentUser, token, location, history }) => {
   }, [checkUserSession, currentUser, token]);
 
   useEffect(() => {
-    function initializeReactGA() {
-      ReactGA.initialize('UA-104203925-4');
-      history.listen(locations => ReactGA.pageview(locations.pathname));
-    }
-    initializeReactGA()
+    ReactGA.initialize('UA-104203925-4');
+    history.listen(locations => ReactGA.pageview(locations.pathname));
   }, [history])
 
   const headerExclusionArray = ['/confirmation/', '/reset-password/'];
