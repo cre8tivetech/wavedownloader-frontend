@@ -20,20 +20,20 @@
   }
 
   img {
-    width: 25rem;
-    fill-opacity:0;
+    height: 25rem;
+    fill-opacity: 0;
     filter: none;
 
     @include respond(tabLand) {
-      width: 23.5rem;
+      height: 23.5rem;
     }
 
     @include respond(tabPort) {
-      width: 22rem;
+      height: 22rem;
     }
 
     @include respond(phone) {
-      width: 21rem;
+      height: 21rem;
     }
   }
 

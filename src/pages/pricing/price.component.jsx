@@ -37,7 +37,8 @@ const Price = ({
       callback(response);
     },
     onClose: () => {
-      // console.log('Payment closed');
+      console.log('good');
+      window.location.assign('http://localhost:3000/pricing');
     },
   };
   // useEffect(() => {}, [paymentData]);

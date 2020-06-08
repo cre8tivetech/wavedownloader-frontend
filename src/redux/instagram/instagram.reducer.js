@@ -24,6 +24,29 @@ const INITIAL_STATE = {
 
 const instagramReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
+    case InstagramActionTypes.CLEAR_INSTAGRAM_DATA:
+      return {
+        ...state,
+        collections: null,
+        userCollections: null,
+        hashTagCollections: null,
+        storyCollections: null,
+        highlightCollections: null,
+        singleHighlightCollections: null,
+        slideCollections: null,
+        credentials: null,
+        storyForm: null,
+        highlightForm: null,
+        hashTagForm: null,
+        shortcode: null,
+        idcode: null,
+        source: null,
+        downloadData: null,
+        isFetching: false,
+        isSlide: false,
+        isSingleHighlight: false,
+        errorMessage: null,
+      };
     case InstagramActionTypes.FETCH_POSTS_ADD:
       return {
         ...state,
