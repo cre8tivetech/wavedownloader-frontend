@@ -215,7 +215,7 @@ const Profile = ({
               />
               <p>Subscription Time</p>
               <strong style={{ color: 'var(--color-danger-1)' }}>
-                {subDays} Days
+                {!user.is_subscribed ? 'NO' : subDays + ' Days'}
               </strong>
             </div>
             <div className="profile-section__box--overview_container_box">

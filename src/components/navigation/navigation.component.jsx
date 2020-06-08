@@ -23,6 +23,7 @@ const Navigation = ({ user, signOutStart }) => {
       root.style.setProperty('--color-card', '#050e08');
       root.style.setProperty('--color-text-1', '#a3a3a3');
       root.style.setProperty('--color-text-2', '#cccccc');
+      root.style.setProperty('--color-text-4', '#b8b8b8');
       root.style.setProperty('--color-btn-hover', '#0b1d12');
       root.style.setProperty('--scrollbarBG', '#020503');
       root.style.setProperty('--box-shadow', 'rgba(255,255,255,0.35)');
@@ -34,7 +35,6 @@ const Navigation = ({ user, signOutStart }) => {
       // setClick("open");
     } else if (click === 'open') {
       setClick('close');
-
     }
   };
 
@@ -58,19 +58,21 @@ const Navigation = ({ user, signOutStart }) => {
       root.style.setProperty('--color-card', '#f4f2f2');
       root.style.setProperty('--color-text-1', '#777777');
       root.style.setProperty('--color-text-2', '#242424');
-      root.style.setProperty('--color-btn-hover', '#0b1d12');
+      root.style.setProperty('--color-text-4', '#e6e1e1');
+      root.style.setProperty('--color-btn-hover', '#a8a8a8');
       root.style.setProperty('--scrollbarBG', '#e4ffeb');
 
       root.style.setProperty('--box-shadow', 'rgba(0,0,0,0.35)');
       localStorage.setItem('mode', 'light');
       setMode('light');
-    } else {
+    } else if (mode === 'light') {
       root.style.setProperty('--color-bg', '#030805');
       root.style.setProperty('--color-bg-2', '#050c07');
       root.style.setProperty('--color-light', '#030805');
       root.style.setProperty('--color-card', '#050e08');
       root.style.setProperty('--color-text-1', '#a3a3a3');
       root.style.setProperty('--color-text-2', '#cccccc');
+      root.style.setProperty('--color-text-4', '#b8b8b8');
       root.style.setProperty('--color-btn-hover', '#0b1d12');
       root.style.setProperty('--scrollbarBG', '#020503');
 
@@ -102,7 +104,7 @@ const Navigation = ({ user, signOutStart }) => {
                 <p>
                   {user.full_name} <small>{user.email}</small>
                 </p>
-              </Link> 
+              </Link>
             </li>
           ) : (
             <li>
