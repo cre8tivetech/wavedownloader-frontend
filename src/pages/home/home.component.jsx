@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { connect } from 'react-redux';
-import SEO from "../../components/seo/seo.component";
+import SEO from '../../components/seo/seo.component';
 import LoadingBar from 'react-top-loading-bar';
 import { useHistory } from 'react-router-dom';
 import Accordion from '../../components/accordion/accordion.component';
