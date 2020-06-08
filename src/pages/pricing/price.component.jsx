@@ -31,12 +31,14 @@ const Price = ({
     amount: amount,
     currency: 'USD',
     PBFPubKey: key,
+    production: true,
     onSuccess: (response) => {
       // console.log('Payment successfull');
       callback(response);
     },
     onClose: () => {
-      // console.log('Payment closed');
+      console.log('good');
+      window.location.assign('http://localhost:3000/pricing');
     },
   };
   // useEffect(() => {}, [paymentData]);
