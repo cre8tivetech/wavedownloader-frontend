@@ -10,6 +10,15 @@ const INITIAL_STATE = {
 
 const youtubeReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
+    case YoutubeActionTypes.CLEAR_YOUTUBE_DATA:
+      return {
+        ...state,
+        videoData: null,
+        downloadData: null,
+        isFetching: false,
+        isSlide: false,
+        errorMessage: null,
+      };
     case YoutubeActionTypes.FETCH_VIDEO_START:
       return {
         ...state,

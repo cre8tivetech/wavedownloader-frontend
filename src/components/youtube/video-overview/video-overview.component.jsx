@@ -6,11 +6,13 @@ import {
   selectError,
 } from '../../../redux/youtube/youtube.selectors';
 import VideoPreview from '../video-preview/video-preview.component';
+import Error404 from '../../../pages/Error/error404.component';
 
 const VideoOverview = ({
   collections,
   // source,
   errorMessage,
+  history,
 }) => {
   // const downloadName = source.split('/');
   // const link = { url: source, downloadName: downloadName[4] };
@@ -25,7 +27,7 @@ const VideoOverview = ({
       {/* ))} */}
     </div>
   ) : (
-    <div></div>
+    <Error404 />
   );
 };
 

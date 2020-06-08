@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { connect } from 'react-redux';
 import SEO from "../../components/seo/seo.component";
 import LoadingBar from 'react-top-loading-bar';
@@ -10,11 +10,22 @@ import {
   SupportedResources,
 } from '../../components/pro-features/pro-features.component';
 import { Link, withRouter } from 'react-router-dom';
-import { fetchPostsAdd } from '../../redux/instagram/instagram.actions';
-import { fetchVideoStart } from '../../redux/youtube/youtube.actions';
+import {
+  fetchPostsAdd,
+  clearInstagramData,
+} from '../../redux/instagram/instagram.actions';
+import {
+  fetchVideoStart,
+  clearYouTubeData,
+} from '../../redux/youtube/youtube.actions';
 import './home.styles.scss';
 
-const Home = ({ fetchPostsAdd, fetchVideoStart }) => {
+const Home = ({
+  fetchPostsAdd,
+  fetchVideoStart,
+  clearInstagramData,
+  clearYouTubeData,
+}) => {
   const [loadBar, setLoadBar] = useState(0);
   const [url, setUrl] = useState('');
   const [error, setError] = useState(false);
@@ -25,6 +36,10 @@ const Home = ({ fetchPostsAdd, fetchVideoStart }) => {
     setLoadBar(0);
   };
   const history = useHistory();
+  useMemo(() => {
+    clearInstagramData();
+    clearYouTubeData();
+  }, []);
   useEffect(() => {
     startLoader();
   }, [startLoader]);
@@ -264,5 +279,7 @@ const Home = ({ fetchPostsAdd, fetchVideoStart }) => {
 const mapDispatchToProps = (dispatch) => ({
   fetchPostsAdd: (url) => dispatch(fetchPostsAdd(url)),
   fetchVideoStart: (url) => dispatch(fetchVideoStart(url)),
+  clearInstagramData: () => dispatch(clearInstagramData()),
+  clearYouTubeData: () => dispatch(clearYouTubeData()),
 });
 export default withRouter(connect(null, mapDispatchToProps)(Home));

@@ -23,8 +23,8 @@ const Posts = ({ fetchPostsStart, match }) => {
   );
 };
 
-const mapDispatchToProps = dispatch => ({
-  fetchPostsStart: () => dispatch(fetchPostsStart())
+const mapDispatchToProps = (dispatch) => ({
+  fetchPostsStart: () => dispatch(fetchPostsStart()),
 });
 
 export default connect(null, mapDispatchToProps)(Posts);

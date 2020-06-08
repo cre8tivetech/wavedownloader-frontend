@@ -1,5 +1,9 @@
 import YoutubeActionTypes from './youtube.types';
 
+export const clearYouTubeData = () => ({
+  type: YoutubeActionTypes.CLEAR_YOUTUBE_DATA,
+});
+
 export const fetchVideoStart = (url) => ({
   type: YoutubeActionTypes.FETCH_VIDEO_START,
   payload: url,

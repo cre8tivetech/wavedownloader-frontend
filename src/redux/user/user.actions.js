@@ -19,6 +19,10 @@ export const checkUserSession = () => ({
   type: UserActionTypes.CHECK_USER_SESSION,
 });
 
+export const clearData = () => ({
+  type: UserActionTypes.CLEAR_DATA,
+});
+
 export const signInByTokenStart = (token) => ({
   type: UserActionTypes.SIGN_IN_BY_TOKEN_START,
   payload: token,
