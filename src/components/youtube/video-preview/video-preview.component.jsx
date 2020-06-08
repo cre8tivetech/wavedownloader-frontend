@@ -6,7 +6,7 @@ import { withRouter } from 'react-router-dom';
 import { saveDownload } from '../../../redux/instagram/instagram.actions';
 import { selectCurrentUser } from '../../../redux/user/user.selector';
 import { createStructuredSelector } from 'reselect';
-import YoutubeImage from '../../../assets/img/youtube.png'
+import YoutubeImage from '../../../assets/img/youtube.png';
 
 const PostPreview = ({
   author,
@@ -24,7 +24,9 @@ const PostPreview = ({
 }) => {
   const [loadBar, setLoadBar] = useState();
   const [time, setTime] = useState();
-  const [videoItag, setVideoItag] = useState(formats.find(i => i.itag === 22) ? 22 : 18);
+  const [videoItag, setVideoItag] = useState(
+    formats.find((i) => i.itag === 22) ? 22 : 18
+  );
   const [format, setFormat] = useState('mp4');
 
   useEffect(() => {
@@ -38,28 +40,25 @@ const PostPreview = ({
     const measuredTime = new Date(null);
     measuredTime.setSeconds(parseInt(lengthSeconds));
     const HMSTime = measuredTime.toISOString().substr(11, 8);
-    const H = HMSTime.split(':')[0]
-    const M = HMSTime.split(':')[1]
-    const S = HMSTime.split(':')[2]
+    const H = HMSTime.split(':')[0];
+    const M = HMSTime.split(':')[1];
+    const S = HMSTime.split(':')[2];
     if (H == '00') {
-      setTime(M + ':' + S)
-    }
-    else {
-      setTime(HMSTime)
+      setTime(M + ':' + S);
+    } else {
+      setTime(HMSTime);
     }
   }, [setLoadBar, user]);
 
   const changeOption = (e) => {
-    const { value } = e.currentTarget
+    const { value } = e.currentTarget;
 
-    setVideoItag(value)
+    setVideoItag(value);
     if (value == 1) {
-      setFormat('mp3')
+      setFormat('mp3');
+    } else {
+      setFormat('mp4');
     }
-    else {
-      setFormat('mp4')
-    }
-
   };
 
   return (
@@ -145,11 +144,18 @@ const PostPreview = ({
           </div>
         </div>
         <div className="post-card__select">
-          <select onChange={(e) => changeOption(e)} id="format" defaultValue={22}>
-            {formats.map(i => (<option value={i.itag} key={i.itag}>
-              {i.container.split('/')[1].toUpperCase() + ' ' + i.qualityLabel.split('p')[0]}
-              </option>)
-            )}
+          <select
+            onChange={(e) => changeOption(e)}
+            id="format"
+            defaultValue={22}
+          >
+            {formats.map((i) => (
+              <option value={i.itag} key={i.itag}>
+                {i.container.split('/')[1].toUpperCase() +
+                  ' ' +
+                  i.qualityLabel.split('p')[0]}
+              </option>
+            ))}
             <option value={1}>MP3 audio</option>
           </select>
         </div>
