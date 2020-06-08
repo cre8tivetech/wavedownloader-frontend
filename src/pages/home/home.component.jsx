@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { connect } from 'react-redux';
+import SEO from "../../components/seo/seo.component";
 import LoadingBar from 'react-top-loading-bar';
 import { useHistory } from 'react-router-dom';
 import Accordion from '../../components/accordion/accordion.component';
@@ -49,6 +50,7 @@ const Home = ({ fetchPostsAdd, fetchVideoStart }) => {
   };
   return (
     <div className="home-section">
+      <SEO title="An online post and video downloader" />
       <LoadingBar
         progress={loadBar}
         height={3}

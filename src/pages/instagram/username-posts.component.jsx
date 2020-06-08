@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { Route } from "react-router-dom";
+import SEO from "../../components/seo/seo.component";
 import { fetchUserNamePostsStart } from "../../redux/instagram/instagram.actions";
 import UserNamePostsOverviewContainer from "../../components/instagram/posts-overview/username-posts-overview.container";
 import { checkUserSession } from "../../redux/user/user.actions";
@@ -18,6 +19,7 @@ const UserNamePosts = ({
 
   return (
     <div className="post-section">
+      <SEO title="Download Instagram user posts" />
       <Route
         exact
         // path={`${match.path}`}
