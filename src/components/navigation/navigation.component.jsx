@@ -65,7 +65,7 @@ const Navigation = ({ user, signOutStart }) => {
       root.style.setProperty('--box-shadow', 'rgba(0,0,0,0.35)');
       localStorage.setItem('mode', 'light');
       setMode('light');
-    } else if (mode === 'light') {
+    } else {
       root.style.setProperty('--color-bg', '#030805');
       root.style.setProperty('--color-bg-2', '#050c07');
       root.style.setProperty('--color-light', '#030805');
