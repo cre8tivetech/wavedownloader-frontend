@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import ReactGA from 'react-ga';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 
 import './themes/mixins.scss';
@@ -48,10 +49,18 @@ import Confirmation from './pages/auth/confirmation.component';
 import ResetPassword from './pages/auth/resetPassword.component';
 import DownloadHistory from './pages/downloads/downloadHistory.component';
 
-const App = ({ checkUserSession, currentUser, token, location }) => {
+const App = ({ checkUserSession, currentUser, token, location, history }) => {
   useEffect(() => {
     checkUserSession();
   }, [checkUserSession, currentUser, token]);
+
+  useEffect(() => {
+    function initializeReactGA() {
+      ReactGA.initialize('UA-104203925-4');
+      history.listen(locations => ReactGA.pageview(locations.pathname));
+    }
+    initializeReactGA()
+  }, [history])
 
   const headerExclusionArray = ['/confirmation/', '/reset-password/'];
   return (
