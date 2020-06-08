@@ -19,12 +19,13 @@
   &>* {
     margin-top: 4rem;
   }
-  
+
 
   // DOWNLOAD OPTIONS
-  .premium-features{
+  .premium-features {
 
     h3 {
+      text-align: center;
       font-size: 2rem;
 
       @include respond(tabLand) {
@@ -36,28 +37,30 @@
       }
     }
 
-    .card{
+    .card {
       margin-bottom: 20px;
       box-shadow: 0 0.5rem 2rem rgba(black, 0.15);
-  
+
       @include respond(phone) {
         box-shadow: 0 0.2rem 1rem rgba(black, 0.15);
-  
+
       }
 
       .feature-icon {
         display: flex;
         justify-content: center;
         padding-bottom: 20px;
+
         img {
-          width: 40px;
+          height: 40px;
         }
       }
+
       .options {
         display: flex;
         justify-content: center;
         flex-wrap: wrap;
-        
+
 
         &>* {
           position: relative;
@@ -143,9 +146,9 @@
             }
           }
         }
-        
+
         &--resources {
-          background-color: var(--color-secondary);
+          background-color: var(--color-btn-hover);
           color: white;
           cursor: default;
 
@@ -154,7 +157,7 @@
           }
 
           &:hover {
-            background-color: var(--color-secondary);
+            background-color: var(--color-);
             color: white;
 
             p {
@@ -187,7 +190,7 @@
     @include respond(phone) {
       margin-bottom: 1rem;
     }
-    
+
 
     &__text {
       position: relative;
