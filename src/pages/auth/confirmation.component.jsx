@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import imageLoading from '../../assets/Ripple-2.svg';
 import imageLoaded from '../../assets/thumbs-up.gif';
@@ -34,11 +34,14 @@ const Confirmation = ({ currentUser, signInByTokenStart }) => {
     }
   };
 
+  useMemo(() => {
+    signInByTokenStart(token);
+  }, [signInByTokenStart]);
   useEffect(() => {
     checkMode();
     // !currentUser && console.log('NO token');
-    !currentUser.is_email_confirm && signInByTokenStart(token);
-    currentUser.is_email_confirm &&
+    currentUser &&
+      currentUser.is_email_confirm &&
       setTimeout(() => {
         setConfirmImage(imageLoaded);
         setTextColor('var(--color-primary)');
