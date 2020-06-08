@@ -75,6 +75,8 @@ export function* fetchPostsAsync() {
       if (result.data.__typename === 'GraphHighlightReel') {
         yield put(fetchSingleHighlightCollectionPostsSuccess(result.data));
       }
+    } else {
+      yield put(fetchPostsFailure('Oops!!, Error getting data'));
     }
   } catch (error) {
     yield put(

@@ -1,31 +1,38 @@
-import React, { useState, useEffect } from "react";
-import "./posts-spinner.style.scss";
-import LoadingBar from "react-top-loading-bar";
-import { selectError } from "../../redux/instagram/instagram.selector";
-import { createStructuredSelector } from "reselect";
-const PostsSpinner = WrappedComponent => {
-  const Spinner = ({ isLoading, isSlide, postError, ...otherProps }) => {
+import React, { useState, useEffect } from 'react';
+import './posts-spinner.style.scss';
+import LoadingBar from 'react-top-loading-bar';
+import { selectError } from '../../redux/instagram/instagram.selector';
+import { createStructuredSelector } from 'reselect';
+const PostsSpinner = (WrappedComponent) => {
+  const Spinner = ({
+    isLoading,
+    isSlide,
+    postError,
+    history,
+    ...otherProps
+  }) => {
     const [loadBar, setLoadBar] = useState();
     const [barColor, setBarColor] = useState(
-      "linear-gradient(92deg, #038125 0%, #fbff00 100%)"
+      'linear-gradient(92deg, #038125 0%, #fbff00 100%)'
     );
     // const [errorMessage] = useState();
-    const [errorDisplay, setErrorDIsplay] = useState("none");
+    const [errorDisplay, setErrorDisplay] = useState('none');
     const reload = () => {
       window.location.reload(false);
     };
     useEffect(() => {
       if (postError) {
         setLoadBar(99.9);
-        setBarColor("red");
+        setBarColor('red');
         setTimeout(() => {
-          setErrorDIsplay("block");
-        }, 3000);
-        setTimeout(() => {
-          setErrorDIsplay("none");
-        }, 10000);
+          setErrorDisplay('block');
+          setTimeout(() => {
+            history.push('/');
+            setErrorDisplay('none');
+          }, 6000);
+        }, 2000);
       }
-    }, [setLoadBar, setBarColor, setErrorDIsplay, postError]);
+    }, [setLoadBar, setBarColor, setErrorDisplay, postError]);
 
     return isLoading ? (
       <div className="spinner-section">
@@ -40,7 +47,7 @@ const PostsSpinner = WrappedComponent => {
           <p>
             <i
               className="fad fa-bug"
-              style={{ color: "var(--color-light)" }}
+              style={{ color: 'var(--color-light)' }}
             ></i>
             {postError ? postError : null}
           </p>
@@ -52,7 +59,7 @@ const PostsSpinner = WrappedComponent => {
                 reload();
               }}
               className="fad fa-sync-alt"
-              style={{ color: "var(--color-primary)" }}
+              style={{ color: 'var(--color-primary)' }}
             ></i>
           </div>
           <div className="spinner-card__detail">
@@ -101,7 +108,7 @@ const PostsSpinner = WrappedComponent => {
     );
   };
   createStructuredSelector({
-    errorMessage: selectError
+    errorMessage: selectError,
   });
   return Spinner;
 };

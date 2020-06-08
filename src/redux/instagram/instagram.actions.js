@@ -1,5 +1,9 @@
 import InstagramActionTypes from './instagram.types';
 
+export const clearInstagramData = () => ({
+  type: InstagramActionTypes.CLEAR_INSTAGRAM_DATA,
+});
+
 export const fetchPostsAdd = (url) => ({
   type: InstagramActionTypes.FETCH_POSTS_ADD,
   payload: url,
