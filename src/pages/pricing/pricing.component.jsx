@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import LoadingBar from 'react-top-loading-bar';
 import { connect } from 'react-redux';
+import SEO from "../../components/seo/seo.component";
 import { createStructuredSelector } from 'reselect';
 import imageLoading from '../../assets/Ripple-2.svg';
 import imageSuccessLoaded from '../../assets/thumbs-up.gif';
@@ -200,6 +201,7 @@ const Pricing = ({
   // if (!paymentData)
   return (
     <div className="profile-section">
+      <SEO title="Select subscription plan" />
       {paymentData && (
         <div className="verifying">
           <img src={verifyImage} alt="" />

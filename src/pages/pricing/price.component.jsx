@@ -31,6 +31,7 @@ const Price = ({
     amount: amount,
     currency: 'USD',
     PBFPubKey: key,
+    production: true,
     onSuccess: (response) => {
       // console.log('Payment successfull');
       callback(response);
