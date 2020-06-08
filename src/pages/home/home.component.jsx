@@ -4,7 +4,11 @@ import SEO from "../../components/seo/seo.component";
 import LoadingBar from 'react-top-loading-bar';
 import { useHistory } from 'react-router-dom';
 import Accordion from '../../components/accordion/accordion.component';
-import { ProFeaturesInstagram, ProFeaturesYoutube, SupportedResources } from '../../components/pro-features/pro-features.component';
+import {
+  ProFeaturesInstagram,
+  ProFeaturesYoutube,
+  SupportedResources,
+} from '../../components/pro-features/pro-features.component';
 import { Link, withRouter } from 'react-router-dom';
 import { fetchPostsAdd } from '../../redux/instagram/instagram.actions';
 import { fetchVideoStart } from '../../redux/youtube/youtube.actions';
@@ -30,19 +34,17 @@ const Home = ({ fetchPostsAdd, fetchVideoStart }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setError(false)
-    const checkUrl = url.split('/')[2]
+    setError(false);
+    const checkUrl = url.split('/')[2];
     if (checkUrl.includes('instagram')) {
       fetchPostsAdd(url);
       history.push('/instagram/posts');
-    }
-    else if (checkUrl.includes('youtube') || checkUrl.includes('youtu')) {
-      console.log('url: ', url)
+    } else if (checkUrl.includes('youtube') || checkUrl.includes('youtu')) {
+      console.log('url: ', url);
       fetchVideoStart(url);
       history.push('/youtube/video');
-    }
-    else {
-      setError(true)
+    } else {
+      setError(true);
     }
   };
   const handleChange = (event) => {
@@ -57,7 +59,7 @@ const Home = ({ fetchPostsAdd, fetchVideoStart }) => {
         color="linear-gradient(92deg, #038125 0%, #fbff00 100%)"
         onLoaderFinished={() => onLoaderFinished}
       />
-    
+
       <div className="download card">
         <p className="download__text download__text--1">
           Online Post & Video Downloader
@@ -88,7 +90,11 @@ const Home = ({ fetchPostsAdd, fetchVideoStart }) => {
                   URL
                 </label>
               </div>
-              {error && (<span className="url-error">wavedownloader does not support downloading from this website</span>)}
+              {error && (
+                <span className="url-error">
+                  wavedownloader does not support downloading from this website
+                </span>
+              )}
             </div>
             <div className="form__group">
               <button type="submit" className="btn btn--green">
@@ -129,13 +135,10 @@ const Home = ({ fetchPostsAdd, fetchVideoStart }) => {
                     className="fad fa-gifts"
                     style={{ color: 'var(--color-danger-1)' }}
                   ></i>
-                  Season Greetings 2019 Everyone!UPDATE (23 December 2019):
+                  Live (8 June 2020):
                 </strong>
-                We send you our warmest greetings of this festive season and
-                best wishes for happiness this New Year. We fixed an issue with
-                some URL types: mobile links (m.facebook.com) and the new
-                fbwat.ch links are supported. The Downloader is now working
-                fully working as usual. Thanks for submitting bugs and issues.
+                Finally!!, WaveDownloader is now live, you can download
+                Instagram videos and YouTube videos .
               </p>
             </div>
             <div className="update__content update__content--updates">
@@ -145,12 +148,11 @@ const Home = ({ fetchPostsAdd, fetchVideoStart }) => {
                     className="fad fa-cog"
                     style={{ color: 'var(--color-dark)' }}
                   ></i>
-                  UPDATE (15 November 2019):
+                  UPDATE (7 June 2020):
                 </strong>
-                We improved the downloader to support the new URL architecture
-                of Facebook. We also fixed the thumbnail, video duration as well
-                as video titles and descriptions that weren&apos;t showing most
-                of the time. Don&apos;t hesitate to leave your feedback!
+                We fixed some bugs and made improvements to the downloader.
+                Video thumbnails work with almost all videos now thanks to a new
+                algorithm.
               </p>
             </div>
             <div className="update__content update__content--news">
@@ -160,12 +162,25 @@ const Home = ({ fetchPostsAdd, fetchVideoStart }) => {
                     className="fad fa-star"
                     style={{ color: 'var(--color-dark)' }}
                   ></i>
-                  UPDATE (12 October 2018):
+                  UPDATE (1 June 2020):
                 </strong>
-                We fixed some bugs and made improvements to the downloader.
-                Video thumbnails work with almost all videos now thanks to a new
-                algorithm. We are having some issues with the Chrome Extension
-                and we are working on fixing them..
+                We improved the downloader to support the new URL architecture
+                of YouTube. We also fixed the thumbnail, video duration as well
+                as video titles and descriptions that weren&apos;t showing most
+                of the time. Don&apos;t hesitate to leave your feedback!
+              </p>
+            </div>
+            <div className="update__content update__content--updates">
+              <p>
+                <strong>
+                  <i
+                    className="fad fa-cog"
+                    style={{ color: 'var(--color-dark)' }}
+                  ></i>
+                  UPDATE (20 May 2020):
+                </strong>
+                We fixed some bugs and made app mobile responsive, support 99.9%
+                of smartphones and tablet
               </p>
             </div>
           </div>
@@ -227,8 +242,8 @@ const Home = ({ fetchPostsAdd, fetchVideoStart }) => {
               </span></div>`}
             />
             <Accordion
-               title="Can I download instagram user stories?"
-               content={`<div class="collapsible-body" style="display: block;"><span><b>Yes!</b>
+              title="Can I download instagram user stories?"
+              content={`<div class="collapsible-body" style="display: block;"><span><b>Yes!</b>
                  You can do this using one of our instagram premium features "STORIES".
                  You will need to signup for Wavedownloader PRO to have access to this feature.
                </span></div>`}
