@@ -10,7 +10,6 @@ import './navigation.styles.scss';
 const Navigation = ({ user, signOutStart }) => {
   const [mode, setMode] = useState(localStorage.getItem('mode'));
   const [logout, setLogout] = useState('Logout');
-  const [click, setClick] = useState('close');
   const history = useHistory();
   const checkMode = () => {
     if (mode === 'dark') {
@@ -31,11 +30,11 @@ const Navigation = ({ user, signOutStart }) => {
   };
 
   const navToggle = (e) => {
-    if (click === 'close') {
-      // setClick("open");
-    } else if (click === 'open') {
-      setClick('close');
-    }
+    let menu = document.getElementById('openSidebarMenu').checked;
+    if (menu) document.getElementById('openSidebarMenu').checked = false;
+    // let ht = window
+    //   .getComputedStyle(elem, null)
+    //   .getPropertyValue('transform');
   };
 
   useEffect(() => checkMode(), []);
@@ -89,16 +88,15 @@ const Navigation = ({ user, signOutStart }) => {
       <label
         htmlFor="openSidebarMenu"
         className="navigation__sidebarIconToggle"
-        onClick={(e) => navToggle(e)}
       >
         <div className="navigation__spinner navigation__diagonal navigation__part-1"></div>
         <div className="navigation__spinner navigation__horizontal"></div>
         <div className="navigation__spinner navigation__diagonal navigation__part-2"></div>
       </label>
-      <div className="navigation__sidebarMenu">
+      <div className="navigation__sidebarMenu" id="menu">
         <ul className="navigation__sidebarMenu--inner">
           {user ? (
-            <li>
+            <li onClick={(e) => navToggle(e)}>
               <Link className="profile" to="/profile">
                 <div>{user.full_name.charAt(0).toUpperCase()}</div>
                 <p>
@@ -107,7 +105,7 @@ const Navigation = ({ user, signOutStart }) => {
               </Link>
             </li>
           ) : (
-            <li>
+            <li onClick={(e) => navToggle(e)}>
               <Link className="login" to="/signin">
                 <i
                   className="fad fa-lock"
@@ -127,7 +125,7 @@ const Navigation = ({ user, signOutStart }) => {
               <p>Home</p>
             </Link>
           </li>
-          <li>
+          <li onClick={(e) => navToggle(e)}>
             <Link className="links" to="/profile">
               <i
                 className="fad fa-user"
@@ -136,7 +134,7 @@ const Navigation = ({ user, signOutStart }) => {
               <p>Profile</p>
             </Link>
           </li>
-          <li>
+          <li onClick={(e) => navToggle(e)}>
             <Link className="links" to="/pricing">
               <i
                 className="fad fa-usd-circle"
