@@ -99,7 +99,7 @@ function registerValidSW(swUrl, config) {
           })
         );
       });
-      window.location.href = './';
+      // window.location.href = './';
     })
     .catch((error) => {
       console.error('Error during service worker registration:', error);

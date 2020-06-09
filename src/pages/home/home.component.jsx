@@ -122,7 +122,7 @@ const Home = ({
       </div>
 
       <div className="premium-features">
-        <h3>Supported Resources</h3>
+        <h3>Supported Sites</h3>
         <SupportedResources />
       </div>
 
