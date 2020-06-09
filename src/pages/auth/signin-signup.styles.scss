@@ -82,7 +82,7 @@
     }
   }
 
-  &__header{
+  &__header {
     margin-top: 1.5rem;
     margin-bottom: -2rem;
     font-size: 1.5rem;
@@ -132,6 +132,8 @@
     }
 
     .auth-link {
+      color: var(--color-secondary);
+
       &:link {
         text-decoration: none;
       }
@@ -145,6 +147,10 @@
         &:hover {
           color: var(--color-primary);
         }
+      }
+
+      &:hover {
+        color: var(--color-primary);
       }
     }
 
