@@ -21,11 +21,7 @@ const UserNamePosts = ({
   return (
     <div className="post-section">
       <SEO title="Download Instagram user posts" />
-      <Route
-        exact
-        // path={`${match.path}`}
-        component={UserNamePostsOverviewContainer}
-      />
+      <Route exact component={UserNamePostsOverviewContainer} />
       <Footer />
     </div>
   );
