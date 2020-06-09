@@ -19,6 +19,7 @@ import {
   clearYouTubeData,
 } from '../../redux/youtube/youtube.actions';
 import './home.styles.scss';
+import Footer from '../../components/footer/footer.component';
 
 const Home = ({
   fetchPostsAdd,
@@ -273,6 +274,7 @@ const Home = ({
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
