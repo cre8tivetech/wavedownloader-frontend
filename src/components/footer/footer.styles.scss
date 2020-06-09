@@ -1,0 +1,110 @@
+@import '../../themes/mixins.scss';
+
+.footer {
+  position: absolute;
+  background-color: var(--color-text-3);
+  right: 0;
+  bottom: 1;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  color: var(--color-text-1);
+  font-size: 1.6rem;
+
+  @include respond(phone) {
+    width: 100%;
+  }
+
+  &__content {
+    font-family: 'Poppins-Light';
+    padding: 0 1.5rem;
+
+    h1 {
+      font-size: 1.6rem;
+      text-transform: uppercase;
+      margin: 1.5rem 0 0 0;
+
+      @include respond(tabLand) {
+        font-size: 1.5rem;
+      }
+
+      @include respond(tabPort) {
+        font-size: 1.4rem;
+      }
+    }
+
+    p {
+      font-size: 1.2rem;
+      margin: .3rem 0 1rem 0;
+
+      @include respond(tabLand) {
+        font-size: 1.1rem;
+      }
+
+      @include respond(tabPort) {
+        font-size: 1rem;
+      }
+    }
+
+    &--1 {
+      img {
+        height: 20px;
+        margin-top: 1.5rem;
+      }
+
+      h5 {
+        margin: 1rem 0;
+        font-size: 1.4rem;
+
+        @include respond(phone) {
+          font-size: 1.3rem;
+        }
+
+        a {
+          color: var(--color-primary);
+        }
+      }
+    }
+
+    &--2 {
+      padding-right: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      h5 {
+        margin: 1rem 0;
+        font-size: 1.4rem;
+
+        @include respond(phone) {
+          font-size: 1.3rem;
+        }
+      }
+
+      div {
+        &>* {
+          padding: 0 1rem;
+          font-size: 2rem;
+
+          @include respond(phone) {
+            font-size: 1.5rem;
+          }
+
+          i {
+            color: var(--color-text-1);
+
+            &:hover {
+              color: var(--color-primary);
+
+              cursor: pointer;
+            }
+          }
+
+
+        }
+
+      }
+    }
+  }
+}

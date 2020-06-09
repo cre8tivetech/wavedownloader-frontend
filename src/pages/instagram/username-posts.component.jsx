@@ -1,16 +1,17 @@
-import React, { useEffect } from "react";
-import { connect } from "react-redux";
-import { Route } from "react-router-dom";
-import SEO from "../../components/seo/seo.component";
-import { fetchUserNamePostsStart } from "../../redux/instagram/instagram.actions";
-import UserNamePostsOverviewContainer from "../../components/instagram/posts-overview/username-posts-overview.container";
-import { checkUserSession } from "../../redux/user/user.actions";
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { Route } from 'react-router-dom';
+import SEO from '../../components/seo/seo.component';
+import { fetchUserNamePostsStart } from '../../redux/instagram/instagram.actions';
+import UserNamePostsOverviewContainer from '../../components/instagram/posts-overview/username-posts-overview.container';
+import { checkUserSession } from '../../redux/user/user.actions';
+import Footer from '../../components/footer/footer.component';
 
 const UserNamePosts = ({
-    fetchUserNamePostsStart,
-    checkUserSession,
-    // match
-  }) => {
+  fetchUserNamePostsStart,
+  checkUserSession,
+  // match
+}) => {
   // console.log(match.path);
   useEffect(() => {
     checkUserSession();
@@ -25,11 +26,12 @@ const UserNamePosts = ({
         // path={`${match.path}`}
         component={UserNamePostsOverviewContainer}
       />
+      <Footer />
     </div>
   );
 };
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   fetchUserNamePostsStart: () => dispatch(fetchUserNamePostsStart()),
   checkUserSession: () => dispatch(checkUserSession()),
 });

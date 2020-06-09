@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import LoadingBar from 'react-top-loading-bar';
 import { connect } from 'react-redux';
-import SEO from "../../components/seo/seo.component";
+import SEO from '../../components/seo/seo.component';
 import { createStructuredSelector } from 'reselect';
 import imageLoading from '../../assets/Ripple-2.svg';
 import imageSuccessLoaded from '../../assets/thumbs-up.gif';
@@ -26,6 +26,7 @@ import free from '../../assets/message.svg';
 import basic from '../../assets/plane(1).svg';
 import premium from '../../assets/rocket.svg';
 import Price from './price.component';
+import Footer from '../../components/footer/footer.component';
 
 const Pricing = ({
   user,
@@ -359,6 +360,7 @@ const Pricing = ({
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

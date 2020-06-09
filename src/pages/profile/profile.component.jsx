@@ -22,6 +22,7 @@ import confirmation from '../../assets/mail(1).svg';
 import sub_time from '../../assets/sale(1).svg';
 import plan from '../../assets/subscription(1).svg';
 import { getDownload } from '../../redux/instagram/instagram.actions';
+import Footer from '../../components/footer/footer.component';
 
 const Profile = ({
   user,
@@ -232,6 +233,7 @@ const Profile = ({
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

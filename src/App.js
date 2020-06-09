@@ -58,11 +58,10 @@ const App = ({ checkUserSession, currentUser, token, location, history }) => {
     ReactGA.initialize('UA-104203925-4');
     if (location.pathname.match('/') === '/') {
       ReactGA.pageview('/');
+    } else {
+      history.listen((locations) => ReactGA.pageview(locations.pathname));
     }
-    else {
-      history.listen(locations => ReactGA.pageview(locations.pathname));
-    }
-  }, [history])
+  }, [history]);
 
   const headerExclusionArray = ['/confirmation/', '/reset-password/'];
   return (

@@ -1,16 +1,17 @@
-import React, { useEffect } from "react";
-import { connect } from "react-redux";
-import { Route } from "react-router-dom";
-import SEO from "../../components/seo/seo.component";
-import { fetchHashTagPostsStart } from "../../redux/instagram/instagram.actions";
-import HashTagPostsOverviewContainer from "../../components/instagram/posts-overview/hashtag-posts-overview-container";
-import { checkUserSession } from "../../redux/user/user.actions";
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { Route } from 'react-router-dom';
+import SEO from '../../components/seo/seo.component';
+import { fetchHashTagPostsStart } from '../../redux/instagram/instagram.actions';
+import HashTagPostsOverviewContainer from '../../components/instagram/posts-overview/hashtag-posts-overview-container';
+import { checkUserSession } from '../../redux/user/user.actions';
+import Footer from '../../components/footer/footer.component';
 
 const HashTagPosts = ({
-    fetchHashTagPostsStart,
-    checkUserSession,
-    // match
-  }) => {
+  fetchHashTagPostsStart,
+  checkUserSession,
+  // match
+}) => {
   useEffect(() => {
     checkUserSession();
     fetchHashTagPostsStart();
@@ -24,11 +25,12 @@ const HashTagPosts = ({
         // path={`${match.path}`}
         component={HashTagPostsOverviewContainer}
       />
+      <Footer />
     </div>
   );
 };
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   fetchHashTagPostsStart: () => dispatch(fetchHashTagPostsStart()),
   checkUserSession: () => dispatch(checkUserSession()),
 });
