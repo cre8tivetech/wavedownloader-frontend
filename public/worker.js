@@ -1,4 +1,4 @@
-let CACHE_NAME = 'Wave-Downloader';
+let CACHE_NAME = 'WaveDownloader';
 let urlsToCache = ['/', '/completed'];
 
 // Install a service worker
@@ -27,7 +27,7 @@ self.addEventListener('fetch', (event) => {
 
 // Update a service worker
 self.addEventListener('activate', (event) => {
-  let cacheWhitelist = ['your-app-name'];
+  let cacheWhitelist = ['WaveDownloader'];
   event.waitUntil(
     caches.keys().then((cacheNames) => {
       return Promise.all(
