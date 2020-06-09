@@ -1,4 +1,4 @@
-let CACHE_NAME = 'WaveDownloaderV1';
+let CACHE_NAME = 'WaveDownloader';
 let urlsToCache = ['/'];
 
 // Install a service worker
