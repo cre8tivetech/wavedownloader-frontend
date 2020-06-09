@@ -27,7 +27,7 @@ self.addEventListener('fetch', (event) => {
 
 // Update a service worker
 self.addEventListener('activate', (event) => {
-  let cacheWhitelist = ['WaveDownloader'];
+  let cacheWhitelist = ['WaveDownloader1'];
   event.waitUntil(
     caches.keys().then((cacheNames) => {
       return Promise.all(
