@@ -1,237 +1,241 @@
 @import '../../themes/mixins.scss';
 
 .home-section {
-  width: 70%;
   margin: 0 auto;
 
-  @include respond(tabLand) {
-    width: 85%;
-  }
+  .home-container {
+    margin: 0 auto;
+    width: 70%;
 
-  @include respond(tabPort) {
-    width: 90%;
-  }
-
-  @include respond(phone) {
-    width: 95%;
-  }
-
-  &>* {
-    margin-top: 4rem;
-  }
-
-
-  // DOWNLOAD OPTIONS
-  .premium-features {
-
-    h3 {
-      text-align: center;
-      font-size: 2rem;
-
-      @include respond(tabLand) {
-        font-size: 1.7rem;
-      }
-
-      @include respond(tabPort) {
-        font-size: 1.5rem;
-      }
-
-      @include respond(phone) {
-        font-size: 1.3rem;
-      }
+    @include respond(tabLand) {
+      width: 85%;
     }
-
-    .card {
-      margin-bottom: 20px;
-      box-shadow: 0 0.5rem 2rem rgba(black, 0.15);
-
-      @include respond(phone) {
-        box-shadow: 0 0.2rem 1rem rgba(black, 0.15);
-
-      }
-
-      .feature-icon {
-        display: flex;
-        justify-content: center;
-        padding-bottom: 20px;
-
-        img {
-          height: 40px;
-        }
-      }
-
-      .options {
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-
-
-        &>* {
-          position: relative;
-          border-radius: 10px;
-          margin: 1rem 2rem;
-          padding: 0 4rem;
-          background-color: var(--color-light);
-          box-shadow: 0 0.5rem 2rem rgba(black, 0.1);
-          font-size: 1.5rem;
-          text-transform: uppercase;
-          font-weight: 700;
-
-          @include respond(tabLand) {
-            font-size: 1.3rem;
-          }
-
-          @include respond(tabPort) {
-            font-size: 1.2rem;
-            padding: 0 3rem;
-            margin: 1rem;
-            font-weight: 600;
-          }
-
-          @include respond(phone) {
-            font-size: 1rem;
-            padding: 0 1rem;
-            margin: 1rem;
-            font-weight: 600;
-          }
-
-          &:hover {
-            background-color: var(--color-btn-hover);
-            color: white;
-
-            p {
-              color: white;
-            }
-          }
-
-          span {
-            position: absolute;
-            top: 0.5rem;
-            right: 3rem;
-            letter-spacing: 0.1rem;
-            font-size: 0.7rem;
-
-            @include respond(phone) {
-              font-size: 0.5rem;
-              top: 0.2rem;
-              right: 0.5rem;
-            }
-          }
-
-          p {
-            color: var(--color-text-1);
-          }
-        }
-
-        &--active {
-          background-color: var(--color-primary);
-          color: var(--color-light);
-
-          p {
-            color: var(--color-light);
-          }
-        }
-
-        &--disabled {
-          background-color: var(--color-btn-hover);
-          color: var(--color-text-3);
-          cursor: default;
-
-          p {
-            color: var(--color-text-3);
-          }
-
-          // &:hover {
-          //   background-color: var(--color-btn-hover);
-          //   color: var(--color-text-2);
-
-          //   p {
-          //     color: var(--color-text-1);
-          //   }
-          // }
-        }
-
-        &--resources {
-          background-color: var(--color-btn-hover);
-          color: var(--color-text-4);
-          cursor: default;
-
-          p {
-            color: var(--color-text-4);
-          }
-
-          // &:hover {
-          //   background-color: var(--color-);
-          //   color: white;
-
-          //   p {
-          //     color: white;
-          //   }
-          // }
-        }
-
-        .update__box {
-          &>* {
-            color: white;
-          }
-        }
-      }
-    }
-  }
-
-  // DOWNLOAD LINK
-  .download {
-    text-align: center;
-    border-radius: 1rem;
-    margin-bottom: 5rem;
-    box-shadow: 0 0.5rem 2rem rgba(black, 0.15);
 
     @include respond(tabPort) {
-      margin-bottom: 3rem;
-      box-shadow: 0 0.2rem 1rem rgba(black, 0.15);
+      width: 90%;
     }
 
     @include respond(phone) {
-      margin-bottom: 1rem;
+      width: 95%;
+    }
+
+    &>* {
+      margin-top: 4rem;
     }
 
 
-    &__text {
-      position: relative;
-      font-size: 2rem;
-      font-weight: bold;
-      font-family: Helvetica;
-      margin: 5px auto;
-      padding-bottom: 10px;
+    // DOWNLOAD OPTIONS
+    .premium-features {
 
-      @include respond(tabLand) {
+      h3 {
+        text-align: center;
         font-size: 2rem;
+
+        @include respond(tabLand) {
+          font-size: 1.7rem;
+        }
+
+        @include respond(tabPort) {
+          font-size: 1.5rem;
+        }
+
+        @include respond(phone) {
+          font-size: 1.3rem;
+        }
       }
 
+      .card {
+        margin-bottom: 20px;
+        box-shadow: 0 0.5rem 2rem rgba(black, 0.15);
+
+        @include respond(phone) {
+          box-shadow: 0 0.2rem 1rem rgba(black, 0.15);
+
+        }
+
+        .feature-icon {
+          display: flex;
+          justify-content: center;
+          padding-bottom: 20px;
+
+          img {
+            height: 40px;
+          }
+        }
+
+        .options {
+          display: flex;
+          justify-content: center;
+          flex-wrap: wrap;
+
+
+          &>* {
+            position: relative;
+            border-radius: 10px;
+            margin: 1rem 2rem;
+            padding: 0 4rem;
+            background-color: var(--color-light);
+            box-shadow: 0 0.5rem 2rem rgba(black, 0.1);
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            font-weight: 700;
+
+            @include respond(tabLand) {
+              font-size: 1.3rem;
+            }
+
+            @include respond(tabPort) {
+              font-size: 1.2rem;
+              padding: 0 3rem;
+              margin: 1rem;
+              font-weight: 600;
+            }
+
+            @include respond(phone) {
+              font-size: 1rem;
+              padding: 0 1rem;
+              margin: 1rem;
+              font-weight: 600;
+            }
+
+            &:hover {
+              background-color: var(--color-btn-hover);
+              color: white;
+
+              p {
+                color: white;
+              }
+            }
+
+            span {
+              position: absolute;
+              top: 0.5rem;
+              right: 3rem;
+              letter-spacing: 0.1rem;
+              font-size: 0.7rem;
+
+              @include respond(phone) {
+                font-size: 0.5rem;
+                top: 0.2rem;
+                right: 0.5rem;
+              }
+            }
+
+            p {
+              color: var(--color-text-1);
+            }
+          }
+
+          &--active {
+            background-color: var(--color-primary);
+            color: var(--color-light);
+
+            p {
+              color: var(--color-light);
+            }
+          }
+
+          &--disabled {
+            background-color: var(--color-btn-hover);
+            color: var(--color-text-3);
+            cursor: default;
+
+            p {
+              color: var(--color-text-3);
+            }
+
+            // &:hover {
+            //   background-color: var(--color-btn-hover);
+            //   color: var(--color-text-2);
+
+            //   p {
+            //     color: var(--color-text-1);
+            //   }
+            // }
+          }
+
+          &--resources {
+            background-color: var(--color-btn-hover);
+            color: var(--color-text-4);
+            cursor: default;
+
+            p {
+              color: var(--color-text-4);
+            }
+
+            // &:hover {
+            //   background-color: var(--color-);
+            //   color: white;
+
+            //   p {
+            //     color: white;
+            //   }
+            // }
+          }
+
+          .update__box {
+            &>* {
+              color: white;
+            }
+          }
+        }
+      }
+    }
+
+    // DOWNLOAD LINK
+    .download {
+      text-align: center;
+      border-radius: 1rem;
+      margin-bottom: 5rem;
+      box-shadow: 0 0.5rem 2rem rgba(black, 0.15);
+
       @include respond(tabPort) {
-        font-size: 1.7rem;
+        margin-bottom: 3rem;
+        box-shadow: 0 0.2rem 1rem rgba(black, 0.15);
       }
 
       @include respond(phone) {
-        font-size: 1.4rem;
+        margin-bottom: 1rem;
       }
 
-      p {
-        margin: 0.8rem 0 2rem 0;
-      }
 
-      &--2 {
-        display: inline-block;
+      &__text {
+        position: relative;
+        font-size: 2rem;
+        font-weight: bold;
+        font-family: Helvetica;
+        margin: 5px auto;
+        padding-bottom: 10px;
+
+        @include respond(tabLand) {
+          font-size: 2rem;
+        }
+
+        @include respond(tabPort) {
+          font-size: 1.7rem;
+        }
+
+        @include respond(phone) {
+          font-size: 1.4rem;
+        }
 
         p {
-          span {
-            float: left;
-            font-family: sans-serif;
-            background-color: var(--color-primary);
-            font-size: 0.5rem;
-            color: var(--color-light);
-            padding: 0.3rem;
-            border-radius: 50%;
+          margin: 0.8rem 0 2rem 0;
+        }
+
+        &--2 {
+          display: inline-block;
+
+          p {
+            span {
+              float: left;
+              font-family: sans-serif;
+              background-color: var(--color-primary);
+              font-size: 0.5rem;
+              color: var(--color-light);
+              padding: 0.3rem;
+              border-radius: 50%;
+            }
           }
         }
       }

@@ -10,6 +10,7 @@ import {
   selectIsLoading,
 } from '../../redux/user/user.selector';
 import './signin-signup.styles.scss';
+import Footer from '../../components/footer/footer.component';
 const SignUp = ({ signUpStart, success, error, isLoading }) => {
   const [loadBar, setLoadBar] = useState(0);
   const [message, setMessage] = useState('');
@@ -63,115 +64,127 @@ const SignUp = ({ signUpStart, success, error, isLoading }) => {
   };
 
   return (
-    <div className="signin-signup card">
-      <LoadingBar
-        progress={loadBar}
-        height={3}
-        color="linear-gradient(92deg, #038125 0%, #fbff00 100%)"
-        onLoaderFinished={() => onLoaderFinished}
-      />
-      <div className="signin-signup__type">
-        <Link to="/signin" className="btn">
-          <p>Sign In</p>
-        </Link>
-        <Link to="/signup" className="btn active">
-          <p>Sign Up</p>
-        </Link>
+    <div className="auth-section">
+      <div className="signin-signup card">
+        <LoadingBar
+          progress={loadBar}
+          height={3}
+          color="linear-gradient(92deg, #038125 0%, #fbff00 100%)"
+          onLoaderFinished={() => onLoaderFinished}
+        />
+        <div className="signin-signup__type">
+          <Link to="/signin" className="btn">
+            <p>Sign In</p>
+          </Link>
+          <Link to="/signup" className="btn active">
+            <p>Sign Up</p>
+          </Link>
+        </div>
+        <div className="signin-signup__form">
+          {message}
+
+          <form onSubmit={handleSubmit} className="form">
+            <div className="form__group">
+              {/* UserName */}
+              <div className="form__input">
+                <i
+                  className="fad fa-user"
+                  style={{ color: 'var(--color-primary)' }}
+                ></i>
+                <input
+                  type="text"
+                  className="form__input--box"
+                  placeholder="Username"
+                  id="userName"
+                  name="userName"
+                  value={userName}
+                  onChange={handleChange}
+                  required
+                />
+                <label
+                  htmlFor="userName"
+                  max="11"
+                  className="form__input--label"
+                >
+                  UserName
+                </label>
+              </div>
+
+              <div className="form__input">
+                <i
+                  className="fad fa-envelope"
+                  style={{ color: 'var(--color-primary)' }}
+                ></i>
+                <input
+                  type="email"
+                  className="form__input--box"
+                  placeholder="Email"
+                  id="email"
+                  name="email"
+                  value={email}
+                  onChange={handleChange}
+                  required
+                />
+                <label htmlFor="email" className="form__input--label">
+                  Email
+                </label>
+              </div>
+
+              <div className="form__input">
+                <i
+                  className="fad fa-lock"
+                  style={{ color: 'var(--color-primary)' }}
+                ></i>
+                <input
+                  type="password"
+                  className="form__input--box"
+                  placeholder="Password"
+                  id="password"
+                  name="password"
+                  value={password}
+                  onChange={handleChange}
+                  required
+                />
+                <label htmlFor="password" className="form__input--label">
+                  Password
+                </label>
+              </div>
+
+              <div className="form__input">
+                <i
+                  className="fad fa-lock"
+                  style={{ color: 'var(--color-primary)' }}
+                ></i>
+                <input
+                  type="password"
+                  className="form__input--box"
+                  placeholder="confirm password"
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  value={confirmPassword}
+                  onChange={handleChange}
+                  required
+                />
+                <label htmlFor="confirmPassword" className="form__input--label">
+                  Confirm Password
+                </label>
+              </div>
+            </div>
+            <div className="form__group">
+              <button type="submit" className=" submit_btn btn btn--green">
+                {isLoading ? <div className="loader"></div> : <p>Submit</p>}
+              </button>
+              <p>
+                Already a member?{' '}
+                <Link to="/signin" className="auth-link">
+                  Sign In
+                </Link>
+              </p>
+            </div>
+          </form>
+        </div>
       </div>
-      <div className="signin-signup__form">
-        {message}
-
-        <form onSubmit={handleSubmit} className="form">
-          <div className="form__group">
-            {/* UserName */}
-            <div className="form__input">
-              <i
-                className="fad fa-user"
-                style={{ color: 'var(--color-primary)' }}
-              ></i>
-              <input
-                type="text"
-                className="form__input--box"
-                placeholder="Username"
-                id="userName"
-                name="userName"
-                value={userName}
-                onChange={handleChange}
-                required
-              />
-              <label htmlFor="userName" max="11" className="form__input--label">
-                UserName
-              </label>
-            </div>
-
-            <div className="form__input">
-              <i
-                className="fad fa-envelope"
-                style={{ color: 'var(--color-primary)' }}
-              ></i>
-              <input
-                type="email"
-                className="form__input--box"
-                placeholder="Email"
-                id="email"
-                name="email"
-                value={email}
-                onChange={handleChange}
-                required
-              />
-              <label htmlFor="email" className="form__input--label">
-                Email
-              </label>
-            </div>
-
-            <div className="form__input">
-              <i
-                className="fad fa-lock"
-                style={{ color: 'var(--color-primary)' }}
-              ></i>
-              <input
-                type="password"
-                className="form__input--box"
-                placeholder="Password"
-                id="password"
-                name="password"
-                value={password}
-                onChange={handleChange}
-                required
-              />
-              <label htmlFor="password" className="form__input--label">
-                Password
-              </label>
-            </div>
-
-            <div className="form__input">
-              <i
-                className="fad fa-lock"
-                style={{ color: 'var(--color-primary)' }}
-              ></i>
-              <input
-                type="password"
-                className="form__input--box"
-                placeholder="confirm password"
-                id="confirmPassword"
-                name="confirmPassword"
-                value={confirmPassword}
-                onChange={handleChange}
-                required
-              />
-              <label htmlFor="confirmPassword" className="form__input--label">
-                Confirm Password
-              </label>
-            </div>
-          </div>
-          <div className="form__group">
-            <button type="submit" className=" submit_btn btn btn--green">
-              {isLoading ? <div className="loader"></div> : <p>Submit</p>}
-            </button>
-            <p>Already a member? <Link to="/signin" className="auth-link">Sign In</Link></p>
-          </div>
-        </form>
-      </div>
+      <Footer />
     </div>
   );
 };
