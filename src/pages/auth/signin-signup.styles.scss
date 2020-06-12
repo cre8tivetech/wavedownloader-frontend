@@ -1,206 +1,219 @@
 @import '../../themes/mixins.scss';
 
-.signin-signup {
-  width: 70%;
-  margin: 11rem auto;
-  box-shadow: 0 0.5rem 2rem rgba(black, 0.15);
+.auth {
+  width: 100%;
 
-  @include respond(tabLand) {
-    width: 80%;
-  }
+  &-section {
+    width: 100%;
+    min-height: 90vh;
 
-  @include respond(tabPort) {
-    width: 85%;
-  }
+    .signin-signup {
+      width: 70%;
+      margin: 11rem auto;
+      box-shadow: 0 0.5rem 2rem rgba(black, 0.15);
 
-  @include respond(phone) {
-    width: 90%;
-  }
-
-  &__type {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    margin: 0 1rem;
-
-    @include respond(tabPort) {
-      margin: 2rem 2rem;
-
-    }
-
-    @include respond(phone) {
-      margin: 2rem 2rem 0 2rem;
-
-    }
-
-    &--btn {
-      padding: 0;
-      font-size: 2rem;
-      background-color: var(--color-primary);
-      color: var(--color-light);
-
-      p {
-        color: var(--color-light);
+      @include respond(tabLand) {
+        width: 80%;
       }
-    }
-
-    &>* {
-      position: relative;
-      border-radius: 10px;
-      margin: 0 2rem;
-      padding: 0;
-      background-color: var(--color-light);
-      box-shadow: 0 0.5rem 2rem rgba(black, 0.1);
-      font-size: 1.1rem;
-      text-transform: uppercase;
-      font-weight: 700;
-
-      &:hover {
-        background-color: var(--color-btn-hover);
-
-        p {
-          color: white;
-        }
-      }
-
-      span {
-        position: absolute;
-        top: 0.5rem;
-        right: 3rem;
-        letter-spacing: 0.1rem;
-        font-size: 0.7rem;
-      }
-
-      p {
-        margin: 0;
-        color: var(--color-text-1);
-
-        @include respond(tabPort) {
-          margin: 0 1rem;
-        }
-      }
-    }
-  }
-
-  &__header {
-    margin-top: 1.5rem;
-    margin-bottom: -2rem;
-    font-size: 1.5rem;
-    text-align: center;
-
-    @include respond(tabPort) {
-      font-size: 1.3rem;
-      margin-top: 1rem;
-    }
-  }
-
-  &__form {
-    margin-top: 4rem;
-    padding: 2rem 0;
-    // background-color: var(--color-bg-2);
-  }
-
-  .active {
-    background-color: var(--color-primary);
-    color: var(--color-light);
-
-    p {
-      color: var(--color-light);
-    }
-  }
-
-  .submit_btn {
-    margin: 0 auto 1rem auto;
-    text-transform: none;
-    font-weight: 600;
-    text-align: center;
-  }
-
-  .form__group {
-    // margin: 0 auto;
-    text-align: center;
-
-    p {
-      font-size: 1.3rem;
-      margin: 0;
-      padding: 0;
 
       @include respond(tabPort) {
-        font-size: 1.3rem;
+        width: 85%;
+      }
+
+      @include respond(phone) {
+        width: 90%;
+      }
+
+      &__type {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
         margin: 0 1rem;
-      }
-    }
 
-    .auth-link {
-      color: var(--color-secondary);
+        @include respond(tabPort) {
+          margin: 2rem 2rem;
 
-      &:link {
-        text-decoration: none;
-      }
+        }
 
-      p {
-        text-decoration: none !important;
-        font-size: 1.3rem;
-        color: var(--color-text-1);
-        padding: 0.6rem 0;
+        @include respond(phone) {
+          margin: 2rem 2rem 0 2rem;
 
-        &:hover {
-          color: var(--color-primary);
+        }
+
+        // a {
+        //   padding: 1rem 3rem;
+        // }
+
+        &--btn {
+          padding: 0;
+          font-size: 2rem;
+          background-color: var(--color-primary);
+          color: var(--color-light);
+
+          p {
+            color: var(--color-light);
+          }
+        }
+
+        &>* {
+          position: relative;
+          border-radius: 10px;
+          margin: 0 2rem;
+          padding: 0;
+          background-color: var(--color-light);
+          box-shadow: 0 0.5rem 2rem rgba(black, 0.1);
+          font-size: 1.1rem;
+          text-transform: uppercase;
+          font-weight: 700;
+
+          &:hover {
+            background-color: var(--color-btn-hover);
+
+            p {
+              color: white;
+            }
+          }
+
+          span {
+            position: absolute;
+            top: 0.5rem;
+            right: 3rem;
+            letter-spacing: 0.1rem;
+            font-size: 0.7rem;
+          }
+
+          p {
+            margin: 0;
+            color: var(--color-text-1);
+
+            @include respond(tabPort) {
+              margin: 0 1rem;
+            }
+          }
         }
       }
 
-      &:hover {
-        color: var(--color-primary);
+      &__header {
+        margin-top: 1.5rem;
+        margin-bottom: -2rem;
+        font-size: 1.5rem;
+        text-align: center;
+
+        @include respond(tabPort) {
+          font-size: 1.3rem;
+          margin-top: 1rem;
+        }
+      }
+
+      &__form {
+        margin-top: 4rem;
+        padding: 2rem 0;
+        // background-color: var(--color-bg-2);
+      }
+
+      .active {
+        background-color: var(--color-primary);
+        color: var(--color-light);
+
+        p {
+          color: var(--color-light);
+        }
+      }
+
+      .submit_btn {
+        margin: 0 auto 1rem auto;
+        text-transform: none;
+        font-weight: 600;
+        text-align: center;
+      }
+
+      .form__group {
+        // margin: 0 auto;
+        text-align: center;
+
+        p {
+          font-size: 1.3rem;
+          margin: 0;
+          padding: 0;
+
+          @include respond(tabPort) {
+            font-size: 1.3rem;
+            margin: 0 1rem;
+          }
+        }
+
+        .auth-link {
+          color: var(--color-secondary);
+
+          &:link {
+            text-decoration: none;
+          }
+
+          p {
+            text-decoration: none !important;
+            font-size: 1.3rem;
+            color: var(--color-text-1);
+            padding: 0.6rem 0;
+
+            &:hover {
+              color: var(--color-primary);
+            }
+          }
+
+          &:hover {
+            color: var(--color-primary);
+          }
+        }
+
+        .loader {
+          border: 0.4rem solid #f3f3f3;
+          border-radius: 50%;
+          border-top: 0.4rem groove var(--color-primary);
+          border-right: 0.4rem dashed var(--color-secondary);
+          border-bottom: 0.4rem double var(--color-tertiary);
+          border-left: 0.4rem dotted var(--color-quaternary); //quaternary
+          width: 2.5rem;
+          height: 2.5rem;
+          margin: 0 auto;
+          -webkit-animation: spin 2s linear infinite;
+          animation: spin 2s linear infinite;
+          z-index: 1000;
+        }
       }
     }
 
-    .loader {
-      border: 0.4rem solid #f3f3f3;
-      border-radius: 50%;
-      border-top: 0.4rem groove var(--color-primary);
-      border-right: 0.4rem dashed var(--color-secondary);
-      border-bottom: 0.4rem double var(--color-tertiary);
-      border-left: 0.4rem dotted var(--color-quaternary); //quaternary
-      width: 2.5rem;
-      height: 2.5rem;
-      margin: 0 auto;
-      -webkit-animation: spin 2s linear infinite;
-      animation: spin 2s linear infinite;
-      z-index: 1000;
+    .errorMessage {
+      text-align: center;
+      color: var(--color-danger-1);
+      padding-bottom: 1rem;
+      font-size: 1.3rem;
     }
-  }
-}
 
-.errorMessage {
-  text-align: center;
-  color: var(--color-danger-1);
-  padding-bottom: 1rem;
-  font-size: 1.3rem;
-}
+    .successMessage {
+      text-align: center;
+      color: var(--color-primary);
+      padding-bottom: 1.5rem;
+      font-size: 1.3rem;
+    }
 
-.successMessage {
-  text-align: center;
-  color: var(--color-primary);
-  padding-bottom: 1.5rem;
-  font-size: 1.3rem;
-}
+    @-webkit-keyframes spin {
+      0% {
+        -webkit-transform: rotate(0deg);
+      }
 
-@-webkit-keyframes spin {
-  0% {
-    -webkit-transform: rotate(0deg);
-  }
+      100% {
+        -webkit-transform: rotate(360deg);
+      }
+    }
 
-  100% {
-    -webkit-transform: rotate(360deg);
-  }
-}
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
 
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
+      100% {
+        transform: rotate(360deg);
+      }
+    }
   }
 }

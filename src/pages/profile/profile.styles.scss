@@ -8,7 +8,7 @@
     width: 85%;
   }
 
-  @include respond(phone) { 
+  @include respond(phone) {
     width: 95%;
   }
 
@@ -33,109 +33,111 @@
       @include respond(phone) {
         margin: 0 0.5rem;
       }
+
       &--left {
-      .home{
-        display: flex;
-        flex-direction: row;
-        list-style: none;
-        color: var(--color-text-1);
-        text-transform: capitalize;
-        font-weight: bold;
-        font-size: 1.3rem;
-        padding: 1rem;
-        align-items: center;
-        // margin-bottom: ;
-        cursor: pointer;
-
-        @include respond(tabPort) {
-          font-size: 1.2rem;
-        }
-
-        @include respond(phone) {
-          font-size: 1rem;
-        }
-
-        i {
-          margin: 0.5rem 0.8rem 0.6rem 0rem;
-        }
-
-        &:hover {
-          color: var(--color-primary);
-        }
-      }
-      &-box {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-
-        &-image {
-          border: 1px solid var(--color-primary);
-          width: 5rem;
-          height: 5rem;
-          border-radius: 50%;
-          font-size: 3rem;
-          color: var(--color-text-3);
-          line-height: 5rem;
-          text-align: center;
-          background: var(--color-primary);
-
-          @include respond(tabPort) {
-            width: 4.5rem;
-            height: 4.5rem;
-            font-size: 2.5rem;
-            line-height: 4.5rem;
-          }
-
-          @include respond(phone) {
-            width: 4rem;
-            height: 4rem;
-            font-size: 2rem;
-            line-height: 4rem;
-          }
-        }
-
-        &-user {
-          &_name {
-            display: flex;
-            flex-direction: row;
-          }
-
-          &hover{ 
-            color: black;
-          }
-        }
-
-        p {
-          color: var(--color-text-1);
-          margin: 0 0 0 1rem;
-          font-size: 1.5rem;
+        .home {
           display: flex;
+          flex-direction: row;
+          list-style: none;
+          color: var(--color-text-1);
           text-transform: capitalize;
+          font-weight: bold;
+          font-size: 1.3rem;
+          padding: 1rem;
+          align-items: center;
+          // margin-bottom: ;
           cursor: pointer;
-          // flex-direction: column;
 
           @include respond(tabPort) {
-            font-size: 1.4rem;
+            font-size: 1.2rem;
           }
 
           @include respond(phone) {
-            font-size: 1.3rem;
+            font-size: 1rem;
           }
 
           i {
-            margin: 0.5rem 0rem 0rem 0.5rem;
-          }
-
-          small {
-            text-transform: lowercase;
+            margin: 0.5rem 0.8rem 0.6rem 0rem;
           }
 
           &:hover {
             color: var(--color-primary);
           }
         }
+
+        &-box {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+
+          &-image {
+            border: 1px solid var(--color-primary);
+            width: 5rem;
+            height: 5rem;
+            border-radius: 50%;
+            font-size: 3rem;
+            color: var(--color-text-3);
+            line-height: 5rem;
+            text-align: center;
+            background: var(--color-primary);
+
+            @include respond(tabPort) {
+              width: 4.5rem;
+              height: 4.5rem;
+              font-size: 2.5rem;
+              line-height: 4.5rem;
+            }
+
+            @include respond(phone) {
+              width: 4rem;
+              height: 4rem;
+              font-size: 2rem;
+              line-height: 4rem;
+            }
+          }
+
+          &-user {
+            &_name {
+              display: flex;
+              flex-direction: row;
+            }
+
+            &hover {
+              color: black;
+            }
+          }
+
+          p {
+            color: var(--color-text-1);
+            margin: 0 0 0 1rem;
+            font-size: 1.5rem;
+            display: flex;
+            text-transform: capitalize;
+            cursor: pointer;
+            // flex-direction: column;
+
+            @include respond(tabPort) {
+              font-size: 1.4rem;
+            }
+
+            @include respond(phone) {
+              font-size: 1.3rem;
+            }
+
+            i {
+              margin: 0.5rem 0rem 0rem 0.5rem;
+            }
+
+            small {
+              text-transform: lowercase;
+            }
+
+            &:hover {
+              color: var(--color-primary);
+            }
+          }
+        }
       }
-    }
 
       &--right {
         display: flex;
@@ -243,7 +245,7 @@
           width: 6.2rem;
           padding: 0.3rem;
         }
-        
+
       }
 
       p {
@@ -333,7 +335,7 @@
       }
     }
 
-    &--myDownloads{
+    &--myDownloads {
       position: relative;
       // display: flex;
       // flex-direction: column;
