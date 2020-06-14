@@ -55,7 +55,6 @@ export const SupportedResources = () => {
           <p>youtube.com</p>
         </Link>
         <Link to="#" className="options--resources">
-          <span>Coming Soon</span>
           <p>twitter.com</p>
         </Link>
         <Link to="#" className="options--resources">

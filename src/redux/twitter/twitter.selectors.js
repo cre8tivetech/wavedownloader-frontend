@@ -1,15 +1,15 @@
 import { createSelector } from 'reselect';
 
-const selectYoutube = (state) => state.youtube;
+const selectTwitter = (state) => state.twitter;
 
 export const selectCollections = createSelector(
-  [selectYoutube],
-  (youtube) => youtube.videoData
+  [selectTwitter],
+  (twitter) => twitter.videoData
 );
 
 export const selectErrors = createSelector(
-  [selectYoutube],
-  (youtube) => youtube.errorMessage
+  [selectTwitter],
+  (twitter) => twitter.errorMessage
 );
 
 export const selectError = createSelector([selectErrors], (error) =>
@@ -17,16 +17,16 @@ export const selectError = createSelector([selectErrors], (error) =>
 );
 
 export const selectIsCollectionFetching = createSelector(
-  [selectYoutube],
-  (youtube) => youtube.isFetching
+  [selectTwitter],
+  (twitter) => twitter.isFetching
 );
 
 export const selectIsCollectionsLoaded = createSelector(
-  [selectYoutube],
-  (youtube) => !!youtube.videoData
+  [selectTwitter],
+  (twitter) => !!twitter.videoData
 );
 
 export const selectDownloadData = createSelector(
-  [selectYoutube],
-  (youtube) => !!youtube.downloadData
+  [selectTwitter],
+  (twitter) => !!twitter.downloadData
 );
