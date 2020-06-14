@@ -1,4 +1,4 @@
-import YoutubeActionTypes from './youtube.types';
+import TwitterActionTypes from './twitter.types';
 
 const INITIAL_STATE = {
   videoData: null,
@@ -10,7 +10,7 @@ const INITIAL_STATE = {
 
 const youtubeReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case YoutubeActionTypes.CLEAR_YOUTUBE_DATA:
+    case TwitterActionTypes.CLEAR_TWITTER_DATA:
       return {
         ...state,
         videoData: null,
@@ -19,21 +19,21 @@ const youtubeReducer = (state = INITIAL_STATE, action) => {
         isSlide: false,
         errorMessage: null,
       };
-    case YoutubeActionTypes.YOUTUBE_VIDEO_START:
+    case TwitterActionTypes.TWITTER_VIDEO_START:
       return {
         ...state,
         isFetching: true,
         errorMessage: null,
         videoData: null,
       };
-    case YoutubeActionTypes.YOUTUBE_VIDEO_FAILURE:
+    case TwitterActionTypes.TWITTER_VIDEO_FAILURE:
       return {
         ...state,
         isFetching: false,
         errorMessage: action.payload,
         videoData: null,
       };
-    case YoutubeActionTypes.YOUTUBE_VIDEO_SUCCESS:
+    case TwitterActionTypes.TWITTER_VIDEO_SUCCESS:
       console.log(action.payload.data.data)
       return {
         ...state,
