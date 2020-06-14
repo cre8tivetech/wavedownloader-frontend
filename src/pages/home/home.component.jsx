@@ -63,8 +63,7 @@ const Home = ({
       fetchPostsAdd(url);
       history.push('/instagram/posts');
     } else if (checkUrl.includes('youtube') || checkUrl.includes('youtu')) {
-      console.log('url: ', url);
-      youtubeVideoStart(url);
+      youtubeVideoStart(url.split('&')[0]);
       history.push('/youtube/video');
     } else if (checkUrl.includes('twitter')) {
       console.log('url: ', url);
