@@ -185,6 +185,7 @@ const PostPreview = ({
               {post.is_video ? (
                 <a
                   onClick={(e) => downloadFile(post.video_url, e, '.mp4')}
+                  href={post.video_url}
                   target="__blank"
                   className="post-card__collections--card-media_download-btn"
                   data-method="get"
@@ -198,6 +199,7 @@ const PostPreview = ({
                 <a
                   onClick={(e) => downloadFile(post.display_url, e, '.jpg')}
                   target="__blank"
+                  href={post.display_url}
                   className="post-card__collections--card-media_download-btn"
                   data-method="get"
                 >

@@ -9,25 +9,25 @@ import { createStructuredSelector } from 'reselect';
 import YoutubeImage from '../../../assets/img/youtube.png';
 
 const PostPreview = ({
-  author,
+  uploader,
   formats,
-  lengthSeconds,
+  duration,
   title,
-  shortDescription,
-  publishDate,
+  upload_date,
   thumbnail,
   videoId,
-  viewCount,
+  view_count,
+  like_count,
+  url,
   history,
   saveDownload,
   user,
 }) => {
   const [loadBar, setLoadBar] = useState();
   const [time, setTime] = useState();
-  const [videoItag, setVideoItag] = useState(
-    formats.find((i) => i.itag === 22) ? 22 : 18
-  );
-  const [format, setFormat] = useState('mp4');
+  const [publishDate, setPublishDate] = useState();
+  const [downloadUrl, setDownloadUrl] = useState(url);
+  const [downloadExt, setDownloadExt] = useState('mp4');
 
   useEffect(() => {
     setLoadBar(100);
@@ -36,9 +36,14 @@ const PostPreview = ({
       title = 'No caption text for this post';
     }
 
+    // Add - to date
+    setPublishDate(
+      `${upload_date.slice(0, 4)}-${upload_date.slice(4, 6)}-${upload_date.slice(6, 8)}`
+    );
+
     // Convert seconds to HH-MM-SS format
     const measuredTime = new Date(null);
-    measuredTime.setSeconds(parseInt(lengthSeconds));
+    measuredTime.setSeconds(parseInt(duration));
     const HMSTime = measuredTime.toISOString().substr(11, 8);
     const H = HMSTime.split(':')[0];
     const M = HMSTime.split(':')[1];
@@ -52,14 +57,67 @@ const PostPreview = ({
 
   const changeOption = (e) => {
     const { value } = e.currentTarget;
-
-    setVideoItag(value);
-    if (value == 1) {
-      setFormat('mp3');
-    } else {
-      setFormat('mp4');
-    }
+    console.log(value)
+    console.log(formats.find((i) => i.itag === value).url)
+    setDownloadUrl(
+      formats.find((i) => i.itag === value).url
+    )
+    setDownloadExt(
+      formats.find((i) => i.itag === value).ext === 'm4a'? 'mp3' : formats.find((i) => i.itag === value).ext
+    )
   };
+
+  async function downloadFile(url, e, mediatype) {
+    e.preventDefault();
+    console.log(url, mediatype);
+    // const downloadData = { owner, post, __typename };
+    // console.log(e.currentTarget.querySelector('div').className);
+    const loaderbtn = e.currentTarget.querySelector('div');
+    const downloadName = title;
+    const downloadbtn = e.target;
+    loaderbtn.className = 'loader show';
+    downloadbtn.className = 'hide';
+
+    const method = 'GET';
+    const min = 1;
+    const max = 100;
+
+    await Axios.request({
+      url,
+      method,
+      responseType: 'blob', //important
+    })
+      .then(({ data }) => {
+        const downloadUrl = window.URL.createObjectURL(new Blob([data]));
+
+        const link = document.createElement('a');
+
+        link.href = downloadUrl;
+
+        link.setAttribute(
+          'download',
+          downloadName +'.'+ mediatype
+        ); //any other extension
+
+        document.body.appendChild(link);
+
+        link.click();
+
+        link.remove();
+        if (link.remove()) {
+        }
+      })
+      .then(() => {
+        loaderbtn.className = 'loader hide';
+        downloadbtn.className = 'show';
+        // {
+        //   user && user.is_subscribed && saveDownload(downloadData);
+        // }
+      }).catch(e => {
+        loaderbtn.className = 'loader hide';
+        downloadbtn.className = 'show';
+      })
+  }
 
   return (
     <div className="post-section">
@@ -75,7 +133,7 @@ const PostPreview = ({
             <img src={YoutubeImage} alt="" />
             <div className="post-card__detail--image-name">
               <p>
-                <strong>{author}</strong>
+                <strong>{uploader}</strong>
               </p>
               <p>
                 <i
@@ -94,13 +152,13 @@ const PostPreview = ({
             <p>{title}</p>
           </div>
           <div className="post-card__detail--more">
-            {/* <div className="post-card__detail--more-like">
+            <div className="post-card__detail--more-like">
               <i
                 className="fad fa-heart"
                 style={{ color: 'var(--color-danger-1)' }}
               ></i>
-              <p>{viewCount}</p>
-            </div> */}
+              <p>{like_count}</p>
+            </div>
             <div className="post-card__detail--more-comment">
               <i
                 className="fad fa-clock"
@@ -113,7 +171,7 @@ const PostPreview = ({
                 className="fad fa-eye"
                 style={{ color: 'var(--color-tertiary)' }}
               ></i>
-              <p>{viewCount}</p>
+              <p>{view_count}</p>
             </div>
           </div>
         </div>
@@ -130,10 +188,12 @@ const PostPreview = ({
                 }}
               ></div>
               <a
-                // onClick={(e) => downloadFile(post.display_url, e, '.jpg')}
-                href={`${process.env.REACT_APP_API}youtube/download/?videoId=${videoId}&title=${title}&itag=${videoItag}&format=${format}`}
+                onClick={(e) => downloadFile(downloadUrl, e, downloadExt)}
+                href={downloadUrl}
+                target="__blank"
                 className="post-card__collections--card-media_download-btn"
-                // data-method="get"
+                download={title + '.' + downloadExt}
+                data-type={downloadExt}
               >
                 <div className="loader hide"></div>
                 <p>
@@ -150,13 +210,10 @@ const PostPreview = ({
             defaultValue={22}
           >
             {formats.map((i) => (
-              <option value={i.itag} key={i.itag}>
-                {i.container.split('/')[1].toUpperCase() +
-                  ' ' +
-                  i.qualityLabel.split('p')[0]}
+              <option data-url={i.url} value={i.itag} key={i.itag}>
+                {i.ext.toUpperCase() + ' ' + i.format_note}
               </option>
             ))}
-            <option value={1}>MP3 audio</option>
           </select>
         </div>
       </div>

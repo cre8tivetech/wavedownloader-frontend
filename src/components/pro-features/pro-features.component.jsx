@@ -62,6 +62,18 @@ export const SupportedResources = () => {
           <span>Coming Soon</span>
           <p>facebook.com</p>
         </Link>
+        <Link to="#" className="options--resources">
+          <span>Coming Soon</span>
+          <p>vimeo.com</p>
+        </Link>
+        <Link to="#" className="options--resources">
+          <span>Coming Soon</span>
+          <p>dailymotion.com</p>
+        </Link>
+        <Link to="#" className="options--resources">
+          <span>Coming Soon</span>
+          <p>reddit.com</p>
+        </Link>
       </div>
     </div>
   )
