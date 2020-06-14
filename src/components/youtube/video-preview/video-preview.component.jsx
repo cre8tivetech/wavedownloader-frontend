@@ -15,7 +15,6 @@ const PostPreview = ({
   title,
   upload_date,
   thumbnail,
-  videoId,
   view_count,
   like_count,
   url,
@@ -63,15 +62,14 @@ const PostPreview = ({
       formats.find((i) => i.itag === value).url
     )
     setDownloadExt(
-      formats.find((i) => i.itag === value).ext === 'm4a'? 'mp3' : formats.find((i) => i.itag === value).ext
+      formats.find((i) => i.itag === value).ext
     )
   };
 
   async function downloadFile(url, e, mediatype) {
     e.preventDefault();
     console.log(url, mediatype);
-    // const downloadData = { owner, post, __typename };
-    // console.log(e.currentTarget.querySelector('div').className);
+   
     const loaderbtn = e.currentTarget.querySelector('div');
     const downloadName = title;
     const downloadbtn = e.target;

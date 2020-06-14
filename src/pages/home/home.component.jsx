@@ -56,8 +56,7 @@ const Home = ({
       fetchPostsAdd(url);
       history.push('/instagram/posts');
     } else if (checkUrl.includes('youtube') || checkUrl.includes('youtu')) {
-      console.log('url: ', url);
-      fetchVideoStart(url);
+      fetchVideoStart(url.split('&')[0]);
       history.push('/youtube/video');
     } else {
       setError(true);

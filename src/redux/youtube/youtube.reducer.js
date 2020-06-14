@@ -34,7 +34,6 @@ const youtubeReducer = (state = INITIAL_STATE, action) => {
         videoData: null,
       };
     case YoutubeActionTypes.FETCH_VIDEO_SUCCESS:
-      console.log(action.payload.data.data)
       return {
         ...state,
         isFetching: false,
