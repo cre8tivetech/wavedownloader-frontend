@@ -5,16 +5,12 @@ import { withRouter } from 'react-router-dom';
 import { saveDownload } from '../../../redux/instagram/instagram.actions';
 import { selectCurrentUser } from '../../../redux/user/user.selector';
 import { createStructuredSelector } from 'reselect';
-import TwitterImage from '../../../assets/img/twitter.png';
+import FacebookImage from '../../../assets/img/facebook.png';
 
 const PostPreview = ({
   uploader,
-  duration,
   title,
-  upload_date,
   thumbnail,
-  repost_count,
-  like_count,
   url,
   // history,
   // saveDownload,
@@ -22,7 +18,6 @@ const PostPreview = ({
 }) => {
   const [loadBar, setLoadBar] = useState();
   const [time, setTime] = useState();
-  const [publishDate, setPublishDate] = useState();
 
   useEffect(() => {
     setLoadBar(100);
@@ -31,23 +26,6 @@ const PostPreview = ({
       title = 'No caption text for this post';
     }
 
-    // Add - to date
-    setPublishDate(
-      `${upload_date.slice(0, 4)}-${upload_date.slice(4, 6)}-${upload_date.slice(6, 8)}`
-    );
-
-    // Convert seconds to HH-MM-SS format
-    const measuredTime = new Date(null);
-    measuredTime.setSeconds(parseInt(duration));
-    const HMSTime = measuredTime.toISOString().substr(11, 8);
-    const H = HMSTime.split(':')[0];
-    const M = HMSTime.split(':')[1];
-    const S = HMSTime.split(':')[2];
-    if (H == '00') {
-      setTime(M + ':' + S);
-    } else {
-      setTime(HMSTime);
-    }
   }, [setLoadBar, user]);
 
   const download = (e, url) => {
@@ -77,18 +55,18 @@ const PostPreview = ({
       <div className="post-card">
         <div className="post-card__detail">
           <div className="post-card__detail--image">
-            <img src={TwitterImage} alt="" />
+            <img src={FacebookImage} alt="" />
             <div className="post-card__detail--image-name">
               <p>
                 <strong>{uploader}</strong>
               </p>
-              <p>
+              {/* <p>
                 <i
                   className="fad fa-calendar-alt"
                   style={{ color: 'var(--color-grey-dark-1)' }}
                 ></i>
                 <small> {publishDate}</small>
-              </p>
+              </p> */}
             </div>
           </div>
           <div className="post-card__detail--info">
@@ -99,7 +77,7 @@ const PostPreview = ({
             <p>{title}</p>
           </div>
           <div className="post-card__detail--more">
-            <div className="post-card__detail--more-like">
+            {/* <div className="post-card__detail--more-like">
               <i
                 className="fad fa-heart"
                 style={{ color: 'var(--color-danger-1)' }}
@@ -119,7 +97,7 @@ const PostPreview = ({
                 style={{ color: 'var(--color-tertiary)' }}
               ></i>
               <p>{repost_count}</p>
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="post-card__collections single">

@@ -58,7 +58,6 @@ export const SupportedResources = () => {
           <p>twitter.com</p>
         </Link>
         <Link to="#" className="options--resources">
-          <span>Coming Soon</span>
           <p>facebook.com</p>
         </Link>
         <Link to="#" className="options--resources">

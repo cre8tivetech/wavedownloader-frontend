@@ -22,6 +22,10 @@ import {
   twitterVideoStart,
   clearTwitterData,
 } from '../../redux/twitter/twitter.actions';
+import {
+  facebookVideoStart,
+  clearFacebookData,
+} from '../../redux/facebook/facebook.actions';
 import './home.styles.scss';
 import Footer from '../../components/footer/footer.component';
 
@@ -29,9 +33,11 @@ const Home = ({
   fetchPostsAdd,
   youtubeVideoStart,
   twitterVideoStart,
+  facebookVideoStart,
   clearInstagramData,
   clearYouTubeData,
   clearTwitterData,
+  clearFacebookData,
 }) => {
   const [loadBar, setLoadBar] = useState(0);
   const [url, setUrl] = useState('');
@@ -47,6 +53,7 @@ const Home = ({
     clearInstagramData();
     clearYouTubeData();
     clearTwitterData();
+    clearFacebookData();
   }, []);
   useEffect(() => {
     startLoader();
@@ -69,6 +76,10 @@ const Home = ({
       console.log('url: ', url);
       twitterVideoStart(url);
       history.push('/twitter/video');
+    } else if (checkUrl.includes('facebook')) {
+      console.log('url: ', url);
+      facebookVideoStart(url);
+      history.push('/facebook/video');
     } else {
       setError(true);
     }
@@ -90,11 +101,6 @@ const Home = ({
           <p className="download__text download__text--1">
             Online Post & Video Downloader
           </p>
-          {/* <div className="download__text download__text--2">
-          <p>
-            <span>NEW</span>Download Youtube Videos
-          </p>
-        </div> */}
           <div className="download__form">
             <form onSubmit={handleSubmit} className="form">
               <div className="form__group">
@@ -155,6 +161,19 @@ const Home = ({
               </p>
             </div>
             <div className="update__box">
+            <div className="update__content update__content--updates">
+                <p>
+                  <strong>
+                    <i
+                      className="fad fa-gifts"
+                      style={{ color: 'var(--color-danger-1)' }}
+                    ></i>
+                    Live (16 June 2020):
+                  </strong>
+                  Hurray!!, WaveDownloader can download
+                  Twitter videos and Facebook videos .
+                </p>
+              </div>
               <div className="update__content update__content--greetings">
                 <p>
                   <strong>
@@ -295,8 +314,10 @@ const mapDispatchToProps = (dispatch) => ({
   fetchPostsAdd: (url) => dispatch(fetchPostsAdd(url)),
   youtubeVideoStart: (url) => dispatch(youtubeVideoStart(url)),
   twitterVideoStart: (url) => dispatch(twitterVideoStart(url)),
+  facebookVideoStart: (url) => dispatch(facebookVideoStart(url)),
   clearInstagramData: () => dispatch(clearInstagramData()),
   clearYouTubeData: () => dispatch(clearYouTubeData()),
   clearTwitterData: () => dispatch(clearTwitterData()),
+  clearFacebookData: () => dispatch(clearFacebookData()),
 });
 export default withRouter(connect(null, mapDispatchToProps)(Home));

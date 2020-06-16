@@ -138,3 +138,11 @@ export const twitterVideoApi = async (url, token) => {
   const data = await Axios.get(apiUrl);
   return data;
 };
+
+
+// Facebook Route
+export const facebookVideoApi = async (url, token) => {
+  const apiUrl = process.env.REACT_APP_WAVE_DL_API + process.env.REACT_APP_FACEBOOK_VIDEO + `?url=${url}`;
+  const data = await Axios.get(apiUrl);
+  return data;
+};

@@ -6,6 +6,7 @@ import userReducer from './user/user.reducer';
 import instagramReducer from './instagram/instagram.reducer';
 import youtubeReducer from './youtube/youtube.reducer';
 import twitterReducer from './twitter/twitter.reducer';
+import facebookReducer from './facebook/facebook.reducer';
 
 const persistConfig = {
   key: 'root',
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   instagram: instagramReducer,
   youtube: youtubeReducer,
   twitter: twitterReducer,
+  facebook: facebookReducer,
 });
 
 export default persistReducer(persistConfig, rootReducer);

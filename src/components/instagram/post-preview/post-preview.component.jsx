@@ -42,6 +42,22 @@ const PostPreview = ({
     // };
   }, [setLoadBar, user]);
 
+  const download = (e, url) => {
+    e.preventDefault();
+    const loaderbtn = e.currentTarget.querySelector('div');
+    const downloadbtn = e.target;
+    loaderbtn.className = 'loader show';
+    downloadbtn.className = 'hide';
+    const downloadName = makeDownloadName(10) + '.mp4';
+    const apiUrl = process.env.REACT_APP_API + 'download?url=' + encodeURIComponent(url) + '&filename=' + encodeURIComponent(downloadName)
+    console.log(apiUrl)
+    setTimeout(() => {
+      window.location.href = apiUrl
+      loaderbtn.className = 'loader hide';
+      downloadbtn.className = 'show';
+    }, 500)
+  }
+
   async function downloadFile(url, e, mediatype) {
     e.preventDefault();
     console.log(url);
@@ -72,7 +88,7 @@ const PostPreview = ({
 
         link.setAttribute(
           'download',
-          'wavedownloader-' + downloadName + mediatype
+          downloadName + mediatype
         ); //any other extension
 
         document.body.appendChild(link);
@@ -184,7 +200,7 @@ const PostPreview = ({
               )}
               {post.is_video ? (
                 <a
-                  onClick={(e) => downloadFile(post.video_url, e, '.mp4')}
+                  onClick={(e) => download(e, post.video_url)}
                   href={post.video_url}
                   target="__blank"
                   className="post-card__collections--card-media_download-btn"
@@ -200,6 +216,7 @@ const PostPreview = ({
                   onClick={(e) => downloadFile(post.display_url, e, '.jpg')}
                   target="__blank"
                   href={post.display_url}
+                  download
                   className="post-card__collections--card-media_download-btn"
                   data-method="get"
                 >
