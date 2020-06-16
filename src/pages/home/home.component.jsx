@@ -40,7 +40,6 @@ const Home = ({
   useMemo(() => {
     clearInstagramData();
     clearYouTubeData();
-    clearTwitterData();
   }, []);
   useEffect(() => {
     startLoader();
