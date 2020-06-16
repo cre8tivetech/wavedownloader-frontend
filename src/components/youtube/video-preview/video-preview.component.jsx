@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import LoadingBar from 'react-top-loading-bar';
-import Axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import { saveDownload } from '../../../redux/instagram/instagram.actions';
 import { selectCurrentUser } from '../../../redux/user/user.selector';
@@ -17,7 +16,7 @@ const PostPreview = ({
   thumbnail,
   view_count,
   like_count,
-  url,
+  // url,
   history,
   saveDownload,
   user,
@@ -25,7 +24,9 @@ const PostPreview = ({
   const [loadBar, setLoadBar] = useState();
   const [time, setTime] = useState();
   const [publishDate, setPublishDate] = useState();
-  const [downloadUrl, setDownloadUrl] = useState(url);
+  const [downloadUrl, setDownloadUrl] = useState(
+    formats.find((i) => i.itag === 22)? formats.find((i) => i.itag === 22).url : formats.find((i) => i.itag === 18).url
+  );
   const [downloadExt, setDownloadExt] = useState('mp4');
 
   useEffect(() => {
@@ -66,55 +67,20 @@ const PostPreview = ({
     )
   };
 
-  async function downloadFile(url, e, mediatype) {
+  const download = (e, url) => {
     e.preventDefault();
-    console.log(url, mediatype);
-   
     const loaderbtn = e.currentTarget.querySelector('div');
-    const downloadName = title;
     const downloadbtn = e.target;
     loaderbtn.className = 'loader show';
     downloadbtn.className = 'hide';
-
-    const method = 'GET';
-    const min = 1;
-    const max = 100;
-
-    await Axios.request({
-      url,
-      method,
-      responseType: 'blob', //important
-    })
-      .then(({ data }) => {
-        const downloadUrl = window.URL.createObjectURL(new Blob([data]));
-
-        const link = document.createElement('a');
-
-        link.href = downloadUrl;
-
-        link.setAttribute(
-          'download',
-          downloadName +'.'+ mediatype
-        ); //any other extension
-
-        document.body.appendChild(link);
-
-        link.click();
-
-        link.remove();
-        if (link.remove()) {
-        }
-      })
-      .then(() => {
-        loaderbtn.className = 'loader hide';
-        downloadbtn.className = 'show';
-        // {
-        //   user && user.is_subscribed && saveDownload(downloadData);
-        // }
-      }).catch(e => {
-        loaderbtn.className = 'loader hide';
-        downloadbtn.className = 'show';
-      })
+    const downloadName = title + '.' + downloadExt;
+    const apiUrl = process.env.REACT_APP_API + 'download?url=' + encodeURIComponent(url) + '&filename=' + encodeURIComponent(downloadName)
+    console.log(apiUrl)
+    setTimeout(() => {
+      window.location.href = apiUrl
+      loaderbtn.className = 'loader hide';
+      downloadbtn.className = 'show';
+    }, 500)
   }
 
   return (
@@ -138,7 +104,7 @@ const PostPreview = ({
                   className="fad fa-calendar-alt"
                   style={{ color: 'var(--color-grey-dark-1)' }}
                 ></i>
-                <small> {publishDate}</small>
+                <small> {upload_date}</small>
               </p>
             </div>
           </div>
@@ -150,13 +116,13 @@ const PostPreview = ({
             <p>{title}</p>
           </div>
           <div className="post-card__detail--more">
-            <div className="post-card__detail--more-like">
+            {/* <div className="post-card__detail--more-like">
               <i
                 className="fad fa-heart"
                 style={{ color: 'var(--color-danger-1)' }}
               ></i>
               <p>{like_count}</p>
-            </div>
+            </div> */}
             <div className="post-card__detail--more-comment">
               <i
                 className="fad fa-clock"
@@ -186,7 +152,7 @@ const PostPreview = ({
                 }}
               ></div>
               <a
-                onClick={(e) => downloadFile(downloadUrl, e, downloadExt)}
+                onClick={(e) => download(e, downloadUrl)}
                 href={downloadUrl}
                 target="__blank"
                 className="post-card__collections--card-media_download-btn"

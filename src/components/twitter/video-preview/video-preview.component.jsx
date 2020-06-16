@@ -6,7 +6,7 @@ import { withRouter } from 'react-router-dom';
 import { saveDownload } from '../../../redux/instagram/instagram.actions';
 import { selectCurrentUser } from '../../../redux/user/user.selector';
 import { createStructuredSelector } from 'reselect';
-import YoutubeImage from '../../../assets/img/youtube.png';
+import TwitterImage from '../../../assets/img/twitter.png';
 
 const PostPreview = ({
   uploader,
@@ -51,56 +51,20 @@ const PostPreview = ({
     }
   }, [setLoadBar, user]);
 
-  async function downloadFile(url, e, mediatype) {
+  const download = (e, url) => {
     e.preventDefault();
-    console.log(url, mediatype);
-    // const downloadData = { owner, post, __typename };
-    // console.log(e.currentTarget.querySelector('div').className);
     const loaderbtn = e.currentTarget.querySelector('div');
-    const downloadName = title;
     const downloadbtn = e.target;
     loaderbtn.className = 'loader show';
     downloadbtn.className = 'hide';
-
-    const method = 'GET';
-    const min = 1;
-    const max = 100;
-
-    await Axios.request({
-      url,
-      method,
-      responseType: 'blob', //important
-    })
-      .then(({ data }) => {
-        const downloadUrl = window.URL.createObjectURL(new Blob([data]));
-
-        const link = document.createElement('a');
-
-        link.href = downloadUrl;
-
-        link.setAttribute(
-          'download',
-          downloadName +'.'+ mediatype
-        ); //any other extension
-
-        document.body.appendChild(link);
-
-        link.click();
-
-        link.remove();
-        if (link.remove()) {
-        }
-      })
-      .then(() => {
-        loaderbtn.className = 'loader hide';
-        downloadbtn.className = 'show';
-        // {
-        //   user && user.is_subscribed && saveDownload(downloadData);
-        // }
-      }).catch(e => {
-        loaderbtn.className = 'loader hide';
-        downloadbtn.className = 'show';
-      })
+    const downloadName = title + '.mp4';
+    const apiUrl = process.env.REACT_APP_API + 'download?url=' + encodeURIComponent(url) + '&filename=' + encodeURIComponent(url) + '&filename=' + encodeURIComponent(downloadName)
+    console.log(apiUrl)
+    setTimeout(() => {
+      window.location.href = apiUrl
+      loaderbtn.className = 'loader hide';
+      downloadbtn.className = 'show';
+    }, 500)
   }
 
   return (
@@ -114,7 +78,7 @@ const PostPreview = ({
       <div className="post-card">
         <div className="post-card__detail">
           <div className="post-card__detail--image">
-            <img src={YoutubeImage} alt="" />
+            <img src={TwitterImage} alt="" />
             <div className="post-card__detail--image-name">
               <p>
                 <strong>{uploader}</strong>
@@ -152,7 +116,7 @@ const PostPreview = ({
             </div>
             <div className="post-card__detail--more-views show">
               <i
-                className="fad fa-eye"
+                className="fad fa-retweet"
                 style={{ color: 'var(--color-tertiary)' }}
               ></i>
               <p>{repost_count}</p>
@@ -172,7 +136,8 @@ const PostPreview = ({
                 }}
               ></div>
               <a
-                onClick={(e) => downloadFile(url, e, 'mp4')}
+                
+                onClick={(e) => download(e, url)}
                 href={url}
                 target="__blank"
                 className="post-card__collections--card-media_download-btn"

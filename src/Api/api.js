@@ -126,7 +126,7 @@ export const getSubscriptionApi = async (token) => {
 
 // Youtube Route
 export const youtubeVideoApi = async (url, token) => {
-  const apiUrl = process.env.REACT_APP_WAVE_DL_API + process.env.REACT_APP_YOUTUBE_VIDEO + `?url=${url}`;
+  const apiUrl = process.env.REACT_APP_API + process.env.REACT_APP_YOUTUBE_VIDEO + `?url=${url}`;
   const data = await Axios.get(apiUrl);
   return data;
 };
