@@ -18,20 +18,14 @@ import {
   youtubeVideoStart,
   clearYouTubeData,
 } from '../../redux/youtube/youtube.actions';
-import {
-  twitterVideoStart,
-  clearTwitterData,
-} from '../../redux/twitter/twitter.actions';
 import './home.styles.scss';
 import Footer from '../../components/footer/footer.component';
 
 const Home = ({
   fetchPostsAdd,
   youtubeVideoStart,
-  twitterVideoStart,
   clearInstagramData,
   clearYouTubeData,
-  clearTwitterData,
 }) => {
   const [loadBar, setLoadBar] = useState(0);
   const [url, setUrl] = useState('');
@@ -66,10 +60,6 @@ const Home = ({
       console.log('url: ', url);
       youtubeVideoStart(url);
       history.push('/youtube/video');
-    } else if (checkUrl.includes('twitter')) {
-      console.log('url: ', url);
-      twitterVideoStart(url);
-      history.push('/twitter/video');
     } else {
       setError(true);
     }
@@ -295,9 +285,7 @@ const Home = ({
 const mapDispatchToProps = (dispatch) => ({
   fetchPostsAdd: (url) => dispatch(fetchPostsAdd(url)),
   youtubeVideoStart: (url) => dispatch(youtubeVideoStart(url)),
-  twitterVideoStart: (url) => dispatch(twitterVideoStart(url)),
   clearInstagramData: () => dispatch(clearInstagramData()),
   clearYouTubeData: () => dispatch(clearYouTubeData()),
-  clearTwitterData: () => dispatch(clearTwitterData()),
 });
 export default withRouter(connect(null, mapDispatchToProps)(Home));
