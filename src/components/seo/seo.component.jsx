@@ -9,7 +9,7 @@ const SEO = ({ title, lang }) => {
   return (
     <Helmet
       title={title}
-      titleTemplate={`%s | ${siteTitle}`}
+      titleTemplate={`${siteTitle} | %s`}
       meta={[
         {
           name: `description`,
