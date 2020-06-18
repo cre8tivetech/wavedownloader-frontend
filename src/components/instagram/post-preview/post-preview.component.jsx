@@ -229,6 +229,11 @@ const PostPreview = ({
             </div>
           </div>
         </div>
+        <div className="post-card__search">
+          <button onClick={() => history.push('/')} type="submit" className="btn btn--green">
+          <i className="fad fa-search" style={{ color: 'var(--color-text)' }}></i> Search Again
+          </button>
+        </div>
       </div>
     </div>
   );

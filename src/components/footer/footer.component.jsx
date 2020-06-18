@@ -21,7 +21,7 @@ const Footer = () => {
   return (
     <footer className="footer">
       <div className="footer__content footer__content--1">
-        <img src={Logo} alt="" />
+        {/* <img src={Logo} alt="" /> */}
         <h5>
           Powered by <a href="https://www.cre8tivetech.com/">@Cre8tiveTech</a>
         </h5>

@@ -26,9 +26,11 @@
     }
 
     &--image {
+      width: 25%;
       padding: 1rem;
       display: flex;
       flex-direction: row;
+      justify-content: center;
 
       @include respond(phone) {
         padding: 0rem;
@@ -120,8 +122,10 @@
 
     &--info {
       // background-color: var(--color-grey-light-2);
+      width: 50%;
       display: flex;
       flex-direction: row;
+      justify-content: center;
 
       i {
         font-size: 1.5rem;
@@ -146,6 +150,21 @@
         margin-top: 1.5rem;
       }
 
+      h3 {
+        padding-left: 2rem;
+        font-size: 2rem;
+
+        @include respond(tabPort) {
+          font-size: 1.7rem;
+          padding-left: 1rem;
+        }
+
+        @include respond(phone) {
+          font-size: 1.5rem;
+          padding-left: 0.5rem;
+        }
+      }
+
       p {
         padding-left: 2rem;
         font-size: 1.6rem;
@@ -164,8 +183,10 @@
 
     &--more {
       // background-color: var(--color-grey-light-2);
+      width: 25%;
       display: flex;
       flex-direction: column;
+      justify-content: center;
 
       div {
         display: flex;
@@ -549,6 +570,7 @@
             }
           }
         }
+
       }
     }
   }
@@ -635,6 +657,14 @@
         }
       }
     }
+  }
+
+  &__search {
+    display: flex;
+    width: 100%;
+    margin-top: 50px;
+    margin-bottom: 30px;
+    justify-content: center;
   }
 
   .single {
