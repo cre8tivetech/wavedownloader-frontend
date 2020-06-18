@@ -5,7 +5,7 @@ import {
 } from '../../Api/api';
 import {
   twitterVideoFailure,
-  twitterVideoSuccess
+  twitterVideoSuccess,
 } from './twitter.actions';
 
 export function* fetchTwitterVideoAsync({ payload: url }) {

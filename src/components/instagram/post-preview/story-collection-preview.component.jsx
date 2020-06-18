@@ -15,7 +15,7 @@ const StoryCollectionPreview = ({ owner, post, history }) => {
     biography,
     is_verified
   } = owner;
-  const [view, setView] = useState();
+  // const [view, setView] = useState();
   const [loadBar, setLoadBar] = useState();
   useEffect(() => {
     // console.log(history.location);
@@ -40,7 +40,7 @@ const StoryCollectionPreview = ({ owner, post, history }) => {
     // return () => {
     //   console.log("will unmount");
     // };
-  }, [setLoadBar]);
+  }, [setLoadBar, post.text]);
 
   const download = (e, url) => {
     e.preventDefault();

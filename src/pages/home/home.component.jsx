@@ -9,7 +9,7 @@ import {
   ProFeaturesYoutube,
   SupportedResources,
 } from '../../components/pro-features/pro-features.component';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import {
   fetchPostsAdd,
   clearInstagramData,
