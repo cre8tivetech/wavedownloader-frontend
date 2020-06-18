@@ -2,6 +2,7 @@ import TwitterActionTypes from './twitter.types';
 
 const INITIAL_STATE = {
   videoData: null,
+  twitterUser: null,
   downloadData: null,
   isFetching: false,
   isSlide: false,
@@ -18,7 +19,16 @@ const youtubeReducer = (state = INITIAL_STATE, action) => {
         isFetching: false,
         isSlide: false,
         errorMessage: null,
+        twitterUser: null,
       };
+
+    case TwitterActionTypes.SET_TWITTER_USER:
+      console.log(action.payload)
+      return {
+        ...state,
+        twitterUser: action.payload,
+      };
+
     case TwitterActionTypes.TWITTER_VIDEO_START:
       return {
         ...state,

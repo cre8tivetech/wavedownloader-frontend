@@ -7,6 +7,11 @@ export const selectCollections = createSelector(
   (twitter) => twitter.videoData
 );
 
+export const selectTwitterUser = createSelector(
+  [selectTwitter],
+  (twitter) => twitter.twitterUser
+);
+
 export const selectErrors = createSelector(
   [selectTwitter],
   (twitter) => twitter.errorMessage

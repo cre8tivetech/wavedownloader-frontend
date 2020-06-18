@@ -1,12 +1,12 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React from 'react';
 import './footer.styles.scss';
 import { connect } from 'react-redux';
 import Logo from '../../assets/icon.png';
-import { createStructuredSelector } from 'reselect';
+// import { createStructuredSelector } from 'reselect';
 
 const Footer = () => {
-  const device = window.matchMedia('(max-width: 600px)');
-  const [width, setWidth] = useState();
+  // const device = window.matchMedia('(max-width: 600px)');
+  // const [width, setWidth] = useState();
   // useMemo(() => {
   //   menu && device.matches ? setWidth('100%') : setWidth('93%');
   //   if (!menu)

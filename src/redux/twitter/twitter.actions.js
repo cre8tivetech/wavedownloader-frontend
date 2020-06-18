@@ -4,6 +4,11 @@ export const clearTwitterData = () => ({
   type: TwitterActionTypes.CLEAR_TWITTER_DATA,
 });
 
+export const setTwitterUser = (user) => ({
+  type: TwitterActionTypes.SET_TWITTER_USER,
+  payload: user,
+});
+
 export const twitterVideoStart = (url) => ({
   type: TwitterActionTypes.TWITTER_VIDEO_START,
   payload: url,

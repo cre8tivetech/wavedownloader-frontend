@@ -19,7 +19,7 @@ const UserNamePostsOverview = ({
   useEffect(() => {
     setError({ errorMessage: errorMessage });
   }, [errorMessage]);
-  if (Object.keys(userCollections.data).length == 0) {
+  if (Object.keys(userCollections.data).length === 0) {
     return <PrivateUser {
       ...credentials
     }

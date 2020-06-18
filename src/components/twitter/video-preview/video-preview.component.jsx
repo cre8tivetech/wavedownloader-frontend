@@ -16,6 +16,8 @@ const PostPreview = ({
   repost_count,
   like_count,
   url,
+  location,
+  twitterUser,
   // history,
   // saveDownload,
   user,
@@ -92,11 +94,19 @@ const PostPreview = ({
             </div>
           </div>
           <div className="post-card__detail--info">
-            <i
-              className="fad fa-pen-alt"
-              style={{ color: 'var(--color-primary-light)' }}
-            ></i>
-            <p>{title}</p>
+            {location.pathname.match('getWdBot')? (<h3>{twitterUser}'s Download</h3>) 
+            :
+            <>
+              <i
+                className="fad fa-pen-alt"
+                style={{ color: 'var(--color-primary-light)' }}
+              ></i>
+              <p>{title}</p>
+            </>
+            }
+            
+            
+            
           </div>
           <div className="post-card__detail--more">
             <div className="post-card__detail--more-like">

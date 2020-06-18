@@ -22,6 +22,8 @@ import Stories from './components/instagram/stories/stories.component';
 import InstagramPosts from './pages/instagram/posts.component';
 import YoutubeVideo from './pages/youtube/video.component';
 import TwitterVideo from './pages/twitter/video.component';
+import GetWdBot from './pages/getWdBot/video.component';
+import GetTwitterVideo from './pages/getWdBot/get-video.component';
 import FacebookVideo from './pages/facebook/video.component';
 import UserNamePosts from './pages/instagram/username-posts.component';
 import HashTagPosts from './pages/instagram/hashtag-posts.component';
@@ -63,7 +65,7 @@ const App = ({ checkUserSession, currentUser, token, location, history }) => {
     } else {
       history.listen((locations) => ReactGA.pageview(locations.pathname));
     }
-  }, [history]);
+  }, [history, location.pathname]);
 
   const headerExclusionArray = ['/confirmation/', '/reset-password/'];
   return (
@@ -77,6 +79,8 @@ const App = ({ checkUserSession, currentUser, token, location, history }) => {
         <Route exact path="/instagram/posts" component={InstagramPosts} />
         <Route exact path="/youtube/video" component={YoutubeVideo} />
         <Route exact path="/twitter/video" component={TwitterVideo} />
+        <Route exact path="/getVideo/" component={GetTwitterVideo} />
+        <Route exact path="/getWdBot/" component={GetWdBot} />
         <Route exact path="/facebook/video" component={FacebookVideo} />
         <Route
           exact

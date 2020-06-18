@@ -23,7 +23,7 @@ const PostPreview = ({
 }) => {
   const [loadBar, setLoadBar] = useState();
   const [time, setTime] = useState();
-  const [publishDate, setPublishDate] = useState();
+  // const [publishDate, setPublishDate] = useState();
   const [downloadUrl, setDownloadUrl] = useState(
     formats.find((i) => i.itag === 22)? formats.find((i) => i.itag === 22).url : formats.find((i) => i.itag === 18).url
   );
@@ -37,9 +37,9 @@ const PostPreview = ({
     }
 
     // Add - to date
-    setPublishDate(
-      `${upload_date.slice(0, 4)}-${upload_date.slice(4, 6)}-${upload_date.slice(6, 8)}`
-    );
+    // setPublishDate(
+    //   `${upload_date.slice(0, 4)}-${upload_date.slice(4, 6)}-${upload_date.slice(6, 8)}`
+    // );
 
     // Convert seconds to HH-MM-SS format
     const measuredTime = new Date(null);

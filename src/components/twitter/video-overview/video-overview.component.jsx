@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import {
   selectCollections,
+  selectTwitterUser,
   selectError,
 } from '../../../redux/twitter/twitter.selectors';
 import VideoPreview from '../video-preview/video-preview.component';
@@ -10,6 +11,7 @@ import Error404 from '../../../pages/Error/error404.component';
 
 const VideoOverview = ({
   collections,
+  twitterUser,
   errorMessage,
   history,
 }) => {
@@ -20,7 +22,7 @@ const VideoOverview = ({
   return collections ? (
     <div className="posts-overview">
       {/* {collections.map(({ ,...otherCollectionProps }) => ( */}
-      <VideoPreview {...collections} {...error} />
+      <VideoPreview {...collections} twitterUser={twitterUser} {...error} />
       {/* ))} */}
     </div>
   ) : (
@@ -30,6 +32,7 @@ const VideoOverview = ({
 
 const mapStateToProps = createStructuredSelector({
   collections: selectCollections,
+  twitterUser: selectTwitterUser,
   errorMessage: selectError,
 });
 
