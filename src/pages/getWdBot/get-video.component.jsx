@@ -42,11 +42,10 @@ const Home = ({
     if (!data) {
       history.push('/')
     } else {
-      const result = data.split('=');
-      const getUrl = result[1].split('&');
-      const url = getUrl[0];
-      const user = result[2]
-      console.log(result)
+      const result = data.split('?url=');
+      const getUrlAndUser = result[1].split('&user=');
+      const url = getUrlAndUser[0];
+      const user = getUrlAndUser[1]
       const checkUrl = url.split('/')[2];
       if (checkUrl.includes('twitter')) {
         console.log('url: ', url);
@@ -77,7 +76,6 @@ const Home = ({
       <div className="home-container">
         loading...
       </div>
-      <Footer />
     </div>
   );
 };

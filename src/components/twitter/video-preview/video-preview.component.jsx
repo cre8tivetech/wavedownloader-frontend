@@ -18,7 +18,7 @@ const PostPreview = ({
   url,
   location,
   twitterUser,
-  // history,
+  history,
   // saveDownload,
   user,
 }) => {
@@ -38,18 +38,6 @@ const PostPreview = ({
       `${upload_date.slice(0, 4)}-${upload_date.slice(4, 6)}-${upload_date.slice(6, 8)}`
     );
 
-    // Convert seconds to HH-MM-SS format
-    const measuredTime = new Date(null);
-    measuredTime.setSeconds(parseInt(duration));
-    const HMSTime = measuredTime.toISOString().substr(11, 8);
-    const H = HMSTime.split(':')[0];
-    const M = HMSTime.split(':')[1];
-    const S = HMSTime.split(':')[2];
-    if (H == '00') {
-      setTime(M + ':' + S);
-    } else {
-      setTime(HMSTime);
-    }
   }, [setLoadBar, user]);
 
   const download = (e, url) => {
@@ -58,7 +46,7 @@ const PostPreview = ({
     const downloadbtn = e.target;
     loaderbtn.className = 'loader show';
     downloadbtn.className = 'hide';
-    const downloadName = title + '.mp4';
+    const downloadName = makeDownloadName(10) + '.mp4';
     const apiUrl = process.env.REACT_APP_API + 'download?url=' + encodeURIComponent(url) + '&filename=' + encodeURIComponent(downloadName)
     console.log(apiUrl)
     setTimeout(() => {
@@ -66,6 +54,17 @@ const PostPreview = ({
       loaderbtn.className = 'loader hide';
       downloadbtn.className = 'show';
     }, 500)
+  }
+
+  function makeDownloadName(length) {
+    var result = '';
+    var characters =
+      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789wavedownloaderJOshmatJjenUche007AdaStepheNNwakwuoInstagram';
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
   }
 
   return (
@@ -103,10 +102,7 @@ const PostPreview = ({
               ></i>
               <p>{title}</p>
             </>
-            }
-            
-            
-            
+            }          
           </div>
           <div className="post-card__detail--more">
             <div className="post-card__detail--more-like">
@@ -116,13 +112,13 @@ const PostPreview = ({
               ></i>
               <p>{like_count}</p>
             </div>
-            <div className="post-card__detail--more-comment">
+            {/* <div className="post-card__detail--more-comment">
               <i
                 className="fad fa-clock"
                 style={{ color: 'var(--color-secondary)' }}
               ></i>
               <p>{time}</p>
-            </div>
+            </div> */}
             <div className="post-card__detail--more-views show">
               <i
                 className="fad fa-retweet"
@@ -159,6 +155,11 @@ const PostPreview = ({
               </a>
             </div>
           </div>
+        </div>
+        <div className="post-card__search">
+          <button onClick={() => history.push('/')} type="submit" className="btn btn--green">
+          <i className="fad fa-search" style={{ color: 'var(--color-text)' }}></i> Search Again
+          </button>
         </div>
       </div>
     </div>
