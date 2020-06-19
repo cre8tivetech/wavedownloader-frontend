@@ -44,8 +44,8 @@ const Home = ({
     } else {
       const result = data.split('?url=');
       const getUrlAndUser = result[1].split('&user=');
-      const url = getUrlAndUser[0];
-      const user = getUrlAndUser[1]
+      const url = decodeURIComponent(getUrlAndUser[0]);
+      const user = decodeURIComponent(getUrlAndUser[1])
       const checkUrl = url.split('/')[2];
       if (checkUrl.includes('twitter')) {
         console.log('url: ', url);

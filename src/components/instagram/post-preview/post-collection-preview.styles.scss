@@ -30,7 +30,8 @@
       width: 25%;
       padding: 1rem;
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
+      align-items: center;
       justify-content: center;
 
       @include respond(phone) {
@@ -109,14 +110,14 @@
 
       img {
         border-radius: 50%;
-        height: 7rem;
+        width: 7rem;
 
         @include respond(tabPort) {
-          height: 5rem;
+          width: 5rem;
         }
 
         @include respond(phone) {
-          height: 3.5rem;
+          width: 3.5rem;
         }
       }
     }
