@@ -16,10 +16,10 @@ const Navigation = ({ user, signOutStart }) => {
       const root = document.querySelector(':root');
       const toggle = document.querySelector('.toggle');
       toggle.classList.add('dark-mode');
-      root.style.setProperty('--color-bg', '#030805');
+      root.style.setProperty('--color-bg', '#0c1d13');
       root.style.setProperty('--color-bg-2', '#050c07');
-      root.style.setProperty('--color-light', '#030805');
-      root.style.setProperty('--color-card', '#050e08');
+      root.style.setProperty('--color-light', '#0c1d13');
+      root.style.setProperty('--color-card', '#09180e');
       root.style.setProperty('--color-text-1', '#a3a3a3');
       root.style.setProperty('--color-text-2', '#cccccc');
       root.style.setProperty('--color-text-4', '#b8b8b8');
@@ -65,10 +65,10 @@ const Navigation = ({ user, signOutStart }) => {
       localStorage.setItem('mode', 'light');
       setMode('light');
     } else {
-      root.style.setProperty('--color-bg', '#030805');
+      root.style.setProperty('--color-bg', '#0c1d13');
       root.style.setProperty('--color-bg-2', '#050c07');
-      root.style.setProperty('--color-light', '#030805');
-      root.style.setProperty('--color-card', '#050e08');
+      root.style.setProperty('--color-light', '#0c1d13');
+      root.style.setProperty('--color-card', '#09180e');
       root.style.setProperty('--color-text-1', '#a3a3a3');
       root.style.setProperty('--color-text-2', '#cccccc');
       root.style.setProperty('--color-text-4', '#b8b8b8');

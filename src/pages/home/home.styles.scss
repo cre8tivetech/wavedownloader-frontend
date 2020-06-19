@@ -5,6 +5,7 @@
 
   .home-container {
     margin: 0 auto;
+    margin-top: 80px;
     width: 70%;
 
     @include respond(tabLand) {
@@ -127,11 +128,10 @@
           }
 
           &--active {
-            background-color: var(--color-primary);
-            color: var(--color-light);
+            background-color: var(--color-light);
 
             p {
-              color: var(--color-light);
+              color: var(--color-text-1);
             }
           }
 
@@ -187,6 +187,7 @@
       text-align: center;
       border-radius: 1rem;
       margin-bottom: 5rem;
+      padding: 20px 0;
       box-shadow: 0 0.5rem 2rem rgba(black, 0.15);
 
       @include respond(tabPort) {
@@ -201,22 +202,22 @@
 
       &__text {
         position: relative;
-        font-size: 2rem;
+        font-size: 2.5rem;
         font-weight: bold;
         font-family: Helvetica;
         margin: 5px auto;
         padding-bottom: 10px;
 
         @include respond(tabLand) {
-          font-size: 2rem;
+          font-size: 2.2rem;
         }
 
         @include respond(tabPort) {
-          font-size: 1.7rem;
+          font-size: 2rem;
         }
 
         @include respond(phone) {
-          font-size: 1.4rem;
+          font-size: 1.8rem;
         }
 
         p {

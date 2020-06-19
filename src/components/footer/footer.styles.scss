@@ -2,10 +2,8 @@
 
 .footer {
   position: relative;
-  background-color: var(--color-bg);
-  box-shadow: 10px 10px 2rem rgba(119, 119, 119, 0.8);
-  -moz-box-shadow: 10px 10px 2rem rgba(119, 119, 119, 0.8);
-  -webkit-box-shadow: 10px 10px 2rem rgba(119, 119, 119, 0.8);
+  background-color: var(--color-card);
+  box-shadow: 0px 0px 10px #00000029;
   right: 0;
   bottom: 1;
   width: 100% !important;

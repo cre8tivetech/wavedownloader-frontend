@@ -37,7 +37,7 @@ const youtubeReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         isFetching: false,
-        videoData: action.payload.data,
+        videoData: action.payload.data.data,
         errorMessage: null,
       };
     default:

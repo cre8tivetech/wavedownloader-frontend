@@ -8,19 +8,19 @@ export const ProFeaturesInstagram = () => {
     <div className="card">
       <div className="feature-icon"><img src={InstagramLogo} alt='instagram logo' /></div>
       <div className="options">
-        <Link to="/instagram/post-by-username" className="btn">
+        <Link to="/instagram/post-by-username" className="options--active">
           <span>Pro</span>
           <p>Posts By Username</p>
         </Link>
-        <Link to="/instagram/post-by-hashtag" className="btn">
+        <Link to="/instagram/post-by-hashtag" className="options--active">
           <span>Pro</span>
           <p>Posts By Hashtag</p>
         </Link>
-        <Link to="/instagram/highlight" className="btn">
+        <Link to="/instagram/highlight" className="options--active">
           <span>Pro</span>
           <p>Highlight</p>
         </Link>
-        <Link to="/instagram/stories" className="btn">
+        <Link to="/instagram/stories" className="options--active">
           <span>Pro</span>
           <p>Stories</p>
         </Link>
@@ -63,6 +63,10 @@ export const SupportedResources = () => {
         <Link to="#" className="options--resources">
           <span>Coming Soon</span>
           <p>vimeo.com</p>
+        </Link>
+        <Link to="#" className="options--resources">
+          <span>Coming Soon</span>
+          <p>soundcloud.com</p>
         </Link>
         <Link to="#" className="options--resources">
           <span>Coming Soon</span>
