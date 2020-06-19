@@ -25,7 +25,7 @@ const PostPreview = ({
   const [time, setTime] = useState();
   // const [publishDate, setPublishDate] = useState();
   const [downloadUrl, setDownloadUrl] = useState(
-    formats.find((i) => i.itag === 22)? formats.find((i) => i.itag === 22).url : formats.find((i) => i.itag === 18).url
+    formats.find((i) => i.itag === '22')? formats.find((i) => i.itag === '22').url : formats.find((i) => i.itag === '18').url
   );
   const [downloadExt, setDownloadExt] = useState('mp4');
 
