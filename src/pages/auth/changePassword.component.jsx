@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import LoadingBar from 'react-top-loading-bar';
+import SEO from '../../components/seo/seo.component';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { selectCurrentUser } from '../../redux/user/user.selector';
@@ -80,6 +81,7 @@ const ChangePassword = ({
 
   return (
     <div className="profile-section">
+      <SEO title="Change your password" />
       <LoadingBar
         progress={loadBar}
         height={3}

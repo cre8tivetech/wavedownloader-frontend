@@ -7,6 +7,7 @@ import { signInStart } from '../../redux/user/user.actions';
 import { connect } from 'react-redux';
 import './signin-signup.styles.scss';
 import { selectError, selectIsLoading } from '../../redux/user/user.selector';
+import SEO from '../../components/seo/seo.component';
 import Footer from '../../components/footer/footer.component';
 const SignIn = ({ signInStart, error, isLoading }) => {
   const [loadBar, setLoadBar] = useState(0);
@@ -58,6 +59,7 @@ const SignIn = ({ signInStart, error, isLoading }) => {
   return (
     <div className="auth">
       <div className="auth-section">
+      <SEO title="Sign in" />
         <LoadingBar
           progress={loadBar}
           height={3}

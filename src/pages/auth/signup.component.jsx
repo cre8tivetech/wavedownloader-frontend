@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import LoadingBar from 'react-top-loading-bar';
+import SEO from '../../components/seo/seo.component';
 import { createStructuredSelector } from 'reselect';
 import { Link } from 'react-router-dom';
 import { signUpStart } from '../../redux/user/user.actions';
@@ -66,6 +67,7 @@ const SignUp = ({ signUpStart, success, error, isLoading }) => {
   return (
     <div className="auth-section">
       <div className="signin-signup card">
+        <SEO title="Sign Up" />
         <LoadingBar
           progress={loadBar}
           height={3}

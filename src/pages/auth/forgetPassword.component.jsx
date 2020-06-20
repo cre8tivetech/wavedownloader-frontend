@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import LoadingBar from 'react-top-loading-bar';
+import SEO from '../../components/seo/seo.component';
 import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
@@ -47,6 +48,7 @@ const ForgotPassword = ({ forgetPasswordStart, error, isLoading }) => {
 
   return (
     <div className="signin-signup card">
+      <SEO title="Forget password" />
       <LoadingBar
         progress={loadBar}
         height={3}

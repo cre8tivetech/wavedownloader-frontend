@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import LoadingBar from 'react-top-loading-bar';
+import SEO from '../../components/seo/seo.component';
 import Axios from 'axios';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -161,6 +162,7 @@ const DownloadHistory = ({
 
   return (
     <div className="profile-section">
+      <SEO title="Your download history" />
       <LoadingBar
         progress={loadBar}
         height={3}
