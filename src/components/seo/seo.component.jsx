@@ -4,7 +4,7 @@ import { Helmet } from "react-helmet";
 const SEO = ({ title, lang }) => {
   const metaDescription = "An online post and video downloader | Download Instagram posts, YouTube videos and more";
   const siteTitle = "WaveDownloader";
-  const author = "@cre8tive_tech";
+  const author = "@wavedownloader";
 
   return (
     <Helmet
