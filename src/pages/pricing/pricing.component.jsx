@@ -319,25 +319,28 @@ const Pricing = ({
                 </div>
 
                 <div className="plan-texts">
-                  {/* <p className="free">&#10004;</p> */}
                   <i className="fa fa-check free"></i>
                   <p>Download unlimited posts</p>
                 </div>
                 <div className="plan-texts">
-                  <i className="fa fa-times free"></i>
-                  <p>Dowload post by username</p>
+                  <i className="fa fa-check free"></i>
+                  <p>Save downloads</p>
                 </div>
                 <div className="plan-texts">
                   <i className="fa fa-times free"></i>
-                  <p>Dowload post by hashtag</p>
+                  <p>Download post by username</p>
                 </div>
                 <div className="plan-texts">
                   <i className="fa fa-times free"></i>
-                  <p>Dowload stories post</p>
+                  <p>Download post by hashtag</p>
                 </div>
                 <div className="plan-texts">
                   <i className="fa fa-times free"></i>
-                  <p>Dowload highlights post</p>
+                  <p>Download stories post</p>
+                </div>
+                <div className="plan-texts">
+                  <i className="fa fa-times free"></i>
+                  <p>Download highlights post</p>
                 </div>
                 <div className="plan-texts">
                   <i className="fa fa-times free"></i>

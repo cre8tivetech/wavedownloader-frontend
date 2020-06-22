@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "./message.styles.scss";
 // import Navigation from "../navigation/navigation.component";
 import { withRouter } from "react-router-dom";

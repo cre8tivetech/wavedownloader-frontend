@@ -21,7 +21,7 @@ import downloadImage from '../../assets/download(1).svg';
 import confirmation from '../../assets/mail(1).svg';
 import sub_time from '../../assets/sale(1).svg';
 import plan from '../../assets/subscription(1).svg';
-import { getDownload } from '../../redux/instagram/instagram.actions';
+// import { getDownload } from '../../redux/instagram/instagram.actions';
 import Footer from '../../components/footer/footer.component';
 
 const Profile = ({
@@ -31,7 +31,7 @@ const Profile = ({
   signOutStart,
   checkUserSession,
   resendConfirmEmailStart,
-  message,
+  // message,
   isLoading,
   setLoading,
   // getDownload,
@@ -46,33 +46,7 @@ const Profile = ({
   const onLoaderFinished = () => {
     setLoadBar(0);
   };
-  useEffect(() => {
-    // getDownload();
-    checkUserSession();
-    subDaysRemaining();
-    setLoading(false);
-    startLoader();
-    // console.log(download.length);
-    // console.log(message);
-    if (!isLoading) {
-      setConfirmText('Resend Confirmation Email');
-    }
-  }, [checkUserSession, isLoading]);
-
-  const signOut = () => {
-    setLogout('Logging out...');
-    signOutStart();
-    setTimeout(() => {
-      setLogout('Logout');
-    }, 3000);
-  };
-
-  const resendEmailConfirm = () => {
-    setConfirmText('Sending Email...');
-    resendConfirmEmailStart();
-  };
-
-  const subDaysRemaining = () => {
+  const subDaysRemaining = useCallback(() => {
     if (user.is_subscribed) {
       //NOTE  DATE CONSTRUCTOR USES 0 FOR JAN, (THEREFORE JAN = JAN - 1)
       const expDate = subscription.expired_at.split('-');
@@ -91,7 +65,33 @@ const Profile = ({
     } else {
       setSubDays(0);
     }
+  }, []);
+  useEffect(() => {
+    // getDownload();
+    checkUserSession();
+    subDaysRemaining();
+    setLoading(false);
+    startLoader();
+    // console.log(download.length);
+    // console.log(message);
+    if (!isLoading) {
+      setConfirmText('Resend Confirmation Email');
+    }
+  }, [checkUserSession, isLoading, subDaysRemaining, setLoading, startLoader]);
+
+  const signOut = () => {
+    setLogout('Logging out...');
+    signOutStart();
+    setTimeout(() => {
+      setLogout('Logout');
+    }, 3000);
   };
+
+  const resendEmailConfirm = () => {
+    setConfirmText('Sending Email...');
+    resendConfirmEmailStart();
+  };
+
   return (
     <div className="profile-section">
       <LoadingBar

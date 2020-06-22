@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import imageLoading from '../../assets/Ripple-2.svg';
 import imageLoaded from '../../assets/thumbs-up.gif';
 import './resetPassword.styles.scss';
@@ -14,7 +14,7 @@ import {
 const ResetPassword = ({
   message,
   resetPassword,
-  setMessage,
+  // setMessage,
   signInByTokenStart,
 }) => {
   const [confirmImage, setConfirmImage] = useState(imageLoading);

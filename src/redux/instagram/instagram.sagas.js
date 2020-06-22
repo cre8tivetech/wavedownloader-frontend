@@ -113,7 +113,7 @@ export function* fetchUserNamePostsAsync() {
 }
 
 export function* fetchHashTagPostsAsync() {
-  const { hashTag, postType } = yield select(hashTagForm);
+  const { hashTag } = yield select(hashTagForm);
   const token = yield select(userToken);
   try {
     const result = yield hashtagPostApi(hashTag, token.key).then(function (

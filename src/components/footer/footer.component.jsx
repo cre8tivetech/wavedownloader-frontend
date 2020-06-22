@@ -1,7 +1,7 @@
 import React from 'react';
 import './footer.styles.scss';
 import { connect } from 'react-redux';
-import Logo from '../../assets/icon.png';
+// import Logo from '../../assets/icon.png';
 // import { createStructuredSelector } from 'reselect';
 
 const Footer = () => {

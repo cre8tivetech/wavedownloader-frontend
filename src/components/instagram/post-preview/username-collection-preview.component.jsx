@@ -12,7 +12,7 @@ import { connect } from 'react-redux';
 
 const UserNameCollectionPreview = ({
   data,
-  downloadName,
+  // downloadName,
   fetchUserNamePostsDownload,
 }) => {
   const history = useHistory();
@@ -145,6 +145,7 @@ const UserNameCollectionPreview = ({
                   </div>
                   <a
                     onClick={(e) => downloadFile(item.shortcode, e)}
+                    href="/posts"
                     target="__blank"
                     className="post-card__collections--card-media_download-btn"
                     data-method="get"

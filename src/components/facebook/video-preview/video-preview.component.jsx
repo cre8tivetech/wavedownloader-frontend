@@ -8,16 +8,18 @@ import { createStructuredSelector } from 'reselect';
 import FacebookImage from '../../../assets/img/facebook.png';
 
 const PostPreview = ({
+  post_id,
+  source_link,
   uploader,
   title,
   thumbnail,
   url,
   history,
-  // saveDownload,
+  saveDownload,
   user,
 }) => {
   const [loadBar, setLoadBar] = useState();
-  const [time, setTime] = useState();
+  // const [time, setTime] = useState();
 
   useEffect(() => {
     setLoadBar(100);
@@ -27,6 +29,16 @@ const PostPreview = ({
     }
 
   }, [setLoadBar, user]);
+
+  const downloadData = {
+    site: 'facebook',   
+    post: {
+      post_id: post_id,
+      source_link: source_link,
+      display_url: thumbnail,
+      is_video: true
+    } 
+  };
 
   const download = (e, url) => {
     e.preventDefault();
@@ -38,6 +50,7 @@ const PostPreview = ({
     const apiUrl = process.env.REACT_APP_API + 'download?url=' + encodeURIComponent(url) + '&filename=' + encodeURIComponent(downloadName)
     console.log(apiUrl)
     setTimeout(() => {
+      user && saveDownload(downloadData);
       window.location.href = apiUrl
       loaderbtn.className = 'loader hide';
       downloadbtn.className = 'show';
@@ -60,13 +73,6 @@ const PostPreview = ({
               <p>
                 <strong>{uploader}</strong>
               </p>
-              {/* <p>
-                <i
-                  className="fad fa-calendar-alt"
-                  style={{ color: 'var(--color-grey-dark-1)' }}
-                ></i>
-                <small> {publishDate}</small>
-              </p> */}
             </div>
           </div>
           <div className="post-card__detail--info">
@@ -77,27 +83,6 @@ const PostPreview = ({
             <p>{title}</p>
           </div>
           <div className="post-card__detail--more">
-            {/* <div className="post-card__detail--more-like">
-              <i
-                className="fad fa-heart"
-                style={{ color: 'var(--color-danger-1)' }}
-              ></i>
-              <p>{like_count}</p>
-            </div>
-            <div className="post-card__detail--more-comment">
-              <i
-                className="fad fa-clock"
-                style={{ color: 'var(--color-secondary)' }}
-              ></i>
-              <p>{time}</p>
-            </div>
-            <div className="post-card__detail--more-views show">
-              <i
-                className="fad fa-retweet"
-                style={{ color: 'var(--color-tertiary)' }}
-              ></i>
-              <p>{repost_count}</p>
-            </div> */}
           </div>
         </div>
         <div className="post-card__collections single">

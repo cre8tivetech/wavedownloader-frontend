@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import LoadingBar from "react-top-loading-bar";
-// import "../../pages/posts/posts.styles.scss";
-// import "./post-collection-preview.styles.scss";
 import Axios from "axios";
 import { withRouter } from "react-router-dom";
 
@@ -15,31 +13,12 @@ const StoryCollectionPreview = ({ owner, post, history }) => {
     biography,
     is_verified
   } = owner;
-  // const [view, setView] = useState();
   const [loadBar, setLoadBar] = useState();
   useEffect(() => {
-    // console.log(history.location);
     setLoadBar(100);
-     
-    // setUrl(history.location.data.url);
-    // if (post.is_video) {
-    //   setView("post-card__detail--more-views show");
-    //   // setCollectionType(
-    //   //   <i
-    //   //     className="fad fa-play play"
-    //   //     style={{ color: 'var(--color-light)' }}
-    //   //   ></i>
-    //   // );
-    // } else {
-    //   setView("post-card__detail--more-views hide");
-    //   // setCollectionType('');
-    // }
     if (!post.text) {
       post.text = "No caption text for this post";
     }
-    // return () => {
-    //   console.log("will unmount");
-    // };
   }, [setLoadBar, post.text]);
 
   const download = (e, url) => {
@@ -60,7 +39,6 @@ const StoryCollectionPreview = ({ owner, post, history }) => {
 
   async function downloadFile(url, e, mediatype) {
     e.preventDefault();
-    // console.log(e.currentTarget.querySelector('div').className);
     const loaderbtn = e.currentTarget.querySelector("div");
     const downloadName = makeDownloadName(10);
     const downloadbtn = e.target;
@@ -68,10 +46,6 @@ const StoryCollectionPreview = ({ owner, post, history }) => {
     downloadbtn.className = "hide";
      
     const method = "GET";
-    const min = 1;
-    const max = 100;
-    const rand = min + Math.random() * (max - min);
-     
      
     await Axios.request({
       url,
@@ -145,13 +119,6 @@ const StoryCollectionPreview = ({ owner, post, history }) => {
               <p>
                 <small>{username}</small>
               </p>
-              {/* <p>
-                <i
-                  className="fad fa-calendar-alt"
-                  style={{ color: 'var(--color-grey-dark-1)' }}
-                ></i>
-                 <small>{posted_on.date}</small> 
-              </p> */}
             </div>
           </div>
           <div className="post-card__detail--info">
@@ -211,6 +178,7 @@ const StoryCollectionPreview = ({ owner, post, history }) => {
                       onClick={(e) =>
                         download(e, item.video_url)
                       }
+                      href={item.video_url}
                       target="__blank"
                       className="post-card__collections--card-media_download-btn"
                       data-method="get"
@@ -222,7 +190,8 @@ const StoryCollectionPreview = ({ owner, post, history }) => {
                     </a>
                   ) : (
                     <a
-                      onClick={e => downloadFile(item.display_url, e, ".jpg")}
+                      onClick={e => downloadFile(item.image_url, e, ".jpg")}
+                      href={item.image_url}
                       target="__blank"
                       className="post-card__collections--card-media_download-btn"
                       data-method="get"

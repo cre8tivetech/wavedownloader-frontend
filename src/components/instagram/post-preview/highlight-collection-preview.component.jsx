@@ -8,7 +8,7 @@ import crying from '../../../assets/crying.svg';
 const HighlightCollectionPreview = ({
   owner,
   post,
-  length,
+  // length,
   history,
   fetchHighlightPostsDownload,
 }) => {
@@ -22,9 +22,9 @@ const HighlightCollectionPreview = ({
     biography,
     is_verified,
   } = owner;
-  const [downloading, setDownloading] = useState('loader hide');
-  const [downloadBtn, setDownloadBtn] = useState('show');
-  const [view, setView] = useState();
+  // const [downloading, setDownloading] = useState('loader hide');
+  // const [downloadBtn, setDownloadBtn] = useState('show');
+  // const [view, setView] = useState();
   const [loadBar, setLoadBar] = useState();
   useEffect(() => {
     // console.log(history.location);
@@ -32,7 +32,7 @@ const HighlightCollectionPreview = ({
 
     // setUrl(history.location.data.url);
     if (post.is_video) {
-      setView('post-card__detail--more-views show');
+      // setView('post-card__detail--more-views show');
       // setCollectionType(
       //   <i
       //     className="fad fa-play play"
@@ -40,15 +40,12 @@ const HighlightCollectionPreview = ({
       //   ></i>
       // );
     } else {
-      setView('post-card__detail--more-views hide');
+      // setView('post-card__detail--more-views hide');
       // setCollectionType('');
     }
     if (!post.text) {
       post.text = 'No caption text for this post';
     }
-    // return () => {
-    //   console.log("will unmount");
-    // };
   }, [setLoadBar]);
 
   function downloadFile(idcode, e) {
@@ -64,8 +61,8 @@ const HighlightCollectionPreview = ({
       fetchHighlightPostsDownload(idcode);
     }, 2000);
 
-    setDownloading('loader show');
-    setDownloadBtn('hide');
+    // setDownloading('loader show');
+    // setDownloadBtn('hide');
 
     setTimeout(() => {
       loaderbtn.className = 'loader hide';
@@ -161,6 +158,7 @@ const HighlightCollectionPreview = ({
                     {item.is_video ? (
                       <a
                         onClick={(e) => downloadFile(item.video_url, e, '.mp4')}
+                        href="/posts"
                         target="__blank"
                         className="post-card__collections--card-media_download-btn"
                         data-method="get"
@@ -173,6 +171,7 @@ const HighlightCollectionPreview = ({
                     ) : (
                       <a
                         onClick={(e) => downloadFile(item.id, e)}
+                        href="/posts"
                         target="__blank"
                         className="post-card__collections--card-media_download-btn"
                         data-method="get"

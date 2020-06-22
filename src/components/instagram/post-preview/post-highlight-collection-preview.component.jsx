@@ -7,19 +7,17 @@ import Axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import { saveDownload } from '../../../redux/instagram/instagram.actions';
 import { setMessage } from '../../../redux/user/user.actions';
-import { createStructuredSelector } from 'reselect';
-import {
-  selectCurrentUser,
-  selectIsLoading,
-} from '../../../redux/user/user.selector';
+// import { createStructuredSelector } from 'reselect';
+// import {
+//   selectCurrentUser,
+//   selectIsLoading,
+// } from '../../../redux/user/user.selector';
 
 const PostHighlightCollectionPreview = ({
   owner,
   post,
-  saveDownload,
   setMessage,
   history,
-  user,
 }) => {
   const {
     profile_pic_url,
@@ -34,9 +32,6 @@ const PostHighlightCollectionPreview = ({
 
   useEffect(() => {
     setLoadBar(100);
-    // return () => {
-    //   console.log('will unmount');
-    // };
   }, [setLoadBar]);
 
   const download = (e, url) => {
@@ -64,19 +59,13 @@ const PostHighlightCollectionPreview = ({
     }
     e.preventDefault();
     // console.log(e.currentTarget.querySelector('div').className);
-    let __typename;
-    if (post.is_video) __typename = 'GraphVideo';
-    if (!post.is_video) __typename = 'GraphImage';
-    const downloadData = { owner, post, __typename };
     const loaderbtn = e.currentTarget.querySelector('div');
     const downloadName = makeDownloadName(10);
     const downloadbtn = e.target;
     loaderbtn.className = 'loader show';
     downloadbtn.className = 'hide';
     const method = 'GET';
-    const min = 1;
-    const max = 100;
-    const rand = min + Math.random() * (max - min);
+    
     await Axios.request({
       url,
       method,
@@ -105,9 +94,6 @@ const PostHighlightCollectionPreview = ({
       .then(() => {
         loaderbtn.className = 'loader hide';
         downloadbtn.className = 'show';
-        {
-          user && user.is_subscribed && saveDownload(downloadData);
-        }
       });
     // return await values.add('<div className="show"></div>');
     // await e.target.classList.add('show');
@@ -216,6 +202,7 @@ const PostHighlightCollectionPreview = ({
                       onClick={(e) =>
                         download(e, item.video_url)
                       }
+                      href={item.video_url}
                       target="__blank"
                       className="post-card__collections--card-media_download-btn"
                       data-method="get"
@@ -228,8 +215,9 @@ const PostHighlightCollectionPreview = ({
                   ) : (
                     <a
                       onClick={(e) =>
-                        downloadFile(item, item.display_url, e, '.jpg')
+                        downloadFile(item, item.image_url, e, '.jpg')
                       }
+                      href={item.image_url}
                       target="__blank"
                       className="post-card__collections--card-media_download-btn"
                       data-method="get"
@@ -255,10 +243,10 @@ const PostHighlightCollectionPreview = ({
   );
 };
 
-const mapStateToProps = createStructuredSelector({
-  user: selectCurrentUser,
-  isLoading: selectIsLoading,
-});
+// const mapStateToProps = createStructuredSelector({
+//   user: selectCurrentUser,
+//   isLoading: selectIsLoading,
+// });
 
 const mapDispatchToProps = (dispatch) => ({
   setMessage: (message) => dispatch(setMessage(message)),

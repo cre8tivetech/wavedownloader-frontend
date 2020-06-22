@@ -8,8 +8,10 @@ import { createStructuredSelector } from 'reselect';
 import TwitterImage from '../../../assets/img/twitter.png';
 
 const PostPreview = ({
+  post_id,
+  source_link,
   uploader,
-  duration,
+  // duration,
   title,
   upload_date,
   thumbnail,
@@ -19,11 +21,11 @@ const PostPreview = ({
   location,
   twitterUser,
   history,
-  // saveDownload,
+  saveDownload,
   user,
 }) => {
   const [loadBar, setLoadBar] = useState();
-  const [time, setTime] = useState();
+  // const [time, setTime] = useState();
   const [publishDate, setPublishDate] = useState();
 
   useEffect(() => {
@@ -40,6 +42,16 @@ const PostPreview = ({
 
   }, [setLoadBar, user]);
 
+  const downloadData = {
+    site: 'twitter',   
+    post: {
+      post_id: post_id,
+      source_link: source_link,
+      display_url: thumbnail,
+      is_video: true
+    } 
+  };
+
   const download = (e, url) => {
     e.preventDefault();
     const loaderbtn = e.currentTarget.querySelector('div');
@@ -50,6 +62,7 @@ const PostPreview = ({
     const apiUrl = process.env.REACT_APP_API + 'download?url=' + encodeURIComponent(url) + '&filename=' + encodeURIComponent(downloadName)
     console.log(apiUrl)
     setTimeout(() => {
+      user && saveDownload(downloadData);
       window.location.href = apiUrl
       loaderbtn.className = 'loader hide';
       downloadbtn.className = 'show';

@@ -23,9 +23,9 @@ import {
   signOutFailure,
   signUpFailure,
   signUpSuccess,
-  resendConfirmEmailSuccess,
+  // resendConfirmEmailSuccess,
   forgetPasswordSuccess,
-  userPaymentSucesss,
+  // userPaymentSucesss,
   userPaymentFailure,
 } from './user.actions';
 import { getDownloadsApi, getSubscriptionApi } from '../../Api/api';

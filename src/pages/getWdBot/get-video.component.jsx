@@ -13,7 +13,6 @@ import {
 } from '../../redux/twitter/twitter.actions';
 
 import '../home/home.styles.scss';
-import Footer from '../../components/footer/footer.component';
 
 const Home = ({
   twitterVideoStart,

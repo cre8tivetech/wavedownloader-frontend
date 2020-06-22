@@ -54,7 +54,7 @@ const Home = ({
     clearYouTubeData();
     clearTwitterData();
     clearFacebookData();
-  }, []);
+  }, [clearInstagramData, clearYouTubeData, clearTwitterData, clearFacebookData]);
   useEffect(() => {
     startLoader();
   }, [startLoader]);

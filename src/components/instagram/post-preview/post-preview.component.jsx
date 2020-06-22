@@ -8,7 +8,8 @@ import { selectCurrentUser } from '../../../redux/user/user.selector';
 import { createStructuredSelector } from 'reselect';
 
 const PostPreview = ({
-  __typename,
+  post_id,
+  source_link,
   owner,
   post,
   history,
@@ -37,10 +38,17 @@ const PostPreview = ({
     if (!post.text) {
       post.text = 'No caption text for this post';
     }
-    // return () => {
-    //   console.log("will unmount");
-    // };
   }, [setLoadBar, user]);
+
+  const downloadData = {
+    site: 'instagram',   
+    post: {
+      post_id: post_id,
+      source_link: source_link,
+      display_url: post.display_url,
+      is_video: post.is_video
+    } 
+  };
 
   const download = (e, url) => {
     e.preventDefault();
@@ -52,6 +60,7 @@ const PostPreview = ({
     const apiUrl = process.env.REACT_APP_API + 'download?url=' + encodeURIComponent(url) + '&filename=' + encodeURIComponent(downloadName)
     console.log(apiUrl)
     setTimeout(() => {
+      user && saveDownload(downloadData);
       window.location.href = apiUrl
       loaderbtn.className = 'loader hide';
       downloadbtn.className = 'show';
@@ -61,7 +70,6 @@ const PostPreview = ({
   async function downloadFile(url, e, mediatype) {
     e.preventDefault();
     console.log(url);
-    const downloadData = { owner, post, __typename };
     // console.log(e.currentTarget.querySelector('div').className);
     const loaderbtn = e.currentTarget.querySelector('div');
     const downloadName = makeDownloadName(10);
@@ -70,9 +78,6 @@ const PostPreview = ({
     downloadbtn.className = 'hide';
 
     const method = 'GET';
-    const min = 1;
-    const max = 100;
-    // const rand = min + Math.random() * (max - min);
 
     await Axios.request({
       url,
@@ -103,7 +108,7 @@ const PostPreview = ({
         loaderbtn.className = 'loader hide';
         downloadbtn.className = 'show';
         {
-          user && user.is_subscribed && saveDownload(downloadData);
+          user && saveDownload(downloadData);
         }
       });
   }
@@ -213,9 +218,9 @@ const PostPreview = ({
                 </a>
               ) : (
                 <a
-                  onClick={(e) => downloadFile(post.display_url, e, '.jpg')}
+                  onClick={(e) => downloadFile(post.image_url, e, '.jpg')}
                   target="__blank"
-                  href={post.display_url}
+                  href={post.image_url}
                   download
                   className="post-card__collections--card-media_download-btn"
                   data-method="get"

@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { withRouter, useHistory } from 'react-router-dom';
+import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { RaveProvider, RavePaymentButton } from 'react-ravepayment';
 import { setPaymentData, setMessage } from '../../redux/user/user.actions';
 import { connect } from 'react-redux';
@@ -18,7 +18,7 @@ const Price = ({
   opt,
   setPaymentData,
   setMessage,
-  paymentData,
+  // paymentData,
 }) => {
   const key = process.env.REACT_APP_RAVE_PUBLIC_KEY; // RavePay PUBLIC KEY
   const amountText = amount.toString().split('.');
@@ -82,20 +82,24 @@ const Price = ({
           <p>Download unlimited posts</p>
         </div>
         <div className="plan-texts">
+          <i className={opt1}></i>
+          <p>Save downloads</p>
+        </div>
+        <div className="plan-texts">
           <i className={opt2}></i>
-          <p>Dowload post by username</p>
+          <p>Download post by username</p>
         </div>
         <div className="plan-texts">
           <i className={opt3}></i>
-          <p>Dowload post by hashtag</p>
+          <p>Download post by hashtag</p>
         </div>
         <div className="plan-texts">
           <i className={opt4}></i>
-          <p>Dowload stories post</p>
+          <p>Download stories post</p>
         </div>
         <div className="plan-texts">
           <i className={opt5}></i>
-          <p>Dowload highlights post</p>
+          <p>Download highlights post</p>
         </div>
         <div className="plan-texts">
           <i className={opt6}></i>

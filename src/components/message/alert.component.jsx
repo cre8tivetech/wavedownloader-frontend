@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './message.styles.scss';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -11,17 +11,17 @@ const Alert = ({ messageData }) => {
     return (e.currentTarget.parentElement.className = 'close');
   };
 
-  const messages = () => {
+  const setMessages = useCallback(() => {
     if (messageData) {
       messageData.type === 'error'
         ? setBgcolor('red')
         : setBgcolor('var(--color-primary)');
     }
-  };
+  }, [messageData]);
 
   useEffect(() => {
-    messages();
-  }, [messages]);
+    setMessages();
+  }, [setMessages]);
 
   if (messageData) {
     return (

@@ -2,7 +2,6 @@ import React, { useState, useEffect, useCallback } from 'react';
 import LoadingBar from 'react-top-loading-bar';
 import SEO from '../../components/seo/seo.component';
 import { withRouter } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 import { forgetPasswordStart } from '../../redux/user/user.actions';
 import { connect } from 'react-redux';
@@ -27,7 +26,7 @@ const ForgotPassword = ({ forgetPasswordStart, error, isLoading }) => {
       setErrorMessage(<div className="errorMessage">{error}</div>);
     }
     startLoader();
-  }, [error]);
+  }, [error, startLoader]);
   const handleSubmit = async (event) => {
     event.preventDefault();
     // const btn = event.currentTarget.querySelector('button');

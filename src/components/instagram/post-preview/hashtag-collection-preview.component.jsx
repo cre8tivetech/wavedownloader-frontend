@@ -13,7 +13,6 @@ import { connect } from 'react-redux';
 const HashTagCollectionPreview = ({
   data,
   postType,
-  downloadName,
   fetchHashTagPostsDownload,
 }) => {
   const history = useHistory();
@@ -25,8 +24,8 @@ const HashTagCollectionPreview = ({
     related_hashtags,
   } = data.hashtag;
 
-  const [downloading, setDownloading] = useState('loader hide');
-  const [downloadBtn, setDownloadBtn] = useState('show');
+  // const [downloading, setDownloading] = useState('loader hide');
+  // const [downloadBtn, setDownloadBtn] = useState('show');
   const [loadBar, setLoadBar] = useState();
   // const []
   useEffect(() => {
@@ -128,6 +127,7 @@ const HashTagCollectionPreview = ({
                         </div>
                         <a
                           onClick={(e) => downloadFile(item.shortcode, e)}
+                          href="/posts"
                           target="__blank"
                           className="post-card__collections--card-media_download-btn"
                           data-method="get"
@@ -186,6 +186,7 @@ const HashTagCollectionPreview = ({
                         </div>
                         <a
                           onClick={(e) => downloadFile(item.shortcode, e)}
+                          href="/posts"
                           target="__blank"
                           className="post-card__collections--card-media_download-btn"
                           data-method="get"

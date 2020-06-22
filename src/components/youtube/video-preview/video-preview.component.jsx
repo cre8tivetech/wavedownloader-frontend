@@ -8,6 +8,8 @@ import { createStructuredSelector } from 'reselect';
 import YoutubeImage from '../../../assets/img/youtube.png';
 
 const PostPreview = ({
+  post_id,
+  source_link,
   uploader,
   formats,
   duration,
@@ -55,6 +57,16 @@ const PostPreview = ({
     }
   }, [setLoadBar, user]);
 
+  const downloadData = {
+    site: 'youtube',   
+    post: {
+      post_id: post_id,
+      source_link: source_link,
+      display_url: thumbnail,
+      is_video: true
+    } 
+  };
+
   const changeOption = (e) => {
     const { value } = e.currentTarget;
     console.log(value)
@@ -77,6 +89,7 @@ const PostPreview = ({
     const apiUrl = process.env.REACT_APP_API + 'download?url=' + encodeURIComponent(url) + '&filename=' + encodeURIComponent(downloadName)
     console.log(apiUrl)
     setTimeout(() => {
+      user && saveDownload(downloadData);
       window.location.href = apiUrl
       loaderbtn.className = 'loader hide';
       downloadbtn.className = 'show';

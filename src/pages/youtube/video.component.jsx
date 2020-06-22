@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-// import { connect } from "react-redux";
+import React from 'react';
 import { Route } from 'react-router-dom';
 import SEO from '../../components/seo/seo.component';
 import VideoOverviewContainer from '../../components/youtube/video-overview/video-overview.container';

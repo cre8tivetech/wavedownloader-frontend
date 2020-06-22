@@ -52,6 +52,16 @@ const PostCollectionPreview = ({
     // };
   }, [setLoadBar]);
 
+  const downloadData = {
+    site: 'instagram',   
+    post: {
+      post_id: data.post_id,
+      source_link: data.source_link,
+      display_url: data.post[0].display_url,
+      is_collection: true
+    } 
+  };
+
   const download = (e, url) => {
     e.preventDefault();
     const loaderbtn = e.currentTarget.querySelector('div');
@@ -62,6 +72,7 @@ const PostCollectionPreview = ({
     const apiUrl = process.env.REACT_APP_API + 'download?url=' + encodeURIComponent(url) + '&filename=' + encodeURIComponent(downloadName)
     console.log(apiUrl)
     setTimeout(() => {
+      user && saveDownload(downloadData);
       window.location.href = apiUrl
       loaderbtn.className = 'loader hide';
       downloadbtn.className = 'show';
@@ -76,11 +87,7 @@ const PostCollectionPreview = ({
       }, 5000);
     }
     e.preventDefault();
-    // console.log(e.currentTarget.querySelector('div').className);
-    let __typename;
-    if (post.is_video) __typename = 'GraphVideo';
-    if (!post.is_video) __typename = 'GraphImage';
-    const downloadData = { owner, post, __typename };
+
     const loaderbtn = e.currentTarget.querySelector('div');
     const downloadName = makeDownloadName(10);
     const downloadbtn = e.target;
@@ -88,9 +95,6 @@ const PostCollectionPreview = ({
     downloadbtn.className = 'hide';
 
     const method = 'GET';
-    const min = 1;
-    const max = 100;
-    const rand = min + Math.random() * (max - min);
 
     await Axios.request({
       url,
@@ -121,7 +125,7 @@ const PostCollectionPreview = ({
         loaderbtn.className = 'loader hide';
         downloadbtn.className = 'show';
         {
-          user && user.is_subscribed && saveDownload(downloadData);
+          user && saveDownload(downloadData);
         }
       });
     // return await values.add('<div className="show"></div>');
@@ -227,6 +231,7 @@ const PostCollectionPreview = ({
                       onClick={(e) =>
                         download(e, item.video_url)
                       }
+                      href={item.video_url}
                       target="__blank"
                       className="post-card__collections--card-media_download-btn"
                       data-method="get"
@@ -239,10 +244,10 @@ const PostCollectionPreview = ({
                   ) : (
                     <a
                       onClick={(e) =>
-                        downloadFile(item, item.display_url, e, '.jpg')
+                        downloadFile(item, item.image_url, e, '.jpg')
                       }
                       target="__blank"
-                      href={item.display_url}
+                      href={item.image_url}
                       className="post-card__collections--card-media_download-btn"
                       download
                       data-method="get"
