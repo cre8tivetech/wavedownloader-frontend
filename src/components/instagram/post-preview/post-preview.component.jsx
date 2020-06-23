@@ -50,13 +50,14 @@ const PostPreview = ({
     } 
   };
 
-  const download = (e, url) => {
+  const download = (e, url, ext) => {
     e.preventDefault();
+    const searchBtn = document.querySelector('.post-card__search');
     const loaderbtn = e.currentTarget.querySelector('div');
     const downloadbtn = e.target;
     loaderbtn.className = 'loader show';
     downloadbtn.className = 'hide';
-    const downloadName = makeDownloadName(10) + '.mp4';
+    const downloadName = makeDownloadName(10) + ext;
     const apiUrl = process.env.REACT_APP_API + 'download?url=' + encodeURIComponent(url) + '&filename=' + encodeURIComponent(downloadName)
     console.log(apiUrl)
     setTimeout(() => {
@@ -64,54 +65,55 @@ const PostPreview = ({
       window.location.href = apiUrl
       loaderbtn.className = 'loader hide';
       downloadbtn.className = 'show';
+      searchBtn.className = 'post-card__search show-search';
     }, 500)
   }
 
-  async function downloadFile(url, e, mediatype) {
-    e.preventDefault();
-    console.log(url);
-    // console.log(e.currentTarget.querySelector('div').className);
-    const loaderbtn = e.currentTarget.querySelector('div');
-    const downloadName = makeDownloadName(10);
-    const downloadbtn = e.target;
-    loaderbtn.className = 'loader show';
-    downloadbtn.className = 'hide';
+  // async function downloadFile(url, e, mediatype) {
+  //   e.preventDefault();
+  //   console.log(url);
+  //   // console.log(e.currentTarget.querySelector('div').className);
+  //   const loaderbtn = e.currentTarget.querySelector('div');
+  //   const downloadName = makeDownloadName(10);
+  //   const downloadbtn = e.target;
+  //   loaderbtn.className = 'loader show';
+  //   downloadbtn.className = 'hide';
 
-    const method = 'GET';
+  //   const method = 'GET';
 
-    await Axios.request({
-      url,
-      method,
-      responseType: 'blob', //important
-    })
-      .then(({ data }) => {
-        const downloadUrl = window.URL.createObjectURL(new Blob([data]));
+  //   await Axios.request({
+  //     url,
+  //     method,
+  //     responseType: 'blob', //important
+  //   })
+  //     .then(({ data }) => {
+  //       const downloadUrl = window.URL.createObjectURL(new Blob([data]));
 
-        const link = document.createElement('a');
+  //       const link = document.createElement('a');
 
-        link.href = downloadUrl;
+  //       link.href = downloadUrl;
 
-        link.setAttribute(
-          'download',
-          downloadName + mediatype
-        ); //any other extension
+  //       link.setAttribute(
+  //         'download',
+  //         downloadName + mediatype
+  //       ); //any other extension
 
-        document.body.appendChild(link);
+  //       document.body.appendChild(link);
 
-        link.click();
+  //       link.click();
 
-        link.remove();
-        if (link.remove()) {
-        }
-      })
-      .then(() => {
-        loaderbtn.className = 'loader hide';
-        downloadbtn.className = 'show';
-        {
-          user && saveDownload(downloadData);
-        }
-      });
-  }
+  //       link.remove();
+  //       if (link.remove()) {
+  //       }
+  //     })
+  //     .then(() => {
+  //       loaderbtn.className = 'loader hide';
+  //       downloadbtn.className = 'show';
+  //       {
+  //         user && saveDownload(downloadData);
+  //       }
+  //     });
+  // }
 
   function makeDownloadName(length) {
     var result = '';
@@ -205,7 +207,7 @@ const PostPreview = ({
               )}
               {post.is_video ? (
                 <a
-                  onClick={(e) => download(e, post.video_url)}
+                  onClick={(e) => download(e, post.video_url, '.mp4')}
                   href={post.video_url}
                   target="__blank"
                   className="post-card__collections--card-media_download-btn"
@@ -218,7 +220,7 @@ const PostPreview = ({
                 </a>
               ) : (
                 <a
-                  onClick={(e) => downloadFile(post.image_url, e, '.jpg')}
+                  onClick={(e) => download(e, post.image_url, '.jpg')}
                   target="__blank"
                   href={post.image_url}
                   download

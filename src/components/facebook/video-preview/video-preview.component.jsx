@@ -42,6 +42,7 @@ const PostPreview = ({
 
   const download = (e, url) => {
     e.preventDefault();
+    const searchBtn = document.querySelector('.post-card__search');
     const loaderbtn = e.currentTarget.querySelector('div');
     const downloadbtn = e.target;
     loaderbtn.className = 'loader show';
@@ -51,9 +52,10 @@ const PostPreview = ({
     console.log(apiUrl)
     setTimeout(() => {
       user && saveDownload(downloadData);
-      window.location.href = apiUrl
+      window.location.href = apiUrl;
       loaderbtn.className = 'loader hide';
       downloadbtn.className = 'show';
+      searchBtn.className = 'post-card__search show-search';
     }, 500)
   }
 

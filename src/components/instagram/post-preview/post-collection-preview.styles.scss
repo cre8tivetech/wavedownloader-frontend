@@ -662,11 +662,15 @@
   }
 
   &__search {
-    display: flex;
+    display: none;
     width: 100%;
     margin-top: 50px;
     margin-bottom: 30px;
     justify-content: center;
+  }
+
+  .show-search {
+    display: flex;
   }
 
   .single {

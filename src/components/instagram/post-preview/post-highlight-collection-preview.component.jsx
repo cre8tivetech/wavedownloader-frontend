@@ -34,69 +34,22 @@ const PostHighlightCollectionPreview = ({
     setLoadBar(100);
   }, [setLoadBar]);
 
-  const download = (e, url) => {
+  const download = (e, url, ext) => {
     e.preventDefault();
+    const searchBtn = document.querySelector('.post-card__search');
     const loaderbtn = e.currentTarget.querySelector('div');
     const downloadbtn = e.target;
     loaderbtn.className = 'loader show';
     downloadbtn.className = 'hide';
-    const downloadName = makeDownloadName(10) + '.mp4';
+    const downloadName = makeDownloadName(10) + ext;
     const apiUrl = process.env.REACT_APP_API + 'download?url=' + encodeURIComponent(url) + '&filename=' + encodeURIComponent(downloadName)
     console.log(apiUrl)
     setTimeout(() => {
       window.location.href = apiUrl
       loaderbtn.className = 'loader hide';
       downloadbtn.className = 'show';
+      searchBtn.className = 'post-card__search show-search';
     }, 500)
-  }
-
-  async function downloadFile(post, url, e, mediatype) {
-    if (!post || !url || !e || !mediatype) {
-      setMessage({ type: 'error', message: 'Post already deleted by owner' });
-      return setTimeout(() => {
-        setMessage(null);
-      }, 5000);
-    }
-    e.preventDefault();
-    // console.log(e.currentTarget.querySelector('div').className);
-    const loaderbtn = e.currentTarget.querySelector('div');
-    const downloadName = makeDownloadName(10);
-    const downloadbtn = e.target;
-    loaderbtn.className = 'loader show';
-    downloadbtn.className = 'hide';
-    const method = 'GET';
-    
-    await Axios.request({
-      url,
-      method,
-      responseType: 'blob', //important
-    })
-      .then(({ data }) => {
-        const downloadUrl = window.URL.createObjectURL(new Blob([data]));
-
-        const link = document.createElement('a');
-
-        link.href = downloadUrl;
-
-        link.setAttribute(
-          'download',
-          downloadName + mediatype
-        ); //any other extension
-
-        document.body.appendChild(link);
-
-        link.click();
-
-        link.remove();
-        if (link.remove()) {
-        }
-      })
-      .then(() => {
-        loaderbtn.className = 'loader hide';
-        downloadbtn.className = 'show';
-      });
-    // return await values.add('<div className="show"></div>');
-    // await e.target.classList.add('show');
   }
 
   function makeDownloadName(length) {
@@ -200,7 +153,7 @@ const PostHighlightCollectionPreview = ({
                   {item.is_video ? (
                     <a
                       onClick={(e) =>
-                        download(e, item.video_url)
+                        download(e, item.video_url, '.mp4')
                       }
                       href={item.video_url}
                       target="__blank"
@@ -215,7 +168,7 @@ const PostHighlightCollectionPreview = ({
                   ) : (
                     <a
                       onClick={(e) =>
-                        downloadFile(item, item.image_url, e, '.jpg')
+                        download(e, item.image_url, '.jpg')
                       }
                       href={item.image_url}
                       target="__blank"
