@@ -61,12 +61,11 @@ export const SupportedResources = () => {
           <p>facebook.com</p>
         </Link>
         <Link to="#" className="options--resources">
-          <span>Coming Soon</span>
-          <p>vimeo.com</p>
+          <p>soundcloud.com</p>
         </Link>
         <Link to="#" className="options--resources">
           <span>Coming Soon</span>
-          <p>soundcloud.com</p>
+          <p>vimeo.com</p>
         </Link>
         <Link to="#" className="options--resources">
           <span>Coming Soon</span>

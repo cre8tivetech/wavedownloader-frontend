@@ -26,6 +26,10 @@ import {
   facebookVideoStart,
   clearFacebookData,
 } from '../../redux/facebook/facebook.actions';
+import {
+  soundcloudVideoStart,
+  clearSoundCloudData,
+} from '../../redux/soundcloud/soundcloud.actions';
 import './home.styles.scss';
 import Footer from '../../components/footer/footer.component';
 
@@ -34,6 +38,8 @@ const Home = ({
   youtubeVideoStart,
   twitterVideoStart,
   facebookVideoStart,
+  soundcloudVideoStart,
+  clearSoundCloudData,
   clearInstagramData,
   clearYouTubeData,
   clearTwitterData,
@@ -54,7 +60,8 @@ const Home = ({
     clearYouTubeData();
     clearTwitterData();
     clearFacebookData();
-  }, [clearInstagramData, clearYouTubeData, clearTwitterData, clearFacebookData]);
+    clearSoundCloudData();
+  }, [clearInstagramData, clearYouTubeData, clearTwitterData, clearFacebookData, clearSoundCloudData]);
   useEffect(() => {
     startLoader();
   }, [startLoader]);
@@ -80,6 +87,10 @@ const Home = ({
       console.log('url: ', url);
       facebookVideoStart(url);
       history.push('/facebook/video');
+    } else if (checkUrl.includes('soundcloud')) {
+      console.log('url: ', url);
+      soundcloudVideoStart(url);
+      history.push('/soundcloud/video');
     } else {
       setError(true);
     }
@@ -315,9 +326,11 @@ const mapDispatchToProps = (dispatch) => ({
   youtubeVideoStart: (url) => dispatch(youtubeVideoStart(url)),
   twitterVideoStart: (url) => dispatch(twitterVideoStart(url)),
   facebookVideoStart: (url) => dispatch(facebookVideoStart(url)),
+  soundcloudVideoStart: (url) => dispatch(soundcloudVideoStart(url)),
   clearInstagramData: () => dispatch(clearInstagramData()),
   clearYouTubeData: () => dispatch(clearYouTubeData()),
   clearTwitterData: () => dispatch(clearTwitterData()),
   clearFacebookData: () => dispatch(clearFacebookData()),
+  clearSoundCloudData: () => dispatch(clearSoundCloudData()),
 });
 export default withRouter(connect(null, mapDispatchToProps)(Home));

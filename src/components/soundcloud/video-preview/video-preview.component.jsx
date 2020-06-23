@@ -5,20 +5,19 @@ import { withRouter } from 'react-router-dom';
 import { saveDownload } from '../../../redux/instagram/instagram.actions';
 import { selectCurrentUser } from '../../../redux/user/user.selector';
 import { createStructuredSelector } from 'reselect';
-import YoutubeImage from '../../../assets/img/youtube.png';
+import SoundCloudImage from '../../../assets/img/soundcloud.png';
 
 const PostPreview = ({
   post_id,
   source_link,
   uploader,
-  formats,
   duration,
   title,
   upload_date,
   thumbnail,
   view_count,
   like_count,
-  // url,
+  url,
   history,
   saveDownload,
   user,
@@ -26,9 +25,6 @@ const PostPreview = ({
   const [loadBar, setLoadBar] = useState();
   const [time, setTime] = useState();
   const [publishDate, setPublishDate] = useState();
-  const [downloadUrl, setDownloadUrl] = useState(
-    formats.find((i) => i.itag === '22')? formats.find((i) => i.itag === '22').url : formats.find((i) => i.itag === '18').url
-  );
   const [downloadExt, setDownloadExt] = useState('mp4');
 
   useEffect(() => {
@@ -58,35 +54,23 @@ const PostPreview = ({
   }, [setLoadBar, user]);
 
   const downloadData = {
-    site: 'youtube',   
+    site: 'soundcloud',   
     post: {
       post_id: post_id,
       source_link: source_link,
       display_url: thumbnail,
-      is_video: true
+      is_audio: true
     } 
   };
 
-  const changeOption = (e) => {
-    const { value } = e.currentTarget;
-    console.log(value)
-    console.log(formats.find((i) => i.itag === value).url)
-    setDownloadUrl(
-      formats.find((i) => i.itag === value).url
-    )
-    setDownloadExt(
-      formats.find((i) => i.itag === value).ext
-    )
-  };
-
-  const download = (e, url) => {
+  const download = (e, url, ext) => {
     e.preventDefault();
     const searchBtn = document.querySelector('.post-card__search');
     const loaderbtn = e.currentTarget.querySelector('div');
     const downloadbtn = e.target;
     loaderbtn.className = 'loader show';
     downloadbtn.className = 'hide';
-    const downloadName = title + '.' + downloadExt;
+    const downloadName = title + '.' + ext;
     const apiUrl = process.env.REACT_APP_API + 'download?url=' + encodeURIComponent(url) + '&filename=' + encodeURIComponent(downloadName)
     console.log(apiUrl)
     setTimeout(() => {
@@ -109,7 +93,7 @@ const PostPreview = ({
       <div className="post-card">
         <div className="post-card__detail">
           <div className="post-card__detail--image">
-            <img src={YoutubeImage} alt="" />
+            <img src={SoundCloudImage} alt="" />
             <div className="post-card__detail--image-name">
               <p>
                 <strong>{uploader}</strong>
@@ -167,12 +151,12 @@ const PostPreview = ({
                 }}
               ></div>
               <a
-                onClick={(e) => download(e, downloadUrl)}
-                href={downloadUrl}
+                onClick={(e) => download(e, url, 'mp3')}
+                href={url}
                 target="__blank"
                 className="post-card__collections--card-media_download-btn"
-                download={title + '.' + downloadExt}
-                data-type={downloadExt}
+                download={title + '.' + 'mp3'}
+                data-type={'mp3'}
               >
                 <div className="loader hide"></div>
                 <p>
@@ -181,19 +165,6 @@ const PostPreview = ({
               </a>
             </div>
           </div>
-        </div>
-        <div className="post-card__select">
-          <select
-            onChange={(e) => changeOption(e)}
-            id="format"
-            defaultValue={22}
-          >
-            {formats.map((i) => (
-              <option data-url={i.url} value={i.itag} key={i.itag}>
-                {i.ext.toUpperCase() + ' ' + i.format_note}
-              </option>
-            ))}
-          </select>
         </div>
         <div className="post-card__search">
           <button onClick={() => history.push('/')} type="submit" className="btn btn--green">

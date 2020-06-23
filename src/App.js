@@ -20,11 +20,12 @@ import PostByHashtag from './components/instagram/post-by-hashtag/post-by-hashta
 import Highlight from './components/instagram/highlight/highlight.component';
 import Stories from './components/instagram/stories/stories.component';
 import InstagramPosts from './pages/instagram/posts.component';
-import YoutubeVideo from './pages/youtube/video.component';
+import YouTubeVideo from './pages/youtube/video.component';
 import TwitterVideo from './pages/twitter/video.component';
 import GetWdBot from './pages/getWdBot/video.component';
 import GetTwitterVideo from './pages/getWdBot/get-video.component';
 import FacebookVideo from './pages/facebook/video.component';
+import SoundCloudVideo from './pages/soundcloud/video.component';
 import UserNamePosts from './pages/instagram/username-posts.component';
 import HashTagPosts from './pages/instagram/hashtag-posts.component';
 import HighlightPosts from './pages/instagram/highlight-posts.component';
@@ -77,11 +78,12 @@ const App = ({ checkUserSession, currentUser, token, location, history }) => {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/instagram/posts" component={InstagramPosts} />
-        <Route exact path="/youtube/video" component={YoutubeVideo} />
+        <Route exact path="/youtube/video" component={YouTubeVideo} />
         <Route exact path="/twitter/video" component={TwitterVideo} />
         <Route exact path="/getVideo/" component={GetTwitterVideo} />
         <Route exact path="/getWdBot/" component={GetWdBot} />
         <Route exact path="/facebook/video" component={FacebookVideo} />
+        <Route exact path="/soundcloud/video" component={SoundCloudVideo} />
         <Route
           exact
           path="/instagram/post-by-username"

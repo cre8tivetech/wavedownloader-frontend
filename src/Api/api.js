@@ -146,3 +146,11 @@ export const facebookVideoApi = async (url, token) => {
   const data = await Axios.get(apiUrl);
   return data;
 };
+
+
+// SoundCloud Route
+export const soundcloudVideoApi = async (url, token) => {
+  const apiUrl = process.env.REACT_APP_WAVE_DL_API + process.env.REACT_APP_SOUNDCLOUD_VIDEO + `?url=${url}`;
+  const data = await Axios.get(apiUrl);
+  return data;
+};
