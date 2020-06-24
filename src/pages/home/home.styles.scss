@@ -3,12 +3,25 @@
 .home-section {
   margin: 0 auto;
 
+.search-container:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  background: var(--color-card);
+  background-image: url(../../assets/img/bg.png);
+  opacity: var(--home-bg-opacity);
+}
+
   .search-container {
-    // margin: 0 auto;
-    // margin-top: 10px;
+    position: relative;
     padding: 30px 0 20px 0;
     width: 100%;
     background: var(--color-card);
+    
     // background: rgb(200,245,212);
     // background: linear-gradient(360deg, rgba(200,245,212,1) 0%, rgba(255,255,255,1) 100%);
     box-shadow: 0 0.5rem 2rem rgba(black, 0.15);
@@ -24,6 +37,8 @@
 
     // DOWNLOAD LINK
     .download {
+      position: relative; 
+      z-index: 2;
       text-align: center;
       border-radius: 1rem;
       margin-bottom: 5rem;

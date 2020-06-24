@@ -26,6 +26,8 @@ const Navigation = ({ user, signOutStart }) => {
       root.style.setProperty('--color-btn-hover', '#0b1d12');
       root.style.setProperty('--scrollbarBG', '#020503');
       root.style.setProperty('--box-shadow', 'rgba(255,255,255,0.35)');
+      root.style.setProperty('--home-bg-opacity', 0.9);
+      
     }
   };
 
@@ -60,8 +62,9 @@ const Navigation = ({ user, signOutStart }) => {
       root.style.setProperty('--color-text-4', '#e6e1e1');
       root.style.setProperty('--color-btn-hover', '#a8a8a8');
       root.style.setProperty('--scrollbarBG', '#e4ffeb');
-
       root.style.setProperty('--box-shadow', 'rgba(0,0,0,0.35)');
+      root.style.setProperty('--home-bg-opacity', 0.1);
+      
       localStorage.setItem('mode', 'light');
       setMode('light');
     } else {
@@ -74,8 +77,9 @@ const Navigation = ({ user, signOutStart }) => {
       root.style.setProperty('--color-text-4', '#b8b8b8');
       root.style.setProperty('--color-btn-hover', '#0b1d12');
       root.style.setProperty('--scrollbarBG', '#020503');
-
       root.style.setProperty('--box-shadow', 'rgba(255,255,255,0.35)');
+      root.style.setProperty('--home-bg-opacity', 0.9);
+
       localStorage.setItem('mode', 'dark');
       setMode('dark');
     }
