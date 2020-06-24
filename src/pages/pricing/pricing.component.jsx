@@ -202,7 +202,7 @@ const Pricing = ({
   // if (!paymentData)
   return (
     <div className="profile-section">
-      <SEO title="Select subscription plan" />
+      <SEO title="Select subscription plan to get access to our free basic and premium features" />
       {paymentData && (
         <div className="verifying">
           <img src={verifyImage} alt="" />

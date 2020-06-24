@@ -48,33 +48,33 @@ export const SupportedResources = () => {
     <div className="card">
       {/* <div className="feature-icon"><img src={YoutubeLogo} alt='instagram logo' /></div> */}
       <div className="options">
-        <Link to="#" className="options--resources">
+        <a target="__blank" href="https://instagram.com" className="options--active">
           <p>instagram.com</p>
-        </Link>
-        <Link to="#" className="options--resources">
+        </a>
+        <a target="__blank" href="https://youtube.com" className="options--active">
           <p>youtube.com</p>
-        </Link>
-        <Link to="#" className="options--resources">
+        </a>
+        <a target="__blank" href="https://twitter.com" className="options--active"> 
           <p>twitter.com</p>
-        </Link>
-        <Link to="#" className="options--resources">
+        </a>
+        <a target="__blank" href="https://facebook.com" className="options--active">
           <p>facebook.com</p>
-        </Link>
-        <Link to="#" className="options--resources">
+        </a>
+        <a target="__blank" href="https://soundcloud.com" className="options--active">
           <p>soundcloud.com</p>
-        </Link>
-        <Link to="#" className="options--resources">
+        </a>
+        <a target="__blank" href="https://vimeo.com" className="options--active">
           <span>Coming Soon</span>
           <p>vimeo.com</p>
-        </Link>
-        <Link to="#" className="options--resources">
+        </a>
+        <a target="__blank" href="https://dailymotion.com" className="options--active">
           <span>Coming Soon</span>
           <p>dailymotion.com</p>
-        </Link>
-        <Link to="#" className="options--resources">
+        </a>
+        <a target="__blank" href="https://reddit.com" className="options--active">
           <span>Coming Soon</span>
           <p>reddit.com</p>
-        </Link>
+        </a>
       </div>
     </div>
   )

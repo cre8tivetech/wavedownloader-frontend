@@ -13,7 +13,7 @@ const Posts = ({ fetchPostsStart, match }) => {
 
   return (
     <div className="post-section">
-      <SEO title="Download Instagram posts" />
+      <SEO title="Download Instagram posts for free" />
       <Route
         exact
         // path={`${match.path}`}

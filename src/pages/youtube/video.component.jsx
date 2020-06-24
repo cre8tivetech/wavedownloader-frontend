@@ -7,7 +7,7 @@ import Footer from '../../components/footer/footer.component';
 const Video = ({ match }) => {
   return (
     <div className="post-section">
-      <SEO title="Download YouTube video" />
+      <SEO title="Download YouTube videos for free" />
       <Route
         exact
         // path={`${match.path}`}

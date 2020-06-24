@@ -100,18 +100,24 @@ const Home = ({
   };
   return (
     <div className="home-section">
-      <SEO title="An online post and video downloader" />
+      <SEO title="Free online post and video downloader" />
       <LoadingBar
         progress={loadBar}
         height={3}
         color="linear-gradient(92deg, #038125 0%, #fbff00 100%)"
         onLoaderFinished={() => onLoaderFinished}
       />
-      <div className="home-container">
-        <div className="download card">
-          <p className="download__text download__text--1">
-            Online Post & Video Downloader
-          </p>
+      <div className="search-container">
+        <div className="download">
+          <div className="download__text">
+            <p className="download__text--1">
+              Free online post and video downloader
+            </p>
+            <p className="download__text--2">
+              Fast and convenient post and video downloader. Copy, paste and click Download button. That’s it!
+            </p>
+          </div>
+          
           <div className="download__form">
             <form onSubmit={handleSubmit} className="form">
               <div className="form__group">
@@ -123,7 +129,7 @@ const Home = ({
                   <input
                     type="text"
                     className="form__input--box"
-                    placeholder="Enter post or video URL here"
+                    placeholder="Enter post or video URL here and begin downloading..."
                     value={url}
                     onChange={handleChange}
                     id="url"
@@ -148,7 +154,9 @@ const Home = ({
             </form>
           </div>
         </div>
+      </div>
 
+      <div className="home-container">
         <div className="premium-features">
           <h3>Supported Sites</h3>
           <SupportedResources />

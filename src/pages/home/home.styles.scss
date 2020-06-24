@@ -3,9 +3,114 @@
 .home-section {
   margin: 0 auto;
 
+  .search-container {
+    // margin: 0 auto;
+    // margin-top: 10px;
+    padding: 30px 0 20px 0;
+    width: 100%;
+    background: var(--color-card);
+    // background: rgb(200,245,212);
+    // background: linear-gradient(360deg, rgba(200,245,212,1) 0%, rgba(255,255,255,1) 100%);
+    box-shadow: 0 0.5rem 2rem rgba(black, 0.15);
+
+    @include respond(tabPort) {
+      box-shadow: 0 0.2rem 1rem rgba(black, 0.15);
+    }
+
+
+    &>* {
+      margin-top: 4rem;
+    }
+
+    // DOWNLOAD LINK
+    .download {
+      text-align: center;
+      border-radius: 1rem;
+      margin-bottom: 5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      // padding: 20px 0;
+      // box-shadow: 0 0.5rem 2rem rgba(black, 0.15);
+
+      @include respond(tabPort) {
+        margin-bottom: 3rem;
+        // box-shadow: 0 0.2rem 1rem rgba(black, 0.15);
+      }
+
+      @include respond(phone) {
+        margin-bottom: 1rem;
+      }
+
+      &__form {
+        margin: 0 auto;
+        width: 40%;
+
+        @include respond(tabLand) {
+          width: 70%;
+        }
+    
+        @include respond(tabPort) {
+          width: 70%;
+        }
+    
+        @include respond(phone) {
+          width: 90%;
+        }
+      }
+
+
+      &__text {
+        position: relative;
+        // font-family: Helvetica;
+        margin: 0 auto;
+        padding-bottom: 20px;
+
+        &--1 {
+          font-size: 2.5rem;
+          font-weight: bold;
+          padding: 0 20px 0 20px;
+          margin-bottom: 0;
+          text-transform: uppercase;
+
+          @include respond(tabLand) {
+            font-size: 2.2rem;
+          }
+
+          @include respond(tabPort) {
+            font-size: 2rem;
+          }
+
+          @include respond(phone) {
+            font-size: 1.8rem;
+          }
+        }
+
+        &--2 {
+          font-size: 1.8rem;
+          // font-weight: bold;
+          padding: 0 20px 0 20px;
+          // text-transform: uppercase;
+
+          @include respond(tabLand) {
+            font-size: 1.6rem;
+          }
+
+          @include respond(tabPort) {
+            font-size: 1rem;
+          }
+
+          @include respond(phone) {
+            font-size: 1.4rem;
+          }
+        }
+      }
+    }
+  }
+
   .home-container {
     margin: 0 auto;
-    margin-top: 80px;
+    margin-top: 10px;
     width: 70%;
 
     @include respond(tabLand) {
@@ -21,16 +126,18 @@
     }
 
     &>* {
-      margin-top: 4rem;
+      margin-top: 8rem;
     }
 
 
     // DOWNLOAD OPTIONS
     .premium-features {
+      // margin-top: 20px;
 
       h3 {
         text-align: center;
         font-size: 2rem;
+        text-transform: uppercase;
 
         @include respond(tabLand) {
           font-size: 1.7rem;
@@ -204,9 +311,10 @@
         position: relative;
         font-size: 2.5rem;
         font-weight: bold;
-        font-family: Helvetica;
+        // font-family: Helvetica;
         margin: 5px auto;
-        padding-bottom: 10px;
+        padding-bottom: 20px;
+        text-transform: uppercase;
 
         @include respond(tabLand) {
           font-size: 2.2rem;

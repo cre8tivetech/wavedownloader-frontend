@@ -2,7 +2,7 @@ import React from "react";
 import { Helmet } from "react-helmet";
 
 const SEO = ({ title, lang }) => {
-  const metaDescription = "An online post and video downloader | Download Instagram posts, YouTube videos and more";
+  const metaDescription = "Free online post and video downloader to download Instagram posts, YouTube videos, Twitter videos and Gifs, Facebook videos, SoundCloud audios and more. Mention @getWdBot in a video or gif tweet to get download links of a tweet video or gif.";
   const siteTitle = "WaveDownloader";
   const author = "@wavedownloader";
 

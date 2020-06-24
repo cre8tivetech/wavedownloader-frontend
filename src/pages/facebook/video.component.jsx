@@ -7,7 +7,7 @@ import Footer from '../../components/footer/footer.component';
 const Video = ({ match }) => {
   return (
     <div className="post-section">
-      <SEO title="Download Facebook video" />
+      <SEO title="Download Facebook videos for free" />
       <Route
         exact
         component={VideoOverviewContainer}
