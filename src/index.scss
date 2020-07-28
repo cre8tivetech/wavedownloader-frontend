@@ -72,9 +72,9 @@ body::-webkit-scrollbar-thumb {
 }
 
 #dark-overlay{
-  position: absolute;
+  position: fixed;
   z-index: 3;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.8);
   display: none;

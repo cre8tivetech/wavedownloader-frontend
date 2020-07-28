@@ -18,7 +18,7 @@ const Navigation = ({ user, signOutStart }) => {
       toggle.classList.add('dark-mode');
       root.style.setProperty('--color-bg', '#0c1d13');
       root.style.setProperty('--color-bg-2', '#050c07');
-      root.style.setProperty('--color-border', '#636566');
+      root.style.setProperty('--color-border', '#05da3e71');
       root.style.setProperty('--color-light', '#0c1d13');
       root.style.setProperty('--color-card', '#09180e');
       root.style.setProperty('--color-text-1', '#ffffff');
@@ -34,15 +34,11 @@ const Navigation = ({ user, signOutStart }) => {
 
   const removeOverlay = () => {
     document.getElementById('dark-overlay').style.display = '';
-    document.body.style.position = '';
-    document.body.style.top = '';
     document.getElementById('openSidebarMenu').checked = false;
   }
 
   const displayOverlay = () => {
     document.getElementById('dark-overlay').style.display = 'block';
-    document.body.style.position = 'fixed';
-    document.body.style.top = `-${window.scrollY}px`;
   }
 
   const navToggle = (e) => {
@@ -97,7 +93,7 @@ const Navigation = ({ user, signOutStart }) => {
     } else {
       root.style.setProperty('--color-bg', '#0c1d13');
       root.style.setProperty('--color-bg-2', '#050c07');
-      root.style.setProperty('--color-border', '#636566');
+      root.style.setProperty('--color-border', '#05da3e71');
       root.style.setProperty('--color-light', '#0c1d13');
       root.style.setProperty('--color-card', '#09180e');
       root.style.setProperty('--color-text-1', '#ffffff');
