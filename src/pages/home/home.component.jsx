@@ -114,7 +114,7 @@ const Home = ({
               Free online post and video downloader
             </p>
             <p className="download__text--2">
-              Fast and convenient post and video downloader. Copy, paste and click Download button. That’s it!
+              Copy paste and click the Download button. That’s it!
             </p>
           </div>
           
@@ -141,7 +141,7 @@ const Home = ({
                 </div>
                 {error && (
                   <span className="url-error">
-                    wavedownloader does not support downloading from this
+                    WaveDownloader does not support downloading from this
                     website
                   </span>
                 )}

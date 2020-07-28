@@ -73,6 +73,7 @@ const App = ({ checkUserSession, currentUser, token, location, history }) => {
     <div className="App">
       {/* {location.pathname !== '/confirmation/' && <Header />} */}
       {headerExclusionArray.indexOf(location.pathname) < 0 && <Header />}
+      <div id="dark-overlay"></div>
       <Alert />
       <Message />
       <Switch>

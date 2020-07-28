@@ -18,9 +18,10 @@ const Navigation = ({ user, signOutStart }) => {
       toggle.classList.add('dark-mode');
       root.style.setProperty('--color-bg', '#0c1d13');
       root.style.setProperty('--color-bg-2', '#050c07');
+      root.style.setProperty('--color-border', '#636566');
       root.style.setProperty('--color-light', '#0c1d13');
       root.style.setProperty('--color-card', '#09180e');
-      root.style.setProperty('--color-text-1', '#a3a3a3');
+      root.style.setProperty('--color-text-1', '#ffffff');
       root.style.setProperty('--color-text-2', '#cccccc');
       root.style.setProperty('--color-text-4', '#b8b8b8');
       root.style.setProperty('--color-btn-hover', '#0b1d12');
@@ -31,14 +32,39 @@ const Navigation = ({ user, signOutStart }) => {
     }
   };
 
+  const removeOverlay = () => {
+    document.getElementById('dark-overlay').style.display = '';
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.getElementById('openSidebarMenu').checked = false;
+  }
+
+  const displayOverlay = () => {
+    document.getElementById('dark-overlay').style.display = 'block';
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${window.scrollY}px`;
+  }
+
   const navToggle = (e) => {
-    let menu = document.getElementById('openSidebarMenu').checked;
-    if (menu) document.getElementById('openSidebarMenu').checked = false;
+    console.log(e.target.checked)
+    let menu = e.target.checked;
+    if (menu) {
+      displayOverlay();
+    }
+    if (!menu) {
+      removeOverlay();
+    }
     // let ht = window
     //   .getComputedStyle(elem, null)
     //   .getPropertyValue('transform');
   };
 
+  useEffect(() => {
+    document.getElementById('dark-overlay')
+      .addEventListener('click', removeOverlay);
+    // document.getElementById('openSidebarMenu')
+    //   .addEventListener('click', navToggle);
+  }, []);
   useEffect(() => checkMode(), []);
   const signOut = () => {
     setLogout('Logging out...');
@@ -55,6 +81,7 @@ const Navigation = ({ user, signOutStart }) => {
     if (mode === 'dark') {
       root.style.setProperty('--color-bg', '#fcfcfc');
       root.style.setProperty('--color-bg-2', '#eeeeee');
+      root.style.setProperty('--color-border', '#c0c8cb');
       root.style.setProperty('--color-light', '#ffffff');
       root.style.setProperty('--color-card', '#f4f2f2');
       root.style.setProperty('--color-text-1', '#777777');
@@ -70,9 +97,10 @@ const Navigation = ({ user, signOutStart }) => {
     } else {
       root.style.setProperty('--color-bg', '#0c1d13');
       root.style.setProperty('--color-bg-2', '#050c07');
+      root.style.setProperty('--color-border', '#636566');
       root.style.setProperty('--color-light', '#0c1d13');
       root.style.setProperty('--color-card', '#09180e');
-      root.style.setProperty('--color-text-1', '#a3a3a3');
+      root.style.setProperty('--color-text-1', '#ffffff');
       root.style.setProperty('--color-text-2', '#cccccc');
       root.style.setProperty('--color-text-4', '#b8b8b8');
       root.style.setProperty('--color-btn-hover', '#0b1d12');
@@ -88,7 +116,7 @@ const Navigation = ({ user, signOutStart }) => {
   return (
     // <!-- NAV MENU -->
     <div className="navigation">
-      <input type="checkbox" className="openSidebarMenu" id="openSidebarMenu" />
+      <input type="checkbox" onChange={(e) => navToggle(e)} className="openSidebarMenu" id="openSidebarMenu" />
       <label
         htmlFor="openSidebarMenu"
         className="navigation__sidebarIconToggle"
@@ -100,8 +128,11 @@ const Navigation = ({ user, signOutStart }) => {
       <div className="navigation__sidebarMenu" id="menu">
         <ul className="navigation__sidebarMenu--inner">
           {user ? (
-            <li onClick={(e) => navToggle(e)}>
-              <Link className="profile" to="/profile">
+            <li>
+              <Link 
+                onClick={removeOverlay} 
+                className="profile" to="/profile"
+              >
                 <div>{user.full_name.charAt(0).toUpperCase()}</div>
                 <p>
                   {user.full_name} <small>{user.email}</small>
@@ -109,8 +140,11 @@ const Navigation = ({ user, signOutStart }) => {
               </Link>
             </li>
           ) : (
-            <li onClick={(e) => navToggle(e)}>
-              <Link className="login" to="/signin">
+            <li>
+              <Link 
+                onClick={removeOverlay} 
+                className="login" to="/signin"
+              >
                 <i
                   className="fad fa-lock"
                   style={{ color: 'var(--color-primary)' }}
@@ -120,8 +154,11 @@ const Navigation = ({ user, signOutStart }) => {
             </li>
           )}
 
-          <li onClick={(e) => navToggle(e)}>
-            <Link className="links" to="/">
+          <li>
+            <Link 
+              onClick={removeOverlay} 
+              className="links" to="/"
+            >
               <i
                 className="fad fa-home"
                 style={{ color: 'var(--color-primary)' }}
@@ -129,8 +166,11 @@ const Navigation = ({ user, signOutStart }) => {
               <p>Home</p>
             </Link>
           </li>
-          <li onClick={(e) => navToggle(e)}>
-            <Link className="links" to="/profile">
+          <li>
+            <Link 
+              onClick={removeOverlay} 
+              className="links" to="/profile"
+            >
               <i
                 className="fad fa-user"
                 style={{ color: 'var(--color-primary)' }}
@@ -138,8 +178,11 @@ const Navigation = ({ user, signOutStart }) => {
               <p>Profile</p>
             </Link>
           </li>
-          <li onClick={(e) => navToggle(e)}>
-            <Link className="links" to="/pricing">
+          <li>
+            <Link 
+              onClick={removeOverlay} 
+              className="links" to="/pricing"
+            >
               <i
                 className="fad fa-usd-circle"
                 style={{ color: 'var(--color-primary)' }}

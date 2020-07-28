@@ -11,24 +11,29 @@
   left: 0;
   right: 0;
   z-index: 1;
-  background: var(--color-card);
+  // background: var(--bg-card);
   background-image: url(../../assets/img/bg.png);
-  opacity: var(--home-bg-opacity);
+  background-size: cover;
+  background-position: center;
+  opacity: 0.8;
+  // opacity: var(--home-bg-opacity);
 }
 
   .search-container {
     position: relative;
     padding: 30px 0 20px 0;
     width: 100%;
-    background: var(--color-card);
+    // background: var(--bg-card);
+    border: 0 solid var(--color-border);
+    border-width: .1rem 0;
     
     // background: rgb(200,245,212);
     // background: linear-gradient(360deg, rgba(200,245,212,1) 0%, rgba(255,255,255,1) 100%);
-    box-shadow: 0 0.5rem 2rem rgba(black, 0.15);
+    // box-shadow: 0 0.5rem 2rem rgba(black, 0.15);
 
-    @include respond(tabPort) {
-      box-shadow: 0 0.2rem 1rem rgba(black, 0.15);
-    }
+    // @include respond(tabPort) {
+    //   box-shadow: 0 0.2rem 1rem rgba(black, 0.15);
+    // }
 
 
     &>* {
@@ -169,12 +174,14 @@
 
       .card {
         margin-bottom: 20px;
-        box-shadow: 0 0.5rem 2rem rgba(black, 0.15);
+        border: 0 solid var(--color-border);
+        border-width: .1rem;
+        // box-shadow: 0 0.5rem 2rem rgba(black, 0.15);
 
-        @include respond(phone) {
-          box-shadow: 0 0.2rem 1rem rgba(black, 0.15);
+        // @include respond(phone) {
+        //   box-shadow: 0 0.2rem 1rem rgba(black, 0.15);
 
-        }
+        // }
 
         .feature-icon {
           display: flex;
@@ -310,11 +317,13 @@
       border-radius: 1rem;
       margin-bottom: 5rem;
       padding: 20px 0;
-      box-shadow: 0 0.5rem 2rem rgba(black, 0.15);
+      border: 0 solid var(--color-border);
+      border-width: .1rem 0;
+      // box-shadow: 0 0.5rem 2rem rgba(black, 0.15);
 
       @include respond(tabPort) {
         margin-bottom: 3rem;
-        box-shadow: 0 0.2rem 1rem rgba(black, 0.15);
+        // box-shadow: 0 0.2rem 1rem rgba(black, 0.15);
       }
 
       @include respond(phone) {
@@ -369,11 +378,13 @@
 
 .update-faq .update__content p {
   color: var(--color-bg);
-  box-shadow: 0 0.5rem 2rem rgba(black, 0.15);
+  // border: 0 solid var(--color-border);
+  // border-width: .1rem;
+  // box-shadow: 0 0.5rem 2rem rgba(black, 0.15);
 
-  @include respond(phone) {
-    box-shadow: 0 0.2rem 1rem rgba(black, 0.15);
-  }
+  // @include respond(phone) {
+  //   box-shadow: 0 0.2rem 1rem rgba(black, 0.15);
+  // }
 }
 
 .url-error {

@@ -5,6 +5,8 @@
   margin: 0 auto;
   padding: 3rem;
   justify-content: center;
+  border: 0 solid var(--color-border);
+  border-width: .1rem;
 
   @include respond(tabPort) {
     padding: 0.5rem;
