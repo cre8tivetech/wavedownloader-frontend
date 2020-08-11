@@ -1,6 +1,8 @@
 * {
   box-sizing: border-box;
 }
+*::-moz-selection { color: #fff; background: #05af32;}
+*::selection { color: #fff; background: #05af32;}
 
 html {
   font-size: 62.5%;
