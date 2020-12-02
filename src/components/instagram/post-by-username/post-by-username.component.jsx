@@ -49,19 +49,19 @@ const PostByUserName = ({ fetchUserNamePostsAdd, checkUserSession }) => {
         <Link to="/" className="btn">
           <p>Single Post</p>
         </Link>
-        <Link to="/post-by-username" className="btn options--active">
+        <Link to="/instagram/post-by-username" className="btn options--active">
           <span>Pro</span>
           <p>Posts By Username</p>
         </Link>
-        <Link to="/post-by-hashtag" className="btn">
+        <Link to="/instagram/post-by-hashtag" className="btn">
           <span>Pro</span>
           <p>Posts By Hashtag</p>
         </Link>
-        <Link to="/highlight" className="btn">
+        <Link to="/instagram/highlight" className="btn">
           <span>Pro</span>
           <p>Highlight</p>
         </Link>
-        <Link to="/stories" className="btn">
+        <Link to="/instagram/stories" className="btn">
           <span>Pro</span>
           <p>Stories</p>
         </Link>

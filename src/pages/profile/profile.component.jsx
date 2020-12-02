@@ -46,30 +46,30 @@ const Profile = ({
   const onLoaderFinished = () => {
     setLoadBar(0);
   };
-  const subDaysRemaining = useCallback(() => {
-    if (user.is_subscribed) {
-      //NOTE  DATE CONSTRUCTOR USES 0 FOR JAN, (THEREFORE JAN = JAN - 1)
-      const expDate = subscription.expired_at.split('-');
-      const nowDate = new Date(Date.now());
-      const thisDate = new Date(Date.now());
-      const expiredDate = new Date(
-        expDate[0],
-        expDate[1] - 1,
-        expDate[2].split('T')[0]
-      );
-      const oneDay = 24 * 3600 * 1000; // hours*minutes*seconds*milliseconds
-      const diffDays = Math.round(Math.abs((thisDate - expiredDate) / oneDay));
-      // var timeDiff = Math.abs(thisDate.getTime() - expiredDate.getTime());
-      // var diffDays = Math.ceil(timeDiff / (24 * 3600 * 1000));
-      setSubDays(diffDays);
-    } else {
-      setSubDays(0);
-    }
-  }, []);
+  // const subDaysRemaining = useCallback(() => {
+  //   if (user.is_subscribed) {
+  //     //NOTE  DATE CONSTRUCTOR USES 0 FOR JAN, (THEREFORE JAN = JAN - 1)
+  //     const expDate = subscription.expired_at.split('-');
+  //     const nowDate = new Date(Date.now());
+  //     const thisDate = new Date(Date.now());
+  //     const expiredDate = new Date(
+  //       expDate[0],
+  //       expDate[1] - 1,
+  //       expDate[2].split('T')[0]
+  //     );
+  //     const oneDay = 24 * 3600 * 1000; // hours*minutes*seconds*milliseconds
+  //     const diffDays = Math.round(Math.abs((thisDate - expiredDate) / oneDay));
+  //     // var timeDiff = Math.abs(thisDate.getTime() - expiredDate.getTime());
+  //     // var diffDays = Math.ceil(timeDiff / (24 * 3600 * 1000));
+  //     setSubDays(diffDays);
+  //   } else {
+  //     setSubDays(0);
+  //   }
+  // }, []);
   useEffect(() => {
     // getDownload();
     checkUserSession();
-    subDaysRemaining();
+    // subDaysRemaining();
     setLoading(false);
     startLoader();
     // console.log(download.length);
@@ -77,7 +77,7 @@ const Profile = ({
     if (!isLoading) {
       setConfirmText('Resend Confirmation Email');
     }
-  }, [checkUserSession, isLoading, subDaysRemaining, setLoading, startLoader]);
+  }, [checkUserSession, isLoading, setLoading, startLoader]);
 
   const signOut = () => {
     setLogout('Logging out...');
@@ -216,7 +216,7 @@ const Profile = ({
               />
               <p>Subscription Time</p>
               <strong style={{ color: 'var(--color-danger-1)' }}>
-                {!user.is_subscribed ? 'NO' : subDays + ' Days'}
+                {user.is_subscribed ? 'NO' : subDays + ' Days'}
               </strong>
             </div>
             <div className="profile-section__box--overview_container_box">
