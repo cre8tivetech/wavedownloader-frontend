@@ -98,6 +98,12 @@ const PostPreview = ({
     }, 500)
   }
 
+  const showNoAudio = (itag) => {
+    if (itag !== '22' && itag !== '18' && itag !== '140')
+      return "🔇"
+    else return ""
+  }
+
   return (
     <div className="post-section">
       <LoadingBar
@@ -154,6 +160,24 @@ const PostPreview = ({
             </div>
           </div>
         </div>
+
+        <div className="post-card__select">
+          <select
+            onChange={(e) => changeOption(e)}
+            id="format"
+            defaultValue={formats.find((i) => i.itag === '22')? 22: 18}
+          >
+            {formats.map((i) => (
+              <>
+                <option data-url={i.url} value={i.itag} key={i.itag}>
+                  {i.ext === 'm4a' ? i.ext.toUpperCase() + ' ' + 'audio' : i.ext.toUpperCase() + ' ' + i.format_note}
+                  {"  " + showNoAudio(i.itag)}
+                </option>
+              </>
+            ))}
+          </select>
+        </div>
+
         <div className="post-card__collections single">
           <div className="post-card__collections--card">
             <div className="post-card__collections--card-media">
@@ -182,19 +206,7 @@ const PostPreview = ({
             </div>
           </div>
         </div>
-        <div className="post-card__select">
-          <select
-            onChange={(e) => changeOption(e)}
-            id="format"
-            defaultValue={22}
-          >
-            {formats.map((i) => (
-              <option data-url={i.url} value={i.itag} key={i.itag}>
-                {i.ext.toUpperCase() + ' ' + i.format_note}
-              </option>
-            ))}
-          </select>
-        </div>
+        
         <div className="post-card__search">
           <button onClick={() => history.push('/')} type="submit" className="btn btn--green">
           <i className="fad fa-search" style={{ color: 'var(--color-text)' }}></i> Search Again
