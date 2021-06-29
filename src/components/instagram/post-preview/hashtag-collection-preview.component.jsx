@@ -17,12 +17,9 @@ const HashTagCollectionPreview = ({
 }) => {
   const history = useHistory();
   const { top_post, most_recent_post } = data;
-  const {
-    name,
-    profile_pic_url,
-    hashtag_count,
-    related_hashtags,
-  } = data.hashtag;
+  console.log('top_post: ', top_post);
+  const { name, profile_pic_url, hashtag_count, related_hashtags } =
+    data.hashtag;
 
   // const [downloading, setDownloading] = useState('loader hide');
   // const [downloadBtn, setDownloadBtn] = useState('show');

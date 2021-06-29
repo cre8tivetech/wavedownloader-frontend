@@ -18,7 +18,7 @@
 
     margin: 0 auto;
 
-    &>* {
+    & > * {
       margin: 2rem;
 
       @include respond(tabPort) {
@@ -298,7 +298,7 @@
       color: white;
       padding: 8px;
       width: 200px;
-      
+
       border: none;
       font-size: 1.6rem;
       box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
@@ -321,14 +321,11 @@
       option {
         background-color: rgba(0, 0, 0, 0.507);
         padding: 30px;
-
       }
-      
     }
 
-
     &::before {
-      content: "\f13a";
+      content: '\f13a';
       font-family: FontAwesome;
       position: absolute;
       top: 0;
@@ -458,7 +455,7 @@
             padding: 0.1rem;
             margin: 0.7rem;
 
-            // width: 2rem;   
+            // width: 2rem;
             @include respond(tabPort) {
               margin: 0.5rem;
             }
@@ -468,7 +465,7 @@
             }
 
             img {
-              background-color: var(--color-dark-1);
+              // background-color: var(--color-dark-1);
               float: left;
               padding: 0.1rem;
               height: 3rem;
@@ -483,15 +480,12 @@
                 margin: 0.1rem;
                 height: 2.2rem;
               }
-
             }
 
             p {
               color: var(--color-primary);
               padding-left: 1rem;
             }
-
-
           }
 
           .layer-icon {
@@ -579,7 +573,6 @@
             }
           }
         }
-
       }
     }
   }

@@ -53,13 +53,13 @@ const PostCollectionPreview = ({
   }, [setLoadBar]);
 
   const downloadData = {
-    site: 'instagram',   
+    site: 'instagram',
     post: {
       post_id: data.post_id,
       source_link: data.source_link,
       display_url: data.post[0].display_url,
-      is_collection: true
-    } 
+      is_collection: true,
+    },
   };
 
   const download = (e, url, ext) => {
@@ -70,16 +70,21 @@ const PostCollectionPreview = ({
     loaderbtn.className = 'loader show';
     downloadbtn.className = 'hide';
     const downloadName = makeDownloadName(10) + ext;
-    const apiUrl = process.env.REACT_APP_API + 'download?url=' + encodeURIComponent(url) + '&filename=' + encodeURIComponent(downloadName)
-    console.log(apiUrl)
+    const apiUrl =
+      process.env.REACT_APP_API +
+      'download?url=' +
+      encodeURIComponent(url) +
+      '&filename=' +
+      encodeURIComponent(downloadName);
+    console.log(apiUrl);
     setTimeout(() => {
       user && saveDownload(downloadData);
       window.location.href = apiUrl;
       loaderbtn.className = 'loader hide';
       downloadbtn.className = 'show';
       searchBtn.className = 'post-card__search show-search';
-    }, 500)
-  }
+    }, 500);
+  };
 
   function makeDownloadName(length) {
     var result = '';
@@ -178,9 +183,7 @@ const PostCollectionPreview = ({
                   )}
                   {item.is_video ? (
                     <a
-                      onClick={(e) =>
-                        download(e, item.video_url, '.mp4')
-                      }
+                      onClick={(e) => download(e, item.video_url, '.mp4')}
                       href={item.video_url}
                       target="__blank"
                       className="post-card__collections--card-media_download-btn"
@@ -193,9 +196,7 @@ const PostCollectionPreview = ({
                     </a>
                   ) : (
                     <a
-                      onClick={(e) =>
-                        download(e, item.image_url, '.jpg')
-                      }
+                      onClick={(e) => download(e, item.image_url, '.jpg')}
                       target="__blank"
                       href={item.image_url}
                       className="post-card__collections--card-media_download-btn"
@@ -214,8 +215,16 @@ const PostCollectionPreview = ({
             ))}
         </div>
         <div className="post-card__search">
-          <button onClick={() => history.push('/')} type="submit" className="btn btn--green">
-          <i className="fad fa-search" style={{ color: 'var(--color-text)' }}></i> Search Again
+          <button
+            onClick={() => history.push('/')}
+            type="submit"
+            className="btn btn--green"
+          >
+            <i
+              className="fad fa-search"
+              style={{ color: 'var(--color-text)' }}
+            ></i>{' '}
+            Search Again
           </button>
         </div>
       </div>
