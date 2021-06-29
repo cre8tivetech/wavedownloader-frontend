@@ -23,6 +23,11 @@ import sub_time from '../../assets/sale(1).svg';
 import plan from '../../assets/subscription(1).svg';
 // import { getDownload } from '../../redux/instagram/instagram.actions';
 import Footer from '../../components/footer/footer.component';
+import {
+  ProFeaturesInstagram,
+  ProFeaturesYoutube,
+  SupportedResources,
+} from '../../components/pro-features/pro-features.component';
 
 const Profile = ({
   user,
@@ -216,7 +221,7 @@ const Profile = ({
               />
               <p>Subscription Time</p>
               <strong style={{ color: 'var(--color-danger-1)' }}>
-                {user.is_subscribed ? 'NO' : subDays + ' Days'}
+                {!user.is_subscribed ? 'No Subscription' : subDays + ' Days'}
               </strong>
             </div>
             <div className="profile-section__box--overview_container_box">
@@ -232,6 +237,19 @@ const Profile = ({
             </div>
           </div>
         </div>
+      </div>
+
+      <div className="home-container">
+        <div className="premium-features">
+          <h3>Features</h3>
+          <ProFeaturesInstagram />
+          <ProFeaturesYoutube />
+        </div>
+
+        {/* <div className="premium-features">
+          <h3>Supported Sites</h3>
+          <SupportedResources />
+        </div> */}
       </div>
       <Footer />
     </div>

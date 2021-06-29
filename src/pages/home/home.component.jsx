@@ -61,7 +61,13 @@ const Home = ({
     clearTwitterData();
     clearFacebookData();
     clearSoundCloudData();
-  }, [clearInstagramData, clearYouTubeData, clearTwitterData, clearFacebookData, clearSoundCloudData]);
+  }, [
+    clearInstagramData,
+    clearYouTubeData,
+    clearTwitterData,
+    clearFacebookData,
+    clearSoundCloudData,
+  ]);
   useEffect(() => {
     startLoader();
   }, [startLoader]);
@@ -117,7 +123,7 @@ const Home = ({
               Copy paste and click the Download button. That’s it!
             </p>
           </div>
-          
+
           <div className="download__form">
             <form onSubmit={handleSubmit} className="form">
               <div className="form__group">
@@ -158,14 +164,14 @@ const Home = ({
 
       <div className="home-container">
         <div className="premium-features">
-          <h3>Supported Sites</h3>
-          <SupportedResources />
+          <h3>Features</h3>
+          <ProFeaturesInstagram />
+          <ProFeaturesYoutube />
         </div>
 
         <div className="premium-features">
-          <h3>Premium Features</h3>
-          <ProFeaturesInstagram />
-          <ProFeaturesYoutube />
+          <h3>Supported Sites</h3>
+          <SupportedResources />
         </div>
 
         <div className="update-faq card">
@@ -180,7 +186,7 @@ const Home = ({
               </p>
             </div>
             <div className="update__box">
-            <div className="update__content update__content--updates">
+              <div className="update__content update__content--updates">
                 <p>
                   <strong>
                     <i
@@ -189,8 +195,8 @@ const Home = ({
                     ></i>
                     Live (16 June 2020):
                   </strong>
-                  Hurray!!, WaveDownloader can download
-                  Twitter videos and Facebook videos .
+                  Hurray!!, WaveDownloader can download Twitter videos and
+                  Facebook videos .
                 </p>
               </div>
               <div className="update__content update__content--greetings">

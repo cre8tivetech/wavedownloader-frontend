@@ -1,0 +1,121 @@
+@import '../../themes/mixins.scss';
+
+.options-ig {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  & > * {
+    position: relative;
+    border-radius: 10px;
+    margin: 1rem 2rem;
+    padding: 0 4rem;
+    background-color: var(--color-light);
+    box-shadow: 0 0.5rem 2rem rgba(black, 0.1);
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    font-weight: 700;
+
+    @include respond(tabLand) {
+      font-size: 1.3rem;
+    }
+
+    @include respond(tabPort) {
+      font-size: 1.2rem;
+      padding: 0 3rem;
+      margin: 1rem;
+      font-weight: 600;
+    }
+
+    @include respond(phone) {
+      font-size: 1rem;
+      padding: 0 1rem;
+      margin: 1rem;
+      font-weight: 600;
+    }
+
+    &:hover {
+      background-color: var(--color-btn-hover);
+      color: white;
+
+      p {
+        color: white;
+      }
+    }
+
+    span {
+      position: absolute;
+      top: 0.5rem;
+      right: 3rem;
+      letter-spacing: 0.1rem;
+      font-size: 0.7rem;
+
+      @include respond(phone) {
+        font-size: 0.5rem;
+        top: 0.2rem;
+        right: 0.5rem;
+      }
+    }
+
+    p {
+      color: var(--color-text-1);
+    }
+  }
+
+  &--active {
+    background-color: var(--color-primary);
+
+    p,
+    span {
+      color: var(--color-light);
+    }
+
+    &:hover {
+      background-color: var(--color-primary);
+    }
+  }
+
+  &--disabled {
+    background-color: var(--color-btn-hover);
+    color: var(--color-text-3);
+    cursor: default;
+
+    p {
+      color: var(--color-text-3);
+    }
+
+    // &:hover {
+    //   background-color: var(--color-btn-hover);
+    //   color: var(--color-text-2);
+
+    //   p {
+    //     color: var(--color-text-1);
+    //   }
+    // }
+  }
+
+  &--resources {
+    background-color: var(--color-btn-hover);
+    color: var(--color-text-4);
+    cursor: default;
+
+    p {
+      color: var(--color-text-4);
+    }
+
+    // &:hover {
+    //   background-color: var(--color-);
+    //   color: white;
+
+    //   p {
+    //     color: white;
+    //   }
+    // }
+  }
+
+  .update__box {
+    & > * {
+      color: white;
+    }
+  }
+}

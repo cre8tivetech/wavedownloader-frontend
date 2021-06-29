@@ -96,17 +96,17 @@ const App = ({ checkUserSession, currentUser, token, location, history }) => {
                   state: { error: 'You need to Signin or Signup first' },
                 }}
               />
-            ) : !currentUser.is_subscribed ? (
-              <Redirect
-                to={{
-                  pathname: '/pricing',
-                  state: {
-                    error:
-                      'You have to make sure your email as being confirmed, and also subscribe to one of our paid package to have access to post-by-username',
-                  },
-                }}
-              />
             ) : (
+              // ) : !currentUser.is_subscribed ? (
+              //   <Redirect
+              //     to={{
+              //       pathname: '/pricing',
+              //       state: {
+              //         error:
+              //           'You have to make sure your email as being confirmed, and also subscribe to one of our paid package to have access to post-by-username',
+              //       },
+              //     }}
+              //   />
               <PostByUsername />
             )
           }
@@ -123,17 +123,17 @@ const App = ({ checkUserSession, currentUser, token, location, history }) => {
                   state: { error: 'You need to Signin or Signup first' },
                 }}
               />
-            ) : !currentUser.is_subscribed ? (
-              <Redirect
-                to={{
-                  pathname: '/pricing',
-                  state: {
-                    error:
-                      'You have to make sure your email as being confirmed, and also subscribe to one of our paid package to have access to post-by-hashtag',
-                  },
-                }}
-              />
             ) : (
+              // ) : !currentUser.is_subscribed ? (
+              //   <Redirect
+              //     to={{
+              //       pathname: '/pricing',
+              //       state: {
+              //         error:
+              //           'You have to make sure your email as being confirmed, and also subscribe to one of our paid package to have access to post-by-hashtag',
+              //       },
+              //     }}
+              //   />
               <PostByHashtag />
             )
           }
@@ -150,17 +150,17 @@ const App = ({ checkUserSession, currentUser, token, location, history }) => {
                   state: { error: 'You need to Signin or Signup first' },
                 }}
               />
-            ) : !currentUser.is_subscribed ? (
-              <Redirect
-                to={{
-                  pathname: '/pricing',
-                  state: {
-                    error:
-                      'You have to make sure your email as being confirmed, and also subscribe to one of our paid package to have access to highlights',
-                  },
-                }}
-              />
             ) : (
+              // ) : !currentUser.is_subscribed ? (
+              //   <Redirect
+              //     to={{
+              //       pathname: '/pricing',
+              //       state: {
+              //         error:
+              //           'You have to make sure your email as being confirmed, and also subscribe to one of our paid package to have access to highlights',
+              //       },
+              //     }}
+              //   />
               <Highlight />
             )
           }
@@ -177,17 +177,17 @@ const App = ({ checkUserSession, currentUser, token, location, history }) => {
                   state: { error: 'You need to Signin or Signup first' },
                 }}
               />
-            ) : !currentUser.is_subscribed ? (
-              <Redirect
-                to={{
-                  pathname: '/pricing',
-                  state: {
-                    error:
-                      'You have to make sure your email as being confirmed, and also subscribe to one of our paid package to have access to stories',
-                  },
-                }}
-              />
             ) : (
+              // ) : !currentUser.is_subscribed ? (
+              //   <Redirect
+              //     to={{
+              //       pathname: '/pricing',
+              //       state: {
+              //         error:
+              //           'You have to make sure your email as being confirmed, and also subscribe to one of our paid package to have access to stories',
+              //       },
+              //     }}
+              //   />
               <Stories />
             )
           }
@@ -205,17 +205,17 @@ const App = ({ checkUserSession, currentUser, token, location, history }) => {
                   state: { error: 'You need to Signin or Signup first' },
                 }}
               />
-            ) : !currentUser.is_subscribed ? (
-              <Redirect
-                to={{
-                  pathname: '/pricing',
-                  state: {
-                    error:
-                      'You have to make sure your email as being confirmed, and also subscribe to one of our paid package to have access to username posts',
-                  },
-                }}
-              />
             ) : (
+              // ) : !currentUser.is_subscribed ? (
+              //   <Redirect
+              //     to={{
+              //       pathname: '/pricing',
+              //       state: {
+              //         error:
+              //           'You have to make sure your email as being confirmed, and also subscribe to one of our paid package to have access to username posts',
+              //       },
+              //     }}
+              //   />
               <UserNamePosts />
             )
           }
@@ -232,17 +232,17 @@ const App = ({ checkUserSession, currentUser, token, location, history }) => {
                   state: { error: 'You need to Signin or Signup first' },
                 }}
               />
-            ) : !currentUser.is_subscribed ? (
-              <Redirect
-                to={{
-                  pathname: '/pricing',
-                  state: {
-                    error:
-                      'You have to make sure your email as being confirmed, and also subscribe to one of our paid package to have access to hashtag posts',
-                  },
-                }}
-              />
             ) : (
+              // ) : !currentUser.is_subscribed ? (
+              //   <Redirect
+              //     to={{
+              //       pathname: '/pricing',
+              //       state: {
+              //         error:
+              //           'You have to make sure your email as being confirmed, and also subscribe to one of our paid package to have access to hashtag posts',
+              //       },
+              //     }}
+              //   />
               <HashTagPosts />
             )
           }
@@ -259,17 +259,17 @@ const App = ({ checkUserSession, currentUser, token, location, history }) => {
                   state: { error: 'You need to Signin or Signup first' },
                 }}
               />
-            ) : !currentUser.is_subscribed ? (
-              <Redirect
-                to={{
-                  pathname: '/pricing',
-                  state: {
-                    error:
-                      'You have to make sure your email as being confirmed, and also subscribe to one of our paid package to have access to highlight posts',
-                  },
-                }}
-              />
             ) : (
+              // ) : !currentUser.is_subscribed ? (
+              //   <Redirect
+              //     to={{
+              //       pathname: '/pricing',
+              //       state: {
+              //         error:
+              //           'You have to make sure your email as being confirmed, and also subscribe to one of our paid package to have access to highlight posts',
+              //       },
+              //     }}
+              //   />
               <HighlightPosts />
             )
           }
@@ -286,17 +286,17 @@ const App = ({ checkUserSession, currentUser, token, location, history }) => {
                   state: { error: 'You need to Signin or Signup first' },
                 }}
               />
-            ) : !currentUser.is_subscribed ? (
-              <Redirect
-                to={{
-                  pathname: '/pricing',
-                  state: {
-                    error:
-                      'You have to make sure your email as being confirmed, and also subscribe to one of our paid package to have access to story posts',
-                  },
-                }}
-              />
             ) : (
+              // ) : !currentUser.is_subscribed ? (
+              //   <Redirect
+              //     to={{
+              //       pathname: '/pricing',
+              //       state: {
+              //         error:
+              //           'You have to make sure your email as being confirmed, and also subscribe to one of our paid package to have access to story posts',
+              //       },
+              //     }}
+              //   />
               <StoryPosts />
             )
           }
